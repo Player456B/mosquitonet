@@ -1,74 +1,302 @@
 <!doctype html>
+
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#0b6efd" />
-  <title>MosquitoNet — Windows & Doors</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <title>Raj Marketing Mysore — Mosquito Nets</title>
+  <meta name="description" content="Raj Marketing Mysore — Mosquito nets for windows & doors. Velcro, Pleated, Frame and Fly Mesh doors. Mobile-friendly web app." />
+  <style>
+    /* Mobile-first UI */
+    :root{--bg:#0f1724;--card:#0b1220;--accent:#10b981;--muted:#94a3b8;--glass:rgba(255,255,255,0.04)}
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial}
+    body{background:linear-gradient(180deg,#071021 0%, #0b1220 100%);color:#e6eef8;-webkit-font-smoothing:antialiased}/* App shell */
+.app{max-width:460px;margin:16px auto;border-radius:18px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 10px 30px rgba(2,6,23,0.6)}
+header{display:flex;align-items:center;gap:12px;padding:14px 16px;background:rgba(0,0,0,0.18);backdrop-filter: blur(6px)}
+.logo{height:44px;width:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#0ea5a4);display:flex;align-items:center;justify-content:center;font-weight:700;color:#042f23}
+h1{font-size:16px;margin:0}
+p.sub{margin:0;font-size:12px;color:var(--muted)}
 
-  <!-- PWA manifest -->
-  <link rel="manifest" href="/manifest.json" />
+/* pages */
+.pages{min-height:520px;padding:18px}
+.page{display:none}
+.page.active{display:block}
 
-  <!-- Icons (used by browsers / homescreen) -->
-  <link rel="icon" href="/assets/icons/icon-192.png" sizes="192x192" />
-  <link rel="apple-touch-icon" href="/assets/icons/icon-192.png" />
+/* Loading screen */
+.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;height:420px;gap:18px}
+.spinner{width:84px;height:84px;border-radius:50%;background:conic-gradient(var(--accent), transparent 40%);position:relative;animation:spin 1.6s linear infinite}
+.spinner:after{content:"";position:absolute;inset:12px;border-radius:50%;background:var(--card)}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.loading h2{margin:0}
 
-  <!-- Apple meta -->
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+/* Home */
+.hero{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px;border-radius:12px}
+.cta{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:10px;background:var(--accent);color:#042f23;font-weight:600;text-decoration:none}
 
-  <link rel="stylesheet" href="/assets/css/styles.css" />
+/* Product list */
+.products{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.product{background:var(--card);padding:10px;border-radius:10px}
+.product img{width:100%;height:110px;object-fit:cover;border-radius:8px}
+.price{font-weight:700;color:var(--accent)}
+
+/* Cart floating button */
+.cart-btn{position:fixed;right:18px;bottom:22px;background:linear-gradient(180deg,#065f46,#10b981);color:#042f23;padding:12px 14px;border-radius:999px;box-shadow:0 8px 20px rgba(2,6,23,0.6);display:flex;align-items:center;gap:8px;font-weight:700}
+
+/* Forms & contact */
+input,textarea,select{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
+
+/* Footer nav */
+nav.bottom{display:flex;gap:6px;padding:10px;background:rgba(0,0,0,0.12);justify-content:space-around}
+nav button{background:transparent;border:0;color:var(--muted);font-weight:600;padding:8px;border-radius:8px}
+nav button.active{color:var(--accent)}
+
+/* cart modal */
+.modal{position:fixed;left:0;right:0;bottom:0;top:0;background:rgba(2,6,23,0.6);display:none;align-items:flex-end}
+.modal.open{display:flex}
+.modal .sheet{width:100%;max-width:460px;background:#061022;border-radius:18px 18px 0 0;padding:16px}
+.cart-item{display:flex;gap:10px;align-items:center;padding:8px;border-bottom:1px dashed rgba(255,255,255,0.03)}
+
+/* responsive tweaks */
+@media(min-width:480px){.app{margin:30px auto}}
+
+  </style>
 </head>
 <body>
-  <div id="app" class="app">
-    <header class="app-header">
-      <h1>MosquitoNet</h1>
-      <p class="subtitle">Windows & Doors — Mobile</p>
-    </header>
+  <div class="app" role="application">
+    <header>
+      <div class="logo">RM</div>
+      <div>
+        <h1>Raj Marketing Mysore</h1>
+        <p class="sub">Mosquito nets for windows & doors — Velcro, Frame, Pleated, Fly Mesh</p>
+      </div>
+    </header><main class="pages">
+  <!-- Loading / splash -->
+  <section id="loading" class="page active">
+    <div class="loading">
+      <div class="spinner" aria-hidden="true"></div>
+      <h2>Raj Marketing</h2>
+      <p class="sub">Quality mosquito nets • Installation & custom sizes</p>
+      <small style="color:var(--muted)">Fast demo — optimized for mobile</small>
+    </div>
+  </section>
 
-    <main class="main">
-      <section class="panel">
-        <h2>Front Door</h2>
-        <div class="row">
-          <button id="door-toggle" class="btn btn-primary">Lock / Unlock</button>
-          <span id="door-state" class="state">Unknown</span>
+  <!-- Home -->
+  <section id="home" class="page">
+    <div class="hero">
+      <div class="card">
+        <h3>Keep mosquitoes out — let fresh air in</h3>
+        <p class="sub">Custom-fit nets, professional installation across Mysore.</p>
+        <p style="margin-top:8px"><a class="cta" href="#" id="callNow">Call: +91 94830 37385</a></p>
+      </div>
+      <img src="https://raw.githubusercontent.com/player456-aa/Mosquito-Net-/main/assets/velcro.jpg" alt="velcro" style="height:110px;border-radius:12px;object-fit:cover">
+    </div>
+
+    <div style="margin-top:12px" class="card">
+      <h4>Our Top Products</h4>
+      <div class="products" id="products"></div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="page">
+    <div class="card">
+      <h3>About Raj Marketing Mysore</h3>
+      <p class="sub">Local specialists in insect screens and mosquito nets. We supply and install Velcro systems, aluminium frame nets, pleated nets and fly mesh doors. Proudly serving Mysore since 2016.</p>
+      <p class="sub">Address: #84, Nrupatunga Road, Kuvempu Nagar, Mysore</p>
+      <p class="sub">Phone: +91 94830 37385</p>
+    </div>
+  </section>
+
+  <!-- Products & cart -->
+  <section id="productsPage" class="page">
+    <div class="card">
+      <h3>Products</h3>
+      <div id="productsGrid" style="margin-top:10px"></div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="page">
+    <div class="card">
+      <h3>Contact Us</h3>
+      <form id="contactForm">
+        <label for="name">Your name</label>
+        <input id="name" required />
+        <label for="phone">Phone</label>
+        <input id="phone" required />
+        <label for="msg">Message</label>
+        <textarea id="msg" rows="4" required></textarea>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button type="submit" class="cta">Send</button>
+          <a href="tel:+919483037385" class="cta" style="background:transparent;color:var(--accent);border:1px solid rgba(255,255,255,0.04)">Call</a>
         </div>
-      </section>
+      </form>
+    </div>
+  </section>
 
-      <section class="panel">
-        <h2>Window</h2>
-        <div class="row">
-          <button id="window-toggle" class="btn">Open / Close</button>
-          <span id="window-state" class="state">Unknown</span>
-        </div>
-      </section>
+  <!-- Order confirmation / misc -->
+  <section id="order" class="page">
+    <div class="card">
+      <h3>Order Confirmation</h3>
+      <p id="orderMsg" class="sub">—</p>
+      <button id="backHome" style="margin-top:8px" class="cta">Back to Home</button>
+    </div>
+  </section>
+</main>
 
-      <section class="panel">
-        <h3>Connection</h3>
-        <div class="row">
-          <span id="network-status" class="network offline">Offline</span>
-          <button id="sync-button" class="btn btn-small">Sync</button>
-        </div>
-      </section>
+<nav class="bottom">
+  <button data-target="home" class="navbtn">Home</button>
+  <button data-target="productsPage" class="navbtn">Products</button>
+  <button data-target="about" class="navbtn">About</button>
+  <button data-target="contact" class="navbtn">Contact</button>
+</nav>
 
-      <section class="panel small">
-        <p class="note">This is an offline-first demo mobile app. Use Add to Home Screen to install.</p>
-      </section>
-    </main>
+<div class="cart-btn" id="openCart">Cart (<span id="cartCount">0</span>)</div>
 
-    <footer class="app-footer">
-      <small>Built as a PWA — MosquitoNet</small>
-    </footer>
+<!-- cart modal -->
+<div class="modal" id="cartModal" aria-hidden="true">
+  <div class="sheet">
+    <h3>Your Cart</h3>
+    <div id="cartList" style="max-height:280px;overflow:auto;margin-top:8px"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+      <div>Total: <strong id="cartTotal">₹0</strong></div>
+      <div style="display:flex;gap:8px">
+        <button id="checkout" class="cta">Checkout</button>
+        <button id="closeCart" style="background:transparent;color:var(--muted);border:0">Close</button>
+      </div>
+    </div>
   </div>
+</div>
 
-  <script src="/assets/js/app.js" defer></script>
-  <script>
-    // register service worker (also done in assets/js/app.js for redundancy)
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js').catch(function(err){
-        console.warn('SW registration failed:', err);
-      });
+  </div>  <script>
+    /* Simple single-file mobile app behavior */
+    const pages = document.querySelectorAll('.page');
+    const navBtns = document.querySelectorAll('.navbtn');
+    const openCartBtn = document.getElementById('openCart');
+    const cartModal = document.getElementById('cartModal');
+    const cartList = document.getElementById('cartList');
+    const cartCountEl = document.getElementById('cartCount');
+    const cartTotalEl = document.getElementById('cartTotal');
+
+    // example product catalogue (images are placeholders, replace with your assets)
+    const PRODUCTS = [
+      {id:1,title:'Velcro Window Net',price:199,unit:'per sqft',img:'https://raw.githubusercontent.com/player456-aa/Mosquito-Net-/main/assets/velcro.jpg'},
+      {id:2,title:'Aluminium Frame Net',price:299,unit:'per sqft',img:'https://raw.githubusercontent.com/player456-aa/Mosquito-Net-/main/assets/frame.jpg'},
+      {id:3,title:'Pleated Door Net',price:649,unit:'each',img:'https://raw.githubusercontent.com/player456-aa/Mosquito-Net-/main/assets/pleated.jpg'},
+      {id:4,title:'Fly Mesh Door',price:899,unit:'each',img:'https://raw.githubusercontent.com/player456-aa/Mosquito-Net-/main/assets/flymesh.jpg'}
+    ];
+
+    // tiny cart using localStorage
+    function loadCart(){
+      return JSON.parse(localStorage.getItem('rm_cart')||'[]');
     }
-  </script>
-</body>
+    function saveCart(c){
+      localStorage.setItem('rm_cart',JSON.stringify(c));
+      renderCart();
+    }
+    function addToCart(id){
+      const cart = loadCart();
+      const p = PRODUCTS.find(x=>x.id===id);
+      const existing = cart.find(i=>i.id===id);
+      if(existing) existing.qty++;
+      else cart.push({id:p.id,title:p.title,price:p.price,qty:1});
+      saveCart(cart);
+    }
+    function renderCart(){
+      const cart = loadCart();
+      cartList.innerHTML='';
+      let total=0;let count=0;
+      if(cart.length===0){cartList.innerHTML='<p class="sub">Your cart is empty.</p>'}
+      cart.forEach(item=>{
+        const el = document.createElement('div');el.className='cart-item';
+        el.innerHTML=`<div style="flex:1"><strong>${item.title}</strong><div class="sub">₹${item.price} × ${item.qty}</div></div><div style="text-align:right"><button data-id="${item.id}" class="dec">-</button> <button data-id="${item.id}" class="inc">+</button></div>`;
+        cartList.appendChild(el);
+        total += item.price*item.qty; count += item.qty;
+      });
+      cartCountEl.textContent=count; cartTotalEl.textContent='₹'+total;
+      // attach inc/dec handlers
+      cartList.querySelectorAll('.inc').forEach(b=>b.onclick=()=>{updateQty(+b.dataset.id,1)});
+      cartList.querySelectorAll('.dec').forEach(b=>b.onclick=()=>{updateQty(+b.dataset.id,-1)});
+    }
+    function updateQty(id,delta){
+      let cart = loadCart();
+      const item = cart.find(i=>i.id===id);
+      if(!item) return;
+      item.qty += delta;
+      if(item.qty<=0) cart = cart.filter(i=>i.id!==id);
+      saveCart(cart);
+    }
+
+    // render products grid
+    function renderProductsGrid(){
+      const grid = document.getElementById('productsGrid');
+      grid.innerHTML='';
+      PRODUCTS.forEach(p=>{
+        const card=document.createElement('div');card.className='product card';
+        card.innerHTML=`<img src="${p.img}" alt="${p.title}"><h4>${p.title}</h4><div style="display:flex;justify-content:space-between;align-items:center"><div><div class="price">₹${p.price}</div><small class="sub">${p.unit}</small></div><div><button class="cta" data-id="${p.id}">Add</button></div></div>`;
+        grid.appendChild(card);
+      });
+      // attach add handlers
+      grid.querySelectorAll('button.cta').forEach(b=>b.onclick=()=>{addToCart(+b.dataset.id);alert('Added to cart')});
+    }
+
+    // navigation
+    function showPage(id){
+      pages.forEach(p=>p.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      navBtns.forEach(b=>b.classList.toggle('active',b.dataset.target===id));
+    }
+    navBtns.forEach(b=>b.onclick=()=>showPage(b.dataset.target));
+
+    // open/close cart
+    document.getElementById('openCart').onclick=()=>{cartModal.classList.add('open');cartModal.setAttribute('aria-hidden','false')};
+    document.getElementById('closeCart').onclick=()=>{cartModal.classList.remove('open');cartModal.setAttribute('aria-hidden','true')};
+
+    // checkout -> simple order confirmation and clear cart
+    document.getElementById('checkout').onclick=()=>{
+      const cart = loadCart();
+      if(cart.length===0){alert('Cart empty');return}
+      const total = cart.reduce((s,i)=>s+i.price*i.qty,0);
+      // create a lightweight order id
+      const orderId = 'RM'+Date.now().toString().slice(-6);
+      // store last order (could be sent to server)
+      localStorage.setItem('rm_last_order', JSON.stringify({id:orderId,items:cart,total}));
+      localStorage.removeItem('rm_cart');renderCart();cartModal.classList.remove('open');
+      document.getElementById('orderMsg').textContent = `Order ${orderId} placed. Total ₹${total}. We will contact you at +91 94830 37385`;
+      showPage('order');
+    }
+
+    // contact form: opens mailto with prefilled message (demo)
+    document.getElementById('contactForm').onsubmit = function(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+      const msg = document.getElementById('msg').value;
+      const subject = encodeURIComponent('Enquiry from App: '+name);
+      const body = encodeURIComponent(`Name: ${name}\nPhone: ${phone}\n\n${msg}`);
+      window.location.href = `mailto:info@rajmarketingmysore.com?subject=${subject}&body=${body}`;
+    }
+
+    // init
+    window.addEventListener('load',()=>{
+      // show loading for 1.2s
+      setTimeout(()=>{
+        document.getElementById('loading').classList.remove('active');
+        renderProductsGrid();renderCart();showPage('home');
+      },1200);
+    });
+
+    // small helper: call now link
+    document.getElementById('callNow').onclick = function(e){e.preventDefault();window.location.href='tel:+919483037385'};
+
+    // back to home
+    document.getElementById('backHome').onclick = ()=>showPage('home');
+  </script>  <!-- Developer notes:
+    - Replace placeholder images with your own assets in /assets and update URLs.
+    - To publish on GitHub Pages: push this file as index.html to a repository, then enable GitHub Pages (main branch -> / (root)).
+    - For production: move cart/order logic to a backend (API) or connect to Firebase/Stripe for payments.
+  --></body>
 </html>
