@@ -1,130 +1,370 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dealer Login - Raj Marketing</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/auth.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dealer Login - Raj Marketing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .auth-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--secondary) 0%, #ffc107 100%);
+        }
+        
+        .auth-container {
+            width: 100%;
+            max-width: 450px;
+        }
+        
+        .auth-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .auth-header i {
+            font-size: 3rem;
+            color: var(--secondary);
+            background: rgba(240, 178, 2, 0.1);
+            padding: 20px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+        
+        .auth-header h2 {
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        
+        .dealer-badge {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .input-group {
+            position: relative;
+        }
+        
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 2px solid var(--gray-light);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: var(--transition-fast);
+        }
+        
+        .input-group input:focus {
+            border-color: var(--secondary);
+            outline: none;
+        }
+        
+        .checkbox-group {
+            margin-bottom: 20px;
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gray);
+            cursor: pointer;
+        }
+        
+        .btn-login {
+            width: 100%;
+            padding: 15px;
+            background: var(--secondary);
+            color: var(--dark);
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+        
+        .btn-login:hover {
+            background: var(--secondary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(240, 178, 2, 0.3);
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--gray-light);
+        }
+        
+        .auth-footer a {
+            color: var(--secondary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .alert {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .alert.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+        
+        .alert.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        
+        .dealer-note {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
-  <!-- Loading Page -->
-  <div id="loading-page" class="loading-page">
-    <div class="loader-container">
-      <div class="loader-logo">
-        <i class="fas fa-shield-alt"></i>
-      </div>
-      <h1 class="loader-title">Raj Marketing</h1>
-      <div class="loader-bar">
-        <div class="loader-progress"></div>
-      </div>
-    </div>
-  </div>
+    <section class="auth-section">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <i class="fas fa-store"></i>
+                    <h2>Dealer Login</h2>
+                    <span class="dealer-badge">Authorized Dealers Only</span>
+                </div>
+                
+                <div id="loginAlert" class="alert"></div>
+                
+                <form id="loginForm" onsubmit="return handleDealerLogin(event)">
+                    <div class="form-group">
+                        <label>Dealer ID / Email</label>
+                        <div class="input-group">
+                            <i class="fas fa-id-card"></i>
+                            <input type="text" id="dealerId" placeholder="Enter dealer ID or email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" placeholder="Enter password" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Dealer Code (Optional)</label>
+                        <div class="input-group">
+                            <i class="fas fa-qrcode"></i>
+                            <input type="text" id="dealerCode" placeholder="Enter dealer code if applicable">
+                        </div>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="rememberMe"> Remember me on this device
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn-login" id="loginBtn">
+                        <span>Access Dealer Dashboard</span>
+                        <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
+                    </button>
+                </form>
+                
+                <div class="dealer-note">
+                    <i class="fas fa-info-circle"></i> New dealers? Contact admin at <strong>inforajmarketingmysore@gmail.com</strong> for registration.
+                </div>
+                
+                <div class="auth-footer">
+                    <p><a href="../index.html"><i class="fas fa-home"></i> Back to Home</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- Header -->
-  <header class="header" id="header">
-    <div class="container">
-      <nav class="navbar">
-        <a href="../index.html" class="logo">
-          <i class="fas fa-shield-alt"></i>
-          <span>Raj Marketing</span>
-        </a>
+    <script>
+        // Mock dealer database (in production, this would come from your storage system)
+        const dealers = [
+            {
+                id: 'DLR001',
+                dealerId: 'RAJ001',
+                email: 'dealer1@rajmarketing.com',
+                password: 'dealer123',
+                name: 'Mohan Raj',
+                phone: '9876543222',
+                address: '#65, Hootgalli Industrial Area, Mysore',
+                gst: '29ABCDE1234F1Z5',
+                areas: ['Hootgalli', 'Kuvempunagar', 'Vijayanagar'],
+                profilePhoto: 'https://ui-avatars.com/api/?name=Mohan+Raj&size=150&background=f0b202&color=000',
+                coverPhoto: 'https://via.placeholder.com/1200x300/f0b202/000000?text=Raj+Marketing+Dealer',
+                membership: 'Premium',
+                memberSince: '2023',
+                stats: {
+                    monthlyOrders: 24,
+                    completedJobs: 18,
+                    pendingJobs: 6,
+                    totalEarnings: 45000,
+                    commission: 4500
+                }
+            },
+            {
+                id: 'DLR002',
+                dealerId: 'RAJ002',
+                email: 'dealer2@rajmarketing.com',
+                password: 'dealer456',
+                name: 'Suresh Patel',
+                phone: '9876543223',
+                address: '#456, Kuvempunagar, Mysore',
+                gst: '29FGHIJ5678K2Z6',
+                areas: ['Gokulam', 'Jayalakshmipuram', 'Shivarampet'],
+                profilePhoto: 'https://ui-avatars.com/api/?name=Suresh+Patel&size=150&background=f0b202&color=000',
+                coverPhoto: 'https://via.placeholder.com/1200x300/f0b202/000000?text=Raj+Marketing+Dealer',
+                membership: 'Standard',
+                memberSince: '2024',
+                stats: {
+                    monthlyOrders: 15,
+                    completedJobs: 12,
+                    pendingJobs: 3,
+                    totalEarnings: 28000,
+                    commission: 2800
+                }
+            }
+        ];
+
+        function handleDealerLogin(event) {
+            event.preventDefault();
+            
+            const dealerId = document.getElementById('dealerId').value.trim();
+            const password = document.getElementById('password').value;
+            const dealerCode = document.getElementById('dealerCode').value.trim();
+            const rememberMe = document.getElementById('rememberMe').checked;
+            const loginBtn = document.getElementById('loginBtn');
+            
+            // Show loading state
+            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
+            loginBtn.disabled = true;
+            
+            // Simulate API call delay
+            setTimeout(() => {
+                // Find dealer by ID or email
+                const dealer = dealers.find(d => 
+                    d.dealerId === dealerId || d.email === dealerId
+                );
+                
+                if (dealer && dealer.password === password) {
+                    // Check dealer code if provided (additional security)
+                    if (dealerCode && dealerCode !== 'RAJ2024') {
+                        showAlert('Invalid dealer code', 'error');
+                        loginBtn.innerHTML = '<span>Access Dealer Dashboard</span><i class="fas fa-arrow-right" style="margin-left: 10px;"></i>';
+                        loginBtn.disabled = false;
+                        return;
+                    }
+                    
+                    // Successful login
+                    
+                    // Remove password before storing
+                    const { password, ...dealerData } = dealer;
+                    
+                    // Add login timestamp
+                    dealerData.loginTime = new Date().toISOString();
+                    
+                    // Store in localStorage if remember me is checked, else sessionStorage
+                    if (rememberMe) {
+                        localStorage.setItem('currentUser', JSON.stringify({
+                            ...dealerData,
+                            type: 'dealer'
+                        }));
+                    } else {
+                        sessionStorage.setItem('currentUser', JSON.stringify({
+                            ...dealerData,
+                            type: 'dealer'
+                        }));
+                    }
+                    
+                    // Show success message
+                    showAlert('Login successful! Redirecting to dealer dashboard...', 'success');
+                    
+                    // Redirect to dealer dashboard
+                    setTimeout(() => {
+                        window.location.href = 'dealer-dashboard.html';
+                    }, 1500);
+                    
+                } else {
+                    // Failed login
+                    showAlert('Invalid dealer credentials', 'error');
+                    
+                    // Reset button
+                    loginBtn.innerHTML = '<span>Access Dealer Dashboard</span><i class="fas fa-arrow-right" style="margin-left: 10px;"></i>';
+                    loginBtn.disabled = false;
+                }
+            }, 1500);
+            
+            return false;
+        }
         
-        <div class="nav-toggle" id="navToggle">
-          <i class="fas fa-bars"></i>
-        </div>
-
-        <ul class="nav-menu" id="navMenu">
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="products.html">Products</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Dealer Login Section -->
-  <section class="auth-section">
-    <div class="container">
-      <div class="auth-container">
-        <div class="auth-card dealer-card">
-          <div class="auth-header">
-            <div class="auth-icon dealer-icon">
-              <i class="fas fa-store"></i>
-            </div>
-            <h2>Dealer Login</h2>
-            <p>Access your dealer dashboard and manage orders</p>
-          </div>
-          
-          <form class="auth-form" id="dealerLoginForm">
-            <div class="form-group">
-              <label for="dealerId">Dealer ID / Email</label>
-              <div class="input-group">
-                <i class="fas fa-id-card"></i>
-                <input type="text" id="dealerId" placeholder="Enter dealer ID or email" required>
-              </div>
-            </div>
-            
-            <div class="form-group">
-              <label for="dealerPassword">Password</label>
-              <div class="input-group">
-                <i class="fas fa-lock"></i>
-                <input type="password" id="dealerPassword" placeholder="Enter your password" required>
-                <button type="button" class="password-toggle" onclick="togglePassword('dealerPassword')">
-                  <i class="fas fa-eye"></i>
-                </button>
-              </div>
-            </div>
-            
-            <div class="form-group">
-              <label for="dealerCode">Dealer Code (Optional)</label>
-              <div class="input-group">
-                <i class="fas fa-qrcode"></i>
-                <input type="text" id="dealerCode" placeholder="Enter dealer code if applicable">
-              </div>
-            </div>
-            
-            <div class="form-options">
-              <label class="checkbox">
-                <input type="checkbox"> Remember me
-              </label>
-              <a href="forgot-password.html" class="forgot-link">Forgot Password?</a>
-            </div>
-            
-            <button type="submit" class="btn btn-primary btn-block">Login to Dealer Portal</button>
-          </form>
-          
-          <div class="auth-footer">
-            <p>New dealer? <a href="dealer-register.html">Apply for dealership</a></p>
-          </div>
-          
-          <div class="auth-notice">
-            <i class="fas fa-info-circle"></i>
-            <p>Authorized dealers only. For assistance, contact admin@rajmarketing.com</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-bottom">
-        <p>&copy; 2024 Raj Marketing. All Rights Reserved.</p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Toast Notification -->
-  <div class="toast" id="toast"></div>
-
-  <script src="../assets/js/main.js"></script>
-  <script src="../assets/js/auth.js"></script>
+        function showAlert(message, type) {
+            const alert = document.getElementById('loginAlert');
+            alert.textContent = message;
+            alert.className = 'alert ' + type;
+        }
+        
+        // Check if already logged in
+        window.addEventListener('load', function() {
+            const currentUser = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
+            if (currentUser) {
+                const user = JSON.parse(currentUser);
+                if (user.type === 'dealer') {
+                    window.location.href = 'dealer-dashboard.html';
+                }
+            }
+        });
+    </script>
 </body>
 </html>
