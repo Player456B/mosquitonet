@@ -1,57 +1,479 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>DeepSeek API Test</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raj Marketing - Premium Mosquito Nets</title>
+  <meta name="description" content="Raj Marketing - Your trusted partner for premium mosquito nets in Mysore. Custom-fit solutions for windows and doors.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <h2>DeepSeek API Test</h2>
-    <div id="status"></div>
-    <input type="text" id="message" value="Hello" />
-    <button onclick="testAPI()">Send</button>
-    <pre id="result"></pre>
+  <!-- Loading Page -->
+  <div id="loading-page" class="loading-page">
+    <div class="loader-container">
+      <div class="loader-logo">
+        <i class="fas fa-shield-alt"></i>
+      </div>
+      <h1 class="loader-title">Raj Marketing</h1>
+      <p class="loader-subtitle">Premium Mosquito Nets</p>
+      <div class="loader-bar">
+        <div class="loader-progress"></div>
+      </div>
+      <p class="loader-text">Loading amazing experience...</p>
+    </div>
+  </div>
 
-    <script>
-        const BACKEND_URL = 'https://deepseek-backend-h151.onrender.com';
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="logo">
+          <i class="fas fa-shield-alt"></i>
+          <span>Raj Marketing</span>
+        </a>
         
-        async function testAPI() {
-            const status = document.getElementById('status');
-            const result = document.getElementById('result');
-            const message = document.getElementById('message').value;
-            
-            status.innerHTML = 'Testing...';
-            result.innerHTML = '';
-            
-            try {
-                // Test 1: Health check
-                const health = await fetch(`${BACKEND_URL}/health`);
-                const healthData = await health.json();
-                status.innerHTML = '✅ Health check passed';
-                
-                // Test 2: Chat endpoint
-                const response = await fetch(`${BACKEND_URL}/api/chat`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message })
-                });
-                
-                const data = await response.json();
-                
-                if (response.ok) {
-                    result.innerHTML = JSON.stringify(data, null, 2);
-                    status.innerHTML = '✅ Success!';
-                } else {
-                    status.innerHTML = '❌ API Error';
-                    result.innerHTML = JSON.stringify(data, null, 2);
-                }
-                
-            } catch (error) {
-                status.innerHTML = '❌ Connection Error';
-                result.innerHTML = error.toString();
-            }
-        }
+        <div class="nav-toggle" id="navToggle">
+          <i class="fas fa-bars"></i>
+        </div>
+
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="pages/about.html">About</a></li>
+          <li><a href="pages/services.html">Services</a></li>
+          <li><a href="pages/products.html">Products</a></li>
+          <li><a href="pages/gallery.html">Gallery</a></li>
+          <li><a href="pages/contact.html">Contact</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle">Login <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="pages/customer-login.html"><i class="fas fa-user"></i> Customer Login</a></li>
+              <li><a href="pages/dealer-login.html"><i class="fas fa-store"></i> Dealer Login</a></li>
+              <li><a href="pages/admin-login.html"><i class="fas fa-shield-alt"></i> Admin Login</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <span class="hero-badge">Welcome to Raj Marketing</span>
+        <h1 class="hero-title">Premium Mosquito Nets <span class="highlight">For Your Home</span></h1>
+        <p class="hero-description">Protect your family from mosquitoes while enjoying fresh air with our custom-fit, durable mosquito nets for windows and doors.</p>
+        <div class="hero-buttons">
+          <a href="pages/contact.html" class="btn btn-primary">Get Free Quote</a>
+          <a href="pages/products.html" class="btn btn-outline">View Products</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number">5000+</span>
+            <span class="stat-label">Happy Families</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">15+</span>
+            <span class="stat-label">Years Experience</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Satisfaction</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="assets/images/hero-net.png" alt="Mosquito Net Installation" onerror="this.src='https://via.placeholder.com/600x500?text=Mosquito+Nets'">
+        <div class="floating-card card-1">
+          <i class="fas fa-shield-alt"></i>
+          <span>100% Protection</span>
+        </div>
+        <div class="floating-card card-2">
+          <i class="fas fa-wind"></i>
+          <span>Fresh Air Flow</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Slider Section -->
+  <section class="features">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Why Choose Us</h2>
+        <p class="section-subtitle">Experience the best mosquito net solutions with our premium features</p>
+      </div>
+      
+      <div class="slider-container">
+        <div class="slider" id="featuresSlider">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>Premium Quality</h3>
+            <p>High-grade materials ensuring long-lasting protection</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-ruler-combined"></i>
+            </div>
+            <h3>Custom Fit</h3>
+            <p>Perfect measurements for any window or door size</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <h3>Quick Installation</h3>
+            <p>Professional installation within 24-48 hours</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-hand-holding-heart"></i>
+            </div>
+            <h3>5 Year Warranty</h3>
+            <p>Comprehensive warranty on all our products</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-truck"></i>
+            </div>
+            <h3>Free Delivery</h3>
+            <p>Free delivery and installation in Mysore</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-headset"></i>
+            </div>
+            <h3>24/7 Support</h3>
+            <p>Round-the-clock customer support</p>
+          </div>
+        </div>
+        <div class="slider-controls">
+          <button class="slider-arrow prev" id="featuresPrev"><i class="fas fa-chevron-left"></i></button>
+          <button class="slider-arrow next" id="featuresNext"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search Section -->
+  <section class="search-section">
+    <div class="container">
+      <div class="search-wrapper">
+        <h3>Find Your Perfect Mosquito Net</h3>
+        <form class="search-form" id="searchForm">
+          <div class="search-input-group">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search by size, type, or material..." id="searchInput">
+            <button type="submit" class="btn btn-primary">Search</button>
+          </div>
+        </form>
+        <div class="popular-searches">
+          <span>Popular:</span>
+          <a href="#">Window Nets</a>
+          <a href="#">Door Nets</a>
+          <a href="#">Fiberglass</a>
+          <a href="#">Aluminum Frame</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="benefits">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Benefits of Mosquito Nets</h2>
+        <p class="section-subtitle">Why every home needs professional mosquito net installation</p>
+      </div>
+      
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-heartbeat"></i>
+          </div>
+          <h3>Health Protection</h3>
+          <p>Block disease-carrying mosquitoes and insects effectively</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-wind"></i>
+          </div>
+          <h3>Natural Ventilation</h3>
+          <p>Enjoy fresh air without worrying about bugs</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-sun"></i>
+          </div>
+          <h3>Natural Light</h3>
+          <p>Let sunlight in while keeping insects out</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-leaf"></i>
+          </div>
+          <h3>Eco-Friendly</h3>
+          <p>No chemicals or harmful sprays needed</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-child"></i>
+          </div>
+          <h3>Child & Pet Safe</h3>
+          <p>Safe for children and pets with durable mesh</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-coins"></i>
+          </div>
+          <h3>Cost Effective</h3>
+          <p>One-time investment for years of protection</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Slider -->
+  <section class="products">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Our Products</h2>
+        <p class="section-subtitle">Explore our range of premium mosquito nets</p>
+      </div>
+      
+      <div class="slider-container">
+        <div class="slider" id="productsSlider">
+          <div class="product-card">
+            <div class="product-image">
+              <img src="assets/images/product1.jpg" alt="Fiberglass Net" onerror="this.src='https://via.placeholder.com/300x250?text=Fiberglass+Net'">
+            </div>
+            <div class="product-info">
+              <h3>Fiberglass Mesh</h3>
+              <p>Strong, flexible, and durable mesh for windows</p>
+              <div class="product-footer">
+                <span class="product-price">₹499/sq ft</span>
+                <a href="pages/product-detail.html?id=1" class="btn btn-small">View Details</a>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <img src="assets/images/product2.jpg" alt="Aluminum Frame" onerror="this.src='https://via.placeholder.com/300x250?text=Aluminum+Frame'">
+            </div>
+            <div class="product-info">
+              <h3>Aluminum Frame</h3>
+              <p>Premium rust-free aluminum frames</p>
+              <div class="product-footer">
+                <span class="product-price">₹699/sq ft</span>
+                <a href="pages/product-detail.html?id=2" class="btn btn-small">View Details</a>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <img src="assets/images/product3.jpg" alt="Velcro Net" onerror="this.src='https://via.placeholder.com/300x250?text=Velcro+Net'">
+            </div>
+            <div class="product-info">
+              <h3>Velcro Net</h3>
+              <p>Easy to install and remove, perfect for rentals</p>
+              <div class="product-footer">
+                <span class="product-price">₹399/sq ft</span>
+                <a href="pages/product-detail.html?id=3" class="btn btn-small">View Details</a>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <img src="assets/images/product4.jpg" alt="Door Net" onerror="this.src='https://via.placeholder.com/300x250?text=Door+Net'">
+            </div>
+            <div class="product-info">
+              <h3>Magnetic Door Net</h3>
+              <p>Self-closing magnetic mesh for doors</p>
+              <div class="product-footer">
+                <span class="product-price">₹899/sq ft</span>
+                <a href="pages/product-detail.html?id=4" class="btn btn-small">View Details</a>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <img src="assets/images/product5.jpg" alt="Sliding Net" onerror="this.src='https://via.placeholder.com/300x250?text=Sliding+Net'">
+            </div>
+            <div class="product-info">
+              <h3>Sliding Window Net</h3>
+              <p>For sliding windows and balcony doors</p>
+              <div class="product-footer">
+                <span class="product-price">₹799/sq ft</span>
+                <a href="pages/product-detail.html?id=5" class="btn btn-small">View Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slider-controls">
+          <button class="slider-arrow prev" id="productsPrev"><i class="fas fa-chevron-left"></i></button>
+          <button class="slider-arrow next" id="productsNext"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+      
+      <div class="view-all">
+        <a href="pages/products.html" class="btn btn-outline">View All Products <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">What Our Customers Say</h2>
+        <p class="section-subtitle">Real experiences from our happy customers</p>
+      </div>
+      
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="testimonial-text">"Excellent quality nets! The installation was quick and professional. No more mosquitoes in our home. Highly recommend Raj Marketing!"</p>
+          <div class="testimonial-author">
+            <img src="assets/images/user1.jpg" alt="Customer" onerror="this.src='https://via.placeholder.com/60x60?text=R'">
+            <div>
+              <h4>Ramesh Kumar</h4>
+              <p>Vijayanagar, Mysore</p>
+            </div>
+          </div>
+        </div>
         
-        // Auto-run on load
-        testAPI();
-    </script>
+        <div class="testimonial-card">
+          <div class="testimonial-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="testimonial-text">"Great service and custom-fit solutions. The aluminum frame nets look elegant and work perfectly. Fair pricing and timely delivery."</p>
+          <div class="testimonial-author">
+            <img src="assets/images/user2.jpg" alt="Customer" onerror="this.src='https://via.placeholder.com/60x60?text=S'">
+            <div>
+              <h4>Sunita Patel</h4>
+              <p>Kuvempunagar, Mysore</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <div class="testimonial-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="testimonial-text">"The team was very helpful in choosing the right nets for our home. Installation was neat and clean. Definitely recommend them!"</p>
+          <div class="testimonial-author">
+            <img src="assets/images/user3.jpg" alt="Customer" onerror="this.src='https://via.placeholder.com/60x60?text=P'">
+            <div>
+              <h4>Prakash Rao</h4>
+              <p>Gokulam, Mysore</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta">
+    <div class="container">
+      <div class="cta-wrapper">
+        <h2>Ready to Protect Your Home?</h2>
+        <p>Get a free quote and professional consultation today</p>
+        <div class="cta-buttons">
+          <a href="tel:+919876543210" class="btn btn-primary btn-large">
+            <i class="fas fa-phone-alt"></i> Call Now: +91-9876543210
+          </a>
+          <a href="pages/contact.html" class="btn btn-outline btn-large">
+            <i class="fas fa-calendar-alt"></i> Book Appointment
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-info">
+          <div class="footer-logo">
+            <i class="fas fa-shield-alt"></i>
+            <span>Raj Marketing</span>
+          </div>
+          <p>Your trusted partner for premium mosquito nets in Mysore. Protecting families since 2010.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pages/about.html">About Us</a></li>
+            <li><a href="pages/services.html">Services</a></li>
+            <li><a href="pages/products.html">Products</a></li>
+            <li><a href="pages/gallery.html">Gallery</a></li>
+            <li><a href="pages/contact.html">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Account Access</h4>
+          <ul>
+            <li><a href="pages/customer-login.html">Customer Login</a></li>
+            <li><a href="pages/dealer-login.html">Dealer Login</a></li>
+            <li><a href="pages/admin-login.html">Admin Login</a></li>
+            <li><a href="pages/register.html">Register</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-contact">
+          <h4>Contact Info</h4>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> #123, Main Road, Mysore - 570001</li>
+            <li><i class="fas fa-phone"></i> <a href="tel:+919876543210">+91-9876543210</a></li>
+            <li><i class="fas fa-phone"></i> <a href="tel:+919876543211">+91-9876543211</a></li>
+            <li><i class="fas fa-envelope"></i> <a href="mailto:info@rajmarketing.com">info@rajmarketing.com</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2024 Raj Marketing. All Rights Reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="pages/privacy.html">Privacy Policy</a>
+          <a href="pages/terms.html">Terms of Use</a>
+          <a href="pages/disclaimer.html">Disclaimer</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
