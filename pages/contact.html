@@ -580,5 +580,158 @@
           <p>A: Yes, we provide free on-site measurement and consultation within Mysore city limits. Our technician will visit your home at your convenience.</p>
         </div>
         
-        <div style="background: var(--white); padding: var(--spacing-lg); border-radius: var(--radius-lg);">
-          <h3 style="color: var(--primary); margin-bottom: 10px;">Q: Is parking availab
+      <p>A: Yes, there is ample parking available at K.S Complex, Shivarampet. Two-wheeler and car parking is easily accessible.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta">
+    <div class="container">
+      <div class="cta-wrapper">
+        <h2>Ready to Get Started?</h2>
+        <p>Visit our showroom or call us today for a free consultation</p>
+        <div class="cta-buttons">
+          <a href="https://maps.google.com/?q=K.S+Complex+Shivarampet+Mysore" target="_blank" class="btn btn-primary btn-large">
+            <i class="fas fa-map-marker-alt"></i> Visit Our Store
+          </a>
+          <a href="tel:+919480337385" class="btn btn-outline btn-large">
+            <i class="fas fa-phone-alt"></i> Call Now: +91-9480337385
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-info">
+          <div class="footer-logo">
+            <i class="fas fa-shield-alt"></i>
+            <span>Raj Marketing</span>
+          </div>
+          <p>Premium mosquito nets for windows and doors in Mysore. Serving since 2001 with 5000+ happy customers.</p>
+          <p><strong>GST:</strong> 29AFEPJ3685H1Z5</p>
+          <p><strong>Kannada:</strong> ರಾಜ್ ಮಾರ್ಕೆಟಿಂಗ್ ಮೈಸೂರು</p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/919480337385" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Account Access</h4>
+          <ul>
+            <li><a href="customer-login.html">Customer Login</a></li>
+            <li><a href="dealer-login.html">Dealer Login</a></li>
+            <li><a href="admin-login.html">Admin Login</a></li>
+            <li><a href="register.html">Register</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-contact">
+          <h4>Contact Info</h4>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> 1061-62, 1st Floor, K.S Complex, Shivarampet, Mysuru - 570001</li>
+            <li><i class="fas fa-phone"></i> <a href="tel:+919480337385">+91-9480337385 (Kiran)</a></li>
+            <li><i class="fas fa-phone"></i> <a href="tel:+919481234568">+91-9481234568 (Bharath)</a></li>
+            <li><i class="fas fa-envelope"></i> <a href="mailto:rajmarketingmysore@gmail.com">rajmarketingmysore@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2024 Raj Marketing. All Rights Reserved. | GST: 29AFEPJ3685H1Z5</p>
+        <div class="footer-bottom-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Use</a>
+          <a href="disclaimer.html">Disclaimer</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    // Contact form handler
+    function handleContactSubmit(event) {
+      event.preventDefault();
+      
+      // Get form values
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+      const service = document.getElementById('service').value;
+      
+      // Simple validation
+      if (!name || !phone || !service) {
+        showToast('Please fill in all required fields');
+        return false;
+      }
+      
+      if (phone.length !== 10 || isNaN(phone)) {
+        showToast('Please enter a valid 10-digit mobile number');
+        return false;
+      }
+      
+      // Show success message
+      showToast('Thank you! We will contact you shortly.');
+      
+      // Reset form
+      event.target.reset();
+      
+      return false;
+    }
+    
+    // Make showToast available (from main.js)
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      if (toast) {
+        toast.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 3000);
+      } else {
+        alert(message);
+      }
+    }
+    
+    // Pre-fill service from URL parameter
+    document.addEventListener('DOMContentLoaded', function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const serviceParam = urlParams.get('service');
+      
+      if (serviceParam) {
+        const serviceSelect = document.getElementById('service');
+        for (let option of serviceSelect.options) {
+          if (option.text.toLowerCase().includes(serviceParam.toLowerCase())) {
+            option.selected = true;
+            break;
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+```
