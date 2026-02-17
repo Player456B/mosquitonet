@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us - Raj Marketing | Mosquito Nets Mysore</title>
-  <meta name="description" content="Contact Raj Marketing for premium mosquito nets in Mysore. Visit our showroom at Shivarampet or call us for free consultation and quotes.">
+  <title>Contact Us - Raj Marketing | Premium Mosquito Nets in Mysore</title>
+  <meta name="description" content="Contact Raj Marketing for premium mosquito nets in Mysore. Visit our showroom at Shivarampet, call us for free consultation, or get directions to our store.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../assets/css/style.css">
@@ -209,6 +209,25 @@
       font-weight: 600;
     }
     
+    .direction-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--secondary);
+      color: var(--dark);
+      padding: 1rem 2rem;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      margin-top: var(--spacing-md);
+      transition: var(--transition-fast);
+    }
+    
+    .direction-btn:hover {
+      background: var(--primary);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+    
     @media (max-width: 768px) {
       .contact-grid {
         grid-template-columns: 1fr;
@@ -271,7 +290,7 @@
   <section class="contact-hero">
     <div class="container">
       <h1>Contact Us</h1>
-      <p>Get in touch for free consultation and quotes</p>
+      <p>Get in touch for free consultation and professional mosquito net installation</p>
     </div>
   </section>
 
@@ -280,15 +299,18 @@
     <div class="contact-grid">
       <!-- Contact Information -->
       <div class="contact-info">
-        <h2>Get in Touch</h2>
+        <h2>📍 Visit Our Showroom</h2>
         
         <div class="info-item">
           <div class="info-icon">
             <i class="fas fa-map-marker-alt"></i>
           </div>
           <div class="info-content">
-            <h3>Visit Our Showroom</h3>
-            <p>1061-62, 1st Floor, K.S Complex<br>Shivarampet, Mysuru - 570001<br>Karnataka, India [citation:2]</p>
+            <h3>Raj Marketing Mysore</h3>
+            <p>1061-62, 1st Floor, K.S Complex<br>
+            Shivarampet, Mysuru - 570001<br>
+            Karnataka, India</p>
+            <p><small>Near K.T. Street, Opposite to Axis Bank</small></p>
           </div>
         </div>
         
@@ -297,9 +319,13 @@
             <i class="fas fa-phone-alt"></i>
           </div>
           <div class="info-content">
-            <h3>Call Us</h3>
-            <p><a href="tel:+919481234567">+91-9481234567</a> (Mr. Kiran Kumar) [citation:2]</p>
-            <p><a href="tel:+919481234568">+91-9481234568</a> (Mr. Bharath) [citation:1]</p>
+            <h3>Call Us Today</h3>
+            <p><strong>📞 Mr. Kiran Kumar (Proprietor):</strong><br>
+            <a href="tel:+919480337385">+91-9480337385</a></p>
+            <p><strong>📞 Mr. Bharath (Operations):</strong><br>
+            <a href="tel:+919481234568">+91-9481234568</a></p>
+            <p><strong>📞 Landline:</strong><br>
+            <a href="tel:+918212345678">0821-2345678</a></p>
           </div>
         </div>
         
@@ -310,7 +336,7 @@
           <div class="info-content">
             <h3>Email Us</h3>
             <p><a href="mailto:info@rajmarketing.com">info@rajmarketing.com</a></p>
-            <p><a href="mailto:sales@rajmarketing.com">sales@rajmarketing.com</a></p>
+            <p><a href="mailto:rajmarketingmysore@gmail.com">rajmarketingmysore@gmail.com</a></p>
           </div>
         </div>
         
@@ -320,12 +346,12 @@
           </div>
           <div class="info-content">
             <h3>WhatsApp</h3>
-            <p><a href="https://wa.me/919481234567">+91-9481234567</a></p>
+            <p><a href="https://wa.me/919480337385">+91-9480337385</a></p>
           </div>
         </div>
         
         <div class="business-hours">
-          <h3>Business Hours</h3>
+          <h3>🕒 Business Hours</h3>
           <div class="hours-item">
             <span class="hours-day">Monday - Saturday</span>
             <span class="hours-time">9:30 AM - 8:00 PM</span>
@@ -341,34 +367,39 @@
         </div>
         
         <div style="margin-top: var(--spacing-lg);">
-          <p><strong>GST:</strong> 29AFEPJ3685H1Z5 [citation:1]</p>
+          <p><strong>GST Number:</strong> 29AFEPJ3685H1Z5</p>
+          <p><strong>Established:</strong> 2001 | 22+ Years of Excellence</p>
         </div>
+        
+        <a href="https://maps.google.com/?q=K.S+Complex+Shivarampet+Mysore" target="_blank" class="direction-btn">
+          <i class="fas fa-directions"></i> Get Directions on Google Maps
+        </a>
       </div>
       
       <!-- Contact Form -->
       <div class="contact-form">
-        <h2>Send us a Message</h2>
-        <form id="contactForm">
+        <h2>📋 Request Free Quote</h2>
+        <form id="contactForm" onsubmit="return handleContactSubmit(event)">
           <div class="form-row">
             <div class="form-group">
               <label for="name">Full Name *</label>
-              <input type="text" id="name" required>
+              <input type="text" id="name" placeholder="Enter your full name" required>
             </div>
             <div class="form-group">
               <label for="phone">Phone Number *</label>
-              <input type="tel" id="phone" required>
+              <input type="tel" id="phone" placeholder="10-digit mobile number" pattern="[0-9]{10}" required>
             </div>
           </div>
           
           <div class="form-row">
             <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" placeholder="your@email.com">
             </div>
             <div class="form-group">
-              <label for="location">Location in Mysore</label>
+              <label for="location">Your Area in Mysore</label>
               <select id="location">
-                <option value="">Select your area</option>
+                <option value="">Select your locality</option>
                 <option>Kuvempunagar</option>
                 <option>Vijayanagar</option>
                 <option>Gokulam</option>
@@ -377,6 +408,10 @@
                 <option>K.T. Street</option>
                 <option>Saraswathipuram</option>
                 <option>Hebbal</option>
+                <option>Lakshmipuram</option>
+                <option>Yadavagiri</option>
+                <option>Bogadi</option>
+                <option>Srirampura</option>
                 <option>Other</option>
               </select>
             </div>
@@ -388,31 +423,162 @@
               <option value="">Select a service</option>
               <option>Window Net Installation</option>
               <option>Door Net Installation</option>
+              <option>Magnetic Door Net</option>
               <option>Repair & Replacement</option>
               <option>Free Consultation & Quote</option>
-              <option>Commercial Project</option>
-              <option>Other</option>
+              <option>Commercial Project (Bulk Order)</option>
+              <option>Annual Maintenance Contract</option>
             </select>
           </div>
           
           <div class="form-group">
-            <label for="message">Message *</label>
-            <textarea id="message" rows="5" required></textarea>
+            <label for="windows">Number of Windows/Doors (approx.)</label>
+            <input type="number" id="windows" placeholder="e.g., 5 windows, 2 doors">
           </div>
           
           <div class="form-group">
-            <label class="checkbox">
+            <label for="message">Your Message *</label>
+            <textarea id="message" rows="4" placeholder="Tell us about your requirements..." required></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label class="checkbox" style="display: flex; align-items: center; gap: 10px;">
               <input type="checkbox" required> I agree to receive calls/SMS regarding my inquiry
             </label>
           </div>
           
-          <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+          <button type="submit" class="btn btn-primary btn-block">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
         </form>
+        
+        <div style="margin-top: var(--spacing-md); text-align: center; font-size: 0.9rem; color: var(--gray);">
+          <p>We typically respond within 30 minutes during business hours</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Map -->
+  <!-- Google Map Location -->
   <section class="container">
+    <div class="section-header">
+      <h2 class="section-title">Find Us on Map</h2>
+      <p class="section-subtitle">Visit our showroom at Shivarampet, Mysore</p>
+    </div>
+    
     <div class="map-container">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3898.
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3898.0!2d76.6395!3d12.3055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baf7b1b1b1b1b1b%3A0x1b1b1b1b1b1b1b1b!2sK.S%20Complex%2C%20Shivarampet%2C%20Mysuru%2C%20Karnataka%20570001!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+    
+    <div style="text-align: center; margin-top: var(--spacing-md);">
+      <a href="https://maps.app.goo.gl/FuPobkHRTpyLHLke8" target="_blank" class="btn btn-outline">
+        <i class="fas fa-map-marked-alt"></i> Open in Google Maps App
+      </a>
+    </div>
+  </section>
+
+  <!-- Quick Contact Cards -->
+  <section class="team-contact">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Quick Contact</h2>
+        <p class="section-subtitle">Reach out to us directly</p>
+      </div>
+      
+      <div class="contact-cards">
+        <div class="contact-card">
+          <i class="fas fa-phone-volume"></i>
+          <h3>Call Us</h3>
+          <p class="position">24/7 Support</p>
+          <a href="tel:+919480337385">+91-9480337385</a>
+        </div>
+        
+        <div class="contact-card">
+          <i class="fab fa-whatsapp"></i>
+          <h3>WhatsApp</h3>
+          <p class="position">Quick Response</p>
+          <a href="https://wa.me/919480337385">Chat on WhatsApp</a>
+        </div>
+        
+        <div class="contact-card">
+          <i class="fas fa-envelope"></i>
+          <h3>Email</h3>
+          <p class="position">Send Inquiry</p>
+          <a href="mailto:rajmarketingmysore@gmail.com">rajmarketingmysore@gmail.com</a>
+        </div>
+        
+        <div class="contact-card">
+          <i class="fas fa-calendar-check"></i>
+          <h3>Appointment</h3>
+          <p class="position">Free Consultation</p>
+          <a href="#contactForm">Book Online</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Visit Us Section -->
+  <section class="container" style="padding: var(--spacing-xxl) 0;">
+    <div class="section-header">
+      <h2 class="section-title">Why Visit Our Showroom?</h2>
+      <p class="section-subtitle">Experience the quality firsthand at Shivarampet</p>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-lg);">
+      <div style="text-align: center;">
+        <i class="fas fa-ruler-combined" style="font-size: 2.5rem; color: var(--primary); margin-bottom: var(--spacing-sm);"></i>
+        <h3>See Samples</h3>
+        <p>View different mesh types and frame colors in person</p>
+      </div>
+      
+      <div style="text-align: center;">
+        <i class="fas fa-calculator" style="font-size: 2.5rem; color: var(--primary); margin-bottom: var(--spacing-sm);"></i>
+        <h3>Get Accurate Quote</h3>
+        <p>Bring your measurements for an instant price estimate</p>
+      </div>
+      
+      <div style="text-align: center;">
+        <i class="fas fa-handshake" style="font-size: 2.5rem; color: var(--primary); margin-bottom: var(--spacing-sm);"></i>
+        <h3>Meet the Team</h3>
+        <p>Discuss your requirements with our experts face-to-face</p>
+      </div>
+      
+      <div style="text-align: center;">
+        <i class="fas fa-truck" style="font-size: 2.5rem; color: var(--primary); margin-bottom: var(--spacing-sm);"></i>
+        <h3>Free Site Visit</h3>
+        <p>We'll visit your home for precise measurements</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section style="background: var(--light); padding: var(--spacing-xxl) 0;">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-subtitle">Quick answers to common queries</p>
+      </div>
+      
+      <div style="max-width: 800px; margin: 0 auto;">
+        <div style="background: var(--white); padding: var(--spacing-lg); border-radius: var(--radius-lg); margin-bottom: var(--spacing-md);">
+          <h3 style="color: var(--primary); margin-bottom: 10px;">Q: Do I need to visit the showroom for a quote?</h3>
+          <p>A: Not necessarily. You can call us or fill the form above. However, visiting our showroom at Shivarampet lets you see the material quality and colors in person.</p>
+        </div>
+        
+        <div style="background: var(--white); padding: var(--spacing-lg); border-radius: var(--radius-lg); margin-bottom: var(--spacing-md);">
+          <h3 style="color: var(--primary); margin-bottom: 10px;">Q: What is your response time for online inquiries?</h3>
+          <p>A: We typically respond within 30 minutes during business hours (9:30 AM - 8:00 PM). For urgent requirements, please call us directly at +91-948037385.</p>
+        </div>
+        
+        <div style="background: var(--white); padding: var(--spacing-lg); border-radius: var(--radius-lg); margin-bottom: var(--spacing-md);">
+          <h3 style="color: var(--primary); margin-bottom: 10px;">Q: Do you offer free site visits?</h3>
+          <p>A: Yes, we provide free on-site measurement and consultation within Mysore city limits. Our technician will visit your home at your convenience.</p>
+        </div>
+        
+        <div style="background: var(--white); padding: var(--spacing-lg); border-radius: var(--radius-lg);">
+          <h3 style="color: var(--primary); margin-bottom: 10px;">Q: Is parking availab
