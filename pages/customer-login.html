@@ -1,343 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Login - Raj Marketing</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <style>
-        .auth-section {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-        }
-        
-        .auth-container {
-            width: 100%;
-            max-width: 450px;
-        }
-        
-        .auth-card {
-            background: var(--white);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-        }
-        
-        .auth-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .auth-header i {
-            font-size: 3rem;
-            color: var(--primary);
-            background: rgba(26, 75, 140, 0.1);
-            padding: 20px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-        }
-        
-        .auth-header h2 {
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--dark);
-        }
-        
-        .input-group {
-            position: relative;
-        }
-        
-        .input-group i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--gray);
-        }
-        
-        .input-group input {
-            width: 100%;
-            padding: 15px 15px 15px 45px;
-            border: 2px solid var(--gray-light);
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: var(--transition-fast);
-        }
-        
-        .input-group input:focus {
-            border-color: var(--primary);
-            outline: none;
-        }
-        
-        .remember-forgot {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-        
-        .remember {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--gray);
-        }
-        
-        .forgot a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-        
-        .btn-login {
-            width: 100%;
-            padding: 15px;
-            background: var(--primary);
-            color: var(--white);
-            border: none;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition-fast);
-        }
-        
-        .btn-login:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(26, 75, 140, 0.3);
-        }
-        
-        .auth-footer {
-            text-align: center;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid var(--gray-light);
-        }
-        
-        .auth-footer a {
-            color: var(--primary);
-            font-weight: 600;
-            text-decoration: none;
-        }
-        
-        .alert {
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: none;
-        }
-        
-        .alert.error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-            display: block;
-        }
-        
-        .alert.success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-            display: block;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Login - Raj Marketing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;background:#f8f9fa}.login-container{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}.login-card{background:white;border-radius:20px;padding:40px;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,0.1)}.login-header{text-align:center;margin-bottom:30px}.login-header i{font-size:3rem;color:#1a4b8c;background:rgba(26,75,140,0.1);padding:20px;border-radius:50%;margin-bottom:20px}.login-header h2{color:#1a4b8c;margin-bottom:10px}.form-group{margin-bottom:20px}.form-group label{display:block;margin-bottom:5px;font-weight:500}.input-group{position:relative}.input-group i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#6c757d}.input-group input{width:100%;padding:12px 12px 12px 40px;border:2px solid #e9ecef;border-radius:8px;font-size:1rem}.input-group input:focus{outline:none;border-color:#1a4b8c}.options{display:flex;justify-content:space-between;margin-bottom:20px}.btn-login{width:100%;padding:14px;background:#1a4b8c;color:white;border:none;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer}.btn-login:hover{background:#0f3a6b}.links{text-align:center;margin-top:20px}.links a{color:#1a4b8c;text-decoration:none}.alert{padding:12px;border-radius:8px;margin-bottom:20px;display:none}.alert.error{background:#f8d7da;color:#721c24;display:block}
+  </style>
 </head>
 <body>
-    <section class="auth-section">
-        <div class="auth-container">
-            <div class="auth-card">
-                <div class="auth-header">
-                    <i class="fas fa-user-circle"></i>
-                    <h2>Customer Login</h2>
-                    <p>Welcome back! Please login to your account</p>
-                </div>
-                
-                <div id="loginAlert" class="alert"></div>
-                
-                <form id="loginForm" onsubmit="return handleCustomerLogin(event)">
-                    <div class="form-group">
-                        <label>Email or Mobile Number</label>
-                        <div class="input-group">
-                            <i class="fas fa-envelope"></i>
-                            <input type="text" id="username" placeholder="Enter email or mobile number" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Password</label>
-                        <div class="input-group">
-                            <i class="fas fa-lock"></i>
-                            <input type="password" id="password" placeholder="Enter password" required>
-                        </div>
-                    </div>
-                    
-                    <div class="remember-forgot">
-                        <label class="remember">
-                            <input type="checkbox" id="rememberMe"> Remember me
-                        </label>
-                        <div class="forgot">
-                            <a href="forgot-password.html">Forgot Password?</a>
-                        </div>
-                    </div>
-                    
-                    <button type="submit" class="btn-login" id="loginBtn">
-                        <span>Login to Dashboard</span>
-                        <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
-                    </button>
-                </form>
-                
-                <div class="auth-footer">
-                    <p>New customer? <a href="register.html">Create an account</a></p>
-                    <p style="margin-top: 10px; font-size: 0.9rem;">
-                        <a href="../index.html"><i class="fas fa-home"></i> Back to Home</a>
-                    </p>
-                </div>
-            </div>
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <i class="fas fa-user-circle"></i>
+        <h2>Customer Login</h2>
+        <p>Welcome back!</p>
+      </div>
+      
+      <div id="alert" class="alert"></div>
+      
+      <form id="loginForm" onsubmit="return login(event)">
+        <div class="form-group">
+          <label>Email or Phone</label>
+          <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input type="text" id="username" required>
+          </div>
         </div>
-    </section>
+        
+        <div class="form-group">
+          <label>Password</label>
+          <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="password" required>
+          </div>
+        </div>
+        
+        <div class="options">
+          <label><input type="checkbox" id="remember"> Remember me</label>
+          <a href="forgot-password.html">Forgot Password?</a>
+        </div>
+        
+        <button type="submit" class="btn-login">Login to Dashboard</button>
+      </form>
+      
+      <div class="links">
+        <p>New customer? <a href="register.html">Create Account</a></p>
+        <p style="margin-top:10px"><a href="../index.html">← Back to Home</a></p>
+      </div>
+    </div>
+  </div>
 
-    <script>
-        // Mock customer database (in production, this would come from your storage system)
-        const customers = [
-            {
-                id: 'CUST001',
-                email: 'john@example.com',
-                phone: '9876543210',
-                password: 'customer123',
-                name: 'John Customer',
-                address: '#65, Hootgalli, Mysore',
-                profilePhoto: 'https://ui-avatars.com/api/?name=John+Customer&size=150&background=0e2a47&color=fff',
-                coverPhoto: 'https://via.placeholder.com/1200x300/0e2a47/ffffff?text=Raj+Marketing',
-                membership: 'Gold',
-                memberSince: '2023',
-                stats: {
-                    totalOrders: 12,
-                    pendingOrders: 2,
-                    completedOrders: 10,
-                    activeInstallations: 1
-                }
-            },
-            {
-                id: 'CUST002',
-                email: 'demo@rajmarketing.com',
-                phone: '9876543211',
-                password: 'demo123',
-                name: 'Demo Customer',
-                address: '#123, Kuvempunagar, Mysore',
-                profilePhoto: 'https://ui-avatars.com/api/?name=Demo+Customer&size=150&background=0e2a47&color=fff',
-                coverPhoto: 'https://via.placeholder.com/1200x300/0e2a47/ffffff?text=Raj+Marketing',
-                membership: 'Silver',
-                memberSince: '2024',
-                stats: {
-                    totalOrders: 5,
-                    pendingOrders: 1,
-                    completedOrders: 4,
-                    activeInstallations: 0
-                }
-            }
-        ];
-
-        function handleCustomerLogin(event) {
-            event.preventDefault();
-            
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value;
-            const rememberMe = document.getElementById('rememberMe').checked;
-            const loginBtn = document.getElementById('loginBtn');
-            
-            // Show loading state
-            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
-            loginBtn.disabled = true;
-            
-            // Simulate API call delay
-            setTimeout(() => {
-                // Find customer by email or phone
-                const customer = customers.find(c => 
-                    c.email === username || c.phone === username
-                );
-                
-                if (customer && customer.password === password) {
-                    // Successful login
-                    
-                    // Remove password before storing
-                    const { password, ...customerData } = customer;
-                    
-                    // Add login timestamp
-                    customerData.loginTime = new Date().toISOString();
-                    
-                    // Store in localStorage if remember me is checked, else sessionStorage
-                    if (rememberMe) {
-                        localStorage.setItem('currentUser', JSON.stringify({
-                            ...customerData,
-                            type: 'customer'
-                        }));
-                    } else {
-                        sessionStorage.setItem('currentUser', JSON.stringify({
-                            ...customerData,
-                            type: 'customer'
-                        }));
-                    }
-                    
-                    // Show success message
-                    showAlert('Login successful! Redirecting to dashboard...', 'success');
-                    
-                    // Redirect to customer dashboard
-                    setTimeout(() => {
-                        window.location.href = 'customer-dashboard.html';
-                    }, 1500);
-                    
-                } else {
-                    // Failed login
-                    showAlert('Invalid email/phone or password', 'error');
-                    
-                    // Reset button
-                    loginBtn.innerHTML = '<span>Login to Dashboard</span><i class="fas fa-arrow-right" style="margin-left: 10px;"></i>';
-                    loginBtn.disabled = false;
-                }
-            }, 1500);
-            
-            return false;
+  <script>
+    function showAlert(msg) {
+      const alert = document.getElementById('alert');
+      alert.textContent = msg;
+      alert.style.display = 'block';
+      setTimeout(() => alert.style.display = 'none', 3000);
+    }
+    
+    function login(event) {
+      event.preventDefault();
+      
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+      const remember = document.getElementById('remember').checked;
+      
+      // Get users from storage
+      const users = JSON.parse(localStorage.getItem('users') || '{"customers":[],"dealers":[]}');
+      
+      // Find customer
+      const customer = users.customers.find(c => 
+        (c.email === username || c.phone === username) && c.password === password
+      );
+      
+      if (customer) {
+        const { password: pwd, ...safeUser } = customer;
+        safeUser.type = 'customer';
+        
+        if (remember) {
+          localStorage.setItem('currentUser', JSON.stringify(safeUser));
+        } else {
+          sessionStorage.setItem('currentUser', JSON.stringify(safeUser));
         }
         
-        function showAlert(message, type) {
-            const alert = document.getElementById('loginAlert');
-            alert.textContent = message;
-            alert.className = 'alert ' + type;
-            
-            // Auto hide after 5 seconds for success messages
-            if (type === 'success') {
-                setTimeout(() => {
-                    alert.style.display = 'none';
-                }, 5000);
-            }
-        }
-        
-        // Check if already logged in
-        window.addEventListener('load', function() {
-            const currentUser = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
-            if (currentUser) {
-                const user = JSON.parse(currentUser);
-                if (user.type === 'customer') {
-                    window.location.href = 'customer-dashboard.html';
-                }
-            }
-        });
-    </script>
+        window.location.href = 'customer-dashboard.html';
+      } else {
+        showAlert('Invalid email/phone or password');
+      }
+      
+      return false;
+    }
+    
+    // Check if already logged in
+    const user = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
+    if (user) {
+      window.location.href = 'customer-dashboard.html';
+    }
+  </script>
 </body>
 </html>
