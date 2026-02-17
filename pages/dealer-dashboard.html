@@ -434,4 +434,47 @@
         // Check if dealer is logged in
         const currentUser = JSON.parse(localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser'));
         
-        if (!cu
+            if (!currentUser || currentUser.type !== 'dealer') {
+            window.location.href = 'dealer-login.html';
+        }
+
+        // Load dealer dashboard data
+        async function loadDealerDashboard() {
+            try {
+                // Load dealer details
+                document.getElementById('dealerName').textContent = currentUser.name || 'Dealer';
+                document.getElementById('dealerId').textContent = currentUser.dealerId || 'DLR-' + Date.now();
+                document.getElementById('dealerPhone').textContent = currentUser.phone || '+91-9876543210';
+                document.getElementById('dealerAddress').textContent = currentUser.address || '#65, Hootgalli, Mysore';
+                document.getElementById('dealerGST').textContent = currentUser.gst || '29ABCDE1234F1Z5';
+
+                // Load carpenters
+                // This would come from storage in production
+                // const carpenters = await storage.getCarpentersByDealer(currentUser.id);
+                
+            } catch (error) {
+                console.error('Error loading dashboard:', error);
+                showToast('Error loading dashboard data');
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function logout() {
+            localStorage.removeItem('currentUser');
+            sessionStorage.removeItem('currentUser');
+            window.location.href = 'dealer-login.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', loadDealerDashboard);
+    </script>
+</body>
+</html>
+```
