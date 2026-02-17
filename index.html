@@ -894,3 +894,273 @@
     </div>
   </section>
   
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-info">
+          <div class="footer-logo">
+            <i class="fas fa-shield-alt"></i>
+            <span>Raj Marketing</span>
+          </div>
+          <p>Premium mosquito nets for windows and doors in Mysore. Serving since 2001 with 5000+ happy customers.</p>
+          <p><strong>GST:</strong> 29AFEPJ3685H1Z5</p>
+          <p><strong>Kannada:</strong> ರಾಜ್ ಮಾರ್ಕೆಟಿಂಗ್ ಮೈಸೂರು</p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/919480337385" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pages/about.html">About Us</a></li>
+            <li><a href="pages/services.html">Services</a></li>
+            <li><a href="pages/products.html">Products</a></li>
+            <li><a href="pages/gallery.html">Gallery</a></li>
+            <li><a href="pages/contact.html">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Account Access</h4>
+          <ul>
+            <li><a href="pages/customer-login.html">Customer Login</a></li>
+            <li><a href="pages/dealer-login.html">Dealer Login</a></li>
+            <li><a href="pages/admin-login.html">Admin Login</a></li>
+            <li><a href="pages/register.html">Register</a></li>
+            <li><a href="pages/forgot-password.html">Forgot Password</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="pages/privacy.html">Privacy Policy</a></li>
+            <li><a href="pages/terms.html">Terms & Conditions</a></li>
+            <li><a href="pages/disclaimer.html">Disclaimer</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-contact">
+          <h4>Contact Info</h4>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> #65, Near Pragathi logistics, Hootgalli industrial area, Hootgalli, Mysore - 570018</li>
+            <li><i class="fas fa-phone"></i> <a href="tel:+919480337385">+91-9480337385 (Kiran)</a></li>
+            <li><i class="fas fa-phone"></i> <a href="tel:+919481234568">+91-9481234568 (Bharath)</a></li>
+            <li><i class="fas fa-envelope"></i> <a href="mailto:inforajmarketingmysore@gmail.com">inforajmarketingmysore@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2024 Raj Marketing. All Rights Reserved. | Designed with <i class="fas fa-heart" style="color: #ff4757;"></i> in Mysore</p>
+        <div class="footer-bottom-links">
+          <a href="pages/privacy.html">Privacy</a>
+          <a href="pages/terms.html">Terms</a>
+          <a href="pages/disclaimer.html">Disclaimer</a>
+          <a href="pages/sitemap.html">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Quick Action Button -->
+  <div class="quick-action">
+    <a href="tel:+919480337385" class="quick-call" title="Call Now">
+      <i class="fas fa-phone-alt"></i>
+    </a>
+    <a href="https://wa.me/919480337385" class="quick-whatsapp" title="WhatsApp">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ===== LOADER =====
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        document.getElementById('loading-page').classList.add('hidden');
+      }, 1500);
+    });
+
+    // ===== MOBILE MENU FUNCTIONALITY =====
+    document.addEventListener('DOMContentLoaded', function() {
+      const navToggle = document.getElementById('navToggle');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const mobileOverlay = document.getElementById('mobileMenuOverlay');
+      const mobileClose = document.getElementById('mobileMenuClose');
+      
+      // Function to open mobile menu
+      function openMobileMenu() {
+        mobileMenu.classList.add('active');
+        mobileOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+      
+      // Function to close mobile menu
+      function closeMobileMenu() {
+        mobileMenu.classList.remove('active');
+        mobileOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+      
+      // Toggle menu on hamburger click
+      if (navToggle) {
+        navToggle.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          openMobileMenu();
+        });
+      }
+      
+      // Close on close button
+      if (mobileClose) {
+        mobileClose.addEventListener('click', function(e) {
+          e.preventDefault();
+          closeMobileMenu();
+        });
+      }
+      
+      // Close on overlay click
+      if (mobileOverlay) {
+        mobileOverlay.addEventListener('click', function() {
+          closeMobileMenu();
+        });
+      }
+      
+      // Close on escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+          closeMobileMenu();
+        }
+      });
+      
+      // Handle window resize
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 768 && mobileMenu.classList.contains('active')) {
+          closeMobileMenu();
+        }
+      });
+    });
+
+    // ===== DROPDOWN MENU =====
+    document.addEventListener('DOMContentLoaded', function() {
+      const dropdowns = document.querySelectorAll('.dropdown');
+      
+      dropdowns.forEach(dropdown => {
+        const toggle = dropdown.querySelector('.dropdown-toggle');
+        
+        toggle.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          // Close other dropdowns
+          dropdowns.forEach(d => {
+            if (d !== dropdown) {
+              d.classList.remove('active');
+            }
+          });
+          
+          dropdown.classList.toggle('active');
+        });
+      });
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+          dropdowns.forEach(d => d.classList.remove('active'));
+        }
+      });
+    });
+
+    // ===== SMOOTH SCROLL =====
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        
+        if (href !== '#') {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        }
+      });
+    });
+
+    // ===== TOAST NOTIFICATION =====
+    function showToast(message, duration = 3000) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, duration);
+    }
+
+    // ===== ACTIVE LINK HIGHLIGHT =====
+    document.addEventListener('DOMContentLoaded', function() {
+      const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+      const navLinks = document.querySelectorAll('.nav-menu a, .mobile-nav a');
+      
+      navLinks.forEach(link => {
+        const linkPage = link.getAttribute('href').split('/').pop();
+        
+        if (linkPage === currentPage) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // ===== DYNAMIC YEAR =====
+    document.addEventListener('DOMContentLoaded', function() {
+      const yearElements = document.querySelectorAll('.current-year');
+      const currentYear = new Date().getFullYear();
+      
+      yearElements.forEach(el => {
+        el.textContent = currentYear;
+      });
+    });
+
+    // ===== CHECK LOGIN STATUS =====
+    document.addEventListener('DOMContentLoaded', function() {
+      const currentUser = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
+      
+      if (currentUser) {
+        const user = JSON.parse(currentUser);
+        const mobileUserInfo = document.querySelector('.mobile-user-info');
+        
+        if (mobileUserInfo && user.type) {
+          mobileUserInfo.innerHTML = `
+            <i class="fas fa-user-circle"></i>
+            <div>
+              <h4>Welcome, ${user.name || 'User'}</h4>
+              <p><a href="pages/${user.type}-dashboard.html">Go to Dashboard</a> | <a href="#" onclick="logout()">Logout</a></p>
+            </div>
+          `;
+        }
+      }
+    });
+
+    // ===== LOGOUT FUNCTION =====
+    window.logout = function() {
+      localStorage.removeItem('currentUser');
+      sessionStorage.removeItem('currentUser');
+      showToast('Logged out successfully');
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+    };
+  </script>
+  
