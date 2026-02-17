@@ -546,4 +546,87 @@
         }
 
         // Load customer dashboard data
-        async function load
+        async function loadCustomerDashboard() {
+            try {
+                // Load customer details
+                document.getElementById('customerName').textContent = currentUser.name || 'Customer';
+                document.getElementById('customerId').textContent = currentUser.customerId || 'CUST-' + Date.now();
+                document.getElementById('customerPhone').textContent = currentUser.phone || '+91-9876543210';
+                document.getElementById('customerAddress').textContent = currentUser.address || '#65, Hootgalli, Mysore';
+
+                // Load orders
+                const orders = await storage.getCustomerOrders(currentUser.id);
+                const recentOrdersDiv = document.getElementById('recentOrders');
+                
+                if (orders.length > 0) {
+                    recentOrdersDiv.innerHTML = orders.slice(0, 3).map(order => `
+                        <div class="order-item">
+                            <div>
+                                <strong>Order #${order.id}</strong>
+                                <p style="font-size: 0.85rem; color: var(--gray);">${order.details}</p>
+                            </div>
+                            <span class="order-status status-${order.status}">${order.status}</span>
+                        </div>
+                    `).join('');
+                } else {
+                    recentOrdersDiv.innerHTML = '<p style="text-align: center; color: var(--gray);">No orders yet</p>';
+                }
+
+                // Update stats
+                document.getElementById('totalOrders').textContent = orders.length;
+                document.getElementById('pendingOrders').textContent = orders.filter(o => o.status === 'pending').length;
+                document.getElementById('completedOrders').textContent = orders.filter(o => o.status === 'completed').length;
+
+                // Load service areas
+                const areas = await storage.getServiceAreas();
+                const serviceAreasDiv = document.getElementById('serviceAreas');
+                serviceAreasDiv.innerHTML = areas.map(area => `
+                    <div class="area-tag" onclick="showToast('Service available in ${area.name}')">
+                        <i class="fas fa-map-pin"></i> ${area.name}
+                    </div>
+                `).join('');
+
+                // Load notifications
+                const notifications = await storage.getUserNotifications(currentUser.id);
+                const notificationsDiv = document.getElementById('notifications');
+                
+                if (notifications.length > 0) {
+                    notificationsDiv.innerHTML = notifications.slice(0, 3).map(notif => `
+                        <div class="notification-item" style="padding: var(--spacing-sm); border-left: 3px solid var(--primary); margin-bottom: var(--spacing-sm); background: var(--light); border-radius: var(--radius-sm);">
+                            <p style="font-size: 0.9rem; margin-bottom: 5px;">${notif.message}</p>
+                            <small style="color: var(--gray);">${new Date(notif.createdAt).toLocaleDateString()}</small>
+                        </div>
+                    `).join('');
+                } else {
+                    notificationsDiv.innerHTML = '<p style="text-align: center; color: var(--gray);">No new notifications</p>';
+                }
+
+            } catch (error) {
+                console.error('Error loading dashboard:', error);
+                showToast('Error loading dashboard data');
+            }
+        }
+
+        // Toast function
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Logout function
+        function logout() {
+            localStorage.removeItem('currentUser');
+            sessionStorage.removeItem('currentUser');
+            window.location.href = 'customer-login.html';
+        }
+
+        // Load dashboard on page load
+        document.addEventListener('DOMContentLoaded', loadCustomerDashboard);
+    </script>
+</body>
+</html>
+```
