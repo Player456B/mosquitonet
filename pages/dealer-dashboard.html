@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dealer Dashboard - Raj Marketing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <style>
+        /* Dealer Dashboard Specific Styles */
+        .dealer-welcome {
+            background: linear-gradient(135deg, var(--secondary) 0%, #ffc107 100%);
+            color: var(--dark);
+            padding: var(--spacing-xl) 0;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .dealer-profile {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xl);
+        }
+
+        .dealer-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid var(--dark);
+            overflow: hidden;
+        }
+
+        .dealer-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .dealer-info h1 {
+            color: var(--dark);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .dealer-badge {
+            display: inline-block;
+            background: rgba(0,0,0,0.1);
+            padding: 0.3rem 1rem;
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-right: var(--spacing-xs);
+            color: var(--dark);
+        }
+
+        .membership-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--white);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .membership-card::before {
+            content: 'PREMIUM';
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .carpenter-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .carpenter-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-md);
+            border: 1px solid var(--gray-light);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-sm);
+            transition: var(--transition-fast);
+        }
+
+        .carpenter-item:hover {
+            background: var(--light);
+            border-color: var(--secondary);
+        }
+
+        .carpenter-info h4 {
+            margin-bottom: 5px;
+        }
+
+        .carpenter-info p {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .rating {
+            color: #ffc107;
+        }
+
+        .notification-badge {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .notification-badge::after {
+            content: attr(data-count);
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #dc3545;
+            color: var(--white);
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 50%;
+        }
+
+        .order-alert {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-md);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .city-area-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-sm);
+            margin: var(--spacing-md) 0;
+        }
+
+        .city-tag {
+            background: var(--light);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            text-align: center;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .city-tag.active {
+            border-color: var(--secondary);
+            background: rgba(240, 178, 2, 0.1);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Page -->
+    <div id="loading-page" class="loading-page">
+        <div class="loader-container">
+            <div class="loader-logo">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h1 class="loader-title">Raj Marketing</h1>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dealer Welcome Section -->
+    <section class="dealer-welcome">
+        <div class="container">
+            <div class="dealer-profile">
+                <div class="dealer-avatar">
+                    <img src="https://ui-avatars.com/api/?name=Dealer+Name&size=150&background=0e2a47&color=fff" alt="Dealer Photo" id="dealerPhoto">
+                </div>
+                <div class="dealer-info">
+                    <h1 id="dealerName">Welcome, Dealer!</h1>
+                    <p><i class="fas fa-id-card"></i> Dealer ID: <span id="dealerId">DLR-2024-001</span></p>
+                    <p><i class="fas fa-phone"></i> <span id="dealerPhone">+91-9876543210</span></p>
+                    <p><i class="fas fa-map-marker-alt"></i> <span id="dealerAddress">#65, Hootgalli, Mysore</span></p>
+                    <p><i class="fas fa-id-card"></i> GST: <span id="dealerGST">29ABCDE1234F1Z5</span></p>
+                    <div>
+                        <span class="dealer-badge"><i class="fas fa-store"></i> Premium Dealer</span>
+                        <span class="dealer-badge"><i class="fas fa-calendar"></i> Partner since 2023</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- Left Column -->
+            <div>
+                <!-- Membership Card -->
+                <div class="membership-card">
+                    <div style="display: flex; align-items: center; gap: var(--spacing-lg);">
+                        <i class="fas fa-crown" style="font-size: 3rem;"></i>
+                        <div>
+                            <h3 style="color: var(--white); margin-bottom: 5px;">Premium Dealer Membership</h3>
+                            <p style="color: rgba(255,255,255,0.9);">Valid until: December 2025</p>
+                            <div style="display: flex; gap: var(--spacing-sm); margin-top: var(--spacing-sm);">
+                                <span style="background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 3px;">10% Commission</span>
+                                <span style="background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 3px;">Priority Orders</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customer Orders in City -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-bell"></i> New Orders in Your Area</h3>
+                        <span class="notification-badge" data-count="3" onclick="showToast('New orders')">
+                            <i class="fas fa-bell"></i>
+                        </span>
+                    </div>
+
+                    <div id="cityOrders">
+                        <!-- Dynamic orders will be loaded here -->
+                        <div class="order-alert">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <strong>New Order #ORD-2024-0092</strong>
+                                    <p style="font-size: 0.85rem; color: var(--gray);">5 Windows • Hootgalli</p>
+                                </div>
+                                <button class="btn btn-small btn-primary" onclick="showToast('Order accepted')">Accept</button>
+                            </div>
+                        </div>
+                        <div class="order-alert">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <strong>New Order #ORD-2024-0091</strong>
+                                    <p style="font-size: 0.85rem; color: var(--gray);">3 Doors • Kuvempunagar</p>
+                                </div>
+                                <button class="btn btn-small btn-primary" onclick="showToast('Order accepted')">Accept</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carpenter Management -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-tools"></i> My Carpenters</h3>
+                        <button class="btn btn-small btn-primary" onclick="showToast('Add carpenter form')">+ Add New</button>
+                    </div>
+
+                    <div class="carpenter-list" id="carpenterList">
+                        <!-- Dynamic carpenters will be loaded here -->
+                        <div class="carpenter-item">
+                            <div class="carpenter-info">
+                                <h4>Ramesh <i class="fas fa-check-circle" style="color: #28a745;"></i></h4>
+                                <p><i class="fas fa-phone"></i> +91-9876543210</p>
+                                <p><i class="fas fa-map-marker-alt"></i> Hootgalli</p>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> 4.5
+                                </div>
+                            </div>
+                            <div>
+                                <span class="badge" style="background: #28a745; color: white;">Available</span>
+                                <p style="font-size: 0.8rem; margin-top: 5px;">15 jobs completed</p>
+                            </div>
+                        </div>
+
+                        <div class="carpenter-item">
+                            <div class="carpenter-info">
+                                <h4>Suresh</h4>
+                                <p><i class="fas fa-phone"></i> +91-9876543211</p>
+                                <p><i class="fas fa-map-marker-alt"></i> Kuvempunagar</p>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> 5.0
+                                </div>
+                            </div>
+                            <div>
+                                <span class="badge" style="background: #28a745; color: white;">Available</span>
+                                <p style="font-size: 0.8rem; margin-top: 5px;">28 jobs completed</p>
+                            </div>
+                        </div>
+
+                        <div class="carpenter-item">
+                            <div class="carpenter-info">
+                                <h4>Prakash</h4>
+                                <p><i class="fas fa-phone"></i> +91-9876543212</p>
+                                <p><i class="fas fa-map-marker-alt"></i> Vijayanagar</p>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> 5.0
+                                </div>
+                            </div>
+                            <div>
+                                <span class="badge" style="background: #dc3545; color: white;">On Job</span>
+                                <p style="font-size: 0.8rem; margin-top: 5px;">42 jobs completed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div>
+                <!-- Stats Overview -->
+                <div class="dashboard-card">
+                    <h3>Performance Stats</h3>
+                    <div style="margin-top: var(--spacing-md);">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: var(--spacing-sm);">
+                            <span>Monthly Orders</span>
+                            <strong>24</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: var(--spacing-sm);">
+                            <span>Completed Jobs</span>
+                            <strong>18</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: var(--spacing-sm);">
+                            <span>Pending Jobs</span>
+                            <strong>6</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: var(--spacing-sm);">
+                            <span>Total Earnings</span>
+                            <strong>₹45,000</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Commission Earned</span>
+                            <strong>₹4,500</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service Areas -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-city"></i> My Service Areas</h3>
+                        <button class="btn btn-small btn-primary" onclick="showToast('Add area')">+ Add</button>
+                    </div>
+
+                    <div class="city-area-grid" id="serviceAreas">
+                        <div class="city-tag active">Hootgalli</div>
+                        <div class="city-tag">Kuvempunagar</div>
+                        <div class="city-tag">Vijayanagar</div>
+                        <div class="city-tag">Gokulam</div>
+                        <div class="city-tag">Jayalakshmipuram</div>
+                        <div class="city-tag">Shivarampet</div>
+                    </div>
+                </div>
+
+                <!-- Inventory Status -->
+                <div class="dashboard-card">
+                    <h3><i class="fas fa-boxes"></i> Inventory Status</h3>
+                    <div style="margin-top: var(--spacing-md);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-sm);">
+                            <span>Fiberglass Mesh</span>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div style="width: 100px; height: 6px; background: var(--gray-light); border-radius: 3px;">
+                                    <div style="width: 70%; height: 100%; background: var(--success); border-radius: 3px;"></div>
+                                </div>
+                                <span>70%</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-sm);">
+                            <span>Aluminum Frames</span>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div style="width: 100px; height: 6px; background: var(--gray-light); border-radius: 3px;">
+                                    <div style="width: 45%; height: 100%; background: var(--warning); border-radius: 3px;"></div>
+                                </div>
+                                <span>45%</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span>Magnetic Strips</span>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div style="width: 100px; height: 6px; background: var(--gray-light); border-radius: 3px;">
+                                    <div style="width: 20%; height: 100%; background: var(--danger); border-radius: 3px;"></div>
+                                </div>
+                                <span>20%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-block" style="margin-top: var(--spacing-md);" onclick="showToast('Order supplies')">Order Supplies</button>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="dashboard-card">
+                    <h3><i class="fas fa-history"></i> Recent Activity</h3>
+                    <div style="margin-top: var(--spacing-md);">
+                        <div style="padding: var(--spacing-sm); border-left: 3px solid var(--primary); margin-bottom: var(--spacing-sm);">
+                            <p style="font-size: 0.9rem;">Installation completed at Hootgalli</p>
+                            <small style="color: var(--gray);">2 hours ago</small>
+                        </div>
+                        <div style="padding: var(--spacing-sm); border-left: 3px solid var(--success); margin-bottom: var(--spacing-sm);">
+                            <p style="font-size: 0.9rem;">New order accepted - Kuvempunagar</p>
+                            <small style="color: var(--gray);">5 hours ago</small>
+                        </div>
+                        <div style="padding: var(--spacing-sm); border-left: 3px solid var(--warning); margin-bottom: var(--spacing-sm);">
+                            <p style="font-size: 0.9rem;">Carpenter Ramesh assigned to job</p>
+                            <small style="color: var(--gray);;">Yesterday</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Raj Marketing. All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Use</a>
+                    <a href="disclaimer.html">Disclaimer</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script src="../assets/js/storage.js"></script>
+    <script>
+        // Check if dealer is logged in
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser'));
+        
+        if (!cu
