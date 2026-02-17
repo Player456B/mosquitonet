@@ -431,6 +431,74 @@
 
     <script src="../assets/js/storage.js"></script>
     <script>
+
+        // Check if user is logged in and is a dealer
+const currentUser = JSON.parse(localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser'));
+
+if (!currentUser) {
+    // No user logged in, redirect to login
+    window.location.href = 'dealer-login.html?redirect=dashboard';
+} else if (currentUser.type !== 'dealer') {
+    // Wrong user type, redirect to appropriate login
+    if (currentUser.type === 'customer') {
+        window.location.href = 'customer-dashboard.html';
+    } else {
+        window.location.href = 'dealer-login.html';
+    }
+}
+
+// Load dealer data into dashboard
+function loadDealerData() {
+    document.getElementById('dealerName').textContent = currentUser.name || 'Dealer';
+    document.getElementById('dealerId').textContent = currentUser.dealerId || currentUser.id || 'DLR-001';
+    document.getElementById('dealerPhone').textContent = currentUser.phone || '+91-9876543210';
+    document.getElementById('dealerAddress').textContent = currentUser.address || '#65, Hootgalli, Mysore';
+    document.getElementById('dealerGST').textContent = currentUser.gst || '29ABCDE1234F1Z5';
+    
+    // Update profile photo if available
+    if (currentUser.profilePhoto) {
+        document.getElementById('dealerPhoto').src = currentUser.profilePhoto;
+    }
+    
+    // Update stats
+    if (currentUser.stats) {
+        // Update dealer stats here
+        updateDealerStats(currentUser.stats);
+    }
+    
+    // Load service areas
+    if (currentUser.areas && currentUser.areas.length > 0) {
+        loadServiceAreas(currentUser.areas);
+    }
+}
+
+function updateDealerStats(stats) {
+    // Update dealer statistics on dashboard
+    const statsContainer = document.querySelector('.dealer-stats');
+    if (statsContainer) {
+        // Update stats display
+    }
+}
+
+function loadServiceAreas(areas) {
+    const areasContainer = document.getElementById('serviceAreas');
+    if (areasContainer) {
+        areasContainer.innerHTML = areas.map(area => 
+            `<div class="city-tag active">${area}</div>`
+        ).join('');
+    }
+}
+
+// Logout function
+function logout() {
+    localStorage.removeItem('currentUser');
+    sessionStorage.removeItem('currentUser');
+    window.location.href = 'dealer-login.html';
+}
+
+// Load data on page load
+document.addEventListener('DOMContentLoaded', loadDealerData);
+        
         // Check if dealer is logged in
         const currentUser = JSON.parse(localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser'));
         
