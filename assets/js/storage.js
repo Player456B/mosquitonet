@@ -4,7 +4,7 @@
 const GITHUB_CONFIG = {
     owner: 'Player456B', // Replace with your GitHub username
     repo: 'rajmarketingmysore',     // Replace with your repo name
-    token: 'YOUR_GITHUB_TOKEN',      // Replace with your GitHub token (keep secret!)
+    token: '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',      // Replace with your GitHub token (keep secret!)
     branch: 'main'
 };
 
