@@ -3,11 +3,511 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Raj Marketing - Premium Mosquito Nets</title>
-  <meta name="description" content="Raj Marketing - Your trusted partner for premium mosquito nets in Mysore. Custom-fit solutions for windows and doors.">
+  <title>Raj Marketing - Premium Mosquito Nets in Mysore</title>
+  <meta name="description" content="Raj Marketing - Your trusted partner for premium mosquito nets in Mysore. Custom-fit solutions for windows and doors since 2001.">
+  <meta name="keywords" content="mosquito nets, window nets, door nets, Mysore, Raj Marketing, insect screens">
+  <meta name="author" content="Raj Marketing">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="Raj Marketing - Premium Mosquito Nets">
+  <meta property="og:description" content="Premium mosquito nets for windows and doors in Mysore. Serving since 2001.">
+  <meta property="og:image" content="../assets/images/og-image.jpg">
+  <meta property="og:url" content="https://rajmarketing.com">
+  
+  <!-- Fonts and Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
   <link rel="stylesheet" href="assets/css/style.css">
+  
+  <style>
+    /* Additional styles for index page */
+    :root {
+      --primary: #1a4b8c;
+      --primary-dark: #0f3a6b;
+      --primary-light: #2d6ab3;
+      --secondary: #f0b202;
+      --secondary-dark: #d49b02;
+      --white: #ffffff;
+      --dark: #1e2b3a;
+      --gray: #6c757d;
+      --gray-light: #e9ecef;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--white);
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 50%);
+      animation: rotate 30s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 600px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .hero-title span {
+      color: var(--secondary);
+    }
+
+    .hero-text {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: var(--secondary);
+      color: var(--dark);
+    }
+
+    .btn-primary:hover {
+      background: var(--secondary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(240, 178, 2, 0.3);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--white);
+      color: var(--white);
+    }
+
+    .btn-outline:hover {
+      background: var(--white);
+      color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    /* Features Section */
+    .features-section {
+      padding: 80px 0;
+      background: var(--white);
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 50px;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+
+    .section-subtitle {
+      color: var(--gray);
+      font-size: 1.1rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .feature-card {
+      background: var(--white);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid var(--gray-light);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      border-color: var(--secondary);
+    }
+
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      background: rgba(26, 75, 140, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 2rem;
+      color: var(--primary);
+    }
+
+    .feature-card h3 {
+      margin-bottom: 15px;
+      color: var(--dark);
+    }
+
+    .feature-card p {
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* Products Section */
+    .products-section {
+      padding: 80px 0;
+      background: var(--gray-light);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .product-card {
+      background: var(--white);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+
+    .product-image {
+      height: 250px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.1);
+    }
+
+    .product-tag {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--secondary);
+      color: var(--dark);
+      padding: 5px 15px;
+      border-radius: 25px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-info h3 {
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+
+    .product-info p {
+      color: var(--gray);
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .product-price {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+
+    .product-price small {
+      font-size: 0.9rem;
+      color: var(--gray);
+      font-weight: normal;
+    }
+
+    .product-btn {
+      display: inline-block;
+      padding: 10px 25px;
+      background: var(--primary);
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+    }
+
+    .product-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    /* About Section */
+    .about-section {
+      padding: 80px 0;
+      background: var(--white);
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .about-text h2 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+
+    .about-text p {
+      color: var(--gray);
+      margin-bottom: 20px;
+      line-height: 1.8;
+    }
+
+    .about-features {
+      list-style: none;
+      padding: 0;
+    }
+
+    .about-features li {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+      color: var(--dark);
+    }
+
+    .about-features i {
+      color: var(--secondary);
+      font-size: 1.2rem;
+    }
+
+    .about-image {
+      position: relative;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+
+    .about-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .experience-badge {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: var(--secondary);
+      color: var(--dark);
+      padding: 15px 25px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    /* Testimonials Section */
+    .testimonials-section {
+      padding: 80px 0;
+      background: var(--gray-light);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .testimonial-card {
+      background: var(--white);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+
+    .testimonial-rating {
+      color: var(--secondary);
+      margin-bottom: 15px;
+    }
+
+    .testimonial-text {
+      color: var(--gray);
+      line-height: 1.8;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .author-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .author-info h4 {
+      color: var(--dark);
+      margin-bottom: 5px;
+    }
+
+    .author-info p {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 80px 0;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .cta-content {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .cta-content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .cta-content p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .hero-buttons {
+        flex-direction: column;
+      }
+      
+      .hero-stats {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      .about-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .cta-buttons {
+        flex-direction: column;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- Loading Page -->
@@ -21,11 +521,10 @@
       <div class="loader-bar">
         <div class="loader-progress"></div>
       </div>
-      <p class="loader-text">Loading amazing experience...</p>
     </div>
   </div>
 
-  <!-- Header -->
+  <!-- Header with Working 3-Bar Menu -->
   <header class="header" id="header">
     <div class="container">
       <nav class="navbar">
@@ -34,10 +533,12 @@
           <span>Raj Marketing</span>
         </a>
         
+        <!-- Mobile Menu Toggle (3-Bar Menu) -->
         <div class="nav-toggle" id="navToggle">
           <i class="fas fa-bars"></i>
         </div>
 
+        <!-- Navigation Menu -->
         <ul class="nav-menu" id="navMenu">
           <li><a href="index.html" class="active">Home</a></li>
           <li><a href="pages/about.html">About</a></li>
@@ -45,12 +546,16 @@
           <li><a href="pages/products.html">Products</a></li>
           <li><a href="pages/gallery.html">Gallery</a></li>
           <li><a href="pages/contact.html">Contact</a></li>
+          
+          <!-- Login Dropdown -->
           <li class="dropdown">
             <a href="#" class="dropdown-toggle">Login <i class="fas fa-chevron-down"></i></a>
             <ul class="dropdown-menu">
               <li><a href="pages/customer-login.html"><i class="fas fa-user"></i> Customer Login</a></li>
               <li><a href="pages/dealer-login.html"><i class="fas fa-store"></i> Dealer Login</a></li>
               <li><a href="pages/admin-login.html"><i class="fas fa-shield-alt"></i> Admin Login</a></li>
+              <li><hr style="margin: 5px 0;"></li>
+              <li><a href="pages/register.html"><i class="fas fa-user-plus"></i> Register</a></li>
             </ul>
           </li>
         </ul>
@@ -58,24 +563,82 @@
     </div>
   </header>
 
+  <!-- Mobile Side Menu (For smaller screens) -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+      <div class="mobile-logo">
+        <i class="fas fa-shield-alt"></i>
+        <span>Raj Marketing</span>
+      </div>
+      <button class="mobile-menu-close" id="mobileMenuClose">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <div class="mobile-menu-body">
+      <div class="mobile-user-info">
+        <i class="fas fa-user-circle"></i>
+        <div>
+          <h4>Welcome Guest</h4>
+          <p><a href="pages/customer-login.html">Login</a> or <a href="pages/register.html">Register</a></p>
+        </div>
+      </div>
+      
+      <ul class="mobile-nav">
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="pages/about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+        <li><a href="pages/services.html"><i class="fas fa-tools"></i> Services</a></li>
+        <li><a href="pages/products.html"><i class="fas fa-box"></i> Products</a></li>
+        <li><a href="pages/gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+        <li><a href="pages/contact.html"><i class="fas fa-phone"></i> Contact</a></li>
+        
+        <li class="mobile-divider"></li>
+        <li class="mobile-subheader">Account</li>
+        <li><a href="pages/customer-login.html"><i class="fas fa-user"></i> Customer Login</a></li>
+        <li><a href="pages/dealer-login.html"><i class="fas fa-store"></i> Dealer Login</a></li>
+        <li><a href="pages/admin-login.html"><i class="fas fa-shield-alt"></i> Admin Login</a></li>
+        <li><a href="pages/register.html"><i class="fas fa-user-plus"></i> Register</a></li>
+        
+        <li class="mobile-divider"></li>
+        <li class="mobile-subheader">Quick Links</li>
+        <li><a href="pages/privacy.html"><i class="fas fa-lock"></i> Privacy Policy</a></li>
+        <li><a href="pages/terms.html"><i class="fas fa-file-contract"></i> Terms & Conditions</a></li>
+        <li><a href="pages/disclaimer.html"><i class="fas fa-exclamation-triangle"></i> Disclaimer</a></li>
+      </ul>
+      
+      <div class="mobile-contact">
+        <p><i class="fas fa-phone"></i> <a href="tel:+919480337385">+91-9480337385</a></p>
+        <p><i class="fas fa-envelope"></i> <a href="mailto:inforajmarketingmysore@gmail.com">inforajmarketingmysore@gmail.com</a></p>
+        <p><i class="fas fa-map-marker-alt"></i> #65, Hootgalli, Mysore</p>
+      </div>
+    </div>
+  </div>
+
   <!-- Hero Section -->
-  <section class="hero">
+  <section class="hero-section">
     <div class="container">
       <div class="hero-content">
-        <span class="hero-badge">Welcome to Raj Marketing</span>
-        <h1 class="hero-title">Premium Mosquito Nets <span class="highlight">For Your Home</span></h1>
-        <p class="hero-description">Protect your family from mosquitoes while enjoying fresh air with our custom-fit, durable mosquito nets for windows and doors.</p>
+        <span class="hero-badge"><i class="fas fa-check-circle"></i> Trusted Since 2001</span>
+        <h1 class="hero-title">Premium Mosquito Nets <span>For Your Home</span></h1>
+        <p class="hero-text">Protect your family from mosquitoes while enjoying fresh air with our custom-fit, durable mosquito nets for windows and doors in Mysore.</p>
+        
         <div class="hero-buttons">
-          <a href="pages/contact.html" class="btn btn-primary">Get Free Quote</a>
-          <a href="pages/products.html" class="btn btn-outline">View Products</a>
+          <a href="pages/contact.html" class="btn btn-primary">
+            <i class="fas fa-calendar-alt"></i> Free Consultation
+          </a>
+          <a href="pages/products.html" class="btn btn-outline">
+            <i class="fas fa-eye"></i> View Products
+          </a>
         </div>
+        
         <div class="hero-stats">
           <div class="stat-item">
             <span class="stat-number">5000+</span>
             <span class="stat-label">Happy Families</span>
           </div>
           <div class="stat-item">
-            <span class="stat-number">15+</span>
+            <span class="stat-number">22+</span>
             <span class="stat-label">Years Experience</span>
           </div>
           <div class="stat-item">
@@ -84,396 +647,91 @@
           </div>
         </div>
       </div>
-      <div class="hero-image">
-        <img src="assets/images/hero-net.png" alt="Mosquito Net Installation" onerror="this.src='https://via.placeholder.com/600x500?text=Mosquito+Nets'">
-        <div class="floating-card card-1">
-          <i class="fas fa-shield-alt"></i>
-          <span>100% Protection</span>
-        </div>
-        <div class="floating-card card-2">
-          <i class="fas fa-wind"></i>
-          <span>Fresh Air Flow</span>
-        </div>
-      </div>
     </div>
   </section>
 
-  <!-- Features Slider Section -->
-  <section class="features">
+  <!-- Features Section -->
+  <section class="features-section">
     <div class="container">
       <div class="section-header">
-        <h2 class="section-title">Why Choose Us</h2>
+        <h2 class="section-title">Why Choose Raj Marketing?</h2>
         <p class="section-subtitle">Experience the best mosquito net solutions with our premium features</p>
       </div>
       
-      <div class="slider-container">
-        <div class="slider" id="featuresSlider">
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-shield-alt"></i>
-            </div>
-            <h3>Premium Quality</h3>
-            <p>High-grade materials ensuring long-lasting protection</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-ruler-combined"></i>
-            </div>
-            <h3>Custom Fit</h3>
-            <p>Perfect measurements for any window or door size</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-bolt"></i>
-            </div>
-            <h3>Quick Installation</h3>
-            <p>Professional installation within 24-48 hours</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-hand-holding-heart"></i>
-            </div>
-            <h3>5 Year Warranty</h3>
-            <p>Comprehensive warranty on all our products</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-truck"></i>
-            </div>
-            <h3>Free Delivery</h3>
-            <p>Free delivery and installation in Mysore</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fas fa-headset"></i>
-            </div>
-            <h3>24/7 Support</h3>
-            <p>Round-the-clock customer support</p>
-          </div>
-        </div>
-        <div class="slider-controls">
-          <button class="slider-arrow prev" id="featuresPrev"><i class="fas fa-chevron-left"></i></button>
-          <button class="slider-arrow next" id="featuresNext"><i class="fas fa-chevron-right"></i></button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Search Section -->
-  <section class="search-section">
-    <div class="container">
-      <div class="search-wrapper">
-        <h3>Find Your Perfect Mosquito Net</h3>
-        <form class="search-form" id="searchForm">
-          <div class="search-input-group">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Search by size, type, or material..." id="searchInput">
-            <button type="submit" class="btn btn-primary">Search</button>
-          </div>
-        </form>
-        <div class="popular-searches">
-          <span>Popular:</span>
-          <a href="#">Window Nets</a>
-          <a href="#">Door Nets</a>
-          <a href="#">Fiberglass</a>
-          <a href="#">Aluminum Frame</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Benefits Section -->
-  <section class="benefits">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Benefits of Mosquito Nets</h2>
-        <p class="section-subtitle">Why every home needs professional mosquito net installation</p>
-      </div>
-      
-      <div class="benefits-grid">
-        <div class="benefit-card">
-          <div class="benefit-icon">
-            <i class="fas fa-heartbeat"></i>
-          </div>
-          <h3>Health Protection</h3>
-          <p>Block disease-carrying mosquitoes and insects effectively</p>
-        </div>
-        <div class="benefit-card">
-          <div class="benefit-icon">
-            <i class="fas fa-wind"></i>
-          </div>
-          <h3>Natural Ventilation</h3>
-          <p>Enjoy fresh air without worrying about bugs</p>
-        </div>
-        <div class="benefit-card">
-          <div class="benefit-icon">
-            <i class="fas fa-sun"></i>
-          </div>
-          <h3>Natural Light</h3>
-          <p>Let sunlight in while keeping insects out</p>
-        </div>
-        <div class="benefit-card">
-          <div class="benefit-icon">
-            <i class="fas fa-leaf"></i>
-          </div>
-          <h3>Eco-Friendly</h3>
-          <p>No chemicals or harmful sprays needed</p>
-        </div>
-        <div class="benefit-card">
-          <div class="benefit-icon">
-            <i class="fas fa-child"></i>
-          </div>
-          <h3>Child & Pet Safe</h3>
-          <p>Safe for children and pets with durable mesh</p>
-        </div>
-        <div class="benefit-card">
-          <div class="benefit-icon">
-            <i class="fas fa-coins"></i>
-          </div>
-          <h3>Cost Effective</h3>
-          <p>One-time investment for years of protection</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Products Slider -->
-  <section class="products">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Our Products</h2>
-        <p class="section-subtitle">Explore our range of premium mosquito nets</p>
-      </div>
-      
-      <div class="slider-container">
-        <div class="slider" id="productsSlider">
-          <div class="product-card">
-            <div class="product-image">
-              <img src="assets/images/product1.jpg" alt="Fiberglass Net" onerror="this.src='https://via.placeholder.com/300x250?text=Fiberglass+Net'">
-            </div>
-            <div class="product-info">
-              <h3>Fiberglass Mesh</h3>
-              <p>Strong, flexible, and durable mesh for windows</p>
-              <div class="product-footer">
-                <span class="product-price">₹499/sq ft</span>
-                <a href="pages/product-detail.html?id=1" class="btn btn-small">View Details</a>
-              </div>
-            </div>
-          </div>
-          <div class="product-card">
-            <div class="product-image">
-              <img src="assets/images/product2.jpg" alt="Aluminum Frame" onerror="this.src='https://via.placeholder.com/300x250?text=Aluminum+Frame'">
-            </div>
-            <div class="product-info">
-              <h3>Aluminum Frame</h3>
-              <p>Premium rust-free aluminum frames</p>
-              <div class="product-footer">
-                <span class="product-price">₹699/sq ft</span>
-                <a href="pages/product-detail.html?id=2" class="btn btn-small">View Details</a>
-              </div>
-            </div>
-          </div>
-          <div class="product-card">
-            <div class="product-image">
-              <img src="assets/images/product3.jpg" alt="Velcro Net" onerror="this.src='https://via.placeholder.com/300x250?text=Velcro+Net'">
-            </div>
-            <div class="product-info">
-              <h3>Velcro Net</h3>
-              <p>Easy to install and remove, perfect for rentals</p>
-              <div class="product-footer">
-                <span class="product-price">₹399/sq ft</span>
-                <a href="pages/product-detail.html?id=3" class="btn btn-small">View Details</a>
-              </div>
-            </div>
-          </div>
-          <div class="product-card">
-            <div class="product-image">
-              <img src="assets/images/product4.jpg" alt="Door Net" onerror="this.src='https://via.placeholder.com/300x250?text=Door+Net'">
-            </div>
-            <div class="product-info">
-              <h3>Magnetic Door Net</h3>
-              <p>Self-closing magnetic mesh for doors</p>
-              <div class="product-footer">
-                <span class="product-price">₹899/sq ft</span>
-                <a href="pages/product-detail.html?id=4" class="btn btn-small">View Details</a>
-              </div>
-            </div>
-          </div>
-          <div class="product-card">
-            <div class="product-image">
-              <img src="assets/images/product5.jpg" alt="Sliding Net" onerror="this.src='https://via.placeholder.com/300x250?text=Sliding+Net'">
-            </div>
-            <div class="product-info">
-              <h3>Sliding Window Net</h3>
-              <p>For sliding windows and balcony doors</p>
-              <div class="product-footer">
-                <span class="product-price">₹799/sq ft</span>
-                <a href="pages/product-detail.html?id=5" class="btn btn-small">View Details</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="slider-controls">
-          <button class="slider-arrow prev" id="productsPrev"><i class="fas fa-chevron-left"></i></button>
-          <button class="slider-arrow next" id="productsNext"><i class="fas fa-chevron-right"></i></button>
-        </div>
-      </div>
-      
-      <div class="view-all">
-        <a href="pages/products.html" class="btn btn-outline">View All Products <i class="fas fa-arrow-right"></i></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials -->
-  <section class="testimonials">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">What Our Customers Say</h2>
-        <p class="section-subtitle">Real experiences from our happy customers</p>
-      </div>
-      
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <div class="testimonial-rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-          <p class="testimonial-text">"Excellent quality nets! The installation was quick and professional. No more mosquitoes in our home. Highly recommend Raj Marketing!"</p>
-          <div class="testimonial-author">
-            <img src="assets/images/user1.jpg" alt="Customer" onerror="this.src='https://via.placeholder.com/60x60?text=R'">
-            <div>
-              <h4>Ramesh Kumar</h4>
-              <p>Vijayanagar, Mysore</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="testimonial-card">
-          <div class="testimonial-rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-          <p class="testimonial-text">"Great service and custom-fit solutions. The aluminum frame nets look elegant and work perfectly. Fair pricing and timely delivery."</p>
-          <div class="testimonial-author">
-            <img src="assets/images/user2.jpg" alt="Customer" onerror="this.src='https://via.placeholder.com/60x60?text=S'">
-            <div>
-              <h4>Sunita Patel</h4>
-              <p>Kuvempunagar, Mysore</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="testimonial-card">
-          <div class="testimonial-rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-          <p class="testimonial-text">"The team was very helpful in choosing the right nets for our home. Installation was neat and clean. Definitely recommend them!"</p>
-          <div class="testimonial-author">
-            <img src="assets/images/user3.jpg" alt="Customer" onerror="this.src='https://via.placeholder.com/60x60?text=P'">
-            <div>
-              <h4>Prakash Rao</h4>
-              <p>Gokulam, Mysore</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Call to Action -->
-  <section class="cta">
-    <div class="container">
-      <div class="cta-wrapper">
-        <h2>Ready to Protect Your Home?</h2>
-        <p>Get a free quote and professional consultation today</p>
-        <div class="cta-buttons">
-          <a href="tel:+919876543210" class="btn btn-primary btn-large">
-            <i class="fas fa-phone-alt"></i> Call Now: +91-9876543210
-          </a>
-          <a href="pages/contact.html" class="btn btn-outline btn-large">
-            <i class="fas fa-calendar-alt"></i> Book Appointment
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-info">
-          <div class="footer-logo">
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
             <i class="fas fa-shield-alt"></i>
-            <span>Raj Marketing</span>
           </div>
-          <p>Your trusted partner for premium mosquito nets in Mysore. Protecting families since 2010.</p>
-          <div class="social-links">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-whatsapp"></i></a>
+          <h3>Premium Quality</h3>
+          <p>High-grade materials ensuring long-lasting protection for your family</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-ruler-combined"></i>
           </div>
+          <h3>Custom Fit</h3>
+          <p>Perfect measurements for any window or door size in your home</p>
         </div>
         
-        <div class="footer-links">
-          <h4>Quick Links</h4>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="pages/about.html">About Us</a></li>
-            <li><a href="pages/services.html">Services</a></li>
-            <li><a href="pages/products.html">Products</a></li>
-            <li><a href="pages/gallery.html">Gallery</a></li>
-            <li><a href="pages/contact.html">Contact</a></li>
-          </ul>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <h3>Quick Installation</h3>
+          <p>Professional installation within 24-48 hours of order confirmation</p>
         </div>
         
-        <div class="footer-links">
-          <h4>Account Access</h4>
-          <ul>
-            <li><a href="pages/customer-login.html">Customer Login</a></li>
-            <li><a href="pages/dealer-login.html">Dealer Login</a></li>
-            <li><a href="pages/admin-login.html">Admin Login</a></li>
-            <li><a href="pages/register.html">Register</a></li>
-          </ul>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-hand-holding-heart"></i>
+          </div>
+          <h3>5 Year Warranty</h3>
+          <p>Comprehensive warranty on all our products for peace of mind</p>
         </div>
         
-        <div class="footer-contact">
-          <h4>Contact Info</h4>
-          <ul>
-            <li><i class="fas fa-map-marker-alt"></i> #123, Main Road, Mysore - 570001</li>
-            <li><i class="fas fa-phone"></i> <a href="tel:+919876543210">+91-9876543210</a></li>
-            <li><i class="fas fa-phone"></i> <a href="tel:+919876543211">+91-9876543211</a></li>
-            <li><i class="fas fa-envelope"></i> <a href="mailto:info@rajmarketing.com">info@rajmarketing.com</a></li>
-          </ul>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-truck"></i>
+          </div>
+          <h3>Free Delivery</h3>
+          <p>Free delivery and installation across all areas in Mysore city</p>
         </div>
-      </div>
-      
-      <div class="footer-bottom">
-        <p>&copy; 2024 Raj Marketing. All Rights Reserved.</p>
-        <div class="footer-bottom-links">
-          <a href="pages/privacy.html">Privacy Policy</a>
-          <a href="pages/terms.html">Terms of Use</a>
-          <a href="pages/disclaimer.html">Disclaimer</a>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-headset"></i>
+          </div>
+          <h3>24/7 Support</h3>
+          <p>Round-the-clock customer support for all your queries</p>
         </div>
       </div>
     </div>
-  </footer>
+  </section>
 
-  <!-- Toast Notification -->
-  <div class="toast" id="toast"></div>
-
-  <script src="assets/js/main.js"></script>
-</body>
-</html>
+  <!-- Products Section -->
+  <section class="products-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Our Premium Products</h2>
+        <p class="section-subtitle">Explore our range of high-quality mosquito nets</p>
+      </div>
+      
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://via.placeholder.com/400x300/1a4b8c/ffffff?text=Fiberglass+Net" alt="Fiberglass Window Net">
+            <span class="product-tag">Best Seller</span>
+          </div>
+          <div class="product-info">
+            <h3>Fiberglass Window Net</h3>
+            <p>Strong, flexible mesh with clear view and excellent airflow. UV resistant and durable.</p>
+            <div class="product-price">₹399 <small>/sq ft</small></div>
+            <a href="pages/products.html" class="product-btn">View Details</a>
+          </div>
+        </div>
+        
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://via.placeholder.com/400x300/1a4b8c/ff
