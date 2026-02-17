@@ -2,8 +2,8 @@
 // This uses GitHub API to store data in your repository
 
 const GITHUB_CONFIG = {
-    owner: 'YOUR_GITHUB_USERNAME', // Replace with your GitHub username
-    repo: 'raj-marketing-data',     // Replace with your repo name
+    owner: 'Player456B', // Replace with your GitHub username
+    repo: 'rajmarketingmysore',     // Replace with your repo name
     token: 'YOUR_GITHUB_TOKEN',      // Replace with your GitHub token (keep secret!)
     branch: 'main'
 };
