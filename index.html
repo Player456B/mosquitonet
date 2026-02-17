@@ -3,529 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Raj Marketing - Premium Mosquito Nets in Mysore</title>
-  <meta name="description" content="Raj Marketing - Your trusted partner for premium mosquito nets in Mysore. Custom-fit solutions for windows and doors since 2001.">
-  <meta name="keywords" content="mosquito nets, window nets, door nets, Mysore, Raj Marketing, insect screens">
-  <meta name="author" content="Raj Marketing">
+  <title>Raj Marketing - Premium Mosquito Nets Mysore</title>
+  <meta name="description" content="Raj Marketing: Premium mosquito nets in Mysore since 2001. Custom-fit window & door nets. Free consultation.">
   
-  <!-- Open Graph / Social Media -->
-  <meta property="og:title" content="Raj Marketing - Premium Mosquito Nets">
-  <meta property="og:description" content="Premium mosquito nets for windows and doors in Mysore. Serving since 2001.">
-  <meta property="og:image" content="../assets/images/og-image.jpg">
-  <meta property="og:url" content="https://rajmarketing.com">
+  <!-- Preload critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
   
-  <!-- Fonts and Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="assets/css/style.css">
-  
+  <!-- Critical CSS inline for fast first paint -->
   <style>
-    /* Additional styles for index page */
-    :root {
-      --primary: #1a4b8c;
-      --primary-dark: #0f3a6b;
-      --primary-light: #2d6ab3;
-      --secondary: #f0b202;
-      --secondary-dark: #d49b02;
-      --white: #ffffff;
-      --dark: #1e2b3a;
-      --gray: #6c757d;
-      --gray-light: #e9ecef;
-    }
-
-    /* Hero Section */
-    .hero-section {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      color: var(--white);
-      padding: 100px 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-section::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 50%);
-      animation: rotate 30s linear infinite;
-    }
-
-    @keyframes rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 600px;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      background: rgba(255,255,255,0.2);
-      padding: 8px 20px;
-      border-radius: 50px;
-      font-size: 0.9rem;
-      margin-bottom: 20px;
-    }
-
-    .hero-title {
-      font-size: 3.5rem;
-      font-weight: 800;
-      margin-bottom: 20px;
-      line-height: 1.2;
-    }
-
-    .hero-title span {
-      color: var(--secondary);
-    }
-
-    .hero-text {
-      font-size: 1.2rem;
-      margin-bottom: 30px;
-      opacity: 0.9;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 15px;
-      margin-bottom: 40px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 15px 30px;
-      border-radius: 50px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-
-    .btn-primary {
-      background: var(--secondary);
-      color: var(--dark);
-    }
-
-    .btn-primary:hover {
-      background: var(--secondary-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(240, 178, 2, 0.3);
-    }
-
-    .btn-outline {
-      background: transparent;
-      border: 2px solid var(--white);
-      color: var(--white);
-    }
-
-    .btn-outline:hover {
-      background: var(--white);
-      color: var(--primary);
-      transform: translateY(-2px);
-    }
-
-    .hero-stats {
-      display: flex;
-      gap: 40px;
-    }
-
-    .stat-item {
-      text-align: center;
-    }
-
-    .stat-number {
-      font-size: 2rem;
-      font-weight: 800;
-      display: block;
-    }
-
-    .stat-label {
-      font-size: 0.9rem;
-      opacity: 0.8;
-    }
-
-    /* Features Section */
-    .features-section {
-      padding: 80px 0;
-      background: var(--white);
-    }
-
-    .section-header {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto 50px;
-    }
-
-    .section-title {
-      font-size: 2.5rem;
-      color: var(--primary);
-      margin-bottom: 15px;
-    }
-
-    .section-subtitle {
-      color: var(--gray);
-      font-size: 1.1rem;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-    }
-
-    .feature-card {
-      background: var(--white);
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-      text-align: center;
-      transition: all 0.3s ease;
-      border: 1px solid var(--gray-light);
-    }
-
-    .feature-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-      border-color: var(--secondary);
-    }
-
-    .feature-icon {
-      width: 80px;
-      height: 80px;
-      background: rgba(26, 75, 140, 0.1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      font-size: 2rem;
-      color: var(--primary);
-    }
-
-    .feature-card h3 {
-      margin-bottom: 15px;
-      color: var(--dark);
-    }
-
-    .feature-card p {
-      color: var(--gray);
-      line-height: 1.6;
-    }
-
-    /* Products Section */
-    .products-section {
-      padding: 80px 0;
-      background: var(--gray-light);
-    }
-
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-    }
-
-    .product-card {
-      background: var(--white);
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-      transition: all 0.3s ease;
-    }
-
-    .product-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    }
-
-    .product-image {
-      height: 250px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .product-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .product-card:hover .product-image img {
-      transform: scale(1.1);
-    }
-
-    .product-tag {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background: var(--secondary);
-      color: var(--dark);
-      padding: 5px 15px;
-      border-radius: 25px;
-      font-size: 0.8rem;
-      font-weight: 600;
-    }
-
-    .product-info {
-      padding: 20px;
-    }
-
-    .product-info h3 {
-      margin-bottom: 10px;
-      color: var(--primary);
-    }
-
-    .product-info p {
-      color: var(--gray);
-      margin-bottom: 15px;
-      line-height: 1.6;
-    }
-
-    .product-price {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 15px;
-    }
-
-    .product-price small {
-      font-size: 0.9rem;
-      color: var(--gray);
-      font-weight: normal;
-    }
-
-    .product-btn {
-      display: inline-block;
-      padding: 10px 25px;
-      background: var(--primary);
-      color: var(--white);
-      text-decoration: none;
-      border-radius: 25px;
-      transition: all 0.3s ease;
-    }
-
-    .product-btn:hover {
-      background: var(--primary-dark);
-    }
-
-    /* About Section */
-    .about-section {
-      padding: 80px 0;
-      background: var(--white);
-    }
-
-    .about-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 50px;
-      align-items: center;
-    }
-
-    .about-text h2 {
-      font-size: 2.5rem;
-      color: var(--primary);
-      margin-bottom: 20px;
-    }
-
-    .about-text p {
-      color: var(--gray);
-      margin-bottom: 20px;
-      line-height: 1.8;
-    }
-
-    .about-features {
-      list-style: none;
-      padding: 0;
-    }
-
-    .about-features li {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 15px;
-      color: var(--dark);
-    }
-
-    .about-features i {
-      color: var(--secondary);
-      font-size: 1.2rem;
-    }
-
-    .about-image {
-      position: relative;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-    }
-
-    .about-image img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .experience-badge {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      background: var(--secondary);
-      color: var(--dark);
-      padding: 15px 25px;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 1.2rem;
-    }
-
-    /* Testimonials Section */
-    .testimonials-section {
-      padding: 80px 0;
-      background: var(--gray-light);
-    }
-
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-    }
-
-    .testimonial-card {
-      background: var(--white);
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-      transition: all 0.3s ease;
-    }
-
-    .testimonial-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    }
-
-    .testimonial-rating {
-      color: var(--secondary);
-      margin-bottom: 15px;
-    }
-
-    .testimonial-text {
-      color: var(--gray);
-      line-height: 1.8;
-      margin-bottom: 20px;
-      font-style: italic;
-    }
-
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .author-avatar {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: var(--primary);
-      color: var(--white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-
-    .author-info h4 {
-      color: var(--dark);
-      margin-bottom: 5px;
-    }
-
-    .author-info p {
-      color: var(--gray);
-      font-size: 0.9rem;
-    }
-
-    /* CTA Section */
-    .cta-section {
-      padding: 80px 0;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      color: var(--white);
-      text-align: center;
-    }
-
-    .cta-content {
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .cta-content h2 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-    }
-
-    .cta-content p {
-      font-size: 1.2rem;
-      margin-bottom: 30px;
-      opacity: 0.9;
-    }
-
-    .cta-buttons {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .hero-title {
-        font-size: 2.5rem;
-      }
-      
-      .hero-buttons {
-        flex-direction: column;
-      }
-      
-      .hero-stats {
-        flex-direction: column;
-        gap: 20px;
-      }
-      
-      .about-content {
-        grid-template-columns: 1fr;
-      }
-      
-      .cta-buttons {
-        flex-direction: column;
-      }
-      
-      .section-title {
-        font-size: 2rem;
-      }
-    }
+    /* Critical CSS - loads immediately */
+    *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;background:#f8f9fa;color:#1e2b3a;opacity:0;animation:fadeIn 0.3s ease forwards}@keyframes fadeIn{to{opacity:1}}.header{position:sticky;top:0;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,0.1);z-index:1000}.container{max-width:1200px;margin:0 auto;padding:0 20px}.navbar{display:flex;align-items:center;justify-content:space-between;height:70px}.logo{display:flex;align-items:center;gap:8px;font-size:1.3rem;font-weight:700;color:#1a4b8c;text-decoration:none}.logo i{color:#f0b202}.nav-menu{display:flex;gap:20px;list-style:none}.nav-menu a{color:#1e2b3a;text-decoration:none;font-weight:500;padding:8px 15px;border-radius:30px;transition:all 0.2s}.nav-menu a:hover,.nav-menu a.active{background:#1a4b8c;color:#fff}.nav-toggle{display:none;font-size:1.5rem;cursor:pointer;color:#1a4b8c}.loading-page{position:fixed;top:0;left:0;width:100%;height:100vh;background:#1a4b8c;z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity 0.3s,visibility 0.3s}.loading-page.hidden{opacity:0;visibility:hidden}.loader-container{text-align:center;color:#fff}.loader-logo{width:80px;height:80px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:2.5rem}.loader-title{font-size:2rem;margin-bottom:10px}.loader-bar{width:250px;height:5px;background:rgba(255,255,255,0.2);border-radius:10px;margin:20px auto;overflow:hidden}.loader-progress{width:0%;height:100%;background:#f0b202;border-radius:10px;transition:width 0.5s}.footer{background:#1e2b3a;color:#fff;padding:50px 0 20px}.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;margin-bottom:30px}.footer-bottom{text-align:center;padding-top:20px;border-top:1px solid rgba(255,255,255,0.1)}.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:#fff;color:#1e2b3a;padding:12px 24px;border-radius:50px;box-shadow:0 5px 20px rgba(0,0,0,0.2);z-index:9999;opacity:0;transition:all 0.3s}.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
   </style>
+  
+  <!-- Defer non-critical CSS -->
+  <link rel="stylesheet" href="assets/css/style.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+  
+  <!-- Fallback for no JS -->
+  <noscript>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </noscript>
 </head>
 <body>
-  <!-- Loading Page -->
+  <!-- Loading Page - Fast exit -->
   <div id="loading-page" class="loading-page">
     <div class="loader-container">
       <div class="loader-logo">
         <i class="fas fa-shield-alt"></i>
       </div>
-      <h1 class="loader-title">Raj Marketing</h1>
-      <p class="loader-subtitle">Premium Mosquito Nets</p>
+      <h2 class="loader-title">Raj Marketing</h2>
       <div class="loader-bar">
-        <div class="loader-progress"></div>
+        <div class="loader-progress" id="loaderProgress"></div>
       </div>
     </div>
   </div>
 
-  <!-- Header with Working 3-Bar Menu -->
-  <header class="header" id="header">
+  <!-- Header -->
+  <header class="header">
     <div class="container">
       <nav class="navbar">
         <a href="index.html" class="logo">
@@ -533,12 +52,10 @@
           <span>Raj Marketing</span>
         </a>
         
-        <!-- Mobile Menu Toggle (3-Bar Menu) -->
         <div class="nav-toggle" id="navToggle">
           <i class="fas fa-bars"></i>
         </div>
 
-        <!-- Navigation Menu -->
         <ul class="nav-menu" id="navMenu">
           <li><a href="index.html" class="active">Home</a></li>
           <li><a href="pages/about.html">About</a></li>
@@ -546,15 +63,13 @@
           <li><a href="pages/products.html">Products</a></li>
           <li><a href="pages/gallery.html">Gallery</a></li>
           <li><a href="pages/contact.html">Contact</a></li>
-          
-          <!-- Login Dropdown -->
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle">Login <i class="fas fa-chevron-down"></i></a>
-            <ul class="dropdown-menu">
-              <li><a href="pages/customer-login.html"><i class="fas fa-user"></i> Customer Login</a></li>
-              <li><a href="pages/dealer-login.html"><i class="fas fa-store"></i> Dealer Login</a></li>
-              <li><a href="pages/admin-login.html"><i class="fas fa-shield-alt"></i> Admin Login</a></li>
-              <li><hr style="margin: 5px 0;"></li>
+            <a href="#" id="loginToggle">Login <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown-menu" id="dropdownMenu">
+              <li><a href="pages/customer-login.html"><i class="fas fa-user"></i> Customer</a></li>
+              <li><a href="pages/dealer-login.html"><i class="fas fa-store"></i> Dealer</a></li>
+              <li><a href="pages/admin-login.html"><i class="fas fa-shield-alt"></i> Admin</a></li>
+              <li><hr></li>
               <li><a href="pages/register.html"><i class="fas fa-user-plus"></i> Register</a></li>
             </ul>
           </li>
@@ -563,885 +78,303 @@
     </div>
   </header>
 
-  <!-- Mobile Side Menu (For smaller screens) -->
-  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu-overlay" id="mobileOverlay"></div>
   <div class="mobile-menu" id="mobileMenu">
-    <div class="mobile-menu-header">
+    <div class="mobile-header">
       <div class="mobile-logo">
         <i class="fas fa-shield-alt"></i>
         <span>Raj Marketing</span>
       </div>
-      <button class="mobile-menu-close" id="mobileMenuClose">
-        <i class="fas fa-times"></i>
-      </button>
+      <button class="mobile-close" id="mobileClose"><i class="fas fa-times"></i></button>
     </div>
-    
-    <div class="mobile-menu-body">
-      <div class="mobile-user-info">
+    <div class="mobile-body">
+      <div class="mobile-user" id="mobileUser">
         <i class="fas fa-user-circle"></i>
         <div>
           <h4>Welcome Guest</h4>
           <p><a href="pages/customer-login.html">Login</a> or <a href="pages/register.html">Register</a></p>
         </div>
       </div>
-      
       <ul class="mobile-nav">
         <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-        <li><a href="pages/about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+        <li><a href="pages/about.html"><i class="fas fa-info-circle"></i> About</a></li>
         <li><a href="pages/services.html"><i class="fas fa-tools"></i> Services</a></li>
         <li><a href="pages/products.html"><i class="fas fa-box"></i> Products</a></li>
         <li><a href="pages/gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
         <li><a href="pages/contact.html"><i class="fas fa-phone"></i> Contact</a></li>
-        
-        <li class="mobile-divider"></li>
-        <li class="mobile-subheader">Account</li>
+        <li class="divider"></li>
         <li><a href="pages/customer-login.html"><i class="fas fa-user"></i> Customer Login</a></li>
         <li><a href="pages/dealer-login.html"><i class="fas fa-store"></i> Dealer Login</a></li>
         <li><a href="pages/admin-login.html"><i class="fas fa-shield-alt"></i> Admin Login</a></li>
-        <li><a href="pages/register.html"><i class="fas fa-user-plus"></i> Register</a></li>
-        
-        <li class="mobile-divider"></li>
-        <li class="mobile-subheader">Quick Links</li>
-        <li><a href="pages/privacy.html"><i class="fas fa-lock"></i> Privacy Policy</a></li>
-        <li><a href="pages/terms.html"><i class="fas fa-file-contract"></i> Terms & Conditions</a></li>
-        <li><a href="pages/disclaimer.html"><i class="fas fa-exclamation-triangle"></i> Disclaimer</a></li>
+        <li><a href="pages/register.html"><i class="fas fa-user-plus"></i> Create Account</a></li>
       </ul>
-      
-      <div class="mobile-contact">
-        <p><i class="fas fa-phone"></i> <a href="tel:+919480337385">+91-9480337385</a></p>
-        <p><i class="fas fa-envelope"></i> <a href="mailto:inforajmarketingmysore@gmail.com">inforajmarketingmysore@gmail.com</a></p>
-        <p><i class="fas fa-map-marker-alt"></i> #65, Hootgalli, Mysore</p>
-      </div>
     </div>
   </div>
 
-  <!-- Hero Section -->
-  <section class="hero-section">
-    <div class="container">
-      <div class="hero-content">
-        <span class="hero-badge"><i class="fas fa-check-circle"></i> Trusted Since 2001</span>
-        <h1 class="hero-title">Premium Mosquito Nets <span>For Your Home</span></h1>
-        <p class="hero-text">Protect your family from mosquitoes while enjoying fresh air with our custom-fit, durable mosquito nets for windows and doors in Mysore.</p>
-        
+  <!-- Main Content - Lightweight -->
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <h1>Premium Mosquito Nets <span>in Mysore</span></h1>
+        <p>Protect your family with custom-fit nets for windows & doors. Free consultation!</p>
         <div class="hero-buttons">
-          <a href="pages/contact.html" class="btn btn-primary">
-            <i class="fas fa-calendar-alt"></i> Free Consultation
-          </a>
-          <a href="pages/products.html" class="btn btn-outline">
-            <i class="fas fa-eye"></i> View Products
-          </a>
-        </div>
-        
-        <div class="hero-stats">
-          <div class="stat-item">
-            <span class="stat-number">5000+</span>
-            <span class="stat-label">Happy Families</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number">22+</span>
-            <span class="stat-label">Years Experience</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number">100%</span>
-            <span class="stat-label">Satisfaction</span>
-          </div>
+          <a href="pages/contact.html" class="btn btn-primary">Get Free Quote</a>
+          <a href="pages/products.html" class="btn btn-outline">View Products</a>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Features Section -->
-  <section class="features-section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Why Choose Raj Marketing?</h2>
-        <p class="section-subtitle">Experience the best mosquito net solutions with our premium features</p>
-      </div>
-      
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">
+    <!-- Features -->
+    <section class="features">
+      <div class="container">
+        <h2>Why Choose Us</h2>
+        <div class="features-grid">
+          <div class="feature-card">
             <i class="fas fa-shield-alt"></i>
+            <h3>22+ Years</h3>
+            <p>Serving Mysore since 2001</p>
           </div>
-          <h3>Premium Quality</h3>
-          <p>High-grade materials ensuring long-lasting protection for your family</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-ruler-combined"></i>
+          <div class="feature-card">
+            <i class="fas fa-users"></i>
+            <h3>5000+</h3>
+            <p>Happy Families</p>
           </div>
-          <h3>Custom Fit</h3>
-          <p>Perfect measurements for any window or door size in your home</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-bolt"></i>
-          </div>
-          <h3>Quick Installation</h3>
-          <p>Professional installation within 24-48 hours of order confirmation</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-hand-holding-heart"></i>
-          </div>
-          <h3>5 Year Warranty</h3>
-          <p>Comprehensive warranty on all our products for peace of mind</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">
+          <div class="feature-card">
             <i class="fas fa-truck"></i>
+            <h3>Free Delivery</h3>
+            <p>Across Mysore city</p>
           </div>
-          <h3>Free Delivery</h3>
-          <p>Free delivery and installation across all areas in Mysore city</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-headset"></i>
+          <div class="feature-card">
+            <i class="fas fa-clock"></i>
+            <h3>24-48 hrs</h3>
+            <p>Quick Installation</p>
           </div>
-          <h3>24/7 Support</h3>
-          <p>Round-the-clock customer support for all your queries</p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <!-- Products Section -->
-  <section class="products-section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Our Premium Products</h2>
-        <p class="section-subtitle">Explore our range of high-quality mosquito nets</p>
-      </div>
-      
-      <div class="products-grid">
-        <div class="product-card">
-          <div class="product-image">
-            <img src="https://via.placeholder.com/400x300/1a4b8c/ffffff?text=Fiberglass+Net" alt="Fiberglass Window Net">
-            <span class="product-tag">Best Seller</span>
-          </div>
-          <div class="product-info">
-            <h3>Fiberglass Window Net</h3>
-            <p>Strong, flexible mesh with clear view and excellent airflow. UV resistant and durable.</p>
-            <div class="product-price">₹399 <small>/sq ft</small></div>
-            <a href="pages/products.html" class="product-btn">View Details</a>
-          </div>
-        </div>
-        
-        <div class="product-card">
-          <div class="product-image">
-            <img src="https://via.placeholder.com/400x300/1a4b8c/ffffff?text=Aluminum+Frame" alt="Aluminum Frame Net">
-          </div>
-          <div class="product-info">
-            <h3>Aluminum Frame Net</h3>
-            <p>Premium aluminum frame with powder-coated finish. Rust-proof and elegant.</p>
-            <div class="product-price">₹599 <small>/sq ft</small></div>
-            <a href="pages/products.html" class="product-btn">View Details</a>
-          </div>
-        </div>
-        
-        <div class="product-card">
-          <div class="product-image">
-            <img src="https://via.placeholder.com/400x300/1a4b8c/ffffff?text=Magnetic+Door+Net" alt="Magnetic Door Net">
-            <span class="product-tag">Popular</span>
-          </div>
-          <div class="product-info">
-            <h3>Magnetic Door Net</h3>
-            <p>Self-closing magnetic mesh door. Opens easily and closes automatically.</p>
-            <div class="product-price">₹899 <small>/sq ft</small></div>
-            <a href="pages/products.html" class="product-btn">View Details</a>
-          </div>
-        </div>
-        
-        <div class="product-card">
-          <div class="product-image">
-            <img src="https://via.placeholder.com/400x300/1a4b8c/ffffff?text=Sliding+Net" alt="Sliding Door Net">
-          </div>
-          <div class="product-info">
-            <h3>Sliding Door Net</h3>
-            <p>For balcony and patio doors. Heavy-duty frame with smooth rolling mechanism.</p>
-            <div class="product-price">₹999 <small>/sq ft</small></div>
-            <a href="pages/products.html" class="product-btn">View Details</a>
-          </div>
-        </div>
-      </div>
-      
-      <div style="text-align: center; margin-top: 40px;">
-        <a href="pages/products.html" class="btn btn-primary" style="background: var(--primary); color: var(--white);">
-          View All Products <i class="fas fa-arrow-right"></i>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <section class="about-section">
-    <div class="container">
-      <div class="about-content">
-        <div class="about-text">
-          <h2>Welcome to Raj Marketing</h2>
-          <p>Established in <strong>2001</strong>, Raj Marketing has been serving the people of Mysore with premium quality mosquito nets for over two decades. Founded by <strong>Mr. Kiran Kumar</strong>, we have successfully installed mosquito nets in over 5,000 homes across Mysore city.</p>
-          
-          <p>Located at <strong>#65, Near Pragathi logistics, Hootgalli industrial area, Hootgalli, Mysore</strong>, we take pride in offering custom-fit solutions for every window and door, ensuring your family's complete protection from mosquitoes.</p>
-          
-          <ul class="about-features">
-            <li><i class="fas fa-check-circle"></i> 22+ Years of Experience</li>
-            <li><i class="fas fa-check-circle"></i> 5000+ Happy Families</li>
-            <li><i class="fas fa-check-circle"></i> GST Registered: 29AFEPJ3685H1Z5</li>
-            <li><i class="fas fa-check-circle"></i> Professional Installation Team</li>
-          </ul>
-          
-          <a href="pages/about.html" class="btn btn-primary" style="background: var(--primary); color: var(--white); margin-top: 20px;">
-            Read More About Us <i class="fas fa-arrow-right"></i>
-          </a>
-        </div>
-        
-        <div class="about-image">
-          <img src="https://via.placeholder.com/600x400/1a4b8c/ffffff?text=Raj+Marketing+Showroom" alt="Raj Marketing Showroom">
-          <div class="experience-badge">
-            <i class="fas fa-trophy"></i> 22+ Years
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials Section -->
-  <section class="testimonials-section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">What Our Customers Say</h2>
-        <p class="section-subtitle">Real experiences from our happy customers in Mysore</p>
-      </div>
-      
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <div class="testimonial-rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-          <p class="testimonial-text">"Excellent quality nets! The installation was quick and professional. No more mosquitoes in our home. Highly recommend Raj Marketing!"</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">R</div>
-            <div class="author-info">
-              <h4>Ramesh Kumar</h4>
-              <p>Vijayanagar, Mysore</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="testimonial-card">
-          <div class="testimonial-rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-          <p class="testimonial-text">"Great service and custom-fit solutions. The aluminum frame nets look elegant and work perfectly. Fair pricing and timely delivery."</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">S</div>
-            <div class="author-info">
-              <h4>Sunita Patel</h4>
-              <p>Kuvempunagar, Mysore</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="testimonial-card">
-          <div class="testimonial-rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-          <p class="testimonial-text">"The team was very helpful in choosing the right nets for our home. Installation was neat and clean. Definitely recommend them!"</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">P</div>
-            <div class="author-info">
-              <h4>Prakash Rao</h4>
-              <p>Gokulam, Mysore</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="cta-section">
-    <div class="container">
-      <div class="cta-content">
-        <h2>Ready to Protect Your Home?</h2>
-        <p>Get a free quote and professional consultation today. Our experts will visit your home for precise measurements.</p>
-        <div class="cta-buttons">
-          <a href="tel:+919480337385" class="btn btn-primary" style="background: var(--secondary); color: var(--dark);">
-            <i class="fas fa-phone-alt"></i> Call Now: +91-9480337385
-          </a>
-          <a href="pages/contact.html" class="btn btn-outline" style="border-color: var(--white); color: var(--white);">
-            <i class="fas fa-calendar-alt"></i> Book Appointment
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-  
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
-        <div class="footer-info">
-          <div class="footer-logo">
-            <i class="fas fa-shield-alt"></i>
-            <span>Raj Marketing</span>
-          </div>
-          <p>Premium mosquito nets for windows and doors in Mysore. Serving since 2001 with 5000+ happy customers.</p>
-          <p><strong>GST:</strong> 29AFEPJ3685H1Z5</p>
-          <p><strong>Kannada:</strong> ರಾಜ್ ಮಾರ್ಕೆಟಿಂಗ್ ಮೈಸೂರು</p>
-          <div class="social-links">
-            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://wa.me/919480337385" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-          </div>
+        <div>
+          <h4>Raj Marketing</h4>
+          <p>#65, Near Pragathi logistics, Hootgalli industrial area, Mysore</p>
+          <p>📞 <a href="tel:+919480337385">+91-9480337385</a></p>
+          <p>✉️ <a href="mailto:inforajmarketingmysore@gmail.com">inforajmarketingmysore@gmail.com</a></p>
         </div>
-        
-        <div class="footer-links">
+        <div>
           <h4>Quick Links</h4>
           <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="pages/about.html">About Us</a></li>
+            <li><a href="pages/about.html">About</a></li>
             <li><a href="pages/services.html">Services</a></li>
             <li><a href="pages/products.html">Products</a></li>
-            <li><a href="pages/gallery.html">Gallery</a></li>
             <li><a href="pages/contact.html">Contact</a></li>
           </ul>
         </div>
-        
-        <div class="footer-links">
-          <h4>Account Access</h4>
+        <div>
+          <h4>Account</h4>
           <ul>
             <li><a href="pages/customer-login.html">Customer Login</a></li>
             <li><a href="pages/dealer-login.html">Dealer Login</a></li>
-            <li><a href="pages/admin-login.html">Admin Login</a></li>
-            <li><a href="pages/register.html">Register</a></li>
-            <li><a href="pages/forgot-password.html">Forgot Password</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-links">
-          <h4>Legal</h4>
-          <ul>
-            <li><a href="pages/privacy.html">Privacy Policy</a></li>
-            <li><a href="pages/terms.html">Terms & Conditions</a></li>
-            <li><a href="pages/disclaimer.html">Disclaimer</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-contact">
-          <h4>Contact Info</h4>
-          <ul>
-            <li><i class="fas fa-map-marker-alt"></i> #65, Near Pragathi logistics, Hootgalli industrial area, Hootgalli, Mysore - 570018</li>
-            <li><i class="fas fa-phone"></i> <a href="tel:+919480337385">+91-9480337385 (Kiran)</a></li>
-            <li><i class="fas fa-phone"></i> <a href="tel:+919481234568">+91-9481234568 (Bharath)</a></li>
-            <li><i class="fas fa-envelope"></i> <a href="mailto:inforajmarketingmysore@gmail.com">inforajmarketingmysore@gmail.com</a></li>
+            <li><a href="pages/register.html">Create Account</a></li>
           </ul>
         </div>
       </div>
-      
       <div class="footer-bottom">
-        <p>&copy; 2024 Raj Marketing. All Rights Reserved. | Designed with <i class="fas fa-heart" style="color: #ff4757;"></i> in Mysore</p>
-        <div class="footer-bottom-links">
-          <a href="pages/privacy.html">Privacy</a>
-          <a href="pages/terms.html">Terms</a>
-          <a href="pages/disclaimer.html">Disclaimer</a>
-          <a href="pages/sitemap.html">Sitemap</a>
-        </div>
+        <p>&copy; 2024 Raj Marketing. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
-  <!-- Quick Action Button -->
-  <div class="quick-action">
-    <a href="tel:+919480337385" class="quick-call" title="Call Now">
-      <i class="fas fa-phone-alt"></i>
-    </a>
-    <a href="https://wa.me/919480337385" class="quick-whatsapp" title="WhatsApp">
-      <i class="fab fa-whatsapp"></i>
-    </a>
-  </div>
-
-  <!-- Toast Notification -->
+  <!-- Toast -->
   <div class="toast" id="toast"></div>
 
+  <!-- Optimized JavaScript -->
   <script>
-    // ===== LOADER =====
-    window.addEventListener('load', function() {
-      setTimeout(function() {
-        document.getElementById('loading-page').classList.add('hidden');
-      }, 1500);
-    });
+    // Fast loader - exit in 800ms
+    (function() {
+      const loader = document.getElementById('loading-page');
+      const progress = document.getElementById('loaderProgress');
+      
+      if (loader && progress) {
+        progress.style.width = '100%';
+        setTimeout(() => {
+          loader.classList.add('hidden');
+        }, 800);
+      }
+    })();
 
-    // ===== MOBILE MENU FUNCTIONALITY =====
+    // Mobile menu
     document.addEventListener('DOMContentLoaded', function() {
-      const navToggle = document.getElementById('navToggle');
-      const mobileMenu = document.getElementById('mobileMenu');
-      const mobileOverlay = document.getElementById('mobileMenuOverlay');
-      const mobileClose = document.getElementById('mobileMenuClose');
+      const toggle = document.getElementById('navToggle');
+      const menu = document.getElementById('mobileMenu');
+      const overlay = document.getElementById('mobileOverlay');
+      const close = document.getElementById('mobileClose');
       
-      // Function to open mobile menu
-      function openMobileMenu() {
-        mobileMenu.classList.add('active');
-        mobileOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
-      
-      // Function to close mobile menu
-      function closeMobileMenu() {
-        mobileMenu.classList.remove('active');
-        mobileOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-      
-      // Toggle menu on hamburger click
-      if (navToggle) {
-        navToggle.addEventListener('click', function(e) {
+      if (toggle && menu && overlay && close) {
+        toggle.onclick = (e) => {
           e.preventDefault();
-          e.stopPropagation();
-          openMobileMenu();
-        });
-      }
-      
-      // Close on close button
-      if (mobileClose) {
-        mobileClose.addEventListener('click', function(e) {
-          e.preventDefault();
-          closeMobileMenu();
-        });
-      }
-      
-      // Close on overlay click
-      if (mobileOverlay) {
-        mobileOverlay.addEventListener('click', function() {
-          closeMobileMenu();
-        });
-      }
-      
-      // Close on escape key
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
-          closeMobileMenu();
-        }
-      });
-      
-      // Handle window resize
-      window.addEventListener('resize', function() {
-        if (window.innerWidth > 768 && mobileMenu.classList.contains('active')) {
-          closeMobileMenu();
-        }
-      });
-    });
-
-    // ===== DROPDOWN MENU =====
-    document.addEventListener('DOMContentLoaded', function() {
-      const dropdowns = document.querySelectorAll('.dropdown');
-      
-      dropdowns.forEach(dropdown => {
-        const toggle = dropdown.querySelector('.dropdown-toggle');
+          menu.classList.add('active');
+          overlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        };
         
-        toggle.addEventListener('click', function(e) {
-          e.preventDefault();
-          
-          // Close other dropdowns
-          dropdowns.forEach(d => {
-            if (d !== dropdown) {
-              d.classList.remove('active');
-            }
-          });
-          
-          dropdown.classList.toggle('active');
-        });
-      });
-      
-      // Close dropdown when clicking outside
-      document.addEventListener('click', function(e) {
-        if (!e.target.closest('.dropdown')) {
-          dropdowns.forEach(d => d.classList.remove('active'));
-        }
-      });
-    });
-
-    // ===== SMOOTH SCROLL =====
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
+        close.onclick = () => {
+          menu.classList.remove('active');
+          overlay.classList.remove('active');
+          document.body.style.overflow = '';
+        };
         
-        if (href !== '#') {
+        overlay.onclick = () => {
+          menu.classList.remove('active');
+          overlay.classList.remove('active');
+          document.body.style.overflow = '';
+        };
+      }
+
+      // Dropdown
+      const loginToggle = document.getElementById('loginToggle');
+      const dropdown = document.getElementById('dropdownMenu');
+      
+      if (loginToggle && dropdown) {
+        loginToggle.onclick = (e) => {
           e.preventDefault();
-          const target = document.querySelector(href);
-          
-          if (target) {
-            target.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
-            });
+          dropdown.classList.toggle('show');
+        };
+        
+        document.addEventListener('click', (e) => {
+          if (!e.target.closest('.dropdown')) {
+            dropdown.classList.remove('show');
           }
-        }
-      });
-    });
+        });
+      }
 
-    // ===== TOAST NOTIFICATION =====
-    function showToast(message, duration = 3000) {
-      const toast = document.getElementById('toast');
-      toast.textContent = message;
-      toast.classList.add('show');
-      
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, duration);
-    }
-
-    // ===== ACTIVE LINK HIGHLIGHT =====
-    document.addEventListener('DOMContentLoaded', function() {
-      const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-      const navLinks = document.querySelectorAll('.nav-menu a, .mobile-nav a');
-      
-      navLinks.forEach(link => {
-        const linkPage = link.getAttribute('href').split('/').pop();
-        
-        if (linkPage === currentPage) {
-          link.classList.add('active');
-        }
-      });
-    });
-
-    // ===== DYNAMIC YEAR =====
-    document.addEventListener('DOMContentLoaded', function() {
-      const yearElements = document.querySelectorAll('.current-year');
-      const currentYear = new Date().getFullYear();
-      
-      yearElements.forEach(el => {
-        el.textContent = currentYear;
-      });
-    });
-
-    // ===== CHECK LOGIN STATUS =====
-    document.addEventListener('DOMContentLoaded', function() {
-      const currentUser = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
-      
-      if (currentUser) {
-        const user = JSON.parse(currentUser);
-        const mobileUserInfo = document.querySelector('.mobile-user-info');
-        
-        if (mobileUserInfo && user.type) {
-          mobileUserInfo.innerHTML = `
-            <i class="fas fa-user-circle"></i>
-            <div>
-              <h4>Welcome, ${user.name || 'User'}</h4>
-              <p><a href="pages/${user.type}-dashboard.html">Go to Dashboard</a> | <a href="#" onclick="logout()">Logout</a></p>
-            </div>
-          `;
-        }
+      // Check login status
+      const user = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
+      if (user) {
+        try {
+          const userData = JSON.parse(user);
+          const mobileUser = document.getElementById('mobileUser');
+          if (mobileUser && userData.name) {
+            mobileUser.innerHTML = `
+              <i class="fas fa-user-circle"></i>
+              <div>
+                <h4>Welcome, ${userData.name}</h4>
+                <p><a href="pages/${userData.type}-dashboard.html">Dashboard</a> | <a href="#" onclick="logout()">Logout</a></p>
+              </div>
+            `;
+          }
+        } catch (e) {}
       }
     });
 
-    // ===== LOGOUT FUNCTION =====
+    // Toast
+    window.showToast = function(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+    };
+
+    // Logout
     window.logout = function() {
       localStorage.removeItem('currentUser');
       sessionStorage.removeItem('currentUser');
-      showToast('Logged out successfully');
-      setTimeout(() => {
-        window.location.reload();
-      }, 1500);
+      showToast('Logged out');
+      setTimeout(() => location.reload(), 1000);
     };
   </script>
+
   <style>
-    /* Mobile Menu Styles */
+    /* Mobile menu styles */
     .mobile-menu-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 2000;
-      display: none;
-      backdrop-filter: blur(5px);
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5); z-index: 2000; display: none;
     }
-    
-    .mobile-menu-overlay.active {
-      display: block;
-    }
+    .mobile-menu-overlay.active { display: block; }
     
     .mobile-menu {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 85%;
-      max-width: 350px;
-      height: 100vh;
-      background: var(--white);
-      z-index: 2001;
-      transition: right 0.3s ease;
-      overflow-y: auto;
-      box-shadow: -5px 0 30px rgba(0,0,0,0.1);
+      position: fixed; top: 0; right: -100%; width: 85%; max-width: 320px;
+      height: 100vh; background: white; z-index: 2001;
+      transition: right 0.3s; overflow-y: auto;
     }
+    .mobile-menu.active { right: 0; }
     
-    .mobile-menu.active {
-      right: 0;
+    .mobile-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px; border-bottom: 1px solid #e9ecef;
     }
+    .mobile-logo { display: flex; align-items: center; gap: 8px; color: #1a4b8c; font-weight: 700; }
+    .mobile-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
     
-    .mobile-menu-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px;
-      border-bottom: 1px solid var(--gray-light);
+    .mobile-body { padding: 20px; }
+    .mobile-user {
+      display: flex; align-items: center; gap: 15px; padding: 15px;
+      background: #f8f9fa; border-radius: 10px; margin-bottom: 20px;
     }
+    .mobile-user i { font-size: 2rem; color: #1a4b8c; }
+    .mobile-user h4 { margin-bottom: 5px; }
+    .mobile-user a { color: #1a4b8c; text-decoration: none; }
     
-    .mobile-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
-    
-    .mobile-logo i {
-      color: var(--secondary);
-      font-size: 1.5rem;
-    }
-    
-    .mobile-menu-close {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: var(--gray);
-      padding: 5px;
-    }
-    
-    .mobile-menu-close:hover {
-      color: var(--danger);
-    }
-    
-    .mobile-menu-body {
-      padding: 20px;
-    }
-    
-    .mobile-user-info {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      padding: 15px;
-      background: var(--light);
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
-    
-    .mobile-user-info i {
-      font-size: 2rem;
-      color: var(--primary);
-    }
-    
-    .mobile-user-info h4 {
-      margin-bottom: 5px;
-      color: var(--dark);
-    }
-    
-    .mobile-user-info p {
-      font-size: 0.85rem;
-      margin: 0;
-    }
-    
-    .mobile-user-info a {
-      color: var(--primary);
-      text-decoration: none;
-    }
-    
-    .mobile-nav {
-      list-style: none;
-      padding: 0;
-    }
-    
-    .mobile-nav li {
-      margin-bottom: 5px;
-    }
-    
+    .mobile-nav { list-style: none; padding: 0; }
+    .mobile-nav li { margin-bottom: 5px; }
     .mobile-nav a {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      padding: 12px 15px;
-      color: var(--dark);
-      text-decoration: none;
-      border-radius: 8px;
-      transition: all 0.3s ease;
+      display: flex; align-items: center; gap: 15px; padding: 12px 15px;
+      color: #1e2b3a; text-decoration: none; border-radius: 8px;
     }
-    
-    .mobile-nav a:hover {
-      background: var(--light);
-      color: var(--primary);
-    }
-    
-    .mobile-nav a i {
-      width: 20px;
-      color: var(--primary);
-    }
-    
-    .mobile-divider {
-      height: 1px;
-      background: var(--gray-light);
-      margin: 15px 0;
-    }
-    
-    .mobile-subheader {
-      padding: 10px 15px;
-      color: var(--gray);
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-    
-    .mobile-contact {
-      margin-top: 20px;
-      padding: 15px;
-      background: var(--light);
-      border-radius: 10px;
-    }
-    
-    .mobile-contact p {
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    
-    .mobile-contact i {
-      color: var(--primary);
-      width: 20px;
-    }
-    
-    .mobile-contact a {
-      color: var(--gray);
-      text-decoration: none;
-    }
-    
-    .mobile-contact a:hover {
-      color: var(--primary);
-    }
-    
-    /* Quick Action Buttons */
-    .quick-action {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      z-index: 999;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    
-    .quick-call, .quick-whatsapp {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--white);
-      font-size: 1.2rem;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-      transition: all 0.3s ease;
-    }
-    
-    .quick-call {
-      background: var(--primary);
-    }
-    
-    .quick-whatsapp {
-      background: #25D366;
-    }
-    
-    .quick-call:hover, .quick-whatsapp:hover {
-      transform: scale(1.1);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    }
-    
-    /* Active link */
-    .nav-menu a.active {
-      color: var(--secondary);
-      font-weight: 600;
-    }
-    
-    /* Dropdown */
-    .dropdown {
-      position: relative;
-    }
+    .mobile-nav a:hover { background: #f8f9fa; color: #1a4b8c; }
+    .mobile-nav i { width: 20px; color: #1a4b8c; }
+    .divider { height: 1px; background: #e9ecef; margin: 15px 0; }
     
     .dropdown-menu {
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background: var(--white);
-      border-radius: 8px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-      min-width: 200px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(10px);
-      transition: all 0.3s ease;
-      list-style: none;
-      padding: 10px 0;
+      position: absolute; top: 100%; right: 0; background: white;
+      border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      min-width: 180px; list-style: none; padding: 10px 0;
+      opacity: 0; visibility: hidden; transform: translateY(10px);
+      transition: all 0.2s;
     }
-    
-    .dropdown.active .dropdown-menu {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
+    .dropdown-menu.show {
+      opacity: 1; visibility: visible; transform: translateY(0);
     }
-    
     .dropdown-menu a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 20px;
-      color: var(--dark);
-      text-decoration: none;
-      transition: all 0.3s ease;
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 20px; color: #1e2b3a; text-decoration: none;
     }
-    
-    .dropdown-menu a:hover {
-      background: var(--light);
-      color: var(--primary);
-    }
-    
-    .dropdown-menu hr {
-      margin: 5px 0;
-      border: none;
-      border-top: 1px solid var(--gray-light);
-    }
+    .dropdown-menu a:hover { background: #f8f9fa; color: #1a4b8c; }
     
     @media (max-width: 768px) {
-      .nav-menu {
-        display: none;
-      }
-      
-      .quick-action {
-        bottom: 20px;
-        right: 20px;
-      }
+      .nav-menu { display: none; }
+      .nav-toggle { display: block; }
     }
+    
+    .hero {
+      padding: 60px 0; background: linear-gradient(135deg, #1a4b8c 0%, #0f3a6b 100%);
+      color: white; text-align: center;
+    }
+    .hero h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); margin-bottom: 20px; }
+    .hero span { color: #f0b202; }
+    .hero p { font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9; }
+    .hero-buttons { display: flex; gap: 15px; justify-content: center; }
+    .btn {
+      display: inline-block; padding: 12px 30px; border-radius: 50px;
+      text-decoration: none; font-weight: 600; transition: all 0.2s;
+    }
+    .btn-primary { background: #f0b202; color: #1e2b3a; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(240,178,2,0.3); }
+    .btn-outline { border: 2px solid white; color: white; }
+    .btn-outline:hover { background: white; color: #1a4b8c; }
+    
+    .features { padding: 60px 0; background: white; }
+    .features h2 { text-align: center; color: #1a4b8c; margin-bottom: 40px; }
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px; text-align: center;
+    }
+    .feature-card i { font-size: 2.5rem; color: #f0b202; margin-bottom: 15px; }
   </style>
 </body>
 </html>
-```
