@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard - Raj Marketing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <style>
+        /* Customer Dashboard Specific Styles */
+        .welcome-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--white);
+            padding: var(--spacing-xl) 0;
+            margin-bottom: var(--spacing-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 50%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xl);
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid var(--white);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-info h1 {
+            color: var(--white);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .profile-info p {
+            color: rgba(255,255,255,0.9);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.3rem 1rem;
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-right: var(--spacing-xs);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: var(--transition-normal);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(26, 75, 140, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-md);
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--spacing-lg);
+        }
+
+        .dashboard-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 2px solid var(--gray-light);
+        }
+
+        .card-header h3 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .view-all {
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .order-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-md);
+            border: 1px solid var(--gray-light);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-sm);
+            transition: var(--transition-fast);
+        }
+
+        .order-item:hover {
+            background: var(--light);
+            border-color: var(--primary);
+        }
+
+        .order-status {
+            padding: 0.2rem 0.8rem;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-confirmed { background: #d4edda; color: #155724; }
+        .status-dispatched { background: #cce5ff; color: #004085; }
+        .status-installed { background: #d1ecf1; color: #0c5460; }
+        .status-completed { background: #d4edda; color: #155724; }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: var(--spacing-lg) 0;
+            position: relative;
+        }
+
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gray-light);
+            z-index: 1;
+        }
+
+        .step {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            flex: 1;
+        }
+
+        .step-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--white);
+            border: 2px solid var(--gray-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-xs);
+            color: var(--gray);
+            transition: var(--transition-fast);
+        }
+
+        .step.completed .step-icon {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--white);
+        }
+
+        .step.active .step-icon {
+            border-color: var(--secondary);
+            color: var(--secondary);
+            animation: pulse 2s infinite;
+        }
+
+        .step-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .service-area-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-sm);
+        }
+
+        .area-tag {
+            background: var(--light);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .area-tag:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .quick-service-card {
+            background: linear-gradient(135deg, var(--secondary) 0%, #ffc107 100%);
+            color: var(--dark);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition-normal);
+        }
+
+        .quick-service-card:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .maintenance-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--white);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+        }
+
+        @media (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Page -->
+    <div id="loading-page" class="loading-page">
+        <div class="loader-container">
+            <div class="loader-logo">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h1 class="loader-title">Raj Marketing</h1>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Welcome Section -->
+    <section class="welcome-section">
+        <div class="container">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <img src="https://ui-avatars.com/api/?name=Customer+Name&size=150&background=0e2a47&color=fff" alt="Profile Photo" id="profilePhoto">
+                </div>
+                <div class="profile-info">
+                    <h1 id="customerName">Welcome, Customer!</h1>
+                    <p><i class="fas fa-id-card"></i> Customer ID: <span id="customerId">CUST-2024-001</span></p>
+                    <p><i class="fas fa-phone"></i> <span id="customerPhone">+91-9876543210</span></p>
+                    <p><i class="fas fa-map-marker-alt"></i> <span id="customerAddress">#65, Hootgalli, Mysore</span></p>
+                    <div>
+                        <span class="badge"><i class="fas fa-star"></i> Gold Member</span>
+                        <span class="badge"><i class="fas fa-calendar"></i> Member since 2023</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <div class="stat-number" id="totalOrders">12</div>
+                <div class="stat-label">Total Orders</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-hourglass-half"></i>
+                </div>
+                <div class="stat-number" id="pendingOrders">2</div>
+                <div class="stat-label">Pending Orders</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-number" id="completedOrders">10</div>
+                <div class="stat-label">Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <div class="stat-number" id="activeInstallations">1</div>
+                <div class="stat-label">Active Installations</div>
+            </div>
+        </div>
+
+        <!-- Main Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- Left Column -->
+            <div>
+                <!-- Order Progress -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-line"></i> Current Order Progress</h3>
+                        <span class="badge" id="orderProgressStatus">In Progress</span>
+                    </div>
+                    
+                    <div class="progress-steps">
+                        <div class="step completed">
+                            <div class="step-icon"><i class="fas fa-check"></i></div>
+                            <div class="step-label">Order Placed</div>
+                        </div>
+                        <div class="step completed">
+                            <div class="step-icon"><i class="fas fa-cog"></i></div>
+                            <div class="step-label">Processing</div>
+                        </div>
+                        <div class="step active">
+                            <div class="step-icon"><i class="fas fa-truck"></i></div>
+                            <div class="step-label">Dispatch</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-icon"><i class="fas fa-tools"></i></div>
+                            <div class="step-label">Installation</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-icon"><i class="fas fa-flag-checkered"></i></div>
+                            <div class="step-label">Completed</div>
+                        </div>
+                    </div>
+
+                    <div class="order-item" style="margin-top: var(--spacing-md);">
+                        <div>
+                            <strong>Order #ORD-2024-0089</strong>
+                            <p style="font-size: 0.85rem; color: var(--gray);">5 Windows + 2 Doors • Fiberglass Mesh</p>
+                        </div>
+                        <span class="order-status status-dispatched">Dispatched</span>
+                    </div>
+                </div>
+
+                <!-- Recent Orders -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-history"></i> Recent Orders</h3>
+                        <a href="#" class="view-all" onclick="showToast('View all orders')">View All <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    
+                    <div id="recentOrders">
+                        <!-- Dynamic orders will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Payment Details -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-credit-card"></i> Payment Details</h3>
+                        <a href="#" class="view-all" onclick="showToast('Make payment')">Pay Now</a>
+                    </div>
+                    
+                    <div id="paymentDetails">
+                        <!-- Dynamic payments will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div>
+                <!-- Quick Service -->
+                <div class="quick-service-card" onclick="showToast('Quick service requested! Our team will contact you.')">
+                    <i class="fas fa-bolt" style="font-size: 3rem; margin-bottom: var(--spacing-sm);"></i>
+                    <h3>Quick Service Request</h3>
+                    <p>Need urgent installation or repair? Click here for priority service.</p>
+                    <button class="btn btn-dark" style="margin-top: var(--spacing-md);">Request Now</button>
+                </div>
+
+                <!-- Annual Maintenance -->
+                <div class="dashboard-card">
+                    <div class="maintenance-card">
+                        <h3><i class="fas fa-calendar-check"></i> Annual Maintenance Plan</h3>
+                        <p style="margin: var(--spacing-sm) 0;">Get comprehensive coverage for your mosquito nets</p>
+                        <div style="display: flex; gap: var(--spacing-sm); margin-bottom: var(--spacing-md);">
+                            <span class="badge" style="background: rgba(255,255,255,0.2);">₹2,999/year</span>
+                            <span class="badge" style="background: rgba(255,255,255,0.2);">4 visits</span>
+                            <span class="badge" style="background: rgba(255,255,255,0.2);">Free repairs</span>
+                        </div>
+                        <button class="btn btn-light" onclick="showToast('Enrolled in Annual Maintenance Plan!')">Enroll Now</button>
+                    </div>
+                </div>
+
+                <!-- Service Areas -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-map-marker-alt"></i> Service Areas in Mysore</h3>
+                    </div>
+                    
+                    <div class="service-area-grid" id="serviceAreas">
+                        <!-- Dynamic areas will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Notifications -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-bell"></i> Updates & Notifications</h3>
+                    </div>
+                    
+                    <div id="notifications">
+                        <!-- Dynamic notifications will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Membership Card -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-id-card"></i> Membership Card</h3>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #FFD700, #FDB931); padding: var(--spacing-lg); border-radius: var(--radius-lg); color: var(--dark);">
+                        <div style="display: flex; align-items: center; gap: var(--spacing-sm); margin-bottom: var(--spacing-md);">
+                            <i class="fas fa-crown" style="font-size: 2rem;"></i>
+                            <div>
+                                <h4 style="color: var(--dark);">Gold Member</h4>
+                                <p style="color: var(--dark); opacity: 0.8;">Valid till Dec 2024</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>15% off on services</span>
+                            <span>Free annual maintenance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Raj Marketing. All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Use</a>
+                    <a href="disclaimer.html">Disclaimer</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script src="../assets/js/storage.js"></script>
+    <script>
+        // Check if user is logged in
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser'));
+        
+        if (!currentUser || currentUser.type !== 'customer') {
+            window.location.href = 'customer-login.html';
+        }
+
+        // Load customer dashboard data
+        async function load
