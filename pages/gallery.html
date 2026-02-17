@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery - Raj Marketing | Mosquito Net Installation Photos</title>
+  <meta name="description" content="View our completed mosquito net installation projects across Mysore. See real examples of our work on windows, doors, and balconies.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .gallery-hero {
+      background: linear-gradient(135deg, rgba(26, 75, 140, 0.95) 0%, rgba(26, 75, 140, 0.85) 100%), url('../assets/images/gallery-bg.jpg') center/cover;
+      padding: var(--spacing-xxl) 0;
+      color: var(--white);
+      text-align: center;
+    }
+    
+    .gallery-hero h1 {
+      color: var(--white);
+      font-size: 3rem;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .gallery-hero p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .gallery-filters {
+      display: flex;
+      justify-content: center;
+      gap: var(--spacing-sm);
+      flex-wrap: wrap;
+      margin: var(--spacing-xl) 0;
+    }
+    
+    .gallery-filter {
+      padding: 0.75rem 1.5rem;
+      border: 2px solid var(--primary);
+      background: transparent;
+      color: var(--primary);
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+    
+    .gallery-filter:hover,
+    .gallery-filter.active {
+      background: var(--primary);
+      color: var(--white);
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: var(--spacing-lg);
+      padding: var(--spacing-xl) 0;
+    }
+    
+    .gallery-item {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      cursor: pointer;
+      aspect-ratio: 4/3;
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-normal);
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      color: var(--white);
+      padding: var(--spacing-lg);
+      transform: translateY(100%);
+      transition: transform var(--transition-normal);
+    }
+    
+    .gallery-item:hover .gallery-overlay {
+      transform: translateY(0);
+    }
+    
+    .gallery-overlay h3 {
+      color: var(--white);
+      margin-bottom: var(--spacing-xs);
+      font-size: 1.2rem;
+    }
+    
+    .gallery-overlay p {
+      color: rgba(255,255,255,0.8);
+      margin: 0;
+      font-size: 0.9rem;
+    }
+    
+    .gallery-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--secondary);
+      color: var(--dark);
+      padding: 0.3rem 1rem;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: 0.8rem;
+      z-index: 2;
+    }
+    
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .lightbox.active {
+      display: flex;
+    }
+    
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 90%;
+      position: relative;
+    }
+    
+    .lightbox-content img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius-lg);
+    }
+    
+    .lightbox-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: var(--white);
+      font-size: 2rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+    
+    .lightbox-caption {
+      position: absolute;
+      bottom: -40px;
+      left: 0;
+      color: var(--white);
+      font-size: 1rem;
+    }
+    
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.2);
+      color: var(--white);
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+    
+    .lightbox-nav:hover {
+      background: var(--secondary);
+    }
+    
+    .lightbox-nav.prev {
+      left: 20px;
+    }
+    
+    .lightbox-nav.next {
+      right: 20px;
+    }
+    
+    @media (max-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      }
+      
+      .lightbox-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Page -->
+  <div id="loading-page" class="loading-page">
+    <div class="loader-container">
+      <div class="loader-logo">
+        <i class="fas fa-shield-alt"></i>
+      </div>
+      <h1 class="loader-title">Raj Marketing</h1>
+      <div class="loader-bar">
+        <div class="loader-progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="../index.html" class="logo">
+          <i class="fas fa-shield-alt"></i>
+          <span>Raj Marketing</span>
+        </a>
+        
+        <div class="nav-toggle" id="navToggle">
+          <i class="fas fa-bars"></i>
+        </div>
+
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="gallery.html" class="active">Gallery</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle">Login <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="customer-login.html"><i class="fas fa-user"></i> Customer Login</a></li>
+              <li><a href="dealer-login.html"><i class="fas fa-store"></i> Dealer Login</a></li>
+              <li><a href="admin-login.html"><i class="fas fa-shield-alt"></i> Admin Login</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Gallery Hero -->
+  <section class="gallery-hero">
+    <div class="container">
+      <h1>Our Work Gallery</h1>
+      <p>See real examples of our mosquito net installations across Mysore</p>
+    </div>
+  </section>
+
+  <!-- Gallery Filters -->
+  <div class="container">
+    <div class="gallery-filters">
+      <button class="gallery-filter active" data-filter="all">All Projects</button>
+      <button class="gallery-filter" data-filter="window">Window Nets</button>
+      <button class="gallery-filter" data-filter="door">Door Nets</button>
+      <button class="gallery-filter" data-filter="balcony">Balcony & Sliding</button>
+      <button class="gallery-filter" data-filter="commercial">Commercial</button>
+    </div>
+  </div>
+
+  <!-- Gallery Grid -->
+  <section class="container">
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- Window Nets -->
+      <div class="gallery-item" data-category="window">
+        <img src="../assets/images/gallery/window1.jpg" alt="Fiberglass window net installation in Vijayanagar, Mysore" onerror="this.src='https://via.placeholder.com/400x300?text=Window+Net+1'">
+        <span class="gallery-badge">Window</span>
+        <div class="gallery-overlay">
+          <h3>Fiberglass Window Net</h3>
+          <p>Vijayanagar, Mysore | 5 windows | Fiberglass mesh</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item" data-category="window">
+        <img src="../assets/images/gallery/window2.jpg" alt="Aluminum frame window nets in Kuvempunagar" onerror="this.src='https://via.placeholder.com/400x300?text=Window+Net+2'">
+        <span class="gallery-badge">Window</span>
+        <div class="gallery-overlay">
+          <h3>Aluminum Frame Windows</h3>
+          <p>Kuvempunagar, Mysore | 8 windows | Brown frame</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item" data-category="window">
+        <img src="../assets/images/gallery/window3.jpg" alt="Sliding window nets in Gokulam" onerror="this.src='https://via.placeholder.com/400x300?text=Window+Net+3'">
+        <span class="gallery-badge">Window</span>
+        <div class="gallery-overlay">
+          <h3>Sliding Window Nets</h3>
+          <p>Gokulam, Mysore | 3 large windows | White frame</p>
+        </div>
+      </div>
+      
+      <!-- Door Nets -->
+      <div class="gallery-item" data-category="door">
+        <img src="../assets/images/gallery/door1.jpg" alt="Magnetic door net installation in Jayalakshmipuram" onerror="this.src='https://via.placeholder.com/400x300?text=Door+Net+1'">
+        <span class="gallery-badge">Door</span>
+        <div class="gallery-overlay">
+          <h3>Magnetic Door Net</h3>
+          <p>Jayalakshmipuram, Mysore | Main door | Self-closing</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item" data-category="door">
+        <img src="../assets/images/gallery/door2.jpg" alt="Hinged door net in Shivarampet" onerror="this.src='https://via.placeholder.com/400x300?text=Door+Net+2'">
+        <span class="gallery-badge">Door</span>
+        <div class="gallery-overlay">
+          <h3>Hinged Door Net</h3>
+          <p>Shivarampet, Mysore | Back door | Premium hardware</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item" data-category="door">
+        <img src="../assets/images/gallery/door3.jpg" alt="Sliding door net for balcony in Hebbal" onerror="this.src='https://via.placeholder.com/400x300?text=Door+Net+3'">
+        <span class="gallery-badge">Door</span>
+        <div class="gallery-overlay">
+          <h3>Sliding Balcony Door</h3>
+          <p>Hebbal, Mysore | 8ft x 7ft | Heavy-duty</p>
+        </div>
+      </div>
+      
+      <!-- Balcony & Sliding -->
+      <div class="gallery-item" data-category="balcony">
+        <img src="../assets/images/gallery/balcony1.jpg" alt="Large balcony net installation in Saraswathipuram" onerror="this.src='https://via.placeholder.com/400x300?text=Balcony+Net+1'">
+        <span class="gallery-badge">Balcony</span>
+        <div class="gallery-overlay">
+          <h3>Full Balcony Enclosure</h3>
+          <p>Saraswathipuram, Mysore | 12ft x 4ft | Aluminum frame</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item" data-category="balcony">
+        <img src="../assets/images/gallery/balcony2.jpg" alt="Sliding balcony nets in K.T. Street area" onerror="this.src='https://via.placeholder.com/400x300?text=Balcony+Net+2'">
+        <span class="gallery-badge">Balcony</span>
+        <div class="gallery-overlay">
+          <h3>Sliding Balcony Screens</h3>
+          <p>K.T. Street, Mysore | 3 panels | Brown frame</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item" data-category="balcony">
+        <img src="../assets/images/gallery/balcony3.jpg" alt="French window nets in Vijayanagar" onerror="this.src='https://via.placeholder.com/400x300?text=French+Window'">
+        <span class="gallery-badge">French Window</span>
+        <div class="gallery-overlay">
+          <h3>French Window Nets</h3>
+          <p>Vijayanagar, Mysore | 2 sets | White frame</p>
+        </div>
+      </div>
+      
+      <!-- Commercial -->
+      <div class="gallery-item" data-category="commercial">
+        <img src="../assets/images/gallery/commercial1.jpg" alt="Mosquito nets for office in Mysore" onerror="this.src='https://via.placeholder.com/400x300?text=Commercial+1'">
+        <span class="gallery-badge">Commercial</span>
+        <div class="gallery-overlay">
+          <h3>Office Building</h3>
+          <p>MG Road, Mysore | 25 windows | Commercial grade</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item" data-category="commercial">
+        <img src="../assets/images/gallery/commercial2.jpg" alt="Restaurant door nets in Mysore" onerror="this.src='https://via.placeholder.com/400x300?text=Commercial+2'">
+        <span class="gallery-badge">Commercial</span>
+        <div class="gallery-overlay">
+          <h3>Restaurant Entrance</h3>
+          <p>Deveraja Market area | Magnetic door nets</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item" data-category="commercial">
+        <img src="../assets/images/gallery/commercial3.jpg" alt="Hospital mosquito nets installation" onerror="this.src='https://via.placeholder.com/400x300?text=Commercial+3'">
+        <span class="gallery-badge">Hospital</span>
+        <div class="gallery-overlay">
+          <h3>Private Hospital</h3>
+          <p>Kuvempunagar, Mysore | 50+ windows | No-see-um mesh</p>
+        </div>
+      </div>
+      
+      <!-- Special Projects -->
+      <div class="gallery-item" data-category="window">
+        <img src="../assets/images/gallery/special1.jpg" alt="Arched window net in heritage home" onerror="this.src='https://via.placeholder.com/400x300?text=Arched+Window'">
+        <span class="gallery-badge">Custom</span>
+        <div class="gallery-overlay">
+          <h3>Arched Window</h3>
+          <p>Lakshmipuram, Mysore | Custom curved frame</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item" data-category="door">
+        <img src="../assets/images/gallery/special2.jpg" alt="French door nets in villa" onerror="this.src='https://via.placeholder.com/400x300?text=French+Door'">
+        <span class="gallery-badge">French Door</span>
+        <div class="gallery-overlay">
+          <h3>French Door Nets</h3>
+          <p>Gokulam, Mysore | 2 sets | White frame</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item" data-category="window">
+        <img src="../assets/images/gallery/special3.jpg" alt="Bay window nets in Mysore" onerror="this.src='https://via.placeholder.com/400x300?text=Bay+Window'">
+        <span class="gallery-badge">Bay Window</span>
+        <div class="gallery-overlay">
+          <h3>Bay Window Nets</h3>
+          <p>Jayalakshmipuram, Mysore | 3-section bay</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose">&times;</button>
+    <button class="lightbox-nav prev" id="lightboxPrev">‹</button>
+    <button class="lightbox-nav next" id="lightboxNext">›</button>
+    <div class="lightbox-content">
+      <img src="" alt="" id="lightboxImg">
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+  </div>
+
+  <!-- Video Section -->
+  <section class="container" style="padding: var(--spacing-xxl) 0;">
+    <div class="section-header">
+      <h2 class="section-title">Installation Videos</h2>
+      <p class="section-subtitle">Watch our installation process</p>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: var(--spacing-lg);">
+      <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--radius-lg);">
+        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--radius-lg);">
+        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Client Locations Map -->
+  <section class="container" style="padding: var(--spacing-xxl) 0;">
+    <div class="section-header">
+      <h2 class="section-title">Our Service Areas in Mysore</h2>
+      <p class="section-subtitle">We've served customers across all these locations</p>
+    </div>
+    
+    <div style="background: var(--light); padding: var(--spacing-xl); border-radius: var(--radius-lg);">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-sm);">
+        <div style="display: flex; align-items: center; gap: 10px;"><i class="fas fa-map-marker-alt" style="color: var(--secondary);"></i> Kuvempunagar</div>
+        <div style="display: flex; align-items: center; gap: 10px;"><i class="fas fa-map-marker-alt" style="color: var(--secondary);"></i> Vijayanagar</div>
+        <div style="display: flex; align-items: center; gap: 10px;"><i class="fas fa-map-marker-alt" style="color: var(--secondary);"></i> Gokulam</div>
+        <div style="display: flex; align-items: center; gap: 10px;"><i class="fas fa-map-marker-alt" style="color: var(--secondary);"></i> Jayalakshmipuram</div>
+        <div style="display: flex; align-items: center; gap: 10px;"><i class="fas fa-map-marker-alt" style="color: var(--secondary);"></i> Shivarampet</div>
+        <div style="display: flex; align-items: center; gap: 10px;"><i class="fas fa-map-marker-alt" style="color: var(--secondary);"></i> K.T. Street</div>
+        <div style="display: flex; align-items: center; gap: 10px;"><i class="fas fa-map-marker-alt" style="color: var(--secondary);"></i> Saraswathipuram</div>
+        <div style="display: flex; align-items: center; gap: 10px;"><i class="fas fa-map-marker-alt" style="color: var(--secondary);"></i> Hebbal</div>
+        <div style="display: flex; align-items: center; gap: 10px;"><i class="fas fa-map-marker-alt" style="color: var(--secondary);"></i> Lakshmipuram</div>
+        <div style="display: flex; align-items: center; gap: 10px;"><i class="fas fa-map-marker-alt" style="color: var(--secondary);"></i> Yadavagiri</div>
+        <div style="display: flex; align-items: center; gap: 10px;"><i class="fas fa-map-marker-alt" style="color: var(--secondary);"></i> Bogadi</div>
+        <div style="display: flex; align-items: center; gap: 10px;"><i class="fas fa-map-marker-alt" style="color: var(--secondary);"></i> Srirampura</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta">
+    <div class="container">
+      <div class="cta-wrapper">
+        <h2>Ready to Transform Your Home?</h2>
+        <p>Join our 5000+ happy customers in Mysore</p>
+        <div class="cta-buttons">
+          <a href="contact.html" class="btn btn-primary btn-large">
+            <i class="fas fa-calendar-alt"></i> Schedule Installation
+          </a>
+          <a href="tel:+919481234567" class="btn btn-outline btn-large">
+            <i class="fas fa-phone-alt"></i> Call Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-info">
+          <div class="footer-logo">
+            <i class="fas fa-shield-alt"></i>
+            <span>Raj Marketing</span>
+          </div>
+          <p>Premium mosquito nets for windows and doors in Mysore. Serving since 2001.</p>
+          <p><strong>GST:</strong> 29AFEPJ3685H1Z5 [citation:1]</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../index.html
