@@ -873,11 +873,314 @@
       </div>
     </div>
 
+    
     <!-- Dashboard Grid -->
     <div class="dashboard-grid">
       <!-- Recent Orders -->
       <div class="card">
         <div class="card-header">
           <h3><i class="fas fa-clock"></i> Recent Orders</h3>
-          <button class="btn btn-primary" style="padding:5px 15px;" onclick="openMo
-            
+          <button class="btn btn-primary" style="padding:5px 15px;" onclick="openModal('statusModal')">Track</button>
+        </div>
+        <div id="recentOrdersList"></div>
+      </div>
+
+      <!-- Active Appointment -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-calendar-alt"></i> Next Appointment</h3>
+          <button class="btn btn-primary" style="padding:5px 15px;" onclick="openModal('appointmentModal')">Book</button>
+        </div>
+        <div id="nextAppointment"></div>
+      </div>
+
+      <!-- Payment Due -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-rupee-sign"></i> Payment Due</h3>
+          <button class="btn btn-primary" style="padding:5px 15px;" onclick="openModal('paymentModal')">Pay Now</button>
+        </div>
+        <div id="paymentDue"></div>
+      </div>
+
+      <!-- Recent Complaints -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-exclamation-circle"></i> Recent Complaints</h3>
+          <button class="btn btn-primary" style="padding:5px 15px;" onclick="openModal('complaintModal')">New</button>
+        </div>
+        <div id="recentComplaints"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENQUIRY MODAL -->
+  <div class="modal" id="enquiryModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('enquiryModal')">&times;</button>
+      <h2 style="color:var(--primary); margin-bottom:20px;">Product Enquiry</h2>
+      
+      <div class="product-grid">
+        <div class="product-item" onclick="viewProduct('Fiberglass Window Net', '₹399/sq ft')">
+          <h4>Fiberglass Window Net</h4>
+          <p>Strong, flexible mesh</p>
+          <div class="product-price">₹399/sq ft</div>
+        </div>
+        <div class="product-item" onclick="viewProduct('Aluminum Frame Net', '₹599/sq ft')">
+          <h4>Aluminum Frame Net</h4>
+          <p>Rust-proof premium</p>
+          <div class="product-price">₹599/sq ft</div>
+        </div>
+        <div class="product-item" onclick="viewProduct('Magnetic Door Net', '₹899/sq ft')">
+          <h4>Magnetic Door Net</h4>
+          <p>Self-closing</p>
+          <div class="product-price">₹899/sq ft</div>
+        </div>
+        <div class="product-item" onclick="viewProduct('Sliding Door Net', '₹999/sq ft')">
+          <h4>Sliding Door Net</h4>
+          <p>For balcony doors</p>
+          <div class="product-price">₹999/sq ft</div>
+        </div>
+      </div>
+
+      <div style="margin-top:20px;">
+        <a href="products.html" class="btn btn-primary btn-block">View All Products</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ORDER MODAL -->
+  <div class="modal" id="orderModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('orderModal')">&times;</button>
+      <h2 style="color:var(--primary); margin-bottom:20px;">Place New Order</h2>
+      
+      <form id="orderForm" onsubmit="return submitOrder(event)">
+        <div class="form-group">
+          <label>Select Product</label>
+          <select class="form-control" id="orderProduct" required>
+            <option value="">Choose product</option>
+            <option value="Fiberglass Window Net">Fiberglass Window Net - ₹399/sq ft</option>
+            <option value="Aluminum Frame Net">Aluminum Frame Net - ₹599/sq ft</option>
+            <option value="Magnetic Door Net">Magnetic Door Net - ₹899/sq ft</option>
+            <option value="Sliding Door Net">Sliding Door Net - ₹999/sq ft</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Quantity (sq ft)</label>
+          <input type="number" class="form-control" id="orderQuantity" min="1" value="10" required>
+        </div>
+
+        <div class="form-group">
+          <label>Your Location in Mysore</label>
+          <div class="area-grid" id="areaSelection">
+            <div class="area-option" onclick="selectArea('Hootgalli')">Hootgalli</div>
+            <div class="area-option" onclick="selectArea('Kuvempunagar')">Kuvempunagar</div>
+            <div class="area-option" onclick="selectArea('Vijayanagar')">Vijayanagar</div>
+            <div class="area-option" onclick="selectArea('Gokulam')">Gokulam</div>
+            <div class="area-option" onclick="selectArea('Jayalakshmipuram')">Jayalakshmipuram</div>
+            <div class="area-option" onclick="selectArea('Shivarampet')">Shivarampet</div>
+          </div>
+          <input type="hidden" id="selectedArea" value="">
+        </div>
+
+        <div class="form-group">
+          <label>Full Address</label>
+          <textarea class="form-control" id="orderAddress" rows="3" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Preferred Date</label>
+          <input type="date" class="form-control" id="orderDate" min="2024-01-01" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Submit Order</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- APPOINTMENT MODAL -->
+  <div class="modal" id="appointmentModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('appointmentModal')">&times;</button>
+      <h2 style="color:var(--primary); margin-bottom:20px;">Book Appointment</h2>
+      
+      <form id="appointmentForm" onsubmit="return bookAppointment(event)">
+        <div class="datetime-grid">
+          <div class="form-group">
+            <label>Date</label>
+            <input type="date" class="form-control" id="appointmentDate" min="2024-01-01" required>
+          </div>
+          <div class="form-group">
+            <label>Time</label>
+            <select class="form-control" id="appointmentTime" required>
+              <option value="09:00 AM">09:00 AM</option>
+              <option value="10:00 AM">10:00 AM</option>
+              <option value="11:00 AM">11:00 AM</option>
+              <option value="12:00 PM">12:00 PM</option>
+              <option value="02:00 PM">02:00 PM</option>
+              <option value="03:00 PM">03:00 PM</option>
+              <option value="04:00 PM">04:00 PM</option>
+              <option value="05:00 PM">05:00 PM</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="token-display">
+          <div style="font-size:0.9rem; margin-bottom:5px;">Your Token Number</div>
+          <div class="token-number" id="tokenNumber">0004</div>
+        </div>
+
+        <div class="form-group">
+          <label>Purpose</label>
+          <select class="form-control" id="appointmentPurpose" required>
+            <option value="Installation">New Installation</option>
+            <option value="Measurement">Site Measurement</option>
+            <option value="Repair">Repair Service</option>
+            <option value="Consultation">Consultation</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Book Appointment</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ORDER STATUS MODAL -->
+  <div class="modal" id="statusModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('statusModal')">&times;</button>
+      <h2 style="color:var(--primary); margin-bottom:20px;">Track Order Status</h2>
+      
+      <div class="form-group">
+        <label>Enter Customer ID or Order ID</label>
+        <input type="text" class="form-control" id="trackingId" placeholder="e.g., CUST001 or ORD001">
+      </div>
+
+      <button class="btn btn-primary btn-block" onclick="trackOrder()">Track Order</button>
+
+      <div id="trackingResult" style="margin-top:20px; display:none;">
+        <div class="status-tracker">
+          <div class="status-step" id="step1">
+            <div class="step-icon"><i class="fas fa-check"></i></div>
+            <div class="step-info">
+              <div>Order Confirmed</div>
+              <div class="step-time" id="step1Time">Today, 10:30 AM</div>
+            </div>
+          </div>
+          <div class="status-step" id="step2">
+            <div class="step-icon"><i class="fas fa-cog"></i></div>
+            <div class="step-info">
+              <div>Processing</div>
+              <div class="step-time" id="step2Time">-</div>
+            </div>
+          </div>
+          <div class="status-step" id="step3">
+            <div class="step-icon"><i class="fas fa-truck"></i></div>
+            <div class="step-info">
+              <div>Dispatch</div>
+              <div class="step-time" id="step3Time">-</div>
+            </div>
+          </div>
+          <div class="status-step" id="step4">
+            <div class="step-icon"><i class="fas fa-tools"></i></div>
+            <div class="step-info">
+              <div>Installation</div>
+              <div class="step-time" id="step4Time">-</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timer" id="installTimer">72:00:00</div>
+        <div style="text-align:center; color:var(--gray);">Max 72 hours for installation</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAYMENT MODAL -->
+  <div class="modal" id="paymentModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('paymentModal')">&times;</button>
+      <h2 style="color:var(--primary); margin-bottom:20px;">Make Payment</h2>
+      
+      <div class="payment-summary" id="paymentSummary">
+        <div class="payment-row">
+          <span>Order #ORD001</span>
+          <span>₹10,000</span>
+        </div>
+        <div class="payment-row">
+          <span>Advance Paid</span>
+          <span>₹5,000</span>
+        </div>
+        <div class="payment-row">
+          <span>Balance Amount</span>
+          <span>₹5,000</span>
+        </div>
+        <div class="payment-row">
+          <span>GST (18%)</span>
+          <span>₹900</span>
+        </div>
+        <div class="payment-total">
+          <span>Total Payable</span>
+          <span>₹5,900</span>
+        </div>
+        <div class="gst-note">*GST 18% included</div>
+      </div>
+
+      <div class="payment-options">
+        <button class="payment-btn gpay" onclick="processPayment('gpay')">
+          <i class="fab fa-google-pay"></i> Google Pay
+        </button>
+        <button class="payment-btn phonepe" onclick="processPayment('phonepe')">
+          <i class="fas fa-mobile-alt"></i> PhonePe
+        </button>
+      </div>
+
+      <div class="qr-code" id="qrCode">
+        <p>Scan to Pay</p>
+        <div id="qrcode"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPLAINT MODAL -->
+  <div class="modal" id="complaintModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('complaintModal')">&times;</button>
+      <h2 style="color:var(--primary); margin-bottom:20px;">Register Complaint</h2>
+      
+      <form class="complaint-form" onsubmit="return submitComplaint(event)">
+        <div class="form-group">
+          <label>Order ID (Optional)</label>
+          <input type="text" class="form-control" id="complaintOrder" placeholder="Enter order ID if applicable">
+        </div>
+
+        <div class="form-group">
+          <label>Complaint Type</label>
+          <select class="form-control" id="complaintType" required>
+            <option value="Quality">Quality Issue</option>
+            <option value="Installation">Installation Problem</option>
+            <option value="Delay">Delay in Service</option>
+            <option value="Damage">Product Damage</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Describe Your Issue *</label>
+          <textarea class="form-control" id="complaintDesc" rows="4" required></textarea>
+        </div>
+
+        <div class="file-upload" onclick="document.getElementById('complaintImage').click()">
+          <i class="fas fa-camera"></i>
+          <p>Click to upload photo of issue</p>
+          <input type="file" id="complaintImage" accept="image/*" style="display:none;" onchange="previewImage(this)">
+        </div>
+
+        <div id="imagePreview"></div>
+
+        <button type="submit" class="btn btn-primary btn-block">Submit Complaint</button>
+      </form>
+    </div>
+            </div>.
