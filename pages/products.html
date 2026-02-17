@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Products - Raj Marketing | Mosquito Nets in Mysore</title>
+  <meta name="description" content="Explore our wide range of premium mosquito nets in Mysore. Fiberglass, aluminum frame, magnetic door nets, and custom solutions.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .product-hero {
+      background: linear-gradient(135deg, rgba(26, 75, 140, 0.95) 0%, rgba(26, 75, 140, 0.85) 100%), url('../assets/images/products-bg.jpg') center/cover;
+      padding: var(--spacing-xxl) 0;
+      color: var(--white);
+      text-align: center;
+    }
+    
+    .product-hero h1 {
+      color: var(--white);
+      font-size: 3rem;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .product-hero p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .product-categories {
+      display: flex;
+      justify-content: center;
+      gap: var(--spacing-sm);
+      flex-wrap: wrap;
+      margin: var(--spacing-xl) 0;
+    }
+    
+    .category-btn {
+      padding: 0.75rem 1.5rem;
+      border: 2px solid var(--primary);
+      background: transparent;
+      color: var(--primary);
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+    
+    .category-btn:hover,
+    .category-btn.active {
+      background: var(--primary);
+      color: var(--white);
+    }
+    
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: var(--spacing-lg);
+      padding: var(--spacing-xl) 0;
+    }
+    
+    .product-item {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition-normal);
+    }
+    
+    .product-item:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .product-item-image {
+      height: 250px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .product-item-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-normal);
+    }
+    
+    .product-item:hover .product-item-image img {
+      transform: scale(1.1);
+    }
+    
+    .product-tag {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--secondary);
+      color: var(--dark);
+      padding: 0.3rem 1rem;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+    
+    .product-item-content {
+      padding: var(--spacing-lg);
+    }
+    
+    .product-item-content h3 {
+      margin-bottom: var(--spacing-xs);
+      color: var(--primary);
+    }
+    
+    .product-specs {
+      margin: var(--spacing-sm) 0;
+      font-size: 0.95rem;
+    }
+    
+    .product-specs span {
+      display: inline-block;
+      background: var(--light);
+      padding: 0.2rem 0.8rem;
+      border-radius: var(--radius-full);
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .product-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: var(--spacing-sm) 0;
+    }
+    
+    .product-price small {
+      font-size: 0.9rem;
+      color: var(--gray);
+      font-weight: normal;
+    }
+    
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      margin: var(--spacing-xl) 0;
+    }
+    
+    .comparison-table th {
+      background: var(--primary);
+      color: var(--white);
+      padding: var(--spacing-md);
+      text-align: left;
+    }
+    
+    .comparison-table td {
+      padding: var(--spacing-md);
+      border-bottom: 1px solid var(--gray-light);
+    }
+    
+    .comparison-table tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .comparison-table tr:hover {
+      background: var(--light);
+    }
+    
+    .comparison-table i.fa-check {
+      color: var(--success);
+    }
+    
+    .comparison-table i.fa-times {
+      color: var(--danger);
+    }
+    
+    .material-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-lg);
+      margin: var(--spacing-xl) 0;
+    }
+    
+    .material-card {
+      background: var(--white);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      text-align: center;
+    }
+    
+    .material-icon {
+      width: 80px;
+      height: 80px;
+      background: rgba(26, 75, 140, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--spacing-md);
+      font-size: 2rem;
+      color: var(--primary);
+    }
+    
+    @media (max-width: 768px) {
+      .comparison-table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Page -->
+  <div id="loading-page" class="loading-page">
+    <div class="loader-container">
+      <div class="loader-logo">
+        <i class="fas fa-shield-alt"></i>
+      </div>
+      <h1 class="loader-title">Raj Marketing</h1>
+      <div class="loader-bar">
+        <div class="loader-progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="../index.html" class="logo">
+          <i class="fas fa-shield-alt"></i>
+          <span>Raj Marketing</span>
+        </a>
+        
+        <div class="nav-toggle" id="navToggle">
+          <i class="fas fa-bars"></i>
+        </div>
+
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="products.html" class="active">Products</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle">Login <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="customer-login.html"><i class="fas fa-user"></i> Customer Login</a></li>
+              <li><a href="dealer-login.html"><i class="fas fa-store"></i> Dealer Login</a></li>
+              <li><a href="admin-login.html"><i class="fas fa-shield-alt"></i> Admin Login</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Product Hero -->
+  <section class="product-hero">
+    <div class="container">
+      <h1>Our Premium Products</h1>
+      <p>High-quality mosquito nets for every window and door in your home</p>
+    </div>
+  </section>
+
+  <!-- Product Categories Filter -->
+  <div class="container">
+    <div class="product-categories">
+      <button class="category-btn active" data-category="all">All Products</button>
+      <button class="category-btn" data-category="window">Window Nets</button>
+      <button class="category-btn" data-category="door">Door Nets</button>
+      <button class="category-btn" data-category="fiberglass">Fiberglass</button>
+      <button class="category-btn" data-category="aluminum">Aluminum Frame</button>
+      <button class="category-btn" data-category="magnetic">Magnetic Nets</button>
+    </div>
+  </div>
+
+  <!-- Products Grid -->
+  <section class="container">
+    <div class="products-grid" id="productsGrid">
+      <!-- Window Nets -->
+      <div class="product-item" data-category="window fiberglass">
+        <div class="product-item-image">
+          <img src="../assets/images/product-window-fiberglass.jpg" alt="Fiberglass Window Net" onerror="this.src='https://via.placeholder.com/400x250?text=Fiberglass+Window+Net'">
+          <span class="product-tag">Best Seller</span>
+        </div>
+        <div class="product-item-content">
+          <h3>Fiberglass Window Net</h3>
+          <div class="product-specs">
+            <span>Fiberglass</span>
+            <span>PVC Frame</span>
+            <span>White/Black</span>
+          </div>
+          <p>Standard window net with clear view and excellent airflow. UV resistant and durable.</p>
+          <div class="product-price">₹399<span>/sq ft</span></div>
+          <a href="contact.html" class="btn btn-primary btn-block">Get Quote</a>
+        </div>
+      </div>
+      
+      <div class="product-item" data-category="window aluminum">
+        <div class="product-item-image">
+          <img src="../assets/images/product-aluminum-window.jpg" alt="Aluminum Frame Window Net" onerror="this.src='https://via.placeholder.com/400x250?text=Aluminum+Frame+Window+Net'">
+        </div>
+        <div class="product-item-content">
+          <h3>Aluminum Frame Window Net</h3>
+          <div class="product-specs">
+            <span>Fiberglass</span>
+            <span>Aluminum</span>
+            <span>Rust-proof</span>
+          </div>
+          <p>Premium aluminum frame with powder-coated finish. Perfect for modern homes.</p>
+          <div class="product-price">₹599<span>/sq ft</span></div>
+          <a href="contact.html" class="btn btn-primary btn-block">Get Quote</a>
+        </div>
+      </div>
+      
+      <div class="product-item" data-category="window aluminum">
+        <div class="product-item-image">
+          <img src="../assets/images/product-sliding-window.jpg" alt="Sliding Window Net" onerror="this.src='https://via.placeholder.com/400x250?text=Sliding+Window+Net'">
+        </div>
+        <div class="product-item-content">
+          <h3>Sliding Window Net</h3>
+          <div class="product-specs">
+            <span>Aluminum</span>
+            <span>Sliding</span>
+            <span>Brown/White</span>
+          </div>
+          <p>Designed specifically for sliding windows. Smooth operation with easy access.</p>
+          <div class="product-price">₹699<span>/sq ft</span></div>
+          <a href="contact.html" class="btn btn-primary btn-block">Get Quote</a>
+        </div>
+      </div>
+      
+      <!-- Door Nets -->
+      <div class="product-item" data-category="door magnetic">
+        <div class="product-item-image">
+          <img src="../assets/images/product-magnetic-door.jpg" alt="Magnetic Door Net" onerror="this.src='https://via.placeholder.com/400x250?text=Magnetic+Door+Net'">
+          <span class="product-tag">Popular</span>
+        </div>
+        <div class="product-item-content">
+          <h3>Magnetic Door Net</h3>
+          <div class="product-specs">
+            <span>Magnetic</span>
+            <span>Self-closing</span>
+            <span>Fiberglass</span>
+          </div>
+          <p>Self-closing magnetic mesh door. Opens easily and closes automatically behind you.</p>
+          <div class="product-price">₹899<span>/sq ft</span></div>
+          <a href="contact.html" class="btn btn-primary btn-block">Get Quote</a>
+        </div>
+      </div>
+      
+      <div class="product-item" data-category="door aluminum">
+        <div class="product-item-image">
+          <img src="../assets/images/product-sliding-door.jpg" alt="Sliding Door Net" onerror="this.src='https://via.placeholder.com/400x250?text=Sliding+Door+Net'">
+        </div>
+        <div class="product-item-content">
+          <h3>Sliding Door Net</h3>
+          <div class="product-specs">
+            <span>Aluminum</span>
+            <span>Sliding</span>
+            <span>Heavy-duty</span>
+          </div>
+          <p>For balcony and patio doors. Heavy-duty frame with smooth rolling mechanism.</p>
+          <div class="product-price">₹999<span>/sq ft</span></div>
+          <a href="contact.html" class="btn btn-primary btn-block">Get Quote</a>
+        </div>
+      </div>
+      
+      <div class="product-item" data-category="door fiberglass">
+        <div class="product-item-image">
+          <img src="../assets/images/product-hinged-door.jpg" alt="Hinged Door Net" onerror="this.src='https://via.placeholder.com/400x250?text=Hinged+Door+Net'">
+        </div>
+        <div class="product-item-content">
+          <h3>Hinged Door Net</h3>
+          <div class="product-specs">
+            <span>Aluminum</span>
+            <span>Hinged</span>
+            <span>Premium</span>
+          </div>
+          <p>Traditional hinged door net with premium hardware. Opens like a regular door.</p>
+          <div class="product-price">₹1,099<span>/sq ft</span></div>
+          <a href="contact.html" class="btn btn-primary btn-block">Get Quote</a>
+        </div>
+      </div>
+      
+      <!-- Special Nets -->
+      <div class="product-item" data-category="fiberglass">
+        <div class="product-item-image">
+          <img src="../assets/images/product-velcro.jpg" alt="Velcro Net" onerror="this.src='https://via.placeholder.com/400x250?text=Velcro+Net'">
+        </div>
+        <div class="product-item-content">
+          <h3>Velcro Fix Net</h3>
+          <div class="product-specs">
+            <span>Velcro</span>
+            <span>No frame</span>
+            <span>Portable</span>
+          </div>
+          <p>Easy to install and remove. Perfect for rented homes or temporary fixes.</p>
+          <div class="product-price">₹299<span>/sq ft</span></div>
+          <a href="contact.html" class="btn btn-primary btn-block">Get Quote</a>
+        </div>
+      </div>
+      
+      <div class="product-item" data-category="fiberglass">
+        <div class="product-item-image">
+          <img src="../assets/images/product-roller.jpg" alt="Roller Screen Net" onerror="this.src='https://via.placeholder.com/400x250?text=Roller+Screen+Net'">
+        </div>
+        <div class="product-item-content">
+          <h3>Roller Screen Net</h3>
+          <div class="product-specs">
+            <span>Spring-loaded</span>
+            <span>Retractable</span>
+            <span>Aluminum</span>
+          </div>
+          <p>Retractable screen that rolls up when not in use. Discreet and elegant.</p>
+          <div class="product-price">₹1,299<span>/sq ft</span></div>
+          <a href="contact.html" class="btn btn-primary btn-block">Get Quote</a>
+        </div>
+      </div>
+      
+      <div class="product-item" data-category="aluminum">
+        <div class="product-item-image">
+          <img src="../assets/images/product-pleated.jpg" alt="Pleated Net" onerror="this.src='https://via.placeholder.com/400x250?text=Pleated+Net'">
+        </div>
+        <div class="product-item-content">
+          <h3>Pleated Net</h3>
+          <div class="product-specs">
+            <span>Pleated</span>
+            <span>Foldable</span>
+            <span>Space-saving</span>
+          </div>
+          <p>Accordion-style net that folds neatly. Ideal for large openings.</p>
+          <div class="product-price">₹1,499<span>/sq ft</span></div>
+          <a href="contact.html" class="btn btn-primary btn-block">Get Quote</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Material Comparison -->
+  <section class="container" style="margin-top: var(--spacing-xxl);">
+    <div class="section-header">
+      <h2 class="section-title">Material Comparison</h2>
+      <p class="section-subtitle">Choose the right material for your needs</p>
+    </div>
+    
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Fiberglass</th>
+          <th>Aluminum Frame</th>
+          <th>Stainless Steel</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Durability</strong></td>
+          <td><i class="fas fa-check"></i> Good (5-7 years)</td>
+          <td><i class="fas fa-check"></i> Excellent (10+ years)</td>
+          <td><i class="fas fa-check"></i> Very Good (8-10 years)</td>
+        </tr>
+        <tr>
+          <td><strong>Rust Resistance</strong></td>
+          <td><i class="fas fa-check"></i> Excellent</td>
+          <td><i class="fas fa-check"></i> Excellent</td>
+          <td><i class="fas fa-check"></i> Excellent</td>
+        </tr>
+        <tr>
+          <td><strong>Visibility</strong></td>
+          <td><i class="fas fa-check"></i> Excellent</td>
+          <td><i class="fas fa-check"></i> Good</td>
+          <td><i class="fas fa-check"></i> Good</td>
+        </tr>
+        <tr>
+          <td><strong>Airflow</strong></td>
+          <td><i class="fas fa-check"></i> Excellent</td>
+          <td><i class="fas fa-check"></i> Excellent</td>
+          <td><i class="fas fa-check"></i> Good</td>
+        </tr>
+        <tr>
+          <td><strong>Weight</strong></td>
+          <td><i class="fas fa-check"></i> Lightweight</td>
+          <td><i class="fas fa-check"></i> Medium</td>
+          <td><i class="fas fa-times"></i> Heavy</td>
+        </tr>
+        <tr>
+          <td><strong>Price (per sq ft)</strong></td>
+          <td>₹399 - ₹599</td>
+          <td>₹599 - ₹899</td>
+          <td>₹899 - ₹1,299</td>
+        </tr>
+        <tr>
+          <td><strong>Best For</strong></td>
+          <td>Windows, Budget homes</td>
+          <td>All applications, Premium homes</td>
+          <td>High-security areas</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Mesh Types -->
+  <section class="container" style="padding: var(--spacing-xxl) 0;">
+    <div class="section-header">
+      <h2 class="section-title">Mesh Options</h2>
+      <p class="section-subtitle">Different mesh types for different needs</p>
+    </div>
+    
+    <div class="material-info">
+      <div class="material-card">
+        <div class="material-icon">
+          <i class="fas fa-eye"></i>
+        </div>
+        <h3>Standard Mesh</h3>
+        <p>18x16 count per inch. Best balance of visibility and protection. Ideal for most homes.</p>
+      </div>
+      
+      <div class="material-card">
+        <div class="material-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h3>No See Um Mesh</h3>
+        <p>20x20 count. Finer mesh that blocks tiny insects like sand flies and midges.</p>
+      </div>
+      
+      <div class="material-card">
+        <div class="material-icon">
+          <i class="fas fa-dog"></i>
+        </div>
+        <h3>Pet Proof Mesh</h3>
+        <p>Heavy-duty vinyl-coated polyester. Resists scratches and damage from pets.</p>
+      </div>
+      
+      <div class="material-card">
+        <div class="material-icon">
+          <i class="fas fa-sun"></i>
+        </div>
+        <h3>Solar Screen</h3>
+        <p>Blocks up to 70% of UV rays while maintaining visibility. Reduces heat.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Color Options -->
+  <section class="container" style="padding: var(--spacing-xxl) 0; background: var(--light); border-radius: var(--radius-lg);">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Frame Colors</h2>
+        <p class="section-subtitle">Choose from a variety of colors to match your home</p>
+      </div>
+      
+      <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-md); justify-content: center;">
+        <div style="text-align: center;">
+          <div style="width: 60px; height: 60px; background: white; border: 2px solid #ddd; border-radius: 50%; margin: 0 auto 10px;"></div>
+          <span>White</span>
+        </div>
+        <div style="text-align: center;">
+          <div style="width: 60px; height: 60px; background: #8B4513; border-radius: 50%; margin: 0 auto 10px;"></div>
+          <span>Brown</span>
+        </div>
+        <div style="text-align: center;">
+          <div style="width: 60px; height: 60px; background: black; border-radius: 50%; margin: 0 auto 10px;"></div>
+          <span>Black</span>
+        </div>
+        <div style="text-align: center;">
+          <div style="width: 60px; height: 60px; background: silver; border-radius: 50%; margin: 0 auto 10px;"></div>
+          <span>Silver</span>
+        </div>
+        <div style="text-align: center;">
+          <div style="width: 60px; height: 60px; background: gold; border-radius: 50%; margin: 0 auto 10px;"></div>
+          <span>Gold</span>
+        </div>
+        <div style="text-align: center;">
+          <div style="width: 60px; height: 60px; background: beige; border-radius: 50%; margin: 0 auto 10px;"></div>
+          <span>Cream</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta">
+    <div class="container">
+      <div class="cta-wrapper">
+        <h2>Need Help Choosing?</h2>
+        <p>Our experts can help you select the perfect mosquito net for your home</p>
+        <div class="cta-buttons">
+          <a href="contact.html" class="btn btn-primary btn-large">
+            <i class="fas fa-comments"></i> Free Consultation
+          </a>
+          <a href="tel:+919481234567" class="btn btn-outline btn-large">
+            <i class="fas fa-phone-alt"></i> Call Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-info">
+          <div class="footer-logo">
+            <i class="fas fa-shield-alt"></i>
+            <span>Raj Marketing</span>
+          </div>
+          <p>Premium mosquito nets for windows and doors in Mysore. Serving since 2001.</p>
+          <p><strong>GST:</strong> 29AFEPJ3685H1Z5 [citation:1]</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Account Access</h4>
+          <ul>
+            <li><a href="customer-login.html">Customer Login</a></li>
+            <li><a href="dealer-login.html">Dealer Login</a></li>
+            <li><a href="admin-login.html">Admin Login</a></li>
+            <li><a href="register.html">Register</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-contact">
+          <h4>Contact Info</h4>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> 1061-62, 1st Floor, K.S Complex, Shivarampet, Mysuru - 570001 [citation:2]</li>
+            <li><i class="fas fa-phone"></i> <a href="tel:+919481234567">+91-9481234567</a></li>
+            <li><i class="fas fa-envelope"></i> <a href="mailto:info@rajmarketing.com">info@rajmarketing.com</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2024 Raj Marketing. All Rights Reserved. | GST: 29AFEPJ3685H1Z5 [citation:1]</p>
+        <div class="footer-bottom-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Use</a>
+          <a href="disclaimer.html">Disclaimer</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    // Product filtering
+    document.addEventListener('DOMContentLoaded', function() {
+      const filterButtons = document.querySelectorAll('.category-btn');
+      const products = document.querySelectorAll('.product-item');
+      
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          // Update active button
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+          
+          const category = button.dataset.category;
+          
+          // Filter products
+          products.forEach(product => {
+            if (category === 'all' || product.dataset.category.includes(category)) {
+              product.style.display = 'block';
+            } else {
+              product.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
