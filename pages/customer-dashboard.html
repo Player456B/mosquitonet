@@ -538,6 +538,52 @@
 
     <script src="../assets/js/storage.js"></script>
     <script>
+
+        // Check if user is logged in and is a customer
+const currentUser = JSON.parse(localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser'));
+
+if (!currentUser) {
+    // No user logged in, redirect to login
+    window.location.href = 'customer-login.html?redirect=dashboard';
+} else if (currentUser.type !== 'customer') {
+    // Wrong user type, redirect to appropriate login
+    if (currentUser.type === 'dealer') {
+        window.location.href = 'dealer-dashboard.html';
+    } else {
+        window.location.href = 'customer-login.html';
+    }
+}
+
+// Load customer data into dashboard
+function loadCustomerData() {
+    document.getElementById('customerName').textContent = currentUser.name || 'Customer';
+    document.getElementById('customerId').textContent = currentUser.id || 'CUST-001';
+    document.getElementById('customerPhone').textContent = currentUser.phone || '+91-9876543210';
+    document.getElementById('customerAddress').textContent = currentUser.address || '#65, Hootgalli, Mysore';
+    
+    // Update profile photo if available
+    if (currentUser.profilePhoto) {
+        document.getElementById('profilePhoto').src = currentUser.profilePhoto;
+    }
+    
+    // Update stats
+    if (currentUser.stats) {
+        document.getElementById('totalOrders').textContent = currentUser.stats.totalOrders || 0;
+        document.getElementById('pendingOrders').textContent = currentUser.stats.pendingOrders || 0;
+        document.getElementById('completedOrders').textContent = currentUser.stats.completedOrders || 0;
+        document.getElementById('activeInstallations').textContent = currentUser.stats.activeInstallations || 0;
+    }
+}
+
+// Logout function
+function logout() {
+    localStorage.removeItem('currentUser');
+    sessionStorage.removeItem('currentUser');
+    window.location.href = 'customer-login.html';
+}
+
+// Load data on page load
+document.addEventListener('DOMContentLoaded', loadCustomerData);
         // Check if user is logged in
         const currentUser = JSON.parse(localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser'));
         
