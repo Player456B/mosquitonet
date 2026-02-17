@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Services - Raj Marketing | Mosquito Net Installation Mysore</title>
+  <meta name="description" content="Professional mosquito net installation services in Mysore. Free consultation, custom measurements, and expert installation for windows and doors.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .service-hero {
+      background: linear-gradient(135deg, rgba(240, 178, 2, 0.95) 0%, rgba(26, 75, 140, 0.9) 100%), url('../assets/images/services-bg.jpg') center/cover;
+      padding: var(--spacing-xxl) 0;
+      color: var(--white);
+      text-align: center;
+    }
+    
+    .service-hero h1 {
+      color: var(--white);
+      font-size: 3rem;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .service-hero p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .service-process {
+      padding: var(--spacing-xxl) 0;
+      background: var(--light);
+    }
+    
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-xl);
+    }
+    
+    .process-step {
+      text-align: center;
+      position: relative;
+    }
+    
+    .process-step:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      top: 30px;
+      right: -20px;
+      font-size: 2rem;
+      color: var(--primary-light);
+      font-weight: 300;
+    }
+    
+    .step-number {
+      width: 60px;
+      height: 60px;
+      background: var(--primary);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 auto var(--spacing-md);
+    }
+    
+    .process-step h3 {
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: var(--spacing-lg);
+      padding: var(--spacing-xxl) 0;
+    }
+    
+    .service-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      box-shadow: var(--shadow-md);
+      transition: var(--transition-normal);
+      border-bottom: 4px solid transparent;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-5px);
+      border-bottom-color: var(--secondary);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .service-icon {
+      width: 80px;
+      height: 80px;
+      background: rgba(26, 75, 140, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--spacing-md);
+      font-size: 2rem;
+      color: var(--primary);
+    }
+    
+    .service-card h3 {
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .service-features {
+      list-style: none;
+      margin-top: var(--spacing-md);
+    }
+    
+    .service-features li {
+      margin-bottom: var(--spacing-xs);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .service-features i {
+      color: var(--secondary);
+    }
+    
+    .pricing-table {
+      background: var(--light);
+      padding: var(--spacing-xxl) 0;
+    }
+    
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-xl);
+    }
+    
+    .pricing-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition-normal);
+      position: relative;
+    }
+    
+    .pricing-card.popular {
+      transform: scale(1.05);
+      border: 2px solid var(--secondary);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .popular-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--secondary);
+      color: var(--dark);
+      padding: 0.3rem 1rem;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+    
+    .pricing-header {
+      background: var(--primary);
+      color: var(--white);
+      padding: var(--spacing-lg);
+      text-align: center;
+    }
+    
+    .pricing-header h3 {
+      color: var(--white);
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .price {
+      font-size: 2.5rem;
+      font-weight: 800;
+    }
+    
+    .price span {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+    
+    .pricing-body {
+      padding: var(--spacing-lg);
+    }
+    
+    .pricing-features {
+      list-style: none;
+    }
+    
+    .pricing-features li {
+      margin-bottom: var(--spacing-sm);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .pricing-features i.fa-check {
+      color: var(--success);
+    }
+    
+    .pricing-features i.fa-times {
+      color: var(--danger);
+      opacity: 0.5;
+    }
+    
+    .pricing-footer {
+      padding: 0 var(--spacing-lg) var(--spacing-lg);
+    }
+    
+    @media (max-width: 768px) {
+      .process-steps {
+        grid-template-columns: 1fr;
+      }
+      
+      .process-step:not(:last-child)::after {
+        content: '↓';
+        top: auto;
+        right: auto;
+        bottom: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      .pricing-card.popular {
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Page -->
+  <div id="loading-page" class="loading-page">
+    <div class="loader-container">
+      <div class="loader-logo">
+        <i class="fas fa-shield-alt"></i>
+      </div>
+      <h1 class="loader-title">Raj Marketing</h1>
+      <div class="loader-bar">
+        <div class="loader-progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="../index.html" class="logo">
+          <i class="fas fa-shield-alt"></i>
+          <span>Raj Marketing</span>
+        </a>
+        
+        <div class="nav-toggle" id="navToggle">
+          <i class="fas fa-bars"></i>
+        </div>
+
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html" class="active">Services</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle">Login <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="customer-login.html"><i class="fas fa-user"></i> Customer Login</a></li>
+              <li><a href="dealer-login.html"><i class="fas fa-store"></i> Dealer Login</a></li>
+              <li><a href="admin-login.html"><i class="fas fa-shield-alt"></i> Admin Login</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Service Hero -->
+  <section class="service-hero">
+    <div class="container">
+      <h1>Our Professional Services</h1>
+      <p>Complete mosquito net solutions for homes, offices, and commercial spaces in Mysore</p>
+    </div>
+  </section>
+
+  <!-- Service Process -->
+  <section class="service-process">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">How We Work</h2>
+        <p class="section-subtitle">Simple 4-step process for hassle-free service</p>
+      </div>
+      
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="step-number">1</div>
+          <h3>Free Consultation</h3>
+          <p>Visit our showroom or call us for a free consultation about your requirements</p>
+        </div>
+        
+        <div class="process-step">
+          <div class="step-number">2</div>
+          <h3>On-Site Measurement</h3>
+          <p>Our technician visits your home for precise measurements of windows and doors</p>
+        </div>
+        
+        <div class="process-step">
+          <div class="step-number">3</div>
+          <h3>Custom Fabrication</h3>
+          <p>Nets are custom-made to fit your exact specifications in our workshop</p>
+        </div>
+        
+        <div class="process-step">
+          <div class="step-number">4</div>
+          <h3>Professional Installation</h3>
+          <p>Expert installation within 24-48 hours with minimal disturbance</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Services -->
+  <section class="container">
+    <div class="section-header">
+      <h2 class="section-title">Our Services</h2>
+      <p class="section-subtitle">Comprehensive mosquito net solutions for every need</p>
+    </div>
+    
+    <div class="service-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-window-maximize"></i>
+        </div>
+        <h3>Window Net Installation</h3>
+        <p>Custom-fit mosquito nets for all types of windows - sliding, casement, fixed, and French windows.</p>
+        <ul class="service-features">
+          <li><i class="fas fa-check"></i> Fiberglass mesh for clear view</li>
+          <li><i class="fas fa-check"></i> Aluminum or PVC frames</li>
+          <li><i class="fas fa-check"></i> Rust-proof materials</li>
+          <li><i class="fas fa-check"></i> 5-year warranty</li>
+        </ul>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-door-open"></i>
+        </div>
+        <h3>Door Net Installation</h3>
+        <p>Magnetic and sliding door nets for main doors, balcony doors, and French doors.</p>
+        <ul class="service-features">
+          <li><i class="fas fa-check"></i> Self-closing magnetic mesh</li>
+          <li><i class="fas fa-check"></i> Easy passage for family</li>
+          <li><i class="fas fa-check"></i> Durable frame options</li>
+          <li><i class="fas fa-check"></i> Child and pet friendly</li>
+        </ul>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-exchange-alt"></i>
+        </div>
+        <h3>Net Replacement & Repair</h3>
+        <p>Replace old, torn nets or repair damaged frames with our quick service.</p>
+        <ul class="service-features">
+          <li><i class="fas fa-check"></i> Same-day service available</li>
+          <li><i class="fas fa-check"></i> Genuine replacement parts</li>
+          <li><i class="fas fa-check"></i> Frame repair and painting</li>
+          <li><i class="fas fa-check"></i> Mesh replacement only</li>
+        </ul>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-building"></i>
+        </div>
+        <h3>Commercial Projects</h3>
+        <p>Bulk installations for offices, hotels, hospitals, and apartment complexes.</p>
+        <ul class="service-features">
+          <li><i class="fas fa-check"></i> Volume discounts</li>
+          <li><i class="fas fa-check"></i> Project management</li>
+          <li><i class="fas fa-check"></i> Fast turnaround</li>
+          <li><i class="fas fa-check"></i> Maintenance contracts</li>
+        </ul>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-ruler-combined"></i>
+        </div>
+        <h3>Custom Fabrication</h3>
+        <p>Special sizes and shapes for unique windows and architectural designs.</p>
+        <ul class="service-features">
+          <li><i class="fas fa-check"></i> Arch windows</li>
+          <li><i class="fas fa-check"></i> Circular windows</li>
+          <li><i class="fas fa-check"></i> Skylights</li>
+          <li><i class="fas fa-check"></i> Custom colors</li>
+        </ul>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-tools"></i>
+        </div>
+        <h3>Annual Maintenance</h3>
+        <p>Regular cleaning and maintenance service to keep your nets in perfect condition.</p>
+        <ul class="service-features">
+          <li><i class="fas fa-check"></i> Bi-annual cleaning</li>
+          <li><i class="fas fa-check"></i> Tension adjustment</li>
+          <li><i class="fas fa-check"></i> Frame inspection</li>
+          <li><i class="fas fa-check"></i> Priority service</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing-table">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Service Packages</h2>
+        <p class="section-subtitle">Choose the plan that fits your needs</p>
+      </div>
+      
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <h3>Basic</h3>
+            <div class="price">₹399<span>/sq ft</span></div>
+          </div>
+          <div class="pricing-body">
+            <ul class="pricing-features">
+              <li><i class="fas fa-check"></i> Fiberglass mesh</li>
+              <li><i class="fas fa-check"></i> PVC frame</li>
+              <li><i class="fas fa-check"></i> Standard windows only</li>
+              <li><i class="fas fa-check"></i> 2-year warranty</li>
+              <li><i class="fas fa-times"></i> Free installation</li>
+              <li><i class="fas fa-times"></i> Color options</li>
+            </ul>
+          </div>
+          <div class="pricing-footer">
+            <a href="contact.html" class="btn btn-outline btn-block">Get Quote</a>
+          </div>
+        </div>
+        
+        <div class="pricing-card popular">
+          <div class="popular-badge">Most Popular</div>
+          <div class="pricing-header">
+            <h3>Premium</h3>
+            <div class="price">₹599<span>/sq ft</span></div>
+          </div>
+          <div class="pricing-body">
+            <ul class="pricing-features">
+              <li><i class="fas fa-check"></i> Premium fiberglass mesh</li>
+              <li><i class="fas fa-check"></i> Aluminum frame</li>
+              <li><i class="fas fa-check"></i> All window types</li>
+              <li><i class="fas fa-check"></i> 5-year warranty</li>
+              <li><i class="fas fa-check"></i> Free installation</li>
+              <li><i class="fas fa-check"></i> 5 color options</li>
+            </ul>
+          </div>
+          <div class="pricing-footer">
+            <a href="contact.html" class="btn btn-primary btn-block">Get Quote</a>
+          </div>
+        </div>
+        
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <h3>Commercial</h3>
+            <div class="price">₹499<span>/sq ft</span></div>
+          </div>
+          <div class="pricing-body">
+            <ul class="pricing-features">
+              <li><i class="fas fa-check"></i> Heavy-duty mesh</li>
+              <li><i class="fas fa-check"></i> Commercial grade frame</li>
+              <li><i class="fas fa-check"></i> Bulk orders</li>
+              <li><i class="fas fa-check"></i> 3-year warranty</li>
+              <li><i class="fas fa-check"></i> Volume discounts</li>
+              <li><i class="fas fa-check"></i> Maintenance contract</li>
+            </ul>
+          </div>
+          <div class="pricing-footer">
+            <a href="contact.html" class="btn btn-outline btn-block">Contact Sales</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Areas -->
+  <section class="container" style="padding: var(--spacing-xxl) 0;">
+    <div class="section-header">
+      <h2 class="section-title">Service Areas in Mysore</h2>
+      <p class="section-subtitle">We serve all major localities across Mysore city</p>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-md);">
+      <div style="background: var(--light); padding: var(--spacing-md); border-radius: var(--radius-md); text-align: center;">
+        <i class="fas fa-map-marker-alt" style="color: var(--secondary); margin-right: 5px;"></i> Kuvempunagar
+      </div>
+      <div style="background: var(--light); padding: var(--spacing-md); border-radius: var(--radius-md); text-align: center;">
+        <i class="fas fa-map-marker-alt" style="color: var(--secondary); margin-right: 5px;"></i> Vijayanagar
+      </div>
+      <div style="background: var(--light); padding: var(--spacing-md); border-radius: var(--radius-md); text-align: center;">
+        <i class="fas fa-map-marker-alt" style="color: var(--secondary); margin-right: 5px;"></i> Gokulam
+      </div>
+      <div style="background: var(--light); padding: var(--spacing-md); border-radius: var(--radius-md); text-align: center;">
+        <i class="fas fa-map-marker-alt" style="color: var(--secondary); margin-right: 5px;"></i> Jayalakshmipuram
+      </div>
+      <div style="background: var(--light); padding: var(--spacing-md); border-radius: var(--radius-md); text-align: center;">
+        <i class="fas fa-map-marker-alt" style="color: var(--secondary); margin-right: 5px;"></i> Shivarampet
+      </div>
+      <div style="background: var(--light); padding: var(--spacing-md); border-radius: var(--radius-md); text-align: center;">
+        <i class="fas fa-map-marker-alt" style="color: var(--secondary); margin-right: 5px;"></i> K.T. Street
+      </div>
+      <div style="background: var(--light); padding: var(--spacing-md); border-radius: var(--radius-md); text-align: center;">
+        <i class="fas fa-map-marker-alt" style="color: var(--secondary); margin-right: 5px;"></i> Saraswathipuram
+      </div>
+      <div style="background: var(--light); padding: var(--spacing-md); border-radius: var(--radius-md); text-align: center;">
+        <i class="fas fa-map-marker-alt" style="color: var(--secondary); margin-right: 5px;"></i> Hebbal
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="container" style="padding: var(--spacing-xxl) 0; background: var(--light); border-radius: var(--radius-lg);">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-subtitle">Common questions about our services</p>
+      </div>
+      
+      <div style="max-width: 800px; margin: 0 auto;">
+        <div style="margin-bottom: var(--spacing-md);">
+          <h3 style="color: var(--primary); margin-bottom: 10px;">Q: How long does installation take?</h3>
+          <p>A: For a typical 3 BHK home, installation takes 4-6 hours. We complete the job in a single day with minimal disturbance.</p>
+        </div>
+        
+        <div style="margin-bottom: var(--spacing-md);">
+          <h3 style="color: var(--primary); margin-bottom: 10px;">Q: Do you provide free estimates?</h3>
+          <p>A: Yes, we provide free on-site measurement and quotation with no obligation. Call us to schedule a visit.</p>
+        </div>
+        
+        <div style="margin-bottom: var(--spacing-md);">
+          <h3 style="color: var(--primary); margin-bottom: 10px;">Q: What is your service area?</h3>
+          <p>A: We serve all areas within Mysore city limits. For locations outside the city, please contact us for availability.</p>
+        </div>
+        
+        <div style="margin-bottom: var(--spacing-md);">
+          <h3 style="color: var(--primary); margin-bottom: 10px;">Q: How do I clean the mosquito nets?</h3>
+          <p>A: Simply wipe with a soft damp cloth. For deep cleaning, you can remove the nets (if detachable) and wash with mild soap.</
