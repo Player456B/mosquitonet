@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Raj Marketing (Secure)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        /* Admin Panel Specific Styles - Extra Security Measures */
+        :root {
+            --admin-primary: #1a237e;
+            --admin-secondary: #0d47a1;
+            --admin-danger: #b71c1c;
+            --admin-success: #1b5e20;
+        }
+
+        body {
+            background: #f5f5f5;
+        }
+
+        .admin-login-verify {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--admin-primary) 0%, var(--admin-secondary) 100%);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s ease;
+        }
+
+        .admin-login-verify.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .verify-card {
+            background: var(--white);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            animation: slideUp 0.5s ease;
+        }
+
+        .security-badge {
+            display: inline-block;
+            background: var(--admin-danger);
+            color: var(--white);
+            padding: 0.3rem 1rem;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .otp-input {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: var(--spacing-lg) 0;
+        }
+
+        .otp-input input {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-size: 1.5rem;
+            border: 2px solid var(--gray-light);
+            border-radius: var(--radius-md);
+        }
+
+        .otp-input input:focus {
+            border-color: var(--admin-primary);
+        }
+
+        .session-timer {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--admin-danger);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            z-index: 9999;
+            display: none;
+        }
+
+        .session-timer.warning {
+            background: #ff9800;
+        }
+
+        .admin-header {
+            background: var(--admin-primary);
+            color: var(--white);
+            padding: var(--spacing-md) 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .admin-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .admin-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        .admin-logo i {
+            color: #ffd700;
+        }
+
+        .admin-menu {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        .admin-menu a {
+            color: rgba(255,255,255,0.8);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-full);
+            transition: var(--transition-fast);
+        }
+
+        .admin-menu a:hover,
+        .admin-menu a.active {
+            background: rgba(255,255,255,0.2);
+            color: var(--white);
+        }
+
+        .admin-content {
+            padding: var(--spacing-xl) 0;
+        }
+
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border-left: 4px solid;
+        }
+
+        .stat-card.customers { border-color: #2196f3; }
+        .stat-card.dealers { border-color: #ff9800; }
+        .stat-card.orders { border-color: #4caf50; }
+        .stat-card.revenue { border-color: #9c27b0; }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            margin: var(--spacing-xs) 0;
+        }
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--spacing-lg);
+        }
+
+        .admin-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 2px solid var(--gray-light);
+        }
+
+        .card-title h3 {
+            color: var(--admin-primary);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th {
+            text-align: left;
+            padding: var(--spacing-sm);
+            background: var(--light);
+            font-weight: 600;
+        }
+
+        .data-table td {
+            padding: var(--spacing-sm);
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .data-table tr:hover {
+            background: var(--light);
+        }
+
+        .status-badge {
+            padding: 0.2rem 0.8rem;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-active { background: #c8e6c9; color: #1b5e20; }
+        .status-inactive { background: #ffcdd2; color: #b71c1c; }
+        .status-pending { background: #fff3cd; color: #856404; }
+
+        .action-btn {
+            padding: 0.3rem 0.8rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            margin: 0 2px;
+            font-size: 0.8rem;
+        }
+
+        .btn-edit { background: #2196f3; color: white; }
+        .btn-delete { background: #f44336; color: white; }
+        .btn-view { background: #4caf50; color: white; }
+
+        .audit-log {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .log-item {
+            padding: var(--spacing-sm);
+            border-left: 3px solid;
+            margin-bottom: var(--spacing-sm);
+            background: var(--light);
+        }
+
+        .log-item.info { border-color: #2196f3; }
+        .log-item.warning { border-color: #ff9800; }
+        .log-item.danger { border-color: #f44336; }
+
+        @media (max-width: 1024px) {
+            .stats-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .admin-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-menu {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Session Timer -->
+    <div class="session-timer" id="sessionTimer">Session: 30:00</div>
+
+    <!-- Admin Login Verification (Extra Security Layer) -->
+    <div class="admin-login-verify" id="adminVerify">
+        <div class="verify-card">
+            <div class="security-badge">
+                <i class="fas fa-shield-alt"></i> SECURE ADMIN ACCESS
+            </div>
+            <i class="fas fa-lock" style="font-size: 3rem; color: var(--admin-primary); margin-bottom: var(--spacing-md);"></i>
+            <h2>Two-Factor Authentication</h2>
+            <p>Enter the 6-digit code sent to your registered email</p>
+            
+            <div class="otp-input">
+                <input type="text" maxlength="1" class="otp-digit" onkeyup="moveToNext(this, 0)">
+                <input type="text" maxlength="1" class="otp-digit" onkeyup="moveToNext(this, 1)">
+                <input type="text" maxlength="1" class="otp-digit" onkeyup="moveToNext(this, 2)">
+                <input type="text" maxlength="1" class="otp-digit" onkeyup="moveToNext(this, 3)">
+                <input type="text" maxlength="1" class="otp-digit" onkeyup="moveToNext(this, 4)">
+                <input type="text" maxlength="1" class="otp-digit" onkeyup="moveToNext(this, 5)">
+            </div>
+            
+            <button class="btn btn-primary btn-block" onclick="verifyAdminOTP()">
+                <i class="fas fa-check-circle"></i> Verify & Access
+            </button>
+            
+            <p style="margin-top: var(--spacing-md); font-size: 0.85rem;">
+                <i class="fas fa-clock"></i> Code expires in 5 minutes
+            </p>
+        </div>
+    </div>
+
+    <!-- Admin Header -->
+    <header class="admin-header">
+        <div class="container">
+            <div class="admin-nav">
+                <div class="admin-logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Raj Marketing Admin</span>
+                </div>
+                
+                <div class="admin-menu">
+                    <a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    <a href="#" onclick="showToast('Customers section')"><i class="fas fa-users"></i> Customers</a>
+                    <a href="#" onclick="showToast('Dealers section')"><i class="fas fa-store"></i> Dealers</a>
+                    <a href="#" onclick="showToast('Orders section')"><i class="fas fa-shopping-cart"></i> Orders</a>
+                    <a href="#" onclick="showToast('Payments section')"><i class="fas fa-credit-card"></i> Payments</a>
+                    <a href="#" onclick="showToast('Settings section')"><i class="fas fa-cog"></i> Settings</a>
+                </div>
+                
+                <div>
+                    <span id="adminName">Admin</span>
+                    <button class="btn btn-small" style="background: rgba(255,255,255,0.2); margin-left: var(--spacing-sm);" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Admin Content -->
+    <div class="admin-content">
+        <div class="container">
+            <!-- Statistics Cards -->
+            <div class="stats-cards">
+                <div class="stat-card customers">
+                    <i class="fas fa-users" style="font-size: 2rem; color: #2196f3;"></i>
+                    <div class="stat-value" id="totalCustomers">1,234</div>
+                    <div>Total Customers</div>
+                    <small style="color: #4caf50;">↑ 12% this month</small>
+                </div>
+                
+                <div class="stat-card dealers">
+                    <i class="fas fa-store" style="font-size: 2rem; color: #ff9800;"></i>
+                    <div class="stat-value" id="totalDealers">56</div>
+                    <div>Active Dealers</div>
+                    <small style="color: #4caf50;">↑ 8% this month</small>
+                </div>
+                
+                <div class="stat-card orders">
+                    <i class="fas fa-shopping-cart" style="font-size: 2rem; color: #4caf50;"></i>
+                    <div class="stat-value" id="totalOrders">345</div>
+                    <div>Total Orders</div>
+                    <small style="color: #ff9800;">28 pending</small>
+                </div>
+                
+                <div class="stat-card revenue">
+                    <i class="fas fa-rupee-sign" style="font-size: 2rem; color: #9c27b0;"></i>
+                    <div class="stat-value" id="totalRevenue">₹12.5L</div>
+                    <div>Monthly Revenue</div>
+                    <small>↑ 15% vs last month</small>
+                </div>
+            </div>
+
+            <!-- Main Admin Grid -->
+            <div class="admin-grid">
+                <!-- Left Column -->
+                <div>
+                    <!-- Recent Orders -->
+                    <div class="admin-card">
+                        <div class="card-title">
+                            <h3><i class="fas fa-clock"></i> Recent Orders</h3>
+                            <button class="btn btn-small btn-primary" onclick="showToast('View all orders')">View All</button>
+                        </div>
+                        
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentOrdersTable">
+                                <tr>
+                                    <td>#ORD-001</td>
+                                    <td>Ramesh Kumar</td>
+                                    <td>₹12,500</td>
+                                    <td><span class="status-badge status-active">Completed</span></td>
+                                    <td>
+                                        <button class="action-btn btn-view" onclick="showToast('View order')">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#ORD-002</td>
+                                    <td>Suresh Patel</td>
+                                    <td>₹8,900</td>
+                                    <td><span class="status-badge status-pending">Processing</span></td>
+                                    <td>
+                                        <button class="action-btn btn-view" onclick="showToast('View order')">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#ORD-003</td>
+                                    <td>Priya Singh</td>
+                                    <td>₹15,200</td>
+                                    <td><span class="status-badge status-active">Dispatched</span></td>
+                                    <td>
+                                        <button class="action-btn btn-view" onclick="showToast('View order')">View</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- User Management -->
+                    <div class="admin-card">
+                        <div class="card-title">
+                            <h3><i class="fas fa-users-cog"></i> Recent Users</h3>
+                            <button class="btn btn-small btn-primary" onclick="showToast('Add new user')">+ Add User</button>
+                        </div>
+                        
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Phone</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentUsersTable">
+                                <tr>
+                                    <td>Ramesh Kumar</td>
+                                    <td>Customer</td>
+                                    <td>9876543210</td>
+                                    <td><span class="status-badge status-active">Active</span></td>
+                                    <td>
+                                        <button class="action-btn btn-edit" onclick="showToast('Edit user')"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn btn-delete" onclick="confirmDelete('user')"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Mohan Raj</td>
+                                    <td>Dealer</td>
+                                    <td>9876543211</td>
+                                    <td><span class="status-badge status-active">Active</span></td>
+                                    <td>
+                                        <button class="action-btn btn-edit" onclick="showToast('Edit user')"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn btn-delete" onclick="confirmDelete('user')"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Sunita Patel</td>
+                                    <td>Customer</td>
+                                    <td>9876543212</td>
+                                    <td><span class="status-badge status-inactive">Inactive</span></td>
+                                    <td>
+                                        <button class="action-btn btn-edit" onclick="showToast('Edit user')"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn btn-delete" onclick="confirmDelete('user')"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div>
+                    <!-- System Status -->
+                    <div class="admin-card">
+                        <h3><i class="fas fa-heartbeat"></i> System Status</h3>
+                        <div style="margin-top: var(--spacing-md);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-sm);">
+                                <span>Server Status</span>
+                                <span style="color: #4caf50;"><i class="fas fa-circle"></i> Online</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-sm);">
+                                <span>Database</span>
+                                <span style="color: #4caf50;"><i class="fas fa-circle"></i> Connected</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-sm);">
+                                <span>API Status</span>
+                                <span style="color: #4caf50;"><i class="fas fa-circle"></i> Operational</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span>Last Backup</span>
+                                <span>Today 03:00 AM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Audit Log -->
+                    <div class="admin-card">
+                        <div class="card-title">
+                            <h3><i class="fas fa-history"></i> Security Audit Log</h3>
+                            <button class="btn btn-small btn-primary" onclick="showToast('Download logs')">Export</button>
+                        </div>
+                        
+                        <div class="audit-log">
+                            <div class="log-item info">
+                                <small>10:32 AM</small>
+                                <p>Admin login from IP 192.168.1.1</p>
+                            </div>
+                            <div class="log-item info">
+                                <small>09:45 AM</small>
+                                <p>New user registered: Ramesh Kumar</p>
+                            </div>
+                            <div class="log-item warning">
+                                <small>08:15 AM</small>
+                                <p>Failed login attempt from IP 203.45.67.89</p>
+                            </div>
+                            <div class="log-item info">
+                                <small>Yesterday 11:20 PM</small>
+                                <p>Order #ORD-002 status updated</p>
+                            </div>
+                            <div class="log-item danger">
+                                <small>Yesterday 06:30 PM</small>
+                                <p>Payment failed for order #ORD-001</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="admin-card">
+                        <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-sm); margin-top: var(--spacing-md);">
+                            <button class="btn btn-primary" onclick="showToast('Backup initiated')">
+                                <i class="fas fa-database"></i> Backup Now
+                            </button>
+                            <button class="btn btn-primary" onclick="showToast('Sending notifications')">
+                                <i class="fas fa-bell"></i> Notify All
+                            </button>
+                            <button class="btn btn-primary" onclick="showToast('Generating report')">
+                                <i class="fas fa-file-pdf"></i> Generate Report
+                            </button>
+                            <button class="btn btn-primary" onclick="showToast('Clearing cache')">
+                                <i class="fas fa-broom"></i> Clear Cache
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Service Areas Management -->
+                    <div class="admin-card">
+                        <div class="card-title">
+                            <h3><i class="fas fa-map-marker-alt"></i> Service Areas</h3>
+                            <button class="btn btn-small btn-primary" onclick="showToast('Add area')">+ Add</button>
+                        </div>
+                        
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                            <span style="background: var(--light); padding: 5px 15px; border-radius: 20px;">Hootgalli <i class="fas fa-times" onclick="showToast('Remove area')" style="cursor: pointer;"></i></span>
+                            <span style="background: var(--light); padding: 5px 15px; border-radius: 20px;">Kuvempunagar <i class="fas fa-times" onclick="showToast('Remove area')" style="cursor: pointer;"></i></span>
+                            <span style="background: var(--light); padding: 5px 15px; border-radius: 20px;">Vijayanagar <i class="fas fa-times" onclick="showToast('Remove area')" style="cursor: pointer;"></i></span>
+                            <span style="background: var(--light); padding: 5px 15px; border-radius: 20px;">Gokulam <i class="fas fa-times" onclick="showToast('Remove area')" style="cursor: pointer;"></i></span>
+                            <span style="background: var(--light); padding: 5px 15px; border-radius: 20px;">Shivarampet <i class="fas fa-times" onclick="showToast('Remove area')" style="cursor: pointer;"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Raj Marketing. All Rights Reserved. | Secure Admin Panel v2.0</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script src="../assets/js/storage.js"></script>
+    <script>
+        // ========== EXTREME SECURITY MEASURES ==========
+        
+        // Session management
+        let sessionTimeout;
+        let warningTimeout;
+        let timeLeft = 1800; // 30 minutes in seconds
+        
+        // Check if admin is authenticated
+        const adminAuth = sessionStorage.getItem('adminAuthenticated');
+        
+        if (!adminAuth) {
+            window.location.href = 'admin-login.html';
+        }
+
+        // Start session timer
+        function startSessionTimer() {
+            const timerDisplay = document.getElementById('sessionTimer');
+            timerDisplay.style.display = 'block';
+            
+            sessionTimeout = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `Session: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 300) { // 5 minutes warning
+                    timerDisplay.classList.add('warning');
+                }
+                
+                if (timeLeft <= 0) {
+                    clearInterval(sessionTimeout);
+                    alert('Session expired. Please login again.');
+                    logout();
+                }
+            }, 1000);
+        }
+
+        // Activity tracker
+        let activityTimer;
+        function resetActivityTimer() {
+            clearTimeout(activityTimer);
+            activityTimer = setTimeout(() => {
+                if (confirm('Session about to expire due to inactivity. Extend session?')) {
+                    timeLeft = 1800;
+                } else {
+                    logout();
+                }
+            }, 15 * 60 * 1000); // 15 minutes
+        }
+
+        // Track user activity
+        document.addEventListener('mousemove', resetActivityTimer);
+        document.addEventListener('keypress', resetActivityTimer);
+
+        // OTP Verification
+        function moveToNext(input, index) {
+            if (input.value.length === 1) {
+                const next = document.querySelectorAll('.otp-digit')[index + 1];
+                if (next) next.focus();
+            }
+        }
+
+        function verifyAdminOTP() {
+            const digits = document.querySelectorAll('.otp-digit');
+            const otp = Array.from(digits).map(d => d.value).join('');
+            
+            if (otp.length === 6) {
+                // In production, verify with server
+                if (otp === '123456') { // Demo OTP - in production, this would be verified server-side
+                    document.getElementById('adminVerify').classList.add('hidden');
+                    startSessionTimer();
+                    resetActivityTimer();
+                    
+                    // Log admin login
+                    addAuditLog('info', 'Admin login successful');
+                    
+                    showToast('Access Granted! Welcome Admin.');
+                } else {
+                    showToast('Invalid OTP. Please try again.');
+                }
+            } else {
+                showToast('Please enter complete 6-digit OTP');
+            }
+        }
+
+        // Audit Log
+        function addAuditLog(type, message) {
+            const logContainer = document.querySelector('.audit-log');
+            const logEntry = document.createElement('div');
+            logEntry.className = `log-item ${type}`;
+            logEntry.innerHTML = `
+                <small>${new Date().toLocaleTimeString()}</small>
+                <p>${message}</p>
+            `;
+            logContainer.insertBefore(logEntry, logContainer.firstChild);
+        }
+
+        // Load dashboard data
+        async function loadAdminDashboard() {
+            try {
+                // Load stats from storage
+                const stats = await storage.getDashboardStats();
+                
+                document.getElementById('totalCustomers').textContent = stats.totalCustomers;
+                document.getElementById('totalDealers').textContent = stats.totalDealers;
+                document.getElementById('totalOrders').textContent = stats.totalOrders;
+                document.getElementById('totalRevenue').textContent = `₹${stats.totalRevenue}L`;
+                
+                // Load recent orders
+                const ordersTable = document.getElementById('recentOrdersTable');
+                if (stats.recentOrders && stats.recentOrders.length > 0) {
+                    ordersTable.innerHTML = stats.recentOrders.map(order => `
+                        <tr>
+                            <td>${order.id}</td>
+                            <td>${order.customerName}</td>
+                            <td>₹${order.amount}</td>
+                            <td><span class="status-badge status-${order.status}">${order.status}</span></td>
+                            <td>
+                                <button class="action-btn btn-view" onclick="showToast('View order')">View</button>
+                            </td>
+                        </tr>
+                    `).join('');
+                }
+                
+            } catch (error) {
+                console.error('Error loading dashboard:', error);
+                addAuditLog('danger', 'Error loading dashboard data');
+            }
+        }
+
+        // Confirmation dialogs
+        function confirmDelete(type) {
+            if (confirm(`Are you sure you want to delete this ${type}? This action cannot be undone.`)) {
+                showToast(`${type} deleted successfully`);
+                addAuditLog('warning', `${type} deleted by admin`);
+            }
+        }
+
+        // Show toast
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Secure logout
+        function logout() {
+            clearInterval(sessionTimeout);
+            clearTimeout(activityTimer);
+            sessionStorage.removeItem('adminAuthenticated');
+            localStorage.removeItem('adminToken');
+            
+            addAuditLog('info', 'Admin logged out');
+            
+            window.location.href = 'admin-login.html';
+        }
+
+        // Disable right-click
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // Disable keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+            if (e.key === 'F12' || 
+                (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+                (e.ctrlKey && e.key === 'u')) {
+                e.preventDefault();
+                showToast('Developer tools are disabled for security');
+            }
+        });
+
+        // Load dashboard when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            loadAdminDashboard();
+            
+            // Check if 2FA is verified
+            const verifyScreen = document.getElementById('adminVerify');
+            if (!verifyScreen.classList.contains('hidden')) {
+                document.querySelector('.otp-digit').focus();
+            }
+        });
+    </script>
+</body>
+</html>
