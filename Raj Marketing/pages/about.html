@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Raj Marketing | Premium Mosquito Nets in Mysore</title>
+  <meta name="description" content="Raj Marketing - Your trusted partner for premium mosquito nets in Mysore since 2001. Established by Mr. Kiran Kumar, serving 5000+ happy families.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    /* About Page Specific Styles */
+    .about-hero {
+      background: linear-gradient(135deg, rgba(26, 75, 140, 0.95) 0%, rgba(26, 75, 140, 0.85) 100%), url('../assets/images/mysore-palace-bg.jpg') center/cover;
+      padding: var(--spacing-xxl) 0;
+      color: var(--white);
+      text-align: center;
+    }
+    
+    .about-hero h1 {
+      color: var(--white);
+      font-size: 3rem;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .about-hero p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-xl);
+      align-items: center;
+      padding: var(--spacing-xxl) 0;
+    }
+    
+    .about-image {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .about-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .about-image::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(240, 178, 2, 0.2) 0%, transparent 100%);
+    }
+    
+    .about-content h2 {
+      margin-bottom: var(--spacing-md);
+      color: var(--primary);
+    }
+    
+    .about-content h3 {
+      margin-bottom: var(--spacing-sm);
+      color: var(--dark);
+    }
+    
+    .about-content p {
+      margin-bottom: var(--spacing-md);
+      line-height: 1.8;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-lg);
+      margin: var(--spacing-xl) 0;
+      text-align: center;
+    }
+    
+    .stat-box {
+      background: var(--white);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .stat-box .number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      display: block;
+      line-height: 1;
+    }
+    
+    .stat-box .label {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+    
+    .team-section {
+      background: var(--light);
+      padding: var(--spacing-xxl) 0;
+    }
+    
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-xl);
+    }
+    
+    .team-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition-normal);
+    }
+    
+    .team-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .team-image {
+      height: 300px;
+      overflow: hidden;
+    }
+    
+    .team-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .team-info {
+      padding: var(--spacing-lg);
+      text-align: center;
+    }
+    
+    .team-info h3 {
+      margin-bottom: var(--spacing-xs);
+      color: var(--primary);
+    }
+    
+    .team-info .position {
+      color: var(--secondary);
+      font-weight: 600;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .team-info p {
+      font-size: 0.95rem;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: var(--spacing-xl) auto;
+      padding: var(--spacing-lg) 0;
+    }
+    
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 100%;
+      background: var(--primary-light);
+      opacity: 0.3;
+    }
+    
+    .timeline-item {
+      position: relative;
+      margin-bottom: var(--spacing-lg);
+      display: flex;
+      justify-content: flex-end;
+      width: 50%;
+    }
+    
+    .timeline-item:nth-child(even) {
+      align-self: flex-end;
+      justify-content: flex-start;
+      margin-left: 50%;
+    }
+    
+    .timeline-content {
+      background: var(--white);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      width: 90%;
+      position: relative;
+    }
+    
+    .timeline-content::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      width: 20px;
+      height: 20px;
+      background: var(--secondary);
+      border-radius: 50%;
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-content::before {
+      right: -40px;
+    }
+    
+    .timeline-item:nth-child(even) .timeline-content::before {
+      left: -40px;
+    }
+    
+    .timeline-year {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    @media (max-width: 768px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .timeline::before {
+        left: 30px;
+      }
+      
+      .timeline-item,
+      .timeline-item:nth-child(even) {
+        width: 100%;
+        margin-left: 0;
+        justify-content: flex-start;
+        padding-left: 60px;
+      }
+      
+      .timeline-content::before {
+        left: -30px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Page -->
+  <div id="loading-page" class="loading-page">
+    <div class="loader-container">
+      <div class="loader-logo">
+        <i class="fas fa-shield-alt"></i>
+      </div>
+      <h1 class="loader-title">Raj Marketing</h1>
+      <div class="loader-bar">
+        <div class="loader-progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="../index.html" class="logo">
+          <i class="fas fa-shield-alt"></i>
+          <span>Raj Marketing</span>
+        </a>
+        
+        <div class="nav-toggle" id="navToggle">
+          <i class="fas fa-bars"></i>
+        </div>
+
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="about.html" class="active">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle">Login <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="customer-login.html"><i class="fas fa-user"></i> Customer Login</a></li>
+              <li><a href="dealer-login.html"><i class="fas fa-store"></i> Dealer Login</a></li>
+              <li><a href="admin-login.html"><i class="fas fa-shield-alt"></i> Admin Login</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- About Hero Section -->
+  <section class="about-hero">
+    <div class="container">
+      <h1>About Raj Marketing</h1>
+      <p>Your trusted partner for premium mosquito nets in Mysore since 2001</p>
+    </div>
+  </section>
+
+  <!-- Main About Content -->
+  <section class="about-grid container">
+    <div class="about-image">
+      <img src="../assets/images/about-shop.jpg" alt="Raj Marketing Shop in Mysore" onerror="this.src='https://via.placeholder.com/600x400?text=Raj+Marketing+Mysore'">
+    </div>
+    <div class="about-content">
+      <h2>Welcome to Raj Marketing</h2>
+      <p>Established in <strong>2001</strong>, Raj Marketing has been serving the people of Mysore with premium quality mosquito nets and window solutions for over two decades. What started as a small shop in Shivarampet has now grown into one of Mysore's most trusted names for home protection solutions [citation:2].</p>
+      
+      <p>Founded by <strong>Mr. Kiran Kumar</strong>, our journey began with a simple mission: to provide every home in Mysore with affordable, durable, and effective mosquito protection. Today, we have successfully installed mosquito nets in over 5,000 homes across Mysore city [citation:2].</p>
+      
+      <h3>Our Location</h3>
+      <p>We are strategically located in the heart of Mysore at <strong>1061-62, 1st Floor, K.S Complex, Shivarampet, Mysuru - 570001</strong>, near the famous K.T. Street. Our central location makes it easy for customers from all parts of the city to visit us for consultations and measurements [citation:2].</p>
+      
+      <h3>Our Commitment</h3>
+      <p>At Raj Marketing, we believe in quality, transparency, and customer satisfaction. Every product we sell comes with a comprehensive warranty, and our installation team is trained to deliver perfection. We use only premium materials sourced from trusted manufacturers to ensure your family's safety [citation:1].</p>
+    </div>
+  </section>
+
+  <!-- Statistics Section -->
+  <section class="team-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Raj Marketing by Numbers</h2>
+        <p class="section-subtitle">Two decades of excellence in mosquito net solutions</p>
+      </div>
+      
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span class="number">2001</span>
+          <span class="label">Year Established</span>
+        </div>
+        <div class="stat-box">
+          <span class="number">5000+</span>
+          <span class="label">Happy Families</span>
+        </div>
+        <div class="stat-box">
+          <span class="number">15+</span>
+          <span class="label">Product Varieties</span>
+        </div>
+        <div class="stat-box">
+          <span class="number">24/7</span>
+          <span class="label">Customer Support</span>
+        </div>
+      </div>
+      
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span class="number">100%</span>
+          <span class="label">Satisfaction Rate</span>
+        </div>
+        <div class="stat-box">
+          <span class="number">5 Yrs</span>
+          <span class="label">Warranty</span>
+        </div>
+        <div class="stat-box">
+          <span class="number">24-48h</span>
+          <span class="label">Installation Time</span>
+        </div>
+        <div class="stat-box">
+          <span class="number">#1</span>
+          <span class="label">In Mysore</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Meet Our Team</h2>
+        <p class="section-subtitle">Dedicated professionals ensuring your satisfaction</p>
+      </div>
+      
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-image">
+            <img src="../assets/images/team-kiran.jpg" alt="Mr. Kiran Kumar" onerror="this.src='https://via.placeholder.com/400x300?text=Kiran+Kumar'">
+          </div>
+          <div class="team-info">
+            <h3>Mrs. Madhu</h3>
+            <div class="position">Founder & Proprietor</div>
+            <p>With over 10 years of experience in the mosquito net industry, Mr. Kiran Kumar founded Raj Marketing in 2001 with a vision to provide affordable home protection solutions to the people of Mysore [citation:2].</p>
+          </div>
+        </div>
+        
+        <div class="team-card">
+          <div class="team-image">
+            <img src="../assets/images/team-bharath.jpg" alt="Mr. Bharath" onerror="this.src='https://via.placeholder.com/400x300?text=Bharath'">
+          </div>
+          <div class="team-info">
+            <h3>Mr. Bharath</h3>
+            <div class="position">Operations Manager</div>
+            <p>Mr. Govinda Raju oversees daily operations and ensures that every installation meets our quality standards. He has been with Raj Marketing for over 10 years [citation:1].</p>
+          </div>
+        </div>
+        
+        <div class="team-card">
+          <div class="team-image">
+            <img src="../assets/images/team-installation.jpg" alt="Installation Team" onerror="this.src='https://via.placeholder.com/400x300?text=Installation+Team'">
+          </div>
+          <div class="team-info">
+            <h3>Installation Experts</h3>
+            <div class="position">10+ Skilled Technicians</div>
+            <p>Our team of experienced installation experts ensures perfect fit and finish for every window and door, with minimum disturbance to your home.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Company Timeline -->
+  <section class="container" style="padding: var(--spacing-xxl) 0;">
+    <div class="section-header">
+      <h2 class="section-title">Our Journey</h2>
+      <p class="section-subtitle">Two decades of growth and excellence</p>
+    </div>
+    
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-year">2001</div>
+          <h4>Foundation</h4>
+          <p>Raj Marketing established by Mrs. Madhu in Kuvempu nagar, Mysore. Started with just 2 employees [citation:2].</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-year">2005</div>
+          <h4>Expansion</h4>
+          <p>Moved to larger premises at Hootghalli industries area to accommodate growing customer base and inventory.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-year">2010</div>
+          <h4>Product Range</h4>
+          <p>Introduced aluminum frame nets and magnetic door nets, expanding beyond traditional fiberglass options.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-year">2015</div>
+          <h4>5000 Families</h4>
+          <p>Celebrated installation of mosquito nets in 5000+ homes across Mysore city.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-year">2020</div>
+          <h4>GST Registration</h4>
+          <p>Registered under GST: 29GKYMP6359C1Z, becoming a fully compliant and verified supplier [citation:1].</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-year">2024</div>
+          <h4>Digital Presence</h4>
+          <p>Launched our online platform to better serve customers with easy quotes, estimates, and appointments.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="benefits" style="background: var(--light);">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Why Mysore Trusts Raj Marketing</h2>
+        <p class="section-subtitle">What makes us the preferred choice for mosquito nets</p>
+      </div>
+      
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <h3>10+ Years Experience</h3>
+          <p>Serving Mysore since 2001 with unmatched expertise in mosquito net solutions [citation:2].</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <h3>Central Location</h3>
+          <p>Conveniently located at Near Pragathi logistics, Hootghalli industries area easily accessible from all parts of Mysore [citation:2].</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-certificate"></i>
+          </div>
+          <h3>GST Registered</h3>
+          <p>Fully compliant and verified supplier with GST: 29AFEPJ3685H1Z5 [citation:1].</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-tools"></i>
+          </div>
+          <h3>In-House Installation</h3>
+          <p>Our own team of trained installers ensures quality workmanship every time.</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-handshake"></i>
+          </div>
+          <h3>Direct Sourcing</h3>
+          <p>We source materials directly from manufacturers, passing the savings to you.</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <h3>Community Focus</h3>
+          <p>Proudly serving our Mysore community with honest, reliable service for 22 years.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta">
+    <div class="container">
+      <div class="cta-wrapper">
+        <h2>Visit Our Showroom Today</h2>
+        <p>Come talk to us about your mosquito net requirements at our Shivarampet location</p>
+        <div class="cta-buttons">
+          <a href="https://maps.google.com/?q=Raj+Marketing+Mysore" class="btn btn-primary btn-large" target="_blank">
+            <i class="fas fa-map-marker-alt"></i> Get Directions
+          </a>
+          <a href="tel:+919483037385" class="btn btn-outline btn-large">
+            <i class="fas fa-phone-alt"></i> Call Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-info">
+          <div class="footer-logo">
+            <i class="fas fa-shield-alt"></i>
+            <span>Raj Marketing</span>
+          </div>
+          <p>Premium mosquito nets for windows and doors in Mysore. Serving since 2001.</p>
+          <p><strong>GST:</strong> 29AFEPJ3685H1Z5 [citation:1]</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Account Access</h4>
+          <ul>
+            <li><a href="customer-login.html">Customer Login</a></li>
+            <li><a href="dealer-login.html">Dealer Login</a></li>
+            <li><a href="admin-login.html">Admin Login</a></li>
+            <li><a href="register.html">Register</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-contact">
+          <h4>Contact Info</h4>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> 1061-62, 1st Floor, K.S Complex, Shivarampet, Mysuru - 570001 </li>
+            <li><i class="fas fa-phone"></i> <a href="tel:+919481234567">+91-9481234567</a></li>
+            <li><i class="fas fa-phone"></i> <a href="tel:+919481234568">+91-9481234568</a></li>
+            <li><i class="fas fa-envelope"></i> <a href="mailto:info@rajmarketing.com">info@rajmarketing.com</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2024 Raj Marketing. All Rights Reserved. | GST: 29AFEPJ3685H1Z5 </p>
+        <div class="footer-bottom-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Use</a>
+          <a href="disclaimer.html">Disclaimer</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
+```
