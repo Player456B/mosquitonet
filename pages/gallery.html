@@ -515,4 +515,144 @@
         <div class="footer-links">
           <h4>Quick Links</h4>
           <ul>
-            <li><a href="../index.html
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Account Access</h4>
+          <ul>
+            <li><a href="customer-login.html">Customer Login</a></li>
+            <li><a href="dealer-login.html">Dealer Login</a></li>
+            <li><a href="admin-login.html">Admin Login</a></li>
+            <li><a href="register.html">Register</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-contact">
+          <h4>Contact Info</h4>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> 1061-62, 1st Floor, K.S Complex, Shivarampet, Mysuru - 570001 </li>
+            <li><i class="fas fa-phone"></i> <a href="tel:+919481234567">+91-9481234567</a></li>
+            <li><i class="fas fa-envelope"></i> <a href="mailto:info@rajmarketing.com">info@rajmarketing.com</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2024 Raj Marketing. All Rights Reserved. | GST: 29AFEPJ3685H1Z5 </p>
+        <div class="footer-bottom-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Use</a>
+          <a href="disclaimer.html">Disclaimer</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    // Gallery filtering and lightbox
+    document.addEventListener('DOMContentLoaded', function() {
+      const filterButtons = document.querySelectorAll('.gallery-filter');
+      const galleryItems = document.querySelectorAll('.gallery-item');
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const lightboxCaption = document.getElementById('lightboxCaption');
+      const lightboxClose = document.getElementById('lightboxClose');
+      const lightboxPrev = document.getElementById('lightboxPrev');
+      const lightboxNext = document.getElementById('lightboxNext');
+      
+      let currentIndex = 0;
+      let currentItems = [];
+      
+      // Filter functionality
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+          
+          const filter = button.dataset.filter;
+          
+          galleryItems.forEach(item => {
+            if (filter === 'all' || item.dataset.category === filter) {
+              item.style.display = 'block';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+          
+          // Update current items for lightbox navigation
+          currentItems = Array.from(galleryItems).filter(item => 
+            filter === 'all' || item.dataset.category === filter
+          );
+        });
+      });
+      
+      // Lightbox functionality
+      galleryItems.forEach((item, index) => {
+        item.addEventListener('click', () => {
+          const img = item.querySelector('img');
+          const title = item.querySelector('.gallery-overlay h3')?.textContent || '';
+          const location = item.querySelector('.gallery-overlay p')?.textContent || '';
+          
+          lightboxImg.src = img.src;
+          lightboxCaption.textContent = `${title} - ${location}`;
+          lightbox.classList.add('active');
+          currentIndex = index;
+          currentItems = Array.from(galleryItems).filter(i => i.style.display !== 'none');
+        });
+      });
+      
+      lightboxClose.addEventListener('click', () => {
+        lightbox.classList.remove('active');
+      });
+      
+      lightboxPrev.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + currentItems.length) % currentItems.length;
+        const item = currentItems[currentIndex];
+        const img = item.querySelector('img');
+        const title = item.querySelector('.gallery-overlay h3')?.textContent || '';
+        const location = item.querySelector('.gallery-overlay p')?.textContent || '';
+        
+        lightboxImg.src = img.src;
+        lightboxCaption.textContent = `${title} - ${location}`;
+      });
+      
+      lightboxNext.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % currentItems.length;
+        const item = currentItems[currentIndex];
+        const img = item.querySelector('img');
+        const title = item.querySelector('.gallery-overlay h3')?.textContent || '';
+        const location = item.querySelector('.gallery-overlay p')?.textContent || '';
+        
+        lightboxImg.src = img.src;
+        lightboxCaption.textContent = `${title} - ${location}`;
+      });
+      
+      // Close lightbox with escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+          lightbox.classList.remove('active');
+        } else if (e.key === 'ArrowLeft' && lightbox.classList.contains('active')) {
+          lightboxPrev.click();
+        } else if (e.key === 'ArrowRight' && lightbox.classList.contains('active')) {
+          lightboxNext.click();
+        }
+      });
+      
+      // Initialize current items
+      currentItems = Array.from(galleryItems);
+    });
+  </script>
+</body>
+</html>
+```
