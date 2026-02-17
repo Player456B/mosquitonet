@@ -1,1 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Raj Marketing | Mosquito Nets Mysore</title>
+  <meta name="description" content="Contact Raj Marketing for premium mosquito nets in Mysore. Visit our showroom at Shivarampet or call us for free consultation and quotes.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .contact-hero {
+      background: linear-gradient(135deg, rgba(26, 75, 140, 0.95) 0%, rgba(26, 75, 140, 0.85) 100%), url('../assets/images/contact-bg.jpg') center/cover;
+      padding: var(--spacing-xxl) 0;
+      color: var(--white);
+      text-align: center;
+    }
+    
+    .contact-hero h1 {
+      color: var(--white);
+      font-size: 3rem;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .contact-hero p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-xl);
+      padding: var(--spacing-xxl) 0;
+    }
+    
+    .contact-info {
+      background: var(--light);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+    }
+    
+    .contact-info h2 {
+      color: var(--primary);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .info-icon {
+      width: 50px;
+      height: 50px;
+      background: rgba(26, 75, 140, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+    
+    .info-content h3 {
+      margin-bottom: var(--spacing-xs);
+      font-size: 1.2rem;
+    }
+    
+    .info-content p {
+      margin: 0;
+      line-height: 1.6;
+    }
+    
+    .info-content a {
+      color: var(--gray);
+      text-decoration: none;
+      transition: var(--transition-fast);
+    }
+    
+    .info-content a:hover {
+      color: var(--primary);
+    }
+    
+    .business-hours {
+      margin-top: var(--spacing-lg);
+      padding-top: var(--spacing-lg);
+      border-top: 1px solid var(--gray-light);
+    }
+    
+    .hours-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .hours-day {
+      font-weight: 600;
+    }
+    
+    .hours-time {
+      color: var(--gray);
+    }
+    
+    .contact-form {
+      background: var(--white);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .contact-form h2 {
+      color: var(--primary);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-md);
+    }
+    
+    .form-group {
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: var(--spacing-xs);
+      font-weight: 600;
+      color: var(--dark);
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 2px solid var(--gray-light);
+      border-radius: var(--radius-md);
+      font-family: var(--font-primary);
+      font-size: 1rem;
+      transition: var(--transition-fast);
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    
+    .map-container {
+      margin: var(--spacing-xl) 0;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .map-container iframe {
+      width: 100%;
+      height: 450px;
+      border: 0;
+    }
+    
+    .team-contact {
+      background: var(--light);
+      padding: var(--spacing-xl) 0;
+    }
+    
+    .contact-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-xl);
+    }
+    
+    .contact-card {
+      background: var(--white);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      text-align: center;
+      box-shadow: var(--shadow-md);
+    }
+    
+    .contact-card i {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .contact-card h3 {
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .contact-card .position {
+      color: var(--secondary);
+      font-weight: 600;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .contact-card a {
+      color: var(--primary);
+      font-weight: 600;
+    }
+    
+    @media (max-width: 768px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Page -->
+  <div id="loading-page" class="loading-page">
+    <div class="loader-container">
+      <div class="loader-logo">
+        <i class="fas fa-shield-alt"></i>
+      </div>
+      <h1 class="loader-title">Raj Marketing</h1>
+      <div class="loader-bar">
+        <div class="loader-progress"></div>
+      </div>
+    </div>
+  </div>
 
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="../index.html" class="logo">
+          <i class="fas fa-shield-alt"></i>
+          <span>Raj Marketing</span>
+        </a>
+        
+        <div class="nav-toggle" id="navToggle">
+          <i class="fas fa-bars"></i>
+        </div>
+
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle">Login <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="customer-login.html"><i class="fas fa-user"></i> Customer Login</a></li>
+              <li><a href="dealer-login.html"><i class="fas fa-store"></i> Dealer Login</a></li>
+              <li><a href="admin-login.html"><i class="fas fa-shield-alt"></i> Admin Login</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contact Hero -->
+  <section class="contact-hero">
+    <div class="container">
+      <h1>Contact Us</h1>
+      <p>Get in touch for free consultation and quotes</p>
+    </div>
+  </section>
+
+  <!-- Contact Grid -->
+  <section class="container">
+    <div class="contact-grid">
+      <!-- Contact Information -->
+      <div class="contact-info">
+        <h2>Get in Touch</h2>
+        
+        <div class="info-item">
+          <div class="info-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div class="info-content">
+            <h3>Visit Our Showroom</h3>
+            <p>1061-62, 1st Floor, K.S Complex<br>Shivarampet, Mysuru - 570001<br>Karnataka, India [citation:2]</p>
+          </div>
+        </div>
+        
+        <div class="info-item">
+          <div class="info-icon">
+            <i class="fas fa-phone-alt"></i>
+          </div>
+          <div class="info-content">
+            <h3>Call Us</h3>
+            <p><a href="tel:+919481234567">+91-9481234567</a> (Mr. Kiran Kumar) [citation:2]</p>
+            <p><a href="tel:+919481234568">+91-9481234568</a> (Mr. Bharath) [citation:1]</p>
+          </div>
+        </div>
+        
+        <div class="info-item">
+          <div class="info-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="info-content">
+            <h3>Email Us</h3>
+            <p><a href="mailto:info@rajmarketing.com">info@rajmarketing.com</a></p>
+            <p><a href="mailto:sales@rajmarketing.com">sales@rajmarketing.com</a></p>
+          </div>
+        </div>
+        
+        <div class="info-item">
+          <div class="info-icon">
+            <i class="fab fa-whatsapp"></i>
+          </div>
+          <div class="info-content">
+            <h3>WhatsApp</h3>
+            <p><a href="https://wa.me/919481234567">+91-9481234567</a></p>
+          </div>
+        </div>
+        
+        <div class="business-hours">
+          <h3>Business Hours</h3>
+          <div class="hours-item">
+            <span class="hours-day">Monday - Saturday</span>
+            <span class="hours-time">9:30 AM - 8:00 PM</span>
+          </div>
+          <div class="hours-item">
+            <span class="hours-day">Sunday</span>
+            <span class="hours-time">10:00 AM - 6:00 PM</span>
+          </div>
+          <div class="hours-item">
+            <span class="hours-day">Public Holidays</span>
+            <span class="hours-time">10:00 AM - 4:00 PM</span>
+          </div>
+        </div>
+        
+        <div style="margin-top: var(--spacing-lg);">
+          <p><strong>GST:</strong> 29AFEPJ3685H1Z5 [citation:1]</p>
+        </div>
+      </div>
+      
+      <!-- Contact Form -->
+      <div class="contact-form">
+        <h2>Send us a Message</h2>
+        <form id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full Name *</label>
+              <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number *</label>
+              <input type="tel" id="phone" required>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email">
+            </div>
+            <div class="form-group">
+              <label for="location">Location in Mysore</label>
+              <select id="location">
+                <option value="">Select your area</option>
+                <option>Kuvempunagar</option>
+                <option>Vijayanagar</option>
+                <option>Gokulam</option>
+                <option>Jayalakshmipuram</option>
+                <option>Shivarampet</option>
+                <option>K.T. Street</option>
+                <option>Saraswathipuram</option>
+                <option>Hebbal</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="service">Service Required *</label>
+            <select id="service" required>
+              <option value="">Select a service</option>
+              <option>Window Net Installation</option>
+              <option>Door Net Installation</option>
+              <option>Repair & Replacement</option>
+              <option>Free Consultation & Quote</option>
+              <option>Commercial Project</option>
+              <option>Other</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" rows="5" required></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label class="checkbox">
+              <input type="checkbox" required> I agree to receive calls/SMS regarding my inquiry
+            </label>
+          </div>
+          
+          <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map -->
+  <section class="container">
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3898.
