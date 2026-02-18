@@ -1183,4 +1183,422 @@
         <button type="submit" class="btn btn-primary btn-block">Submit Complaint</button>
       </form>
     </div>
-            </div>.
+  </div>
+
+  <!-- REWORK MODAL (Same as complaint but with different title) -->
+  <div class="modal" id="reworkModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('reworkModal')">&times;</button>
+      <h2 style="color:var(--primary); margin-bottom:20px;">Request Rework</h2>
+      
+      <form onsubmit="return submitRework(event)">
+        <div class="form-group">
+          <label>Order ID *</label>
+          <input type="text" class="form-control" id="reworkOrder" required>
+        </div>
+
+        <div class="form-group">
+          <label>Rework Required For</label>
+          <select class="form-control" id="reworkType" required>
+            <option value="Measurement">Wrong Measurement</option>
+            <option value="Installation">Improper Installation</option>
+            <option value="Damage">Product Damaged</option>
+            <option value="Adjustment">Size Adjustment</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Describe Rework Needed *</label>
+          <textarea class="form-control" id="reworkDesc" rows="4" required></textarea>
+        </div>
+
+        <div class="file-upload" onclick="document.getElementById('reworkImage').click()">
+          <i class="fas fa-camera"></i>
+          <p>Upload photo of issue</p>
+          <input type="file" id="reworkImage" accept="image/*" style="display:none;">
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Submit Rework Request</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ===== CHECK LOGIN =====
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser'));
+    
+    if (!currentUser || currentUser.type !== 'customer') {
+      window.location.href = 'customer-login.html';
+    }
+
+    // ===== LOADING ANIMATION =====
+    window.addEventListener('load', function() {
+      const loader = document.getElementById('loading-page');
+      const progress = document.getElementById('loaderProgress');
+      progress.style.width = '100%';
+      setTimeout(() => {
+        loader.classList.add('hidden');
+      }, 500);
+    });
+
+    // ===== LOAD CUSTOMER DATA =====
+    document.addEventListener('DOMContentLoaded', function() {
+      // Load customer profile
+      document.getElementById('customerName').textContent = currentUser.name || 'Customer';
+      document.getElementById('customerAddress').textContent = currentUser.address || 'Mysore';
+      document.getElementById('customerPhone').textContent = currentUser.phone || '+91-9876543210';
+      document.getElementById('joinDate').textContent = currentUser.joinDate || 'Jan 2024';
+      document.getElementById('customerId').textContent = currentUser.id || 'CUST001';
+
+      // Load stats
+      const orders = JSON.parse(localStorage.getItem(`orders_${currentUser.id}`) || '[]');
+      const complaints = JSON.parse(localStorage.getItem(`complaints_${currentUser.id}`) || '[]');
+      
+      document.getElementById('totalOrders').textContent = orders.length;
+      document.getElementById('pendingOrders').textContent = orders.filter(o => o.status === 'pending').length;
+      document.getElementById('completedOrders').textContent = orders.filter(o => o.status === 'completed').length;
+      document.getElementById('complaints').textContent = complaints.length;
+
+      // Load recent orders
+      displayRecentOrders(orders);
+      
+      // Set next token number (increment from last)
+      const lastToken = localStorage.getItem('lastToken') || '0003';
+      const nextToken = (parseInt(lastToken) + 1).toString().padStart(4, '0');
+      document.getElementById('tokenNumber').textContent = nextToken;
+      
+      // Set min date for appointments
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('appointmentDate').min = today;
+      document.getElementById('orderDate').min = today;
+    });
+
+    // ===== DISPLAY RECENT ORDERS =====
+    function displayRecentOrders(orders) {
+      const container = document.getElementById('recentOrdersList');
+      if (orders.length === 0) {
+        container.innerHTML = '<p style="color:var(--gray); text-align:center;">No orders yet</p>';
+        return;
+      }
+
+      container.innerHTML = orders.slice(0, 3).map(order => `
+        <div style="padding:10px; border-bottom:1px solid var(--border);">
+          <div style="display:flex; justify-content:space-between;">
+            <strong>${order.id}</strong>
+            <span style="color:${order.status === 'completed' ? 'var(--success)' : 'var(--warning)'}">${order.status}</span>
+          </div>
+          <div style="font-size:0.85rem; color:var(--gray);">${order.product} • ${order.area}</div>
+        </div>
+      `).join('');
+    }
+
+    // ===== MODAL FUNCTIONS =====
+    function openModal(modalId) {
+      document.getElementById(modalId).classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // ===== AREA SELECTION =====
+    let selectedArea = '';
+    function selectArea(area) {
+      selectedArea = area;
+      document.getElementById('selectedArea').value = area;
+      
+      // Update UI
+      document.querySelectorAll('.area-option').forEach(opt => {
+        opt.classList.remove('selected');
+        if (opt.textContent === area) {
+          opt.classList.add('selected');
+        }
+      });
+    }
+
+    // ===== SUBMIT ORDER =====
+    function submitOrder(event) {
+      event.preventDefault();
+      
+      const product = document.getElementById('orderProduct').value;
+      const quantity = document.getElementById('orderQuantity').value;
+      const area = selectedArea;
+      const address = document.getElementById('orderAddress').value;
+      const date = document.getElementById('orderDate').value;
+
+      if (!product || !quantity || !area || !address || !date) {
+        showToast('Please fill all fields');
+        return false;
+      }
+
+      // Generate order ID
+      const orderId = 'ORD' + Date.now().toString().slice(-6);
+      
+      // Calculate amount
+      const price = product.includes('399') ? 399 : product.includes('599') ? 599 : product.includes('899') ? 899 : 999;
+      const amount = price * quantity;
+      const gst = amount * 0.18;
+      const total = amount + gst;
+
+      // Create order object
+      const order = {
+        id: orderId,
+        product: product,
+        quantity: quantity,
+        area: area,
+        address: address,
+        date: date,
+        amount: amount,
+        gst: gst,
+        total: total,
+        status: 'pending',
+        orderTime: new Date().toISOString(),
+        installDeadline: new Date(Date.now() + 72 * 60 * 60 * 1000).toISOString()
+      };
+
+      // Save order
+      const orders = JSON.parse(localStorage.getItem(`orders_${currentUser.id}`) || '[]');
+      orders.push(order);
+      localStorage.setItem(`orders_${currentUser.id}`, JSON.stringify(orders));
+
+      showToast('Order placed successfully! Order ID: ' + orderId);
+      closeModal('orderModal');
+      
+      // Refresh display
+      displayRecentOrders(orders);
+      document.getElementById('totalOrders').textContent = orders.length;
+      
+      return false;
+    }
+
+    // ===== BOOK APPOINTMENT =====
+    function bookAppointment(event) {
+      event.preventDefault();
+      
+      const date = document.getElementById('appointmentDate').value;
+      const time = document.getElementById('appointmentTime').value;
+      const purpose = document.getElementById('appointmentPurpose').value;
+      const token = document.getElementById('tokenNumber').textContent;
+
+      if (!date || !time) {
+        showToast('Please select date and time');
+        return false;
+      }
+
+      // Save token for next time
+      localStorage.setItem('lastToken', token);
+
+      const appointment = {
+        token: token,
+        date: date,
+        time: time,
+        purpose: purpose,
+        bookedAt: new Date().toISOString()
+      };
+
+      // Save appointment
+      localStorage.setItem(`appointment_${currentUser.id}`, JSON.stringify(appointment));
+
+      showToast(`Appointment booked! Token: ${token}`);
+      closeModal('appointmentModal');
+      
+      // Update next appointment display
+      document.getElementById('nextAppointment').innerHTML = `
+        <div style="padding:10px; background:var(--light); border-radius:10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span><strong>Token: ${token}</strong></span>
+            <span style="color:var(--primary);">${date}</span>
+          </div>
+          <div style="font-size:0.9rem;">${purpose} at ${time}</div>
+        </div>
+      `;
+      
+      return false;
+    }
+
+    // ===== TRACK ORDER =====
+    function trackOrder() {
+      const trackingId = document.getElementById('trackingId').value;
+      
+      if (!trackingId) {
+        showToast('Please enter Order ID');
+        return;
+      }
+
+      // Simulate tracking
+      document.getElementById('trackingResult').style.display = 'block';
+      
+      // Mock data - in real app, fetch from database
+      document.getElementById('step1Time').textContent = 'Today, 10:30 AM';
+      document.getElementById('step2Time').textContent = 'Today, 02:15 PM';
+      document.getElementById('step3Time').textContent = 'Expected Tomorrow';
+      
+      // Update step icons
+      document.querySelectorAll('#trackingResult .step-icon')[0].classList.add('completed');
+      document.querySelectorAll('#trackingResult .step-icon')[1].classList.add('completed');
+      document.querySelectorAll('#trackingResult .step-icon')[2].classList.add('active');
+      
+      // Start timer
+      startInstallTimer();
+    }
+
+    // ===== INSTALLATION TIMER =====
+    function startInstallTimer() {
+      const timerDisplay = document.getElementById('installTimer');
+      let hours = 72;
+      
+      const timer = setInterval(() => {
+        hours--;
+        if (hours <= 0) {
+          clearInterval(timer);
+          timerDisplay.textContent = '00:00:00';
+        } else {
+          const h = Math.floor(hours);
+          const m = Math.floor((hours * 60) % 60);
+          const s = Math.floor((hours * 3600) % 60);
+          timerDisplay.textContent = `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+        }
+      }, 1000);
+    }
+
+    // ===== PROCESS PAYMENT =====
+    function processPayment(method) {
+      // Generate QR code
+      document.getElementById('qrCode').innerHTML = '<p>Scan to Pay</p><div id="qrcode"></div>';
+      
+      const upiId = method === 'gpay' ? 'rajmarketing@okhdfcbank' : '9480337385@ybl';
+      const amount = '5900';
+      const upiLink = `upi://pay?pa=${upiId}&pn=Raj%20Marketing&am=${amount}&cu=INR`;
+      
+      new QRCode(document.getElementById('qrcode'), {
+        text: upiLink,
+        width: 200,
+        height: 200
+      });
+
+      // Simulate payment success after 5 seconds
+      setTimeout(() => {
+        showToast('Payment successful! Thank you for your payment.');
+        closeModal('paymentModal');
+      }, 5000);
+    }
+
+    // ===== SUBMIT COMPLAINT =====
+    function submitComplaint(event) {
+      event.preventDefault();
+      
+      const orderId = document.getElementById('complaintOrder').value;
+      const type = document.getElementById('complaintType').value;
+      const desc = document.getElementById('complaintDesc').value;
+
+      if (!desc) {
+        showToast('Please describe your complaint');
+        return false;
+      }
+
+      const complaint = {
+        id: 'CMP' + Date.now().toString().slice(-6),
+        orderId: orderId || 'N/A',
+        type: type,
+        description: desc,
+        status: 'pending',
+        date: new Date().toISOString()
+      };
+
+      // Save complaint
+      const complaints = JSON.parse(localStorage.getItem(`complaints_${currentUser.id}`) || '[]');
+      complaints.push(complaint);
+      localStorage.setItem(`complaints_${currentUser.id}`, JSON.stringify(complaints));
+
+      showToast('Complaint registered successfully! ID: ' + complaint.id);
+      closeModal('complaintModal');
+      
+      // Update complaint count
+      document.getElementById('complaints').textContent = complaints.length;
+      
+      return false;
+    }
+
+    // ===== SUBMIT REWORK =====
+    function submitRework(event) {
+      event.preventDefault();
+      
+      const orderId = document.getElementById('reworkOrder').value;
+      const type = document.getElementById('reworkType').value;
+      const desc = document.getElementById('reworkDesc').value;
+
+      if (!orderId || !desc) {
+        showToast('Please fill all fields');
+        return false;
+      }
+
+      showToast('Rework request submitted successfully!');
+      closeModal('reworkModal');
+      
+      return false;
+    }
+
+    // ===== VIEW PRODUCT =====
+    function viewProduct(name, price) {
+      showToast(`${name} - ${price}`);
+      // In real app, open product details page
+    }
+
+    // ===== PREVIEW IMAGE =====
+    function previewImage(input) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('imagePreview').innerHTML = `
+            <img src="${e.target.result}" class="preview-image" alt="Preview">
+          `;
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    // ===== SHOW NOTIFICATIONS =====
+    function showNotifications() {
+      showToast('You have 3 new notifications');
+    }
+
+    // ===== TOAST =====
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    // ===== LOGOUT =====
+    function logout() {
+      localStorage.removeItem('currentUser');
+      sessionStorage.removeItem('currentUser');
+      window.location.href = 'customer-login.html';
+    }
+
+    // Make functions global
+    window.openModal = openModal;
+    window.closeModal = closeModal;
+    window.selectArea = selectArea;
+    window.submitOrder = submitOrder;
+    window.bookAppointment = bookAppointment;
+    window.trackOrder = trackOrder;
+    window.processPayment = processPayment;
+    window.submitComplaint = submitComplaint;
+    window.submitRework = submitRework;
+    window.viewProduct = viewProduct;
+    window.previewImage = previewImage;
+    window.showNotifications = showNotifications;
+    window.logout = logout;
+  </script>
+</body>
+</html>
+```
