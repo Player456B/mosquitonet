@@ -1206,3 +1206,378 @@
   <!-- Toast Notification -->
   <div class="toast" id="toast"></div>
           
+<script>
+    // ===== CHECK LOGIN =====
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser'));
+    
+    if (!currentUser || currentUser.type !== 'dealer') {
+      window.location.href = 'dealer-login.html';
+    }
+
+    // ===== LOADING ANIMATION =====
+    window.addEventListener('load', function() {
+      const loader = document.getElementById('loading-page');
+      const progress = document.getElementById('loaderProgress');
+      progress.style.width = '100%';
+      setTimeout(() => {
+        loader.classList.add('hidden');
+      }, 500);
+    });
+
+    // ===== LOAD DEALER DATA =====
+    document.addEventListener('DOMContentLoaded', function() {
+      // Load dealer profile
+      document.getElementById('dealerName').textContent = currentUser.name || 'Dealer Name';
+      document.getElementById('dealerId').textContent = currentUser.dealerId || 'DLR001';
+      document.getElementById('dealerAddress').textContent = currentUser.address || 'Mysore';
+      document.getElementById('dealerPhone').textContent = currentUser.phone || '+91-9876543210';
+      document.getElementById('dealerGST').textContent = currentUser.gst || '29ABCDE1234F1Z5';
+      
+      // Load stats
+      loadDealerStats();
+      
+      // Load new orders
+      loadNewOrders();
+      
+      // Load carpenters
+      loadCarpenters();
+      
+      // Load inventory
+      loadInventory();
+      
+      // Load service areas
+      loadServiceAreas();
+      
+      // Load recent activities
+      loadRecentActivities();
+      
+      // Initialize performance chart
+      initPerformanceChart();
+    });
+
+    // ===== LOAD DEALER STATS =====
+    function loadDealerStats() {
+      // Mock data - in real app, fetch from API
+      document.getElementById('monthlyOrders').textContent = '24';
+      document.getElementById('completedJobs').textContent = '18';
+      document.getElementById('pendingJobs').textContent = '6';
+      document.getElementById('totalCarpenters').textContent = '8';
+      document.getElementById('commissionAmount').textContent = '₹4,500';
+      document.getElementById('monthlyEarnings').textContent = '₹12,500';
+      document.getElementById('walletBalance').innerHTML = '<i class="fas fa-wallet"></i> ₹12,500';
+    }
+
+    // ===== LOAD NEW ORDERS =====
+    function loadNewOrders() {
+      const orders = [
+        { id: 'ORD123', customer: 'Ramesh Kumar', area: 'Hootgalli', windows: 5, amount: 12500, time: '5 min ago' },
+        { id: 'ORD124', customer: 'Suresh Patel', area: 'Kuvempunagar', doors: 3, amount: 8900, time: '15 min ago' },
+        { id: 'ORD125', customer: 'Priya Singh', area: 'Vijayanagar', windows: 8, amount: 19900, time: '30 min ago' }
+      ];
+
+      const container = document.getElementById('newOrdersList');
+      container.innerHTML = orders.map(order => `
+        <div class="order-item">
+          <div class="order-info">
+            <h4>Order #${order.id}</h4>
+            <p>${order.customer} • ${order.area} • ${order.windows || order.doors} items</p>
+            <p><small>${order.time}</small></p>
+          </div>
+          <div>
+            <span class="order-badge badge-new">New</span>
+            <button class="btn btn-primary" style="padding:5px 10px; margin-top:5px;" onclick="acceptOrder('${order.id}')">Accept</button>
+          </div>
+        </div>
+      `).join('');
+
+      document.getElementById('newOrderCount').textContent = orders.length + ' New';
+    }
+
+    // ===== LOAD CARPENTERS =====
+    function loadCarpenters() {
+      const carpenters = [
+        { name: 'Ramesh', phone: '9876543210', area: 'Hootgalli', rating: 4.8, status: 'available', jobs: 45 },
+        { name: 'Suresh', phone: '9876543211', area: 'Kuvempunagar', rating: 4.9, status: 'busy', jobs: 38 },
+        { name: 'Prakash', phone: '9876543212', area: 'Vijayanagar', rating: 5.0, status: 'available', jobs: 52 },
+        { name: 'Mohan', phone: '9876543213', area: 'Gokulam', rating: 4.7, status: 'available', jobs: 27 }
+      ];
+
+      const container = document.getElementById('carpentersList');
+      container.innerHTML = carpenters.map(c => `
+        <div class="carpenter-item">
+          <div class="carpenter-avatar">${c.name.charAt(0)}</div>
+          <div class="carpenter-info">
+            <h4>${c.name}</h4>
+            <p><i class="fas fa-phone"></i> ${c.phone} • ${c.area}</p>
+            <div class="rating">
+              <i class="fas fa-star"></i> ${c.rating} (${c.jobs} jobs)
+            </div>
+          </div>
+          <span class="status-badge status-${c.status}">${c.status}</span>
+        </div>
+      `).join('');
+
+      // Also load in modal
+      const modalContainer = document.getElementById('currentCarpenters');
+      if (modalContainer) {
+        modalContainer.innerHTML = carpenters.map(c => `
+          <div class="carpenter-item">
+            <div class="carpenter-info">
+              <h4>${c.name}</h4>
+              <p>📞 ${c.phone} • ${c.area}</p>
+            </div>
+            <button class="btn btn-danger" style="padding:5px 10px;" onclick="removeCarpenter('${c.name}')">Remove</button>
+          </div>
+        `).join('');
+      }
+    }
+
+    // ===== LOAD INVENTORY =====
+    function loadInventory() {
+      const inventory = [
+        { item: 'Fiberglass Mesh', stock: 450, unit: 'meters', percentage: 75 },
+        { item: 'Aluminum Frame', stock: 120, unit: 'pieces', percentage: 60 },
+        { item: 'Magnetic Strips', stock: 80, unit: 'sets', percentage: 40 },
+        { item: 'PVC Frame', stock: 200, unit: 'meters', percentage: 80 }
+      ];
+
+      const container = document.getElementById('inventoryList');
+      container.innerHTML = inventory.map(i => `
+        <div class="inventory-item">
+          <div style="flex:1;">
+            <div style="display:flex; justify-content:space-between;">
+              <span><strong>${i.item}</strong></span>
+              <span>${i.stock} ${i.unit}</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width:${i.percentage}%;"></div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // Load in modal
+      const modalContainer = document.getElementById('currentInventory');
+      if (modalContainer) {
+        modalContainer.innerHTML = inventory.map(i => `
+          <div class="inventory-item">
+            <span><strong>${i.item}</strong></span>
+            <span>${i.stock} ${i.unit}</span>
+          </div>
+        `).join('');
+      }
+    }
+
+    // ===== LOAD SERVICE AREAS =====
+    function loadServiceAreas() {
+      const areas = ['Hootgalli', 'Kuvempunagar', 'Vijayanagar'];
+      const container = document.getElementById('serviceAreas');
+      container.innerHTML = areas.map(area => `
+        <span class="area-tag"><i class="fas fa-map-pin"></i> ${area}</span>
+      `).join('');
+    }
+
+    // ===== LOAD RECENT ACTIVITIES =====
+    function loadRecentActivities() {
+      const activities = [
+        { time: '2 min ago', text: 'Order #ORD123 accepted' },
+        { time: '15 min ago', text: 'Carpenter Ramesh assigned to job' },
+        { time: '1 hour ago', text: 'Inventory updated: Fiberglass +50m' },
+        { time: '2 hours ago', text: 'Payment received: ₹5,900' }
+      ];
+
+      const container = document.getElementById('recentActivities');
+      container.innerHTML = activities.map(a => `
+        <div style="padding:8px; border-bottom:1px solid var(--border);">
+          <div style="display:flex; justify-content:space-between;">
+            <span>${a.text}</span>
+            <small style="color:var(--gray);">${a.time}</small>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ===== INIT PERFORMANCE CHART =====
+    function initPerformanceChart() {
+      const ctx = document.getElementById('performanceChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+          datasets: [{
+            label: 'Orders',
+            data: [12, 19, 15, 24],
+            borderColor: '#1a4b8c',
+            backgroundColor: 'rgba(26,75,140,0.1)',
+            tension: 0.4
+          }, {
+            label: 'Earnings (₹1000)',
+            data: [25, 32, 28, 45],
+            borderColor: '#f0b202',
+            backgroundColor: 'rgba(240,178,2,0.1)',
+            tension: 0.4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      });
+    }
+
+    // ===== ACCEPT ORDER =====
+    function acceptOrder(orderId) {
+      showToast('Order #' + orderId + ' accepted successfully!');
+      // In real app, update order status
+    }
+
+    // ===== ADD CARPENTER =====
+    function addCarpenter(event) {
+      event.preventDefault();
+      
+      const name = document.getElementById('carpenterName').value;
+      const phone = document.getElementById('carpenterPhone').value;
+      
+      if (!name || !phone) {
+        showToast('Please fill all fields');
+        return false;
+      }
+
+      showToast('Carpenter ' + name + ' added successfully!');
+      closeModal('carpenterModal');
+      loadCarpenters(); // Refresh list
+      
+      return false;
+    }
+
+    // ===== UPDATE INVENTORY =====
+    function updateInventory(event) {
+      event.preventDefault();
+      
+      const material = document.getElementById('materialType').value;
+      const quantity = document.getElementById('materialQuantity').value;
+      
+      showToast(`${quantity} ${material} added to inventory`);
+      closeModal('inventoryModal');
+      loadInventory(); // Refresh inventory
+      
+      return false;
+    }
+
+    // ===== WITHDRAW COMMISSION =====
+    function withdrawCommission(method) {
+      const qrDiv = document.getElementById('withdrawQR');
+      const qrcodeDiv = document.getElementById('qrcode');
+      
+      qrDiv.style.display = 'block';
+      
+      const upiId = method === 'upi' ? 'dealer@okhdfcbank' : '9480337385@ybl';
+      const amount = '2500';
+      const upiLink = `upi://pay?pa=${upiId}&pn=Raj%20Marketing%20Dealer&am=${amount}&cu=INR`;
+      
+      new QRCode(qrcodeDiv, {
+        text: upiLink,
+        width: 200,
+        height: 200
+      });
+
+      setTimeout(() => {
+        showToast('Withdrawal request submitted successfully!');
+      }, 1000);
+    }
+
+    // ===== SAVE SERVICE AREAS =====
+    function saveServiceAreas() {
+      showToast('Service areas updated successfully!');
+      closeModal('areaModal');
+      loadServiceAreas();
+    }
+
+    // ===== UPGRADE MEMBERSHIP =====
+    function upgradeMembership() {
+      showToast('Membership upgrade option coming soon!');
+    }
+
+    // ===== GENERATE REPORT =====
+    function generateReport() {
+      showToast('Report generated! Check downloads folder.');
+    }
+
+    // ===== GENERATE EXCEL =====
+    function generateExcel() {
+      showToast('Excel file downloaded!');
+    }
+
+    // ===== RAISE TICKET =====
+    function raiseTicket() {
+      showToast('Support ticket raised! You will be contacted soon.');
+    }
+
+    // ===== REFRESH ORDERS =====
+    function refreshOrders() {
+      showToast('Refreshing orders...');
+      loadNewOrders();
+    }
+
+    // ===== REMOVE CARPENTER =====
+    function removeCarpenter(name) {
+      if (confirm(`Remove ${name} from your team?`)) {
+        showToast(`${name} removed successfully`);
+        closeModal('carpenterModal');
+        loadCarpenters();
+      }
+    }
+
+    // ===== SHOW NOTIFICATIONS =====
+    function showNotifications() {
+      showToast('You have 5 new notifications');
+    }
+
+    // ===== MODAL FUNCTIONS =====
+    function openModal(modalId) {
+      document.getElementById(modalId).classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // ===== TOAST =====
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    // ===== LOGOUT =====
+    function logout() {
+      localStorage.removeItem('currentUser');
+      sessionStorage.removeItem('currentUser');
+      window.location.href = 'dealer-login.html';
+    }
+
+    // Make functions global
+    window.openModal = openModal;
+    window.closeModal = closeModal;
+    window.acceptOrder = acceptOrder;
+    window.addCarpenter = addCarpenter;
+    window.updateInventory = updateInventory;
+    window.withdrawCommission = withdrawCommission;
+    window.saveServiceAreas = saveServiceAreas;
+    window.upgradeMembership = upgradeMembership;
+    window.generateReport = generateReport;
+    window.generateExcel = generateExcel;
+    window.raiseTicket = raiseTicket;
+    window.refreshOrders = refreshOrders;
+    window.removeCarpenter = removeCarpenter;
+    window.showNotifications = showNotifications;
+    window.logout = logout;
+  </script>
+</body>
+</html>
+```
