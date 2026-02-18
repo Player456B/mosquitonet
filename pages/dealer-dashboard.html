@@ -861,7 +861,348 @@
           </div>
         </div>
 
-        <!-- Inventory Status -->
+            <!-- Inventory Status -->
         <div class="card">
           <div class="card-header">
-            <h3><i class="fas fa-boxes"></i> In
+            <h3><i class="fas fa-boxes"></i> Inventory Status</h3>
+            <button class="btn btn-primary" style="padding:5px 15px;" onclick="openModal('inventoryModal')">Manage</button>
+          </div>
+          <div id="inventoryList"></div>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div>
+        <!-- Commission Card -->
+        <div class="commission-card">
+          <h4>Available Commission</h4>
+          <div class="commission-amount" id="commissionAmount">₹4,500</div>
+          <div class="commission-details">
+            <span>This Month</span>
+            <span id="monthlyEarnings">₹12,500</span>
+          </div>
+          <button class="btn btn-secondary btn-block" style="margin-top:15px;" onclick="openModal('commissionModal')">
+            Withdraw Commission
+          </button>
+        </div>
+
+        <!-- Performance Chart -->
+        <div class="card">
+          <h3>Performance Overview</h3>
+          <div class="chart-container">
+            <canvas id="performanceChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Membership Card -->
+        <div class="membership-card">
+          <h4><i class="fas fa-crown"></i> Premium Membership</h4>
+          <p style="margin:10px 0;">Valid until: Dec 2025</p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <span class="area-tag">10% Commission</span>
+            <span class="area-tag">Priority Orders</span>
+            <span class="area-tag">Free Listing</span>
+          </div>
+        </div>
+
+        <!-- Service Areas -->
+        <div class="card">
+          <div class="card-header">
+            <h3><i class="fas fa-map-marker-alt"></i> My Service Areas</h3>
+            <button class="btn btn-primary" style="padding:5px 15px;" onclick="openModal('areaModal')">Edit</button>
+          </div>
+          <div class="area-tags" id="serviceAreas"></div>
+        </div>
+
+        <!-- Recent Activities -->
+        <div class="card">
+          <h3>Recent Activities</h3>
+          <div id="recentActivities"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEW ORDERS MODAL -->
+  <div class="modal" id="ordersModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('ordersModal')">&times;</button>
+      <h2 style="color:var(--primary); margin-bottom:20px;">New Customer Orders</h2>
+      
+      <div id="allOrdersList"></div>
+      
+      <div style="margin-top:20px;">
+        <button class="btn btn-secondary btn-block" onclick="refreshOrders()">Refresh Orders</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARPENTER MANAGEMENT MODAL -->
+  <div class="modal" id="carpenterModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('carpenterModal')">&times;</button>
+      <h2 style="color:var(--primary); margin-bottom:20px;">Carpenter Management</h2>
+      
+      <form id="carpenterForm" onsubmit="return addCarpenter(event)">
+        <div class="form-group">
+          <label>Carpenter Name *</label>
+          <input type="text" class="form-control" id="carpenterName" required>
+        </div>
+
+        <div class="form-group">
+          <label>Phone Number *</label>
+          <input type="tel" class="form-control" id="carpenterPhone" pattern="[0-9]{10}" required>
+        </div>
+
+        <div class="form-group">
+          <label>Specialization</label>
+          <select class="form-control" id="carpenterSpecialization">
+            <option value="Window">Window Specialist</option>
+            <option value="Door">Door Specialist</option>
+            <option value="Both">Both (Window & Door)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Service Areas</label>
+          <div class="area-grid" style="display:grid; grid-template-columns:repeat(2,1fr); gap:10px;">
+            <label><input type="checkbox" value="Hootgalli"> Hootgalli</label>
+            <label><input type="checkbox" value="Kuvempunagar"> Kuvempunagar</label>
+            <label><input type="checkbox" value="Vijayanagar"> Vijayanagar</label>
+            <label><input type="checkbox" value="Gokulam"> Gokulam</label>
+            <label><input type="checkbox" value="Jayalakshmipuram"> Jayalakshmipuram</label>
+            <label><input type="checkbox" value="Shivarampet"> Shivarampet</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Experience (Years)</label>
+          <input type="number" class="form-control" id="carpenterExperience" min="0" value="5">
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Add Carpenter</button>
+      </form>
+
+      <hr style="margin:20px 0;">
+
+      <h3>Current Carpenters</h3>
+      <div id="currentCarpenters"></div>
+    </div>
+  </div>
+
+  <!-- INVENTORY MODAL -->
+  <div class="modal" id="inventoryModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('inventoryModal')">&times;</button>
+      <h2 style="color:var(--primary); margin-bottom:20px;">Inventory Management</h2>
+      
+      <form id="inventoryForm" onsubmit="return updateInventory(event)">
+        <div class="form-group">
+          <label>Select Material</label>
+          <select class="form-control" id="materialType">
+            <option value="Fiberglass Mesh">Fiberglass Mesh</option>
+            <option value="Aluminum Frame">Aluminum Frame</option>
+            <option value="Magnetic Strips">Magnetic Strips</option>
+            <option value="PVC Frame">PVC Frame</option>
+            <option value="Screws & Fittings">Screws & Fittings</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Quantity to Add</label>
+          <input type="number" class="form-control" id="materialQuantity" min="1" value="10">
+        </div>
+
+        <div class="form-group">
+          <label>Unit</label>
+          <select class="form-control" id="materialUnit">
+            <option value="Meters">Meters</option>
+            <option value="Pieces">Pieces</option>
+            <option value="Boxes">Boxes</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Update Inventory</button>
+      </form>
+
+      <hr style="margin:20px 0;">
+
+      <h3>Current Stock</h3>
+      <div id="currentInventory"></div>
+    </div>
+  </div>
+
+  <!-- COMMISSION MODAL -->
+  <div class="modal" id="commissionModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('commissionModal')">&times;</button>
+      <h2 style="color:var(--primary); margin-bottom:20px;">Commission Details</h2>
+      
+      <div style="background:var(--light); padding:20px; border-radius:10px; margin-bottom:20px;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+          <span>Total Earnings:</span>
+          <strong id="totalEarnings">₹45,000</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+          <span>Commission Earned (10%):</span>
+          <strong id="commissionEarned">₹4,500</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+          <span>Withdrawn:</span>
+          <strong id="withdrawn">₹2,000</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:1.2rem; border-top:2px dashed var(--border); padding-top:10px;">
+          <span>Available Balance:</span>
+          <strong id="availableBalance">₹2,500</strong>
+        </div>
+      </div>
+
+      <div class="payment-options" style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
+        <button class="payment-btn" style="background:var(--primary); color:white; padding:15px;" onclick="withdrawCommission('bank')">
+          <i class="fas fa-university"></i> Bank Transfer
+        </button>
+        <button class="payment-btn" style="background:var(--secondary); color:var(--dark); padding:15px;" onclick="withdrawCommission('upi')">
+          <i class="fas fa-mobile-alt"></i> UPI Transfer
+        </button>
+      </div>
+
+      <div class="qr-code" id="withdrawQR" style="text-align:center; margin-top:20px; display:none;">
+        <p>Scan to receive payment</p>
+        <div id="qrcode"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICE AREAS MODAL -->
+  <div class="modal" id="areaModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('areaModal')">&times;</button>
+      <h2 style="color:var(--primary); margin-bottom:20px;">Manage Service Areas</h2>
+      
+      <p>Select the areas where you provide service:</p>
+      
+      <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:15px; margin:20px 0;">
+        <label style="display:flex; align-items:center; gap:10px;">
+          <input type="checkbox" value="Hootgalli" checked> Hootgalli
+        </label>
+        <label style="display:flex; align-items:center; gap:10px;">
+          <input type="checkbox" value="Kuvempunagar" checked> Kuvempunagar
+        </label>
+        <label style="display:flex; align-items:center; gap:10px;">
+          <input type="checkbox" value="Vijayanagar" checked> Vijayanagar
+        </label>
+        <label style="display:flex; align-items:center; gap:10px;">
+          <input type="checkbox" value="Gokulam"> Gokulam
+        </label>
+        <label style="display:flex; align-items:center; gap:10px;">
+          <input type="checkbox" value="Jayalakshmipuram"> Jayalakshmipuram
+        </label>
+        <label style="display:flex; align-items:center; gap:10px;">
+          <input type="checkbox" value="Shivarampet"> Shivarampet
+        </label>
+      </div>
+
+      <button class="btn btn-primary btn-block" onclick="saveServiceAreas()">Save Areas</button>
+    </div>
+  </div>
+
+  <!-- MEMBERSHIP MODAL -->
+  <div class="modal" id="membershipModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('membershipModal')">&times;</button>
+      <h2 style="color:var(--primary); margin-bottom:20px;">Membership Benefits</h2>
+      
+      <div class="membership-card" style="margin-bottom:20px;">
+        <h4><i class="fas fa-crown"></i> Premium Dealer</h4>
+        <p>Valid until: December 2025</p>
+      </div>
+
+      <div style="margin:20px 0;">
+        <h3>Your Benefits:</h3>
+        <ul style="list-style:none; padding:0;">
+          <li style="margin:10px 0;"><i class="fas fa-check-circle" style="color:var(--success);"></i> 10% Commission on all orders</li>
+          <li style="margin:10px 0;"><i class="fas fa-check-circle" style="color:var(--success);"></i> Priority order allocation</li>
+          <li style="margin:10px 0;"><i class="fas fa-check-circle" style="color:var(--success);"></i> Free business listing</li>
+          <li style="margin:10px 0;"><i class="fas fa-check-circle" style="color:var(--success);"></i> Dedicated relationship manager</li>
+          <li style="margin:10px 0;"><i class="fas fa-check-circle" style="color:var(--success);"></i> Marketing materials support</li>
+          <li style="margin:10px 0;"><i class="fas fa-check-circle" style="color:var(--success);"></i> 24/7 priority support</li>
+        </ul>
+      </div>
+
+      <button class="btn btn-secondary btn-block" onclick="upgradeMembership()">Upgrade Membership</button>
+    </div>
+  </div>
+
+  <!-- REPORTS MODAL -->
+  <div class="modal" id="reportModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('reportModal')">&times;</button>
+      <h2 style="color:var(--primary); margin-bottom:20px;">Generate Reports</h2>
+      
+      <div class="form-group">
+        <label>Report Type</label>
+        <select class="form-control" id="reportType">
+          <option value="sales">Sales Report</option>
+          <option value="commission">Commission Report</option>
+          <option value="carpenter">Carpenter Performance</option>
+          <option value="inventory">Inventory Report</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Date Range</label>
+        <select class="form-control">
+          <option value="today">Today</option>
+          <option value="week">This Week</option>
+          <option value="month">This Month</option>
+          <option value="custom">Custom Range</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary btn-block" onclick="generateReport()">
+        <i class="fas fa-file-pdf"></i> Generate PDF Report
+      </button>
+
+      <button class="btn btn-secondary btn-block" style="margin-top:10px;" onclick="generateExcel()">
+        <i class="fas fa-file-excel"></i> Download Excel
+      </button>
+    </div>
+  </div>
+
+  <!-- SUPPORT MODAL -->
+  <div class="modal" id="supportModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('supportModal')">&times;</button>
+      <h2 style="color:var(--primary); margin-bottom:20px;">Dealer Support</h2>
+      
+      <div style="text-align:center; margin-bottom:20px;">
+        <i class="fas fa-headset" style="font-size:3rem; color:var(--primary);"></i>
+        <h3>24/7 Dealer Support</h3>
+      </div>
+
+      <div class="contact-card" style="background:var(--light); padding:20px; border-radius:10px; margin-bottom:15px;">
+        <h4><i class="fas fa-phone-alt"></i> Call Support</h4>
+        <p><a href="tel:+919480337385">+91-9480337385</a> (Kiran)</p>
+        <p><a href="tel:+919481234568">+91-9481234568</a> (Bharath)</p>
+      </div>
+
+      <div class="contact-card" style="background:var(--light); padding:20px; border-radius:10px; margin-bottom:15px;">
+        <h4><i class="fab fa-whatsapp"></i> WhatsApp Support</h4>
+        <p><a href="https://wa.me/919480337385">+91-9480337385</a></p>
+      </div>
+
+      <div class="contact-card" style="background:var(--light); padding:20px; border-radius:10px;">
+        <h4><i class="fas fa-envelope"></i> Email Support</h4>
+        <p><a href="mailto:dealer@rajmarketing.com">dealer@rajmarketing.com</a></p>
+        <p><a href="mailto:support@rajmarketing.com">support@rajmarketing.com</a></p>
+      </div>
+
+      <button class="btn btn-primary btn-block" style="margin-top:20px;" onclick="raiseTicket()">
+        Raise Support Ticket
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+          
