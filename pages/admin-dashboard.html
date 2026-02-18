@@ -831,4 +831,515 @@
               <div class="chart-container">
                 <canvas id="revenueChart"></canvas>
               </div>
-    
+            </div>
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3>Order Status</h3>
+              </div>
+              <div class="chart-container">
+                <canvas id="orderChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Orders Table -->
+          <div class="table-card">
+            <div class="table-header">
+              <h2>Recent Orders</h2>
+              <div class="table-actions">
+                <button class="btn btn-primary" onclick="showSection('orders')">View All</button>
+                <button class="btn btn-secondary" onclick="exportData('orders')">Export</button>
+              </div>
+            </div>
+            <table id="recentOrdersTable" class="display" style="width:100%">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>ORD001</td>
+                  <td>Ramesh Kumar</td>
+                  <td>₹12,500</td>
+                  <td><span class="status-badge status-completed">Completed</span></td>
+                  <td>2024-01-15</td>
+                  <td>
+                    <button class="btn btn-sm btn-primary" onclick="viewOrder('ORD001')">View</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>ORD002</td>
+                  <td>Suresh Patel</td>
+                  <td>₹8,900</td>
+                  <td><span class="status-badge status-pending">Processing</span></td>
+                  <td>2024-01-16</td>
+                  <td>
+                    <button class="btn btn-sm btn-primary" onclick="viewOrder('ORD002')">View</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>ORD003</td>
+                  <td>Priya Singh</td>
+                  <td>₹15,200</td>
+                  <td><span class="status-badge status-active">Dispatched</span></td>
+                  <td>2024-01-16</td>
+                  <td>
+                    <button class="btn btn-sm btn-primary" onclick="viewOrder('ORD003')">View</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Recent Customers -->
+          <div class="table-card">
+            <div class="table-header">
+              <h2>Recent Customers</h2>
+              <div class="table-actions">
+                <button class="btn btn-primary" onclick="showSection('customers')">View All</button>
+              </div>
+            </div>
+            <table id="recentCustomersTable" class="display" style="width:100%">
+              <thead>
+                <tr>
+                  <th>Customer ID</th>
+                  <th>Name</th>
+                  <th>Phone</th>
+                  <th>Area</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>CUST001</td>
+                  <td>Ramesh Kumar</td>
+                  <td>9876543210</td>
+                  <td>Hootgalli</td>
+                  <td><span class="status-badge status-active">Active</span></td>
+                  <td>
+                    <button class="btn btn-sm btn-primary" onclick="viewCustomer('CUST001')">View</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>CUST002</td>
+                  <td>Suresh Patel</td>
+                  <td>9876543211</td>
+                  <td>Kuvempunagar</td>
+                  <td><span class="status-badge status-active">Active</span></td>
+                  <td>
+                    <button class="btn btn-sm btn-primary" onclick="viewCustomer('CUST002')">View</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Customers Section (Hidden by default) -->
+        <div id="customers-section" style="display:none;">
+          <div class="table-card">
+            <div class="table-header">
+              <h2>Customer Management</h2>
+              <div class="table-actions">
+                <button class="btn btn-primary" onclick="openModal('addCustomerModal')">
+                  <i class="fas fa-user-plus"></i> Add Customer
+                </button>
+                <button class="btn btn-secondary" onclick="exportData('customers')">
+                  <i class="fas fa-download"></i> Export
+                </button>
+              </div>
+            </div>
+            <table id="customersTable" class="display" style="width:100%">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Area</th>
+                  <th>Orders</th>
+                  <th>Status</th>
+                  <th>Joined</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="customersTableBody">
+                <!-- Dynamic data will be loaded here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Dealers Section -->
+        <div id="dealers-section" style="display:none;">
+          <div class="table-card">
+            <div class="table-header">
+              <h2>Dealer Management</h2>
+              <div class="table-actions">
+                <button class="btn btn-primary" onclick="openModal('addDealerModal')">
+                  <i class="fas fa-store-alt"></i> Add Dealer
+                </button>
+                <button class="btn btn-secondary" onclick="exportData('dealers')">
+                  <i class="fas fa-download"></i> Export
+                </button>
+              </div>
+            </div>
+            <table id="dealersTable" class="display" style="width:100%">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Dealer Name</th>
+                  <th>Phone</th>
+                  <th>GST</th>
+                  <th>Areas</th>
+                  <th>Orders</th>
+                  <th>Commission</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="dealersTableBody">
+                <!-- Dynamic data will be loaded here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Orders Section -->
+        <div id="orders-section" style="display:none;">
+          <div class="table-card">
+            <div class="table-header">
+              <h2>Order Management</h2>
+              <div class="table-actions">
+                <button class="btn btn-primary" onclick="openModal('newOrderModal')">
+                  <i class="fas fa-plus"></i> New Order
+                </button>
+                <button class="btn btn-secondary" onclick="exportData('orders')">
+                  <i class="fas fa-download"></i> Export
+                </button>
+              </div>
+            </div>
+            <table id="ordersTable" class="display" style="width:100%">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Products</th>
+                  <th>Amount</th>
+                  <th>Advance</th>
+                  <th>Balance</th>
+                  <th>Status</th>
+                  <th>Assigned To</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTableBody">
+                <!-- Dynamic data will be loaded here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Payments Section -->
+        <div id="payments-section" style="display:none;">
+          <div class="table-card">
+            <div class="table-header">
+              <h2>Payment Management</h2>
+              <div class="table-actions">
+                <button class="btn btn-secondary" onclick="exportData('payments')">
+                  <i class="fas fa-download"></i> Export
+                </button>
+              </div>
+            </div>
+            <table id="paymentsTable" class="display" style="width:100%">
+              <thead>
+                <tr>
+                  <th>Payment ID</th>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Amount</th>
+                  <th>Method</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="paymentsTableBody">
+                <!-- Dynamic data will be loaded here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Complaints Section -->
+        <div id="complaints-section" style="display:none;">
+          <div class="table-card">
+            <div class="table-header">
+              <h2>Complaint Management</h2>
+              <div class="table-actions">
+                <button class="btn btn-secondary" onclick="exportData('complaints')">
+                  <i class="fas fa-download"></i> Export
+                </button>
+              </div>
+            </div>
+            <table id="complaintsTable" class="display" style="width:100%">
+              <thead>
+                <tr>
+                  <th>Complaint ID</th>
+                  <th>Customer</th>
+                  <th>Order ID</th>
+                  <th>Type</th>
+                  <th>Description</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="complaintsTableBody">
+                <!-- Dynamic data will be loaded here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODALS -->
+
+  <!-- Add Customer Modal -->
+  <div class="modal" id="addCustomerModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('addCustomerModal')">&times;</button>
+      <div class="modal-header">
+        <h2>Add New Customer</h2>
+      </div>
+      <form onsubmit="return addCustomer(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" class="form-control" id="custName" required>
+          </div>
+          <div class="form-group">
+            <label>Phone *</label>
+            <input type="tel" class="form-control" id="custPhone" pattern="[0-9]{10}" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" id="custEmail">
+          </div>
+          <div class="form-group">
+            <label>Area</label>
+            <select class="form-control" id="custArea">
+              <option>Hootgalli</option>
+              <option>Kuvempunagar</option>
+              <option>Vijayanagar</option>
+              <option>Gokulam</option>
+              <option>Jayalakshmipuram</option>
+              <option>Shivarampet</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Address</label>
+          <textarea class="form-control" id="custAddress" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Password *</label>
+          <input type="text" class="form-control" id="custPassword" value="customer123" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Create Customer</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Dealer Modal -->
+  <div class="modal" id="addDealerModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('addDealerModal')">&times;</button>
+      <div class="modal-header">
+        <h2>Add New Dealer</h2>
+      </div>
+      <form onsubmit="return addDealer(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Dealer Name *</label>
+            <input type="text" class="form-control" id="dealerName" required>
+          </div>
+          <div class="form-group">
+            <label>Phone *</label>
+            <input type="tel" class="form-control" id="dealerPhone" pattern="[0-9]{10}" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" id="dealerEmail">
+          </div>
+          <div class="form-group">
+            <label>GST Number</label>
+            <input type="text" class="form-control" id="dealerGST">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Service Areas (Select multiple)</label>
+          <select class="form-control" id="dealerAreas" multiple size="4">
+            <option value="Hootgalli">Hootgalli</option>
+            <option value="Kuvempunagar">Kuvempunagar</option>
+            <option value="Vijayanagar">Vijayanagar</option>
+            <option value="Gokulam">Gokulam</option>
+            <option value="Jayalakshmipuram">Jayalakshmipuram</option>
+            <option value="Shivarampet">Shivarampet</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Commission Rate (%)</label>
+          <input type="number" class="form-control" id="dealerCommission" value="10" min="0" max="50">
+        </div>
+        <div class="form-group">
+          <label>Password *</label>
+          <input type="text" class="form-control" id="dealerPassword" value="dealer123" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Create Dealer</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- New Order Modal -->
+  <div class="modal" id="newOrderModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('newOrderModal')">&times;</button>
+      <div class="modal-header">
+        <h2>Create New Order</h2>
+      </div>
+      <form onsubmit="return createOrder(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Customer *</label>
+            <select class="form-control" id="orderCustomer" required>
+              <option value="">Select Customer</option>
+              <option value="CUST001">Ramesh Kumar (Hootgalli)</option>
+              <option value="CUST002">Suresh Patel (Kuvempunagar)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Dealer *</label>
+            <select class="form-control" id="orderDealer" required>
+              <option value="">Assign Dealer</option>
+              <option value="DLR001">Mohan Raj (Hootgalli)</option>
+              <option value="DLR002">Suresh Patel (Kuvempunagar)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Product Details</label>
+          <textarea class="form-control" id="orderProducts" rows="3" placeholder="e.g., 5 Windows - Fiberglass, 2 Doors - Magnetic" required></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Total Amount (₹)</label>
+            <input type="number" class="form-control" id="orderAmount" required>
+          </div>
+          <div class="form-group">
+            <label>Advance (₹)</label>
+            <input type="number" class="form-control" id="orderAdvance" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>GST (18%)</label>
+            <input type="number" class="form-control" id="orderGst" readonly>
+          </div>
+          <div class="form-group">
+            <label>Balance</label>
+            <input type="number" class="form-control" id="orderBalance" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Installation Deadline (Hours)</label>
+          <input type="number" class="form-control" id="orderDeadline" value="72">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Generate Order ID & Save</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Order Details Modal -->
+  <div class="modal" id="orderDetailsModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal('orderDetailsModal')">&times;</button>
+      <div class="modal-header">
+        <h2>Order Details</h2>
+      </div>
+      <div id="orderDetailsContent"></div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast" style="position:fixed; bottom:20px; left:50%; transform:translateX(-50%) translateY(100px); background:var(--dark); color:white; padding:15px 25px; border-radius:50px; z-index:9999; transition:all 0.3s;">Message</div>
+
+  <script>
+    // ===== ADMIN LOGIN CREDENTIALS =====
+    const ADMIN_CREDENTIALS = {
+      username: 'admin',
+      password: 'admin123'
+    };
+
+    // ===== LOGIN FUNCTION =====
+    function handleAdminLogin(event) {
+      event.preventDefault();
+      
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const loginBtn = document.getElementById('loginBtn');
+      
+      if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+        // Show loading
+        loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+        
+        setTimeout(() => {
+          document.getElementById('loginPage').style.display = 'none';
+          document.getElementById('dashboardPage').classList.add('active');
+          initDashboard();
+          showToast('Welcome Admin! Login successful');
+        }, 1000);
+      } else {
+        document.getElementById('loginAlert').style.display = 'block';
+        document.getElementById('loginAlert').textContent = 'Invalid username or password';
+      }
+      
+      return false;
+    }
+
+    // ===== INIT DASHBOARD =====
+    function initDashboard() {
+      // Load all data
+      loadCustomers();
+      loadDealers();
+      loadOrders();
+      loadPayments();
+      loadComplaints();
+      
+      // Initialize charts
+      initRevenueChart();
+      initOrderChart();
+      
+      // Initialize DataTables
+      initDataTables();
+      
+      // Start loading animation
+      const loader = document.getElementById('loading-page');
+      if (loader) {
+        loader.classList.add('hidden');
+      }
+    }
+              
