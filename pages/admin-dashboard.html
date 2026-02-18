@@ -1342,4 +1342,371 @@
         loader.classList.add('hidden');
       }
     }
-              
+          // ===== LOAD CUSTOMERS =====
+    function loadCustomers() {
+      const customers = JSON.parse(localStorage.getItem('users') || '{"customers":[],"dealers":[]}');
+      const tbody = document.getElementById('customersTableBody');
+      
+      if (tbody) {
+        tbody.innerHTML = customers.customers.map(c => `
+          <tr>
+            <td>${c.id || 'CUST'+Date.now()}</td>
+            <td>${c.name || 'N/A'}</td>
+            <td>${c.email || 'N/A'}</td>
+            <td>${c.phone || 'N/A'}</td>
+            <td>${c.address || 'Mysore'}</td>
+            <td>${c.orders || 0}</td>
+            <td><span class="status-badge status-active">Active</span></td>
+            <td>${new Date().toLocaleDateString()}</td>
+            <td>
+              <button class="btn btn-sm btn-primary" onclick="viewCustomer('${c.id}')">View</button>
+              <button class="btn btn-sm btn-danger" onclick="deleteCustomer('${c.id}')">Delete</button>
+            </td>
+          </tr>
+        `).join('');
+        
+        // Update total customers count
+        document.getElementById('totalCustomers').textContent = customers.customers.length;
+      }
+    }
+
+    // ===== LOAD DEALERS =====
+    function loadDealers() {
+      const dealers = JSON.parse(localStorage.getItem('users') || '{"customers":[],"dealers":[]}');
+      const tbody = document.getElementById('dealersTableBody');
+      
+      if (tbody) {
+        tbody.innerHTML = dealers.dealers.map(d => `
+          <tr>
+            <td>${d.id || 'DLR'+Date.now()}</td>
+            <td>${d.name || 'N/A'}</td>
+            <td>${d.phone || 'N/A'}</td>
+            <td>${d.gst || 'N/A'}</td>
+            <td>${d.areas ? d.areas.join(', ') : 'Mysore'}</td>
+            <td>${d.orders || 0}</td>
+            <td>10%</td>
+            <td><span class="status-badge status-active">Active</span></td>
+            <td>
+              <button class="btn btn-sm btn-primary" onclick="viewDealer('${d.id}')">View</button>
+              <button class="btn btn-sm btn-danger" onclick="deleteDealer('${d.id}')">Delete</button>
+            </td>
+          </tr>
+        `).join('');
+        
+        // Update total dealers count
+        document.getElementById('totalDealers').textContent = dealers.dealers.length;
+      }
+    }
+
+    // ===== LOAD ORDERS =====
+    function loadOrders() {
+      const orders = JSON.parse(localStorage.getItem('allOrders') || '[]');
+      const tbody = document.getElementById('ordersTableBody');
+      
+      if (tbody) {
+        tbody.innerHTML = orders.map(o => `
+          <tr>
+            <td>${o.id || 'ORD'+Date.now()}</td>
+            <td>${o.customerName || 'N/A'}</td>
+            <td>${o.products || 'N/A'}</td>
+            <td>₹${o.amount || 0}</td>
+            <td>₹${o.advance || 0}</td>
+            <td>₹${o.balance || 0}</td>
+            <td><span class="status-badge status-${o.status || 'pending'}">${o.status || 'pending'}</span></td>
+            <td>${o.dealerName || 'Unassigned'}</td>
+            <td>
+              <button class="btn btn-sm btn-primary" onclick="viewOrder('${o.id}')">View</button>
+              <button class="btn btn-sm btn-secondary" onclick="updateOrderStatus('${o.id}')">Update</button>
+            </td>
+          </tr>
+        `).join('');
+        
+        // Update total orders count
+        document.getElementById('totalOrders').textContent = orders.length;
+      }
+    }
+
+    // ===== LOAD PAYMENTS =====
+    function loadPayments() {
+      const payments = JSON.parse(localStorage.getItem('payments') || '[]');
+      const tbody = document.getElementById('paymentsTableBody');
+      
+      if (tbody) {
+        tbody.innerHTML = payments.map(p => `
+          <tr>
+            <td>${p.id || 'PAY'+Date.now()}</td>
+            <td>${p.orderId || 'N/A'}</td>
+            <td>${p.customerName || 'N/A'}</td>
+            <td>₹${p.amount || 0}</td>
+            <td>${p.method || 'Cash'}</td>
+            <td><span class="status-badge status-${p.status || 'completed'}">${p.status || 'completed'}</span></td>
+            <td>${new Date().toLocaleDateString()}</td>
+            <td>
+              <button class="btn btn-sm btn-primary" onclick="viewPayment('${p.id}')">View</button>
+            </td>
+          </tr>
+        `).join('');
+        
+        // Calculate total revenue
+        const total = payments.reduce((sum, p) => sum + (p.amount || 0), 0);
+        document.getElementById('totalRevenue').textContent = '₹' + (total/100000).toFixed(1) + 'L';
+      }
+    }
+
+    // ===== LOAD COMPLAINTS =====
+    function loadComplaints() {
+      const complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
+      const tbody = document.getElementById('complaintsTableBody');
+      
+      if (tbody) {
+        tbody.innerHTML = complaints.map(c => `
+          <tr>
+            <td>${c.id || 'CMP'+Date.now()}</td>
+            <td>${c.customerName || 'N/A'}</td>
+            <td>${c.orderId || 'N/A'}</td>
+            <td>${c.type || 'General'}</td>
+            <td>${c.description || 'N/A'}</td>
+            <td><span class="status-badge status-${c.status || 'pending'}">${c.status || 'pending'}</span></td>
+            <td>${new Date().toLocaleDateString()}</td>
+            <td>
+              <button class="btn btn-sm btn-primary" onclick="resolveComplaint('${c.id}')">Resolve</button>
+            </td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    // ===== INIT DATA TABLES =====
+    function initDataTables() {
+      setTimeout(() => {
+        $('#recentOrdersTable').DataTable();
+        $('#recentCustomersTable').DataTable();
+        $('#customersTable').DataTable();
+        $('#dealersTable').DataTable();
+        $('#ordersTable').DataTable();
+        $('#paymentsTable').DataTable();
+        $('#complaintsTable').DataTable();
+      }, 500);
+    }
+
+    // ===== CHARTS =====
+    let revenueChart, orderChart;
+
+    function initRevenueChart() {
+      const ctx = document.getElementById('revenueChart').getContext('2d');
+      revenueChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          datasets: [{
+            label: 'Revenue (₹)',
+            data: [12000, 19000, 15000, 22000, 28000, 32000, 25000],
+            borderColor: '#1a4b8c',
+            backgroundColor: 'rgba(26,75,140,0.1)',
+            tension: 0.4,
+            fill: true
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      });
+    }
+
+    function initOrderChart() {
+      const ctx = document.getElementById('orderChart').getContext('2d');
+      orderChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Completed', 'Processing', 'Pending', 'Dispatched'],
+          datasets: [{
+            data: [45, 25, 20, 10],
+            backgroundColor: ['#28a745', '#ffc107', '#dc3545', '#17a2b8']
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      });
+    }
+
+    function updateRevenueChart(period) {
+      // Update chart data based on period
+      let data;
+      if (period === 'week') data = [12000, 19000, 15000, 22000, 28000, 32000, 25000];
+      else if (period === 'month') data = [45000, 52000, 48000, 68000, 75000, 82000, 91000];
+      else data = [450000, 520000, 480000, 680000, 750000, 820000, 910000];
+      
+      revenueChart.data.datasets[0].data = data;
+      revenueChart.update();
+    }
+
+    // ===== ADD CUSTOMER =====
+    function addCustomer(event) {
+      event.preventDefault();
+      
+      const name = document.getElementById('custName').value;
+      const phone = document.getElementById('custPhone').value;
+      const email = document.getElementById('custEmail').value;
+      const area = document.getElementById('custArea').value;
+      const address = document.getElementById('custAddress').value;
+      const password = document.getElementById('custPassword').value;
+      
+      const users = JSON.parse(localStorage.getItem('users') || '{"customers":[],"dealers":[]}');
+      
+      const newCustomer = {
+        id: 'CUST' + Date.now().toString().slice(-6),
+        name: name,
+        phone: phone,
+        email: email,
+        area: area,
+        address: address,
+        password: password,
+        type: 'customer',
+        joinDate: new Date().toISOString(),
+        orders: 0
+      };
+      
+      users.customers.push(newCustomer);
+      localStorage.setItem('users', JSON.stringify(users));
+      
+      showToast('Customer added successfully! ID: ' + newCustomer.id);
+      closeModal('addCustomerModal');
+      loadCustomers();
+      
+      return false;
+    }
+
+    // ===== ADD DEALER =====
+    function addDealer(event) {
+      event.preventDefault();
+      
+      const name = document.getElementById('dealerName').value;
+      const phone = document.getElementById('dealerPhone').value;
+      const email = document.getElementById('dealerEmail').value;
+      const gst = document.getElementById('dealerGST').value;
+      const areas = Array.from(document.getElementById('dealerAreas').selectedOptions).map(o => o.value);
+      const commission = document.getElementById('dealerCommission').value;
+      const password = document.getElementById('dealerPassword').value;
+      
+      const users = JSON.parse(localStorage.getItem('users') || '{"customers":[],"dealers":[]}');
+      
+      const newDealer = {
+        id: 'DLR' + Date.now().toString().slice(-6),
+        name: name,
+        phone: phone,
+        email: email,
+        gst: gst,
+        areas: areas,
+        commission: commission,
+        password: password,
+        type: 'dealer',
+        joinDate: new Date().toISOString(),
+        orders: 0,
+        earnings: 0
+      };
+      
+      users.dealers.push(newDealer);
+      localStorage.setItem('users', JSON.stringify(users));
+      
+      showToast('Dealer added successfully! ID: ' + newDealer.id);
+      closeModal('addDealerModal');
+      loadDealers();
+      
+      return false;
+    }
+
+    // ===== CREATE ORDER =====
+    function createOrder(event) {
+      event.preventDefault();
+      
+      const customer = document.getElementById('orderCustomer').value;
+      const dealer = document.getElementById('orderDealer').value;
+      const products = document.getElementById('orderProducts').value;
+      const amount = parseFloat(document.getElementById('orderAmount').value);
+      const advance = parseFloat(document.getElementById('orderAdvance').value);
+      const gst = amount * 0.18;
+      const balance = (amount + gst) - advance;
+      const deadline = document.getElementById('orderDeadline').value;
+      
+      document.getElementById('orderGst').value = gst;
+      document.getElementById('orderBalance').value = balance;
+      
+      const orderId = 'ORD' + Date.now().toString().slice(-6);
+      
+      const order = {
+        id: orderId,
+        customerId: customer,
+        dealerId: dealer,
+        products: products,
+        amount: amount,
+        advance: advance,
+        gst: gst,
+        balance: balance,
+        status: 'pending',
+        deadline: deadline,
+        createdAt: new Date().toISOString(),
+        timeline: [{
+          status: 'order_placed',
+          time: new Date().toISOString()
+        }]
+      };
+      
+      const orders = JSON.parse(localStorage.getItem('allOrders') || '[]');
+      orders.push(order);
+      localStorage.setItem('allOrders', JSON.stringify(orders));
+      
+      showToast('Order created successfully! ID: ' + orderId);
+      closeModal('newOrderModal');
+      loadOrders();
+      
+      return false;
+    }
+
+    // ===== VIEW ORDER DETAILS =====
+    function viewOrder(orderId) {
+      const orders = JSON.parse(localStorage.getItem('allOrders') || '[]');
+      const order = orders.find(o => o.id === orderId) || {
+        id: orderId,
+        customer: 'Ramesh Kumar',
+        products: '5 Windows - Fiberglass',
+        amount: 12500,
+        advance: 5000,
+        balance: 7500,
+        status: 'processing',
+        deadline: '48 hours remaining',
+        timeline: [
+          'Order placed: Today 10:30 AM',
+          'Processing: Today 11:45 AM',
+          'Expected dispatch: Tomorrow'
+        ]
+      };
+      
+      document.getElementById('orderDetailsContent').innerHTML = `
+        <div style="background:var(--light); padding:20px; border-radius:10px;">
+          <h3>Order #${order.id}</h3>
+          <p><strong>Customer:</strong> ${order.customer}</p>
+          <p><strong>Products:</strong> ${order.products}</p>
+          <p><strong>Total Amount:</strong> ₹${order.amount}</p>
+          <p><strong>Advance Paid:</strong> ₹${order.advance}</p>
+          <p><strong>Balance:</strong> ₹${order.balance}</p>
+          <p><strong>Status:</strong> <span class="status-badge status-${order.status}">${order.status}</span></p>
+          <p><strong>Deadline:</strong> ${order.deadline}</p>
+          
+          <h4 style="margin-top:15px;">Timeline:</h4>
+          <ul>
+            ${order.timeline.map(t => `<li>${t}</li>`).join('')}
+          </ul>
+          
+          <div style="margin-top:20px;">
+            <button class="btn btn-primary" onclick="updateOrderStatus('${order.id}')">Update Status</button>
+            <button class="btn btn-secondary" onclick="closeModal('orderDetailsModal')">Close</button>
+          </div>
+        </div>
+      `;
+      
+      openModal('orderDetailsModal');
+    }
+    
