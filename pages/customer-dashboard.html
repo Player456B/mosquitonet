@@ -9,247 +9,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- FullCalendar for Appointment Calendar -->
+  <!-- FullCalendar -->
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
   
-  <!-- Animate.css -->
-  <link rel="stylesheet"   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
-
-  <script>
-    // ===== INITIALIZATION =====
-    document.addEventListener('DOMContentLoaded', function() {
-      // Initialize AOS
-      AOS.init({
-        duration: 800,
-        once: true,
-        offset: 100
-      });
-
-      // Loading animation
-      const loader = document.getElementById('loading-page');
-      setTimeout(() => {
-        loader.classList.add('hidden');
-      }, 2000);
-
-      // Update date and time
-      updateDateTime();
-      setInterval(updateDateTime, 1000);
-
-      // Load streak calendar
-      loadStreakCalendar();
-
-      // Check login status
-      const currentUser = JSON.parse(localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser'));
-      
-      if (!currentUser || currentUser.type !== 'customer') {
-        window.location.href = 'customer-login.html';
-      } else {
-        loadUserData(currentUser);
-      }
-    });
-
-    // ===== UPDATE DATE TIME =====
-    function updateDateTime() {
-      const now = new Date();
-      const options = { 
-        weekday: 'short', 
-        year: 'numeric', 
-        month: 'short', 
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      };
-      document.getElementById('currentDateTime').textContent = now.toLocaleString('en-US', options);
-    }
-
-    // ===== LOAD USER DATA =====
-    function loadUserData(user) {
-      document.getElementById('customerName').textContent = user.name || 'Ramesh';
-      document.getElementById('customerFullName').textContent = user.name || 'Ramesh Kumar';
-      document.getElementById('customerId').textContent = user.id || 'CUST001';
-      document.getElementById('customerPhone').textContent = user.phone || '+91-9876543210';
-      document.getElementById('customerAddress').textContent = user.address || '#65, Hootgalli, Mysore';
-      document.getElementById('memberSince').textContent = user.joinDate || 'Jan 2024';
-      
-      // Load profile image if exists
-      if (user.avatar) {
-        document.getElementById('profileImage').src = user.avatar;
-      }
-    }
-
-    // ===== STREAK CALENDAR =====
-    function loadStreakCalendar() {
-      const calendar = document.getElementById('streakCalendar');
-      const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-      
-      let html = '';
-      for (let i = 0; i < 35; i++) {
-        const day = i % 7;
-        const date = i + 1;
-        const isActive = i < 15 ? 'active' : '';
-        html += `<div class="streak-day ${isActive}">${date}</div>`;
-      }
-      calendar.innerHTML = html;
-    }
-
-    // ===== AVATAR MODAL =====
-    function openAvatarModal() {
-      document.getElementById('avatarModal').classList.add('active');
-    }
-
-    function closeModal(modalId) {
-      document.getElementById(modalId).classList.remove('active');
-    }
-
-    function selectAvatar(animal) {
-      const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${animal}`;
-      document.getElementById('profileImage').src = avatarUrl;
-      
-      // Save to user profile
-      const user = JSON.parse(localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser'));
-      if (user) {
-        user.avatar = avatarUrl;
-        localStorage.setItem('currentUser', JSON.stringify(user));
-      }
-      
-      showToast(`Selected ${animal} avatar! 🦁`);
-      closeModal('avatarModal');
-    }
-
-    function uploadCustomPhoto() {
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.accept = 'image/*';
-      input.onchange = function(e) {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.onload = function(event) {
-          document.getElementById('profileImage').src = event.target.result;
-          showToast('Photo uploaded successfully!');
-        };
-        reader.readAsDataURL(file);
-      };
-      input.click();
-    }
-
-    // ===== ORDER TRACKING =====
-    function refreshTracking() {
-      showToast('Refreshing order status...');
-      setTimeout(() => {
-        showToast('Order status updated!');
-      }, 1000);
-    }
-
-    function viewPhoto(photoId) {
-      showToast(`Viewing photo ${photoId}`);
-    }
-
-    function collectSignature() {
-      showToast('Please sign on the device');
-    }
-
-    // ===== LOYALTY PROGRAM =====
-    function redeemPoints() {
-      showToast('Opening points redemption...');
-    }
-
-    // ===== REFERRAL PROGRAM =====
-    function copyReferral() {
-      const code = document.getElementById('referralCode').textContent;
-      navigator.clipboard.writeText(code).then(() => {
-        showToast('Referral code copied!');
-      });
-    }
-
-    function share(platform) {
-      const code = document.getElementById('referralCode').textContent;
-      const message = `Join Raj Marketing using my referral code ${code} and get 500 points!`;
-      
-      if (platform === 'whatsapp') {
-        window.open(`https://wa.me/?text=${encodeURIComponent(message)}`);
-      } else if (platform === 'facebook') {
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://rajmarketing.com')}&quote=${encodeURIComponent(message)}`);
-      } else if (platform === 'twitter') {
-        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`);
-      }
-      showToast(`Sharing on ${platform}...`);
-    }
-
-    // ===== PAYMENT =====
-    document.getElementById('emiAmount')?.addEventListener('input', calculateEMI);
-    document.getElementById('emiMonths')?.addEventListener('input', calculateEMI);
-
-    function calculateEMI() {
-      const amount = parseFloat(document.getElementById('emiAmount').value) || 0;
-      const months = parseFloat(document.getElementById('emiMonths').value) || 0;
-      
-      if (amount && months) {
-        const interest = amount * 0.12; // 12% interest
-        const total = amount + interest;
-        const emi = total / months;
-        document.getElementById('emiResult').innerHTML = `Monthly EMI: ₹${emi.toFixed(2)}`;
-      }
-    }
-
-    // ===== SECTION NAVIGATION =====
-    function openSection(section) {
-      const sections = {
-        'order': 'Place new order',
-        'track': 'Track your order',
-        'payment': 'Payment options',
-        'appointment': 'Schedule appointment',
-        'service': 'Request quick service',
-        'complaint': 'Register complaint',
-        'referral': 'Refer & earn points',
-        'support': 'Contact support'
-      };
-      showToast(sections[section]);
-    }
-
-    // ===== NOTIFICATIONS =====
-    function showNotifications() {
-      showToast('You have 5 new notifications');
-    }
-
-    // ===== TOAST =====
-    function showToast(message) {
-      const toast = document.getElementById('toast');
-      toast.textContent = message;
-      toast.classList.add('show');
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 3000);
-    }
-
-    // Make functions global
-    window.openAvatarModal = openAvatarModal;
-    window.closeModal = closeModal;
-    window.selectAvatar = selectAvatar;
-    window.uploadCustomPhoto = uploadCustomPhoto;
-    window.refreshTracking = refreshTracking;
-    window.viewPhoto = viewPhoto;
-    window.collectSignature = collectSignature;
-    window.redeemPoints = redeemPoints;
-    window.copyReferral = copyReferral;
-    window.share = share;
-    window.openSection = openSection;
-    window.showNotifications = showNotifications;
-  </script>
-</body>
-</html>
-```="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-  
-  <!-- Hover.css -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css">
-  
-  <!-- AOS -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  
-  <!-- Swiper -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <!-- Leaflet Maps -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   
   <style>
-    /* ===== RESET & BASE ===== */
     * {
       margin: 0;
       padding: 0;
@@ -261,179 +27,17 @@
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: #333;
       min-height: 100vh;
-      overflow-x: hidden;
     }
 
-    /* ===== CUSTOM SCROLLBAR ===== */
-    ::-webkit-scrollbar {
-      width: 12px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-      border-radius: 10px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      border-radius: 10px;
-      border: 2px solid white;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: linear-gradient(135deg, #f0b202 0%, #ff9500 100%);
-    }
-
-    /* ===== ANIMATED BACKGROUND ===== */
-    .animated-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      overflow: hidden;
-    }
-
-    .bg-bubble {
-      position: absolute;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-      animation: float 20s infinite;
-    }
-
-    .bg-bubble:nth-child(1) {
-      width: 300px;
-      height: 300px;
-      top: -150px;
-      left: -150px;
-      animation-delay: 0s;
-    }
-
-    .bg-bubble:nth-child(2) {
-      width: 400px;
-      height: 400px;
-      top: 50%;
-      right: -200px;
-      animation-delay: 5s;
-    }
-
-    .bg-bubble:nth-child(3) {
-      width: 500px;
-      height: 500px;
-      bottom: -250px;
-      left: 20%;
-      animation-delay: 10s;
-    }
-
-    .bg-bubble:nth-child(4) {
-      width: 200px;
-      height: 200px;
-      top: 20%;
-      left: 30%;
-      animation-delay: 2s;
-    }
-
-    .bg-bubble:nth-child(5) {
-      width: 350px;
-      height: 350px;
-      bottom: 10%;
-      right: 10%;
-      animation-delay: 7s;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0) rotate(0deg); }
-      25% { transform: translate(50px, 50px) rotate(90deg); }
-      50% { transform: translate(0, 100px) rotate(180deg); }
-      75% { transform: translate(-50px, 50px) rotate(270deg); }
-    }
-
-    /* ===== LOADING PAGE ===== */
-    .loading-page {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.8s ease;
-    }
-
-    .loading-page.hidden {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .loader-container {
-      text-align: center;
-      color: white;
-    }
-
-    .loader-logo {
-      width: 150px;
-      height: 150px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 30px;
-      font-size: 4rem;
-      color: white;
-      animation: pulse 2s infinite, rotate 10s linear infinite;
-      box-shadow: 0 0 50px rgba(255, 255, 255, 0.3);
-    }
-
-    .loader-title {
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin-bottom: 10px;
-      animation: slideInDown 1s ease;
-    }
-
-    .loader-subtitle {
-      font-size: 1.2rem;
-      opacity: 0.9;
-      margin-bottom: 30px;
-      animation: slideInUp 1s ease 0.3s both;
-    }
-
-    .loader-bar {
-      width: 400px;
-      height: 10px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 10px;
-      margin: 20px auto;
-      overflow: hidden;
-    }
-
-    .loader-progress {
-      width: 0%;
-      height: 100%;
-      background: linear-gradient(90deg, #f0b202, #ff9500, #ff6b6b);
-      animation: loadingBar 2s ease forwards;
-    }
-
-    @keyframes loadingBar {
-      0% { width: 0%; }
-      100% { width: 100%; }
-    }
-
-    /* ===== MAIN CONTAINER ===== */
+    /* Main Container */
     .dashboard-container {
       max-width: 1400px;
       margin: 0 auto;
       padding: 20px;
       position: relative;
-      z-index: 1;
     }
 
-    /* ===== HEADER ===== */
+    /* Header */
     .header {
       background: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(10px);
@@ -443,9 +47,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       border: 1px solid rgba(255, 255, 255, 0.3);
-      animation: slideInDown 0.5s ease;
     }
 
     .logo {
@@ -457,16 +59,12 @@
     .logo i {
       font-size: 2rem;
       color: white;
-      filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
-      animation: pulse 2s infinite;
     }
 
     .logo span {
       font-size: 1.5rem;
       font-weight: 700;
-      background: linear-gradient(135deg, #fff, #f0b202);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: white;
     }
 
     .header-actions {
@@ -483,131 +81,72 @@
     .notification-bell i {
       font-size: 1.5rem;
       color: white;
-      transition: all 0.3s;
-    }
-
-    .notification-bell:hover i {
-      transform: rotate(15deg);
-      color: #f0b202;
     }
 
     .badge {
       position: absolute;
       top: -5px;
       right: -5px;
-      background: linear-gradient(135deg, #ff6b6b, #ff4757);
+      background: #ff4757;
       color: white;
       font-size: 0.7rem;
       padding: 2px 6px;
       border-radius: 50%;
-      animation: pulse 1s infinite;
     }
 
-    .date-time {
-      color: white;
-      font-weight: 500;
+    .logout-btn {
       background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .logout-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Profile Section */
+    .profile-section {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 30px;
+      padding: 30px;
+      margin-bottom: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .profile-cover {
+      height: 200px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 20px;
+      position: relative;
+      margin-bottom: 60px;
+      overflow: hidden;
+    }
+
+    .cover-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.3;
+    }
+
+    .cover-edit {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
       padding: 8px 15px;
       border-radius: 30px;
-      backdrop-filter: blur(5px);
+      cursor: pointer;
+      font-size: 0.9rem;
     }
 
-    /* ===== PROFILE COVER ===== */
-    .profile-cover {
-      position: relative;
-      height: 300px;
-      border-radius: 30px;
-      overflow: hidden;
-      margin-bottom: 80px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-      animation: slideInUp 0.5s ease;
-    }
-
-    .cover-slider {
-      width: 100%;
-      height: 100%;
-      position: relative;
-    }
-
-    .cover-slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-      opacity: 0;
-      animation: coverSlide 20s infinite;
-    }
-
-    .cover-slide:nth-child(1) {
-      background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      animation-delay: 0s;
-    }
-
-    .cover-slide:nth-child(2) {
-      background-image: linear-gradient(135deg, #f0b202 0%, #ff9500 100%);
-      animation-delay: 5s;
-    }
-
-    .cover-slide:nth-child(3) {
-      background-image: linear-gradient(135deg, #ff6b6b 0%, #ff4757 100%);
-      animation-delay: 10s;
-    }
-
-    .cover-slide:nth-child(4) {
-      background-image: linear-gradient(135deg, #1a4b8c 0%, #2d6ab3 100%);
-      animation-delay: 15s;
-    }
-
-    .cover-slide:nth-child(5) {
-      background-image: linear-gradient(135deg, #00a86b 0%, #4cd964 100%);
-      animation-delay: 20s;
-    }
-
-    @keyframes coverSlide {
-      0%, 20%, 100% { opacity: 0; }
-      5%, 15% { opacity: 1; }
-    }
-
-    .cover-title {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      z-index: 2;
-      width: 100%;
-      padding: 20px;
-    }
-
-    .cover-title h1 {
-      font-size: 4rem;
-      font-weight: 800;
-      color: white;
-      text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
-      margin-bottom: 10px;
-      animation: fadeInDown 1s ease;
-    }
-
-    .cover-title p {
-      font-size: 1.2rem;
-      color: rgba(255, 255, 255, 0.9);
-      animation: fadeInUp 1s ease 0.3s both;
-    }
-
-    .cover-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.3);
-      z-index: 1;
-    }
-
-    /* ===== PROFILE INFO ===== */
     .profile-info {
       position: relative;
       display: flex;
@@ -615,7 +154,6 @@
       gap: 30px;
       margin-top: -60px;
       padding: 0 30px;
-      z-index: 3;
     }
 
     .profile-avatar {
@@ -623,16 +161,9 @@
       height: 150px;
       border-radius: 50%;
       border: 5px solid white;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
       overflow: hidden;
       cursor: pointer;
-      transition: all 0.3s;
-      animation: bounceIn 0.8s ease;
-    }
-
-    .profile-avatar:hover {
-      transform: scale(1.1) rotate(360deg);
-      border-color: #f0b202;
+      position: relative;
     }
 
     .profile-avatar img {
@@ -641,125 +172,60 @@
       object-fit: cover;
     }
 
-    .avatar-selector {
+    .avatar-overlay {
       position: absolute;
-      bottom: 10px;
-      right: 10px;
-      background: linear-gradient(135deg, #667eea, #764ba2);
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.5);
       color: white;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      transition: all 0.3s;
+      text-align: center;
+      padding: 10px;
+      font-size: 0.8rem;
+      opacity: 0;
+      transition: opacity 0.3s;
     }
 
-    .avatar-selector:hover {
-      transform: scale(1.1);
-      background: linear-gradient(135deg, #f0b202, #ff9500);
+    .profile-avatar:hover .avatar-overlay {
+      opacity: 1;
     }
 
     .profile-details {
       flex: 1;
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(10px);
-      border-radius: 30px;
-      padding: 25px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      animation: slideInRight 0.5s ease 0.3s both;
-    }
-
-    .profile-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 15px;
-    }
-
-    .profile-header h2 {
       color: white;
-      font-size: 2rem;
-      font-weight: 700;
     }
 
-    .online-status {
+    .profile-details h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .profile-stats {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
       display: flex;
       align-items: center;
       gap: 5px;
-      background: rgba(76, 217, 100, 0.3);
-      padding: 5px 15px;
-      border-radius: 30px;
-    }
-
-    .online-dot {
-      width: 10px;
-      height: 10px;
-      background: #4cd964;
-      border-radius: 50%;
-      animation: pulse 1s infinite;
-    }
-
-    .profile-meta {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
-      margin-bottom: 15px;
-    }
-
-    .meta-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: white;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.2);
       padding: 8px 15px;
       border-radius: 30px;
-      transition: all 0.3s;
+      font-size: 0.9rem;
     }
 
-    .meta-item:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateX(5px);
-    }
-
-    .meta-item i {
+    .stat-item i {
       color: #f0b202;
     }
 
-    .security-score {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 8px 15px;
-      border-radius: 30px;
-    }
-
-    .score-bar {
-      width: 100px;
-      height: 8px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .score-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #4cd964, #f0b202);
-      border-radius: 10px;
-      transition: width 0.3s;
-    }
-
-    /* ===== STATS CARDS ===== */
+    /* Stats Grid */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 20px;
-      margin: 30px 0;
+      margin-bottom: 30px;
     }
 
     .stat-card {
@@ -768,108 +234,61 @@
       border-radius: 20px;
       padding: 25px;
       border: 1px solid rgba(255, 255, 255, 0.3);
-      transition: all 0.3s;
-      animation: fadeInUp 0.5s ease forwards;
-      opacity: 0;
-    }
-
-    .stat-card:nth-child(1) { animation-delay: 0.1s; }
-    .stat-card:nth-child(2) { animation-delay: 0.2s; }
-    .stat-card:nth-child(3) { animation-delay: 0.3s; }
-    .stat-card:nth-child(4) { animation-delay: 0.4s; }
-
-    .stat-card:hover {
-      transform: translateY(-10px) scale(1.05);
-      background: rgba(255, 255, 255, 0.3);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    }
-
-    .stat-icon {
-      width: 60px;
-      height: 60px;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      border-radius: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 15px;
       color: white;
-      font-size: 1.5rem;
-      animation: pulse 2s infinite;
+      text-align: center;
     }
 
-    .stat-value {
+    .stat-card h3 {
       font-size: 2rem;
-      font-weight: 700;
-      color: white;
       margin-bottom: 5px;
     }
 
-    .stat-label {
-      color: rgba(255, 255, 255, 0.9);
+    .stat-card p {
       font-size: 0.9rem;
+      opacity: 0.9;
     }
 
-    /* ===== QUICK SERVICE GRID ===== */
+    /* Service Grid */
     .service-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 15px;
-      margin: 30px 0;
+      margin-bottom: 30px;
     }
 
-    .service-card {
+    .service-btn {
       background: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 15px;
       padding: 20px;
+      color: white;
       text-align: center;
       cursor: pointer;
       transition: all 0.3s;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      animation: fadeInUp 0.5s ease forwards;
-      opacity: 0;
     }
 
-    .service-card:nth-child(1) { animation-delay: 0.1s; }
-    .service-card:nth-child(2) { animation-delay: 0.2s; }
-    .service-card:nth-child(3) { animation-delay: 0.3s; }
-    .service-card:nth-child(4) { animation-delay: 0.4s; }
-    .service-card:nth-child(5) { animation-delay: 0.5s; }
-    .service-card:nth-child(6) { animation-delay: 0.6s; }
-    .service-card:nth-child(7) { animation-delay: 0.7s; }
-    .service-card:nth-child(8) { animation-delay: 0.8s; }
-
-    .service-card:hover {
-      transform: translateY(-10px);
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      box-shadow: 0 20px 30px rgba(0,0,0,0.2);
+    .service-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-5px);
     }
 
-    .service-card i {
+    .service-btn i {
       font-size: 2rem;
       color: #f0b202;
       margin-bottom: 10px;
-      transition: all 0.3s;
     }
 
-    .service-card:hover i {
-      transform: scale(1.2);
-      color: white;
-    }
-
-    .service-card span {
-      color: white;
-      font-weight: 500;
+    .service-btn span {
+      display: block;
       font-size: 0.9rem;
     }
 
-    /* ===== DASHBOARD GRID ===== */
+    /* Dashboard Grid */
     .dashboard-grid {
       display: grid;
       grid-template-columns: 2fr 1fr;
       gap: 20px;
-      margin: 30px 0;
     }
 
     .card {
@@ -879,12 +298,7 @@
       padding: 25px;
       border: 1px solid rgba(255, 255, 255, 0.3);
       margin-bottom: 20px;
-      transition: all 0.3s;
-      animation: fadeInUp 0.5s ease;
-    }
-
-    .card:hover {
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      color: white;
     }
 
     .card-header {
@@ -892,13 +306,11 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 20px;
-      padding-bottom: 15px;
-      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .card-header h3 {
-      color: white;
-      font-size: 1.3rem;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -908,61 +320,43 @@
       color: #f0b202;
     }
 
-    .view-all {
-      color: white;
-      text-decoration: none;
-      font-size: 0.9rem;
-      padding: 5px 15px;
+    /* Order Tracking */
+    .order-item {
       background: rgba(255, 255, 255, 0.1);
-      border-radius: 30px;
-      transition: all 0.3s;
-    }
-
-    .view-all:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateX(5px);
-    }
-
-    /* ===== ORDER TRACKING ===== */
-    .order-tracking {
-      background: rgba(0, 0, 0, 0.2);
       border-radius: 15px;
-      padding: 20px;
-      margin-bottom: 20px;
+      padding: 15px;
+      margin-bottom: 15px;
     }
 
-    .tracking-header {
+    .order-header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 
     .order-id {
-      color: white;
       font-weight: 600;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 5px 15px;
-      border-radius: 30px;
-    }
-
-    .eta {
       color: #f0b202;
-      font-weight: 600;
-      animation: pulse 1s infinite;
     }
 
-    .progress-steps {
+    .order-status {
+      background: rgba(240, 178, 2, 0.2);
+      padding: 3px 10px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+    }
+
+    .order-progress {
       display: flex;
       justify-content: space-between;
-      margin: 30px 0;
+      margin: 20px 0;
       position: relative;
     }
 
-    .progress-steps::before {
+    .order-progress::before {
       content: '';
       position: absolute;
-      top: 20px;
+      top: 15px;
       left: 0;
       right: 0;
       height: 2px;
@@ -970,405 +364,108 @@
       z-index: 1;
     }
 
-    .step {
+    .progress-step {
       position: relative;
       z-index: 2;
       text-align: center;
       flex: 1;
     }
 
-    .step-icon {
-      width: 40px;
-      height: 40px;
-      background: rgba(255, 255, 255, 0.1);
+    .step-dot {
+      width: 30px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.2);
       border-radius: 50%;
+      margin: 0 auto 5px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 10px;
-      color: white;
       border: 2px solid transparent;
-      transition: all 0.3s;
     }
 
-    .step.completed .step-icon {
-      background: linear-gradient(135deg, #4cd964, #00a86b);
+    .step-dot.completed {
+      background: #4cd964;
       border-color: white;
-      animation: pulse 1s;
     }
 
-    .step.active .step-icon {
-      background: linear-gradient(135deg, #f0b202, #ff9500);
+    .step-dot.active {
+      background: #f0b202;
       border-color: white;
-      animation: pulse 1s infinite;
     }
 
     .step-label {
-      color: white;
-      font-size: 0.8rem;
+      font-size: 0.7rem;
     }
 
-    .live-map {
-      height: 200px;
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 15px;
-      margin: 20px 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .map-placeholder {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #1a4b8c, #2d6ab3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .moving-dot {
-      width: 20px;
-      height: 20px;
-      background: #f0b202;
-      border-radius: 50%;
-      position: absolute;
-      animation: moveDot 5s linear infinite;
-      box-shadow: 0 0 20px #f0b202;
-    }
-
-    .moving-dot::after {
-      content: '';
-      position: absolute;
-      top: -10px;
-      left: -10px;
-      right: -10px;
-      bottom: -10px;
-      border: 2px solid #f0b202;
-      border-radius: 50%;
-      animation: pulse 1s infinite;
-    }
-
-    @keyframes moveDot {
-      0%, 100% { top: 20%; left: 20%; }
-      25% { top: 20%; left: 80%; }
-      50% { top: 80%; left: 80%; }
-      75% { top: 80%; left: 20%; }
-    }
-
-    .installation-photos {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin: 15px 0;
-    }
-
-    .photo-thumb {
-      height: 80px;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.5rem;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .photo-thumb:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    }
-
-       .signature-pad {
-      height: 100px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 2px dashed rgba(255, 255, 255, 0.3);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255, 255, 255, 0.5);
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .signature-pad:hover {
-      background: rgba(255, 255, 255, 0.2);
-      border-color: #f0b202;
-    }
-
-    /* ===== LOYALTY PROGRAM ===== */
-    .loyalty-card {
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      border-radius: 20px;
-      padding: 25px;
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 20px;
-    }
-
-    .loyalty-card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 50%);
-      animation: rotate 20s linear infinite;
-    }
-
-    .loyalty-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .tier-badge {
-      background: rgba(255, 255, 255, 0.2);
-      padding: 8px 20px;
-      border-radius: 30px;
-      color: white;
-      font-weight: 600;
-      backdrop-filter: blur(5px);
-    }
-
-    .points-balance {
-      text-align: center;
-      margin: 20px 0;
-    }
-
-    .points-number {
-      font-size: 3rem;
-      font-weight: 800;
-      color: #f0b202;
-      text-shadow: 0 0 20px rgba(240, 178, 2, 0.5);
-    }
-
-    .points-label {
-      color: white;
-      font-size: 0.9rem;
-    }
-
-    .tier-progress {
-      margin: 20px 0;
-    }
-
-    .progress-labels {
-      display: flex;
-      justify-content: space-between;
-      color: white;
-      margin-bottom: 5px;
-    }
-
-    .tier-bar {
-      height: 10px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .tier-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #f0b202, #ff9500);
-      border-radius: 10px;
-      transition: width 0.3s;
-    }
-
-    .tier-benefits {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
-
-    .benefit-tag {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 5px 15px;
-      border-radius: 30px;
-      color: white;
-      font-size: 0.8rem;
-      backdrop-filter: blur(5px);
-    }
-
-    /* ===== REFERRAL PROGRAM ===== */
-    .referral-card {
-      background: linear-gradient(135deg, #f0b202, #ff9500);
-      border-radius: 20px;
-      padding: 25px;
-      margin-bottom: 20px;
-    }
-
-    .referral-code {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(0, 0, 0, 0.1);
-      padding: 15px;
-      border-radius: 15px;
-      margin: 15px 0;
-    }
-
-    .code {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: white;
-      letter-spacing: 2px;
-    }
-
-    .copy-btn {
-      background: rgba(255, 255, 255, 0.2);
-      border: none;
-      color: white;
-      padding: 8px 20px;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .copy-btn:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: scale(1.05);
-    }
-
-    .share-buttons {
+    .order-actions {
       display: flex;
       gap: 10px;
     }
 
-    .share-btn {
+    .order-actions button {
       flex: 1;
-      background: rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.2);
       border: none;
       color: white;
-      padding: 10px;
-      border-radius: 10px;
+      padding: 8px;
+      border-radius: 30px;
       cursor: pointer;
-      transition: all 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
+      font-size: 0.8rem;
     }
 
-    .share-btn:hover {
-      transform: translateY(-3px);
+    .order-actions button:hover {
+      background: rgba(255, 255, 255, 0.3);
     }
 
-    .share-btn.whatsapp:hover { background: #25D366; }
-    .share-btn.facebook:hover { background: #4267B2; }
-    .share-btn.twitter:hover { background: #1DA1F2; }
+    /* Map */
+    #map {
+      height: 200px;
+      border-radius: 15px;
+      margin: 15px 0;
+    }
 
-    /* ===== PAYMENT SECTION ===== */
+    /* Payment Methods */
     .payment-methods {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
       gap: 10px;
-      flex-wrap: wrap;
       margin: 15px 0;
     }
 
     .payment-method {
-      flex: 1;
-      min-width: 100px;
       background: rgba(255, 255, 255, 0.1);
       border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 10px;
       padding: 15px;
       text-align: center;
       cursor: pointer;
-      transition: all 0.3s;
     }
 
     .payment-method:hover {
       background: rgba(255, 255, 255, 0.2);
-      transform: translateY(-5px);
     }
 
     .payment-method i {
       font-size: 2rem;
       color: #f0b202;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
     }
 
     .payment-method span {
-      color: white;
+      display: block;
       font-size: 0.8rem;
     }
 
-    .emi-calculator {
-      background: rgba(0, 0, 0, 0.2);
+    /* Appointment Calendar */
+    #calendar {
+      background: white;
       border-radius: 15px;
-      padding: 20px;
-      margin: 15px 0;
+      padding: 15px;
+      color: #333;
     }
 
-    .calc-input {
-      display: flex;
-      gap: 10px;
-      margin: 10px 0;
-    }
-
-    .calc-input input {
-      flex: 1;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 10px;
-      padding: 10px;
-      color: white;
-    }
-
-    .calc-input input::placeholder {
-      color: rgba(255, 255, 255, 0.5);
-    }
-
-    .calc-result {
-      color: #f0b202;
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-
-    /* ===== APPOINTMENT CALENDAR ===== */
-    .calendar-container {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      padding: 20px;
-    }
-
-    .fc {
-      color: white;
-    }
-
-    .fc-toolbar-title {
-      color: white;
-    }
-
-    .fc-button {
-      background: rgba(255, 255, 255, 0.2) !important;
-      border: none !important;
-      color: white !important;
-    }
-
-    .fc-button:hover {
-      background: rgba(255, 255, 255, 0.3) !important;
-    }
-
-    .fc-day {
-      background: rgba(255, 255, 255, 0.05);
-    }
-
-    .fc-day:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .fc-day-today {
-      background: rgba(240, 178, 2, 0.2) !important;
-    }
-
-    /* ===== SERVICE MANAGEMENT ===== */
-    .service-history {
+    /* Service List */
+    .service-list {
       max-height: 300px;
       overflow-y: auto;
     }
@@ -1379,112 +476,104 @@
       gap: 15px;
       padding: 15px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.3s;
-    }
-
-    .service-item:hover {
-      background: rgba(255, 255, 255, 0.1);
-      transform: translateX(5px);
     }
 
     .service-icon {
-      width: 50px;
-      height: 50px;
-      background: linear-gradient(135deg, #667eea, #764ba2);
+      width: 40px;
+      height: 40px;
+      background: rgba(240, 178, 2, 0.2);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
     }
 
-    .service-info {
-      flex: 1;
-    }
-
-    .service-info h4 {
-      color: white;
-      margin-bottom: 5px;
-    }
-
-    .service-info p {
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 0.85rem;
-    }
-
-    .service-rating {
+    .service-icon i {
       color: #f0b202;
     }
 
-    /* ===== COMPLAINT SYSTEM ===== */
-    .complaint-categories {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin: 15px 0;
+    .service-details {
+      flex: 1;
     }
 
-    .complaint-cat {
+    .service-details h4 {
+      font-size: 1rem;
+      margin-bottom: 3px;
+    }
+
+    .service-details p {
+      font-size: 0.8rem;
+      opacity: 0.8;
+    }
+
+    .service-status {
+      font-size: 0.8rem;
+      padding: 3px 10px;
+      border-radius: 30px;
+    }
+
+    .status-completed {
+      background: rgba(76, 217, 100, 0.2);
+      color: #4cd964;
+    }
+
+    .status-pending {
+      background: rgba(240, 178, 2, 0.2);
+      color: #f0b202;
+    }
+
+    /* Complaint Form */
+    .complaint-form {
+      display: none;
+    }
+
+    .complaint-form.active {
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 0.9rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
       background: rgba(255, 255, 255, 0.1);
       border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 10px;
-      padding: 15px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .complaint-cat:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateY(-3px);
-    }
-
-    .complaint-cat i {
-      font-size: 1.5rem;
-      color: #f0b202;
-      margin-bottom: 5px;
-    }
-
-    .complaint-cat span {
       color: white;
-      font-size: 0.8rem;
+      font-family: 'Poppins', sans-serif;
     }
 
-    .priority-levels {
-      display: flex;
-      gap: 10px;
-      margin: 15px 0;
+    .form-group textarea {
+      height: 100px;
+      resize: vertical;
     }
 
-    .priority {
-      flex: 1;
-      padding: 10px;
-      border-radius: 10px;
-      text-align: center;
+    .btn {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border: none;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 30px;
       cursor: pointer;
-      transition: all 0.3s;
+      font-size: 1rem;
+      width: 100%;
     }
 
-    .priority.low {
-      background: rgba(76, 217, 100, 0.2);
-      border: 1px solid #4cd964;
+    .btn:hover {
+      background: linear-gradient(135deg, #764ba2, #667eea);
     }
 
-    .priority.medium {
-      background: rgba(240, 178, 2, 0.2);
-      border: 1px solid #f0b202;
-    }
-
-    .priority.high {
-      background: rgba(255, 75, 75, 0.2);
-      border: 1px solid #ff4b4b;
-    }
-
-    .priority:hover {
-      transform: scale(1.05);
-    }
-
-    /* ===== AVATAR SELECTOR MODAL ===== */
+    /* Modal */
     .modal {
       position: fixed;
       top: 0;
@@ -1496,19 +585,18 @@
       display: none;
       align-items: center;
       justify-content: center;
-      z-index: 10000;
+      z-index: 1000;
     }
 
     .modal.active {
       display: flex;
-      animation: fadeIn 0.3s ease;
     }
 
     .modal-content {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #667eea, #764ba2);
       border-radius: 30px;
       padding: 40px;
-      max-width: 800px;
+      max-width: 600px;
       width: 90%;
       max-height: 80vh;
       overflow-y: auto;
@@ -1518,7 +606,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
     .modal-header h2 {
@@ -1531,230 +619,36 @@
       color: white;
       font-size: 2rem;
       cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .modal-close:hover {
-      transform: rotate(90deg);
-      color: #f0b202;
     }
 
     .animal-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
 
     .animal-option {
       text-align: center;
       cursor: pointer;
+      padding: 15px;
+      border-radius: 15px;
       transition: all 0.3s;
     }
 
     .animal-option:hover {
-      transform: scale(1.1);
+      background: rgba(255, 255, 255, 0.2);
     }
 
     .animal-emoji {
       font-size: 3rem;
-      background: rgba(255, 255, 255, 0.2);
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 10px;
-      border: 3px solid transparent;
-      transition: all 0.3s;
-    }
-
-    .animal-option:hover .animal-emoji {
-      border-color: #f0b202;
-      background: rgba(255, 255, 255, 0.3);
+      margin-bottom: 10px;
     }
 
     .animal-name {
       color: white;
-      font-size: 0.9rem;
     }
 
-    /* ===== ACHIEVEMENT BADGES ===== */
-    .badges-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-      margin: 20px 0;
-    }
-
-    .badge-item {
-      text-align: center;
-      position: relative;
-    }
-
-    .badge-icon {
-      width: 60px;
-      height: 60px;
-      background: linear-gradient(135deg, #f0b202, #ff9500);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 10px;
-      font-size: 1.5rem;
-      color: white;
-      position: relative;
-      animation: pulse 2s infinite;
-    }
-
-    .badge-icon.locked {
-      background: linear-gradient(135deg, #95a5a6, #7f8c8d);
-      opacity: 0.5;
-    }
-
-    .badge-icon.locked::after {
-      content: '\f023';
-      font-family: 'Font Awesome 6 Free';
-      font-weight: 900;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 1rem;
-      color: white;
-    }
-
-    .badge-name {
-      color: white;
-      font-size: 0.8rem;
-    }
-
-    /* ===== ACTIVITY STREAK ===== */
-    .streak-calendar {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 5px;
-      margin: 20px 0;
-    }
-
-    .streak-day {
-      aspect-ratio: 1;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      color: white;
-      transition: all 0.3s;
-    }
-
-    .streak-day.active {
-      background: linear-gradient(135deg, #4cd964, #00a86b);
-      animation: pulse 1s;
-    }
-
-    .streak-day:hover {
-      transform: scale(1.1);
-    }
-
-    /* ===== NOTIFICATION CENTER ===== */
-    .notification-list {
-      max-height: 400px;
-      overflow-y: auto;
-    }
-
-    .notification-item {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      padding: 15px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.3s;
-    }
-
-    .notification-item:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .notification-item.unread {
-      background: rgba(240, 178, 2, 0.1);
-    }
-
-    .notification-icon {
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-    }
-
-    .notification-content {
-      flex: 1;
-    }
-
-    .notification-content h4 {
-      color: white;
-      margin-bottom: 5px;
-      font-size: 0.9rem;
-    }
-
-    .notification-content p {
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 0.8rem;
-    }
-
-    .notification-time {
-      color: rgba(255, 255, 255, 0.5);
-      font-size: 0.7rem;
-    }
-
-    /* ===== BUTTONS ===== */
-    .btn {
-      padding: 12px 25px;
-      border: none;
-      border-radius: 30px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-    }
-
-    .btn-secondary {
-      background: linear-gradient(135deg, #f0b202, #ff9500);
-      color: white;
-    }
-
-    .btn-secondary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(240, 178, 2, 0.4);
-    }
-
-    .btn-outline {
-      background: transparent;
-      border: 2px solid white;
-      color: white;
-    }
-
-    .btn-outline:hover {
-      background: white;
-      color: #667eea;
-    }
-
-    /* ===== TOAST ===== */
+    /* Toast */
     .toast {
       position: fixed;
       bottom: 30px;
@@ -1774,109 +668,16 @@
       transform: translateX(0);
     }
 
-    /* ===== ANIMATIONS ===== */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes slideInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes slideInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes slideInLeft {
-      from {
-        opacity: 0;
-        transform: translateX(-30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes slideInRight {
-      from {
-        opacity: 0;
-        transform: translateX(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes bounceIn {
-      0% {
-        opacity: 0;
-        transform: scale(0.3);
-      }
-      50% {
-        opacity: 1;
-        transform: scale(1.05);
-      }
-      70% {
-        transform: scale(0.9);
-      }
-      100% {
-        transform: scale(1);
-      }
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.05);
-      }
-    }
-
-    @keyframes rotate {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    @keyframes shimmer {
-      0% {
-        background-position: -1000px 0;
-      }
-      100% {
-        background-position: 1000px 0;
-      }
-    }
-  /* ===== RESPONSIVE ===== */
+    /* Responsive */
     @media (max-width: 1024px) {
       .dashboard-grid {
         grid-template-columns: 1fr;
       }
-
+      
       .stats-grid {
         grid-template-columns: repeat(2, 1fr);
       }
-
+      
       .service-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -1886,83 +687,24 @@
       .profile-info {
         flex-direction: column;
         align-items: center;
+        text-align: center;
       }
-
+      
       .stats-grid {
         grid-template-columns: 1fr;
       }
-
+      
       .service-grid {
         grid-template-columns: 1fr;
       }
-
-      .profile-meta {
-        grid-template-columns: 1fr;
-      }
-
+      
       .animal-grid {
         grid-template-columns: repeat(2, 1fr);
-      }
-
-      .badges-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .cover-title h1 {
-        font-size: 2.5rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .header {
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .animal-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .badges-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .progress-steps {
-        flex-direction: column;
-        gap: 20px;
-      }
-
-      .progress-steps::before {
-        display: none;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Animated Background -->
-  <div class="animated-bg">
-    <div class="bg-bubble"></div>
-    <div class="bg-bubble"></div>
-    <div class="bg-bubble"></div>
-    <div class="bg-bubble"></div>
-    <div class="bg-bubble"></div>
-  </div>
-
-  <!-- Loading Page -->
-  <div id="loading-page" class="loading-page">
-    <div class="loader-container">
-      <div class="loader-logo">
-        <i class="fas fa-shield-alt"></i>
-      </div>
-      <h1 class="loader-title">Raj Marketing</h1>
-      <p class="loader-subtitle">Loading Your Dashboard...</p>
-      <div class="loader-bar">
-        <div class="loader-progress" id="loaderProgress"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Main Dashboard -->
   <div class="dashboard-container">
     <!-- Header -->
     <header class="header">
@@ -1971,582 +713,1015 @@
         <span>Raj Marketing</span>
       </div>
       <div class="header-actions">
-        <div class="date-time" id="currentDateTime"></div>
         <div class="notification-bell" onclick="showNotifications()">
           <i class="fas fa-bell"></i>
-          <span class="badge" id="notificationCount">5</span>
+          <span class="badge" id="notificationCount">0</span>
         </div>
+        <button class="logout-btn" onclick="logout()">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
       </div>
     </header>
 
-    <!-- Profile Cover with Animated Slideshow -->
-    <div class="profile-cover">
-      <div class="cover-slider">
-        <div class="cover-slide"></div>
-        <div class="cover-slide"></div>
-        <div class="cover-slide"></div>
-        <div class="cover-slide"></div>
-        <div class="cover-slide"></div>
-      </div>
-      <div class="cover-overlay"></div>
-      <div class="cover-title">
-        <h1>Welcome Back, <span id="customerName">Ramesh!</span></h1>
-        <p>Your mosquito net expert in Mysore</p>
-      </div>
-    </div>
-
-    <!-- Profile Info Section -->
-    <div class="profile-info">
-      <div class="profile-avatar" onclick="openAvatarModal()">
-        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Leo" alt="Profile" id="profileImage">
-        <div class="avatar-selector">
-          <i class="fas fa-camera"></i>
-        </div>
+    <!-- Profile Section -->
+    <div class="profile-section">
+      <div class="profile-cover" id="coverContainer">
+        <img src="" alt="Cover" class="cover-image" id="coverImage" style="display: none;">
+        <button class="cover-edit" onclick="changeCover()">
+          <i class="fas fa-camera"></i> Change Cover
+        </button>
       </div>
 
-      <div class="profile-details">
-        <div class="profile-header">
-          <h2 id="customerFullName">Ramesh Kumar</h2>
-          <div class="online-status">
-            <span class="online-dot"></span>
-            <span>Online</span>
+      <div class="profile-info">
+        <div class="profile-avatar" onclick="openAvatarModal()">
+          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=default" alt="Avatar" id="avatarImage">
+          <div class="avatar-overlay">
+            <i class="fas fa-camera"></i> Change
           </div>
         </div>
 
-        <div class="profile-meta">
-          <div class="meta-item">
-            <i class="fas fa-id-card"></i>
-            <span id="customerId">CUST-001</span>
-          </div>
-          <div class="meta-item">
-            <i class="fas fa-phone"></i>
-            <span id="customerPhone">+91-9876543210</span>
-          </div>
-          <div class="meta-item">
-            <i class="fas fa-map-marker-alt"></i>
-            <span id="customerAddress">#65, Hootgalli, Mysore</span>
-          </div>
-          <div class="meta-item">
-            <i class="fas fa-calendar-alt"></i>
-            <span>Member since: <span id="memberSince">Jan 2024</span></span>
-          </div>
-          <div class="meta-item">
-            <i class="fas fa-clock"></i>
-            <span>Last login: <span id="lastLogin">Today 10:30 AM</span></span>
-          </div>
-          <div class="security-score">
-            <i class="fas fa-shield-alt"></i>
-            <span>Security Score:</span>
-            <div class="score-bar">
-              <div class="score-fill" style="width: 85%"></div>
+        <div class="profile-details">
+          <h2 id="customerName">Loading...</h2>
+          <div class="profile-stats">
+            <div class="stat-item">
+              <i class="fas fa-id-card"></i>
+              <span id="customerId">CUST001</span>
             </div>
-            <span>85%</span>
+            <div class="stat-item">
+              <i class="fas fa-phone"></i>
+              <span id="customerPhone">+91-9876543210</span>
+            </div>
+            <div class="stat-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span id="customerAddress">Mysore</span>
+            </div>
+            <div class="stat-item">
+              <i class="fas fa-calendar"></i>
+              <span id="memberSince">Jan 2024</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Stats Cards -->
+    <!-- Stats Grid -->
     <div class="stats-grid">
       <div class="stat-card">
-        <div class="stat-icon">
-          <i class="fas fa-shopping-cart"></i>
-        </div>
-        <div class="stat-value" id="totalOrders">12</div>
-        <div class="stat-label">Total Orders</div>
+        <h3 id="totalOrders">0</h3>
+        <p>Total Orders</p>
       </div>
       <div class="stat-card">
-        <div class="stat-icon">
-          <i class="fas fa-hourglass-half"></i>
-        </div>
-        <div class="stat-value" id="pendingOrders">2</div>
-        <div class="stat-label">Pending</div>
+        <h3 id="activeOrders">0</h3>
+        <p>Active Orders</p>
       </div>
       <div class="stat-card">
-        <div class="stat-icon">
-          <i class="fas fa-check-circle"></i>
-        </div>
-        <div class="stat-value" id="completedOrders">10</div>
-        <div class="stat-label">Completed</div>
+        <h3 id="completedOrders">0</h3>
+        <p>Completed</p>
       </div>
       <div class="stat-card">
-        <div class="stat-icon">
-          <i class="fas fa-star"></i>
-        </div>
-        <div class="stat-value" id="loyaltyPoints">2,450</div>
-        <div class="stat-label">Loyalty Points</div>
+        <h3 id="loyaltyPoints">0</h3>
+        <p>Loyalty Points</p>
       </div>
     </div>
 
-    <!-- Quick Service Grid -->
+    <!-- Service Grid -->
     <div class="service-grid">
-      <div class="service-card" onclick="openSection('order')">
+      <div class="service-btn" onclick="showSection('newOrder')">
         <i class="fas fa-shopping-cart"></i>
         <span>New Order</span>
       </div>
-      <div class="service-card" onclick="openSection('track')">
+      <div class="service-btn" onclick="showSection('trackOrders')">
         <i class="fas fa-map-marker-alt"></i>
-        <span>Track Order</span>
+        <span>Track Orders</span>
       </div>
-      <div class="service-card" onclick="openSection('payment')">
+      <div class="service-btn" onclick="showSection('payments')">
         <i class="fas fa-credit-card"></i>
         <span>Payments</span>
       </div>
-      <div class="service-card" onclick="openSection('appointment')">
+      <div class="service-btn" onclick="showSection('appointments')">
         <i class="fas fa-calendar-check"></i>
-        <span>Appointment</span>
+        <span>Appointments</span>
       </div>
-      <div class="service-card" onclick="openSection('service')">
+      <div class="service-btn" onclick="showSection('services')">
         <i class="fas fa-tools"></i>
-        <span>Quick Service</span>
+        <span>Services</span>
       </div>
-      <div class="service-card" onclick="openSection('complaint')">
+      <div class="service-btn" onclick="showSection('complaints')">
         <i class="fas fa-exclamation-triangle"></i>
-        <span>Complaint</span>
+        <span>Complaints</span>
       </div>
-      <div class="service-card" onclick="openSection('referral')">
+      <div class="service-btn" onclick="showSection('loyalty')">
         <i class="fas fa-gift"></i>
-        <span>Refer & Earn</span>
+        <span>Loyalty</span>
       </div>
-      <div class="service-card" onclick="openSection('support')">
-        <i class="fas fa-headset"></i>
-        <span>24/7 Support</span>
+      <div class="service-btn" onclick="showSection('referrals')">
+        <i class="fas fa-users"></i>
+        <span>Referrals</span>
       </div>
     </div>
 
     <!-- Dashboard Grid -->
     <div class="dashboard-grid">
-      <!-- Left Column -->
+      <!-- Left Column - Orders -->
       <div>
-        <!-- Order Tracking Section -->
-        <div class="card">
+        <!-- New Order Form -->
+        <div class="card" id="newOrderCard" style="display: none;">
           <div class="card-header">
-            <h3><i class="fas fa-truck"></i> Live Order Tracking</h3>
-            <span class="order-id" id="currentOrderId">#ORD-2024-001</span>
+            <h3><i class="fas fa-shopping-cart"></i> Place New Order</h3>
           </div>
-
-          <div class="order-tracking">
-            <div class="tracking-header">
-              <span class="eta">Estimated arrival: 15 mins</span>
-              <button class="btn btn-secondary btn-small" onclick="refreshTracking()">
-                <i class="fas fa-sync-alt"></i> Refresh
-              </button>
+          <form id="orderForm">
+            <div class="form-group">
+              <label>Product Type</label>
+              <select id="productType" required>
+                <option value="">Select Product</option>
+                <option value="Fiberglass Window Net">Fiberglass Window Net - ₹399/sq ft</option>
+                <option value="Aluminum Frame Net">Aluminum Frame Net - ₹599/sq ft</option>
+                <option value="Magnetic Door Net">Magnetic Door Net - ₹899/sq ft</option>
+                <option value="Sliding Door Net">Sliding Door Net - ₹999/sq ft</option>
+              </select>
             </div>
-
-            <div class="progress-steps">
-              <div class="step completed">
-                <div class="step-icon"><i class="fas fa-check"></i></div>
-                <div class="step-label">Ordered</div>
-              </div>
-              <div class="step completed">
-                <div class="step-icon"><i class="fas fa-cog"></i></div>
-                <div class="step-label">Processed</div>
-              </div>
-              <div class="step active">
-                <div class="step-icon"><i class="fas fa-truck"></i></div>
-                <div class="step-label">Dispatched</div>
-              </div>
-              <div class="step">
-                <div class="step-icon"><i class="fas fa-tools"></i></div>
-                <div class="step-label">Installing</div>
-              </div>
-              <div class="step">
-                <div class="step-icon"><i class="fas fa-check-circle"></i></div>
-                <div class="step-label">Completed</div>
-              </div>
+            <div class="form-group">
+              <label>Quantity (sq ft)</label>
+              <input type="number" id="quantity" min="1" value="10" required>
             </div>
-
-            <div class="live-map">
-              <div class="map-placeholder">
-                <div class="moving-dot"></div>
-              </div>
+            <div class="form-group">
+              <label>Location</label>
+              <select id="location" required>
+                <option value="">Select Area</option>
+                <option value="Hootgalli">Hootgalli</option>
+                <option value="Kuvempunagar">Kuvempunagar</option>
+                <option value="Vijayanagar">Vijayanagar</option>
+                <option value="Gokulam">Gokulam</option>
+                <option value="Jayalakshmipuram">Jayalakshmipuram</option>
+              </select>
             </div>
-
-            <div class="installation-photos">
-              <div class="photo-thumb" onclick="viewPhoto(1)">
-                <i class="fas fa-image"></i>
-              </div>
-              <div class="photo-thumb" onclick="viewPhoto(2)">
-                <i class="fas fa-image"></i>
-              </div>
-              <div class="photo-thumb" onclick="viewPhoto(3)">
-                <i class="fas fa-image"></i>
-              </div>
+            <div class="form-group">
+              <label>Full Address</label>
+              <textarea id="address" required></textarea>
             </div>
-
-            <div class="signature-pad" onclick="collectSignature()">
-              <i class="fas fa-pen"></i> Tap to sign on delivery
+            <div class="form-group">
+              <label>Preferred Date</label>
+              <input type="date" id="orderDate" required>
             </div>
-          </div>
+            <button type="submit" class="btn">Place Order</button>
+          </form>
         </div>
 
-        <!-- Service History -->
-        <div class="card">
+             <!-- Track Orders -->
+        <div class="card" id="trackOrdersCard">
           <div class="card-header">
-            <h3><i class="fas fa-history"></i> Service History</h3>
-            <a href="#" class="view-all">View All</a>
+            <h3><i class="fas fa-map-marker-alt"></i> Track Your Orders</h3>
+            <button class="btn" style="width: auto; padding: 5px 15px;" onclick="refreshOrders()">
+              <i class="fas fa-sync-alt"></i> Refresh
+            </button>
           </div>
+          <div id="ordersList"></div>
+        </div>
 
-          <div class="service-history">
-            <div class="service-item">
-              <div class="service-icon">
-                <i class="fas fa-wrench"></i>
-              </div>
-              <div class="service-info">
-                <h4>Window Net Installation</h4>
-                <p>5 Windows • Hootgalli • Completed</p>
-              </div>
-              <div class="service-rating">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-            </div>
-
-            <div class="service-item">
-              <div class="service-icon">
-                <i class="fas fa-door-open"></i>
-              </div>
-              <div class="service-info">
-                <h4>Magnetic Door Net</h4>
-                <p>2 Doors • Kuvempunagar • Completed</p>
-              </div>
-              <div class="service-rating">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-            </div>
-
-            <div class="service-item">
-              <div class="service-icon">
-                <i class="fas fa-tools"></i>
-              </div>
-              <div class="service-info">
-                <h4>Maintenance Service</h4>
-                <p>Annual maintenance • Vijayanagar</p>
-              </div>
-              <div class="service-rating">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-              </div>
-            </div>
+        <!-- Live Map (Shows when tracking) -->
+        <div class="card" id="mapCard" style="display: none;">
+          <div class="card-header">
+            <h3><i class="fas fa-map"></i> Live Location</h3>
           </div>
+          <div id="map"></div>
+          <p style="margin-top: 10px; font-size: 0.9rem;" id="etaInfo"></p>
         </div>
       </div>
 
-      <!-- Right Column -->
+      <!-- Right Column - Other Services -->
       <div>
-        <!-- Loyalty Program Card -->
-        <div class="loyalty-card">
-          <div class="loyalty-header">
-            <h3>Loyalty Program</h3>
-            <span class="tier-badge" id="tierLevel">Gold Tier</span>
-          </div>
-
-          <div class="points-balance">
-            <div class="points-number" id="pointsBalance">2,450</div>
-            <div class="points-label">Available Points</div>
-          </div>
-
-          <div class="tier-progress">
-            <div class="progress-labels">
-              <span>Silver</span>
-              <span>Gold</span>
-              <span>Platinum</span>
-            </div>
-            <div class="tier-bar">
-              <div class="tier-fill" style="width: 65%"></div>
-            </div>
-          </div>
-
-          <div class="tier-benefits">
-            <span class="benefit-tag">10% Extra Discount</span>
-            <span class="benefit-tag">Free Installation</span>
-            <span class="benefit-tag">Priority Support</span>
-            <span class="benefit-tag">Birthday Bonus</span>
-          </div>
-
-          <button class="btn btn-secondary btn-block" style="margin-top: 20px;" onclick="redeemPoints()">
-            Redeem Points
-          </button>
-        </div>
-
-        <!-- Referral Program -->
-        <div class="referral-card">
-          <h3>Refer & Earn</h3>
-          <p>Share with friends and earn 500 points each!</p>
-
-          <div class="referral-code">
-            <span class="code" id="referralCode">RAJ1234</span>
-            <button class="copy-btn" onclick="copyReferral()">
-              <i class="fas fa-copy"></i> Copy
-            </button>
-          </div>
-
-          <div class="share-buttons">
-            <button class="share-btn whatsapp" onclick="share('whatsapp')">
-              <i class="fab fa-whatsapp"></i> WhatsApp
-            </button>
-            <button class="share-btn facebook" onclick="share('facebook')">
-              <i class="fab fa-facebook"></i> Facebook
-            </button>
-            <button class="share-btn twitter" onclick="share('twitter')">
-              <i class="fab fa-twitter"></i> Twitter
-            </button>
-          </div>
-
-          <div style="margin-top: 15px; color: white;">
-            <strong>Rewards Earned:</strong> <span id="rewardsEarned">1,500</span> points
-          </div>
-        </div>
-
-        <!-- Achievement Badges -->
-        <div class="card">
+        <!-- Payments -->
+        <div class="card" id="paymentsCard" style="display: none;">
           <div class="card-header">
-            <h3><i class="fas fa-medal"></i> Achievements</h3>
-            <span class="badge-count">8/12</span>
+            <h3><i class="fas fa-credit-card"></i> Make Payment</h3>
           </div>
-
-          <div class="badges-grid">
-            <div class="badge-item">
-              <div class="badge-icon">
-                <i class="fas fa-crown"></i>
-              </div>
-              <div class="badge-name">Royal Customer</div>
-            </div>
-            <div class="badge-item">
-              <div class="badge-icon">
-                <i class="fas fa-rocket"></i>
-              </div>
-              <div class="badge-name">Early Bird</div>
-            </div>
-            <div class="badge-item">
-              <div class="badge-icon locked">
-                <i class="fas fa-gem"></i>
-              </div>
-              <div class="badge-name">Diamond</div>
-            </div>
-            <div class="badge-item">
-              <div class="badge-icon">
-                <i class="fas fa-heart"></i>
-              </div>
-              <div class="badge-name">Loyal Friend</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Activity Streak -->
-        <div class="card">
-          <div class="card-header">
-            <h3><i class="fas fa-fire"></i> Activity Streak</h3>
-            <span class="streak-count">15 Days 🔥</span>
-          </div>
-
-          <div class="streak-calendar" id="streakCalendar"></div>
-        </div>
-
-        <!-- Payment Methods -->
-        <div class="card">
-          <div class="card-header">
-            <h3><i class="fas fa-credit-card"></i> Payment Methods</h3>
-            <a href="#" class="view-all">Manage</a>
-          </div>
-
+          <div id="pendingPayments"></div>
+          
           <div class="payment-methods">
-            <div class="payment-method">
+            <div class="payment-method" onclick="processPayment('gpay')">
               <i class="fab fa-google-pay"></i>
               <span>Google Pay</span>
             </div>
-            <div class="payment-method">
+            <div class="payment-method" onclick="processPayment('phonepe')">
               <i class="fas fa-mobile-alt"></i>
               <span>PhonePe</span>
             </div>
-            <div class="payment-method">
-              <i class="fab fa-paypal"></i>
+            <div class="payment-method" onclick="processPayment('paytm')">
+              <i class="fas fa-rupee-sign"></i>
               <span>Paytm</span>
             </div>
-            <div class="payment-method">
+            <div class="payment-method" onclick="processPayment('card')">
               <i class="fas fa-credit-card"></i>
-              <span>Card</span>
+              <span>Credit Card</span>
             </div>
           </div>
 
-          <div class="emi-calculator">
-            <h4>EMI Calculator</h4>
-            <div class="calc-input">
-              <input type="number" placeholder="Amount" id="emiAmount">
-              <input type="number" placeholder="Months" id="emiMonths">
+          <div id="paymentHistory" style="margin-top: 20px;"></div>
+        </div>
+
+        <!-- Appointments -->
+        <div class="card" id="appointmentsCard" style="display: none;">
+          <div class="card-header">
+            <h3><i class="fas fa-calendar-check"></i> Schedule Appointment</h3>
+          </div>
+          <div id="calendar"></div>
+          
+          <form id="appointmentForm" style="margin-top: 20px;">
+            <div class="form-group">
+              <label>Date</label>
+              <input type="date" id="appointmentDate" required>
             </div>
-            <div class="calc-result" id="emiResult">
-              Monthly EMI: ₹0
+            <div class="form-group">
+              <label>Time</label>
+              <select id="appointmentTime" required>
+                <option value="">Select Time</option>
+                <option value="09:00">09:00 AM</option>
+                <option value="10:00">10:00 AM</option>
+                <option value="11:00">11:00 AM</option>
+                <option value="14:00">02:00 PM</option>
+                <option value="15:00">03:00 PM</option>
+                <option value="16:00">04:00 PM</option>
+              </select>
             </div>
+            <div class="form-group">
+              <label>Purpose</label>
+              <select id="purpose" required>
+                <option value="Installation">New Installation</option>
+                <option value="Measurement">Site Measurement</option>
+                <option value="Repair">Repair Service</option>
+                <option value="Consultation">Consultation</option>
+              </select>
+            </div>
+            <button type="submit" class="btn">Book Appointment</button>
+          </form>
+          <div id="upcomingAppointments" style="margin-top: 20px;"></div>
+        </div>
+
+        <!-- Services -->
+        <div class="card" id="servicesCard" style="display: none;">
+          <div class="card-header">
+            <h3><i class="fas fa-tools"></i> Service History</h3>
+          </div>
+          <div class="service-list" id="serviceHistory"></div>
+          
+          <button class="btn" style="margin-top: 15px;" onclick="requestQuickService()">
+            Request Quick Service
+          </button>
+        </div>
+
+        <!-- Complaints -->
+        <div class="card" id="complaintsCard" style="display: none;">
+          <div class="card-header">
+            <h3><i class="fas fa-exclamation-triangle"></i> Register Complaint</h3>
+          </div>
+          
+          <form id="complaintForm">
+            <div class="form-group">
+              <label>Order ID (Optional)</label>
+              <input type="text" id="complaintOrder" placeholder="Enter order ID if applicable">
+            </div>
+            <div class="form-group">
+              <label>Complaint Type</label>
+              <select id="complaintType" required>
+                <option value="">Select Type</option>
+                <option value="Quality">Quality Issue</option>
+                <option value="Installation">Installation Problem</option>
+                <option value="Delay">Delay in Service</option>
+                <option value="Damage">Product Damage</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <textarea id="complaintDesc" required></textarea>
+            </div>
+            <div class="form-group">
+              <label>Priority</label>
+              <select id="priority">
+                <option value="Low">Low</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="High">High</option>
+              </select>
+            </div>
+            <button type="submit" class="btn">Submit Complaint</button>
+          </form>
+
+          <div id="complaintHistory" style="margin-top: 20px;"></div>
+        </div>
+
+        <!-- Loyalty -->
+        <div class="card" id="loyaltyCard" style="display: none;">
+          <div class="card-header">
+            <h3><i class="fas fa-gift"></i> Loyalty Program</h3>
+          </div>
+          <div style="text-align: center;">
+            <h2 id="loyaltyPointsDisplay">0</h2>
+            <p>Available Points</p>
+            <div style="background: rgba(255,255,255,0.1); height: 10px; border-radius: 10px; margin: 15px 0;">
+              <div id="tierProgress" style="width: 0%; height: 100%; background: #f0b202; border-radius: 10px;"></div>
+            </div>
+            <p id="currentTier">Bronze Tier</p>
+            <button class="btn" onclick="redeemPoints()" id="redeemBtn">Redeem Points</button>
+          </div>
+        </div>
+
+        <!-- Referrals -->
+        <div class="card" id="referralsCard" style="display: none;">
+          <div class="card-header">
+            <h3><i class="fas fa-users"></i> Refer & Earn</h3>
+          </div>
+          <div style="text-align: center;">
+            <h2 id="referralCode">RAJ1234</h2>
+            <button class="btn" onclick="copyReferral()" style="margin: 10px 0;">
+              <i class="fas fa-copy"></i> Copy Code
+            </button>
+            <p id="referralEarnings">Earned: ₹0</p>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- Avatar Selector Modal -->
+  
+  <!-- Avatar Modal -->
   <div class="modal" id="avatarModal">
     <div class="modal-content">
       <div class="modal-header">
         <h2>Choose Your Avatar</h2>
         <button class="modal-close" onclick="closeModal('avatarModal')">&times;</button>
       </div>
-
       <div class="animal-grid">
         <div class="animal-option" onclick="selectAvatar('lion')">
           <div class="animal-emoji">🦁</div>
-          <div class="animal-name">Leo the Lion</div>
+          <div class="animal-name">Lion</div>
         </div>
         <div class="animal-option" onclick="selectAvatar('elephant')">
           <div class="animal-emoji">🐘</div>
-          <div class="animal-name">Ellie Elephant</div>
+          <div class="animal-name">Elephant</div>
         </div>
         <div class="animal-option" onclick="selectAvatar('giraffe')">
           <div class="animal-emoji">🦒</div>
-          <div class="animal-name">Gerry Giraffe</div>
+          <div class="animal-name">Giraffe</div>
         </div>
         <div class="animal-option" onclick="selectAvatar('monkey')">
           <div class="animal-emoji">🐒</div>
-          <div class="animal-name">Monty Monkey</div>
+          <div class="animal-name">Monkey</div>
         </div>
         <div class="animal-option" onclick="selectAvatar('panda')">
           <div class="animal-emoji">🐼</div>
-          <div class="animal-name">Panda Bear</div>
+          <div class="animal-name">Panda</div>
         </div>
         <div class="animal-option" onclick="selectAvatar('tiger')">
           <div class="animal-emoji">🐯</div>
-          <div class="animal-name">Tiger King</div>
-        </div>
-        <div class="animal-option" onclick="selectAvatar('zebra')">
-          <div class="animal-emoji">🦓</div>
-          <div class="animal-name">Ziggy Zebra</div>
-        </div>
-        <div class="animal-option" onclick="selectAvatar('koala')">
-          <div class="animal-emoji">🐨</div>
-          <div class="animal-name">Koa Koala</div>
+          <div class="animal-name">Tiger</div>
         </div>
         <div class="animal-option" onclick="selectAvatar('fox')">
           <div class="animal-emoji">🦊</div>
-          <div class="animal-name">Freddy Fox</div>
+          <div class="animal-name">Fox</div>
         </div>
         <div class="animal-option" onclick="selectAvatar('wolf')">
           <div class="animal-emoji">🐺</div>
-          <div class="animal-name">Wolfie</div>
+          <div class="animal-name">Wolf</div>
         </div>
         <div class="animal-option" onclick="selectAvatar('cat')">
           <div class="animal-emoji">🐱</div>
-          <div class="animal-name">Kitty Cat</div>
-        </div>
-        <div class="animal-option" onclick="selectAvatar('dog')">
-          <div class="animal-emoji">🐶</div>
-          <div class="animal-name">Doggy</div>
+          <div class="animal-name">Cat</div>
         </div>
       </div>
-
-      <div style="text-align: center; margin-top: 30px;">
-        <button class="btn btn-secondary" onclick="uploadCustomPhoto()">
-          <i class="fas fa-upload"></i> Upload Custom Photo
-        </button>
-      </div>
+      <button class="btn" onclick="uploadPhoto()" style="margin-top: 20px;">
+        <i class="fas fa-upload"></i> Upload Photo
+      </button>
     </div>
   </div>
 
-  <!-- Toast Notification -->
-  <div class="toast" id="toast">Message</div>
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
 
   <!-- Scripts -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
 
   <script>
+    // ===== DATA STORAGE =====
+    let currentUser = null;
+    let orders = [];
+    let payments = [];
+    let appointments = [];
+    let services = [];
+    let complaints = [];
+    let map = null;
+    let calendar = null;
+
     // ===== INITIALIZATION =====
     document.addEventListener('DOMContentLoaded', function() {
-      // Initialize AOS
-      AOS.init({
-        duration: 800,
-        once: true,
-        offset: 100
-      });
-
-      // Loading animation
-      const loader = document.getElementById('loading-page');
-      setTimeout(() => {
-        loader.classList.add('hidden');
-      }, 2000);
-
-      // Update date and time
-      updateDateTime();
-      setInterval(updateDateTime, 1000);
-
-      // Load streak calendar
-      loadStreakCalendar();
-
-      // Check login status
-      const currentUser = JSON.parse(localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser'));
-      
-      if (!currentUser || currentUser.type !== 'customer') {
+      // Check login
+      const userData = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
+      if (!userData) {
         window.location.href = 'customer-login.html';
-      } else {
-        loadUserData(currentUser);
+        return;
       }
+
+      currentUser = JSON.parse(userData);
+      if (currentUser.type !== 'customer') {
+        window.location.href = 'customer-login.html';
+        return;
+      }
+
+      // Load user data
+      loadUserData();
+      
+      // Load all data from localStorage
+      loadAllData();
+      
+      // Show default section
+      showSection('trackOrders');
+      
+      // Initialize calendar
+      initCalendar();
     });
 
-    // ===== UPDATE DATE TIME =====
-    function updateDateTime() {
-      const now = new Date();
-      const options = { 
-        weekday: 'short', 
-        year: 'numeric', 
-        month: 'short', 
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      };
-      document.getElementById('currentDateTime').textContent = now.toLocaleString('en-US', options);
-    }
-
     // ===== LOAD USER DATA =====
-    function loadUserData(user) {
-      document.getElementById('customerName').textContent = user.name || 'Ramesh';
-      document.getElementById('customerFullName').textContent = user.name || 'Ramesh Kumar';
-      document.getElementById('customerId').textContent = user.id || 'CUST001';
-      document.getElementById('customerPhone').textContent = user.phone || '+91-9876543210';
-      document.getElementById('customerAddress').textContent = user.address || '#65, Hootgalli, Mysore';
-      document.getElementById('memberSince').textContent = user.joinDate || 'Jan 2024';
+    function loadUserData() {
+      document.getElementById('customerName').textContent = currentUser.name || 'Customer';
+      document.getElementById('customerId').textContent = currentUser.id || 'CUST' + Date.now();
+      document.getElementById('customerPhone').textContent = currentUser.phone || '+91-9876543210';
+      document.getElementById('customerAddress').textContent = currentUser.address || 'Mysore';
+      document.getElementById('memberSince').textContent = currentUser.joinDate || 'Jan 2024';
       
-      // Load profile image if exists
-      if (user.avatar) {
-        document.getElementById('profileImage').src = user.avatar;
+      if (currentUser.avatar) {
+        document.getElementById('avatarImage').src = currentUser.avatar;
+      }
+      
+      if (currentUser.cover) {
+        document.getElementById('coverImage').src = currentUser.cover;
+        document.getElementById('coverImage').style.display = 'block';
       }
     }
 
-    // ===== STREAK CALENDAR =====
-    function loadStreakCalendar() {
-      const calendar = document.getElementById('streakCalendar');
-      const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    // ===== LOAD ALL DATA FROM STORAGE =====
+    function loadAllData() {
+      // Load orders
+      const savedOrders = localStorage.getItem(`orders_${currentUser.id}`);
+      orders = savedOrders ? JSON.parse(savedOrders) : [];
       
-      let html = '';
-      for (let i = 0; i < 35; i++) {
-        const day = i % 7;
-        const date = i + 1;
-        const isActive = i < 15 ? 'active' : '';
-        html += `<div class="streak-day ${isActive}">${date}</div>`;
-      }
-      calendar.innerHTML = html;
+      // Load payments
+      const savedPayments = localStorage.getItem(`payments_${currentUser.id}`);
+      payments = savedPayments ? JSON.parse(savedPayments) : [];
+      
+      // Load appointments
+      const savedAppointments = localStorage.getItem(`appointments_${currentUser.id}`);
+      appointments = savedAppointments ? JSON.parse(savedAppointments) : [];
+      
+      // Load services
+      const savedServices = localStorage.getItem(`services_${currentUser.id}`);
+      services = savedServices ? JSON.parse(savedServices) : [];
+      
+      // Load complaints
+      const savedComplaints = localStorage.getItem(`complaints_${currentUser.id}`);
+      complaints = savedComplaints ? JSON.parse(savedComplaints) : [];
+      
+      // Update UI
+      updateStats();
+      displayOrders();
+      displayPendingPayments();
+      displayUpcomingAppointments();
+      displayServiceHistory();
+      displayComplaintHistory();
+      updateLoyalty();
     }
 
-    // ===== AVATAR MODAL =====
+    // ===== UPDATE STATS =====
+    function updateStats() {
+      const total = orders.length;
+      const active = orders.filter(o => o.status !== 'completed' && o.status !== 'cancelled').length;
+      const completed = orders.filter(o => o.status === 'completed').length;
+      
+      document.getElementById('totalOrders').textContent = total;
+      document.getElementById('activeOrders').textContent = active;
+      document.getElementById('completedOrders').textContent = completed;
+      
+      // Loyalty points (100 points per order)
+      const points = completed * 100;
+      document.getElementById('loyaltyPoints').textContent = points;
+      document.getElementById('loyaltyPointsDisplay').textContent = points;
+      
+      // Tier based on points
+      let tier = 'Bronze';
+      let progress = (points / 1000) * 100;
+      if (points >= 2000) {
+        tier = 'Platinum';
+        progress = 100;
+      } else if (points >= 1000) {
+        tier = 'Gold';
+        progress = (points / 2000) * 100;
+      } else if (points >= 500) {
+        tier = 'Silver';
+        progress = (points / 1000) * 100;
+      }
+      
+      document.getElementById('currentTier').textContent = tier + ' Tier';
+      document.getElementById('tierProgress').style.width = progress + '%';
+      
+      // Notification count
+      const unread = complaints.filter(c => !c.read).length;
+      document.getElementById('notificationCount').textContent = unread;
+    }
+
+    // ===== DISPLAY ORDERS =====
+    function displayOrders() {
+      const container = document.getElementById('ordersList');
+      
+      if (orders.length === 0) {
+        container.innerHTML = '<p style="text-align: center; padding: 20px;">No orders yet. Place your first order!</p>';
+        return;
+      }
+      
+      container.innerHTML = orders.map(order => `
+        <div class="order-item">
+          <div class="order-header">
+            <span class="order-id">${order.id}</span>
+            <span class="order-status">${order.status}</span>
+          </div>
+          <p>${order.product} • ${order.quantity} sq ft</p>
+          <p>📍 ${order.location} • 📅 ${order.date}</p>
+          <p>💰 ₹${order.total}</p>
+          
+          <div class="order-progress">
+            <div class="progress-step">
+              <div class="step-dot ${order.status !== 'pending' ? 'completed' : ''}">
+                <i class="fas fa-check"></i>
+              </div>
+              <span class="step-label">Ordered</span>
+            </div>
+            <div class="progress-step">
+              <div class="step-dot ${order.status === 'processing' || order.status === 'dispatched' || order.status === 'completed' ? 'completed' : ''} ${order.status === 'processing' ? 'active' : ''}">
+                <i class="fas fa-cog"></i>
+              </div>
+              <span class="step-label">Processing</span>
+            </div>
+            <div class="progress-step">
+              <div class="step-dot ${order.status === 'dispatched' || order.status === 'completed' ? 'completed' : ''} ${order.status === 'dispatched' ? 'active' : ''}">
+                <i class="fas fa-truck"></i>
+              </div>
+              <span class="step-label">Dispatched</span>
+            </div>
+            <div class="progress-step">
+              <div class="step-dot ${order.status === 'completed' ? 'completed' : ''}">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <span class="step-label">Delivered</span>
+            </div>
+          </div>
+          
+          <div class="order-actions">
+            ${order.status === 'dispatched' ? 
+              `<button onclick="trackOrder('${order.id}')">
+                <i class="fas fa-map-marker-alt"></i> Track
+              </button>` : ''}
+            ${order.status === 'pending' ? 
+              `<button onclick="cancelOrder('${order.id}')">
+                <i class="fas fa-times"></i> Cancel
+              </button>` : ''}
+            <button onclick="viewOrderDetails('${order.id}')">
+              <i class="fas fa-eye"></i> Details
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ===== TRACK ORDER WITH MAP =====
+    function trackOrder(orderId) {
+      const order = orders.find(o => o.id === orderId);
+      if (!order) return;
+      
+      document.getElementById('mapCard').style.display = 'block';
+      
+      // Initialize map if not already
+      if (!map) {
+        map = L.map('map').setView([12.3051, 76.6551], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+      }
+      
+      // Clear existing markers
+      map.eachLayer((layer) => {
+        if (layer instanceof L.Marker) {
+          map.removeLayer(layer);
+        }
+      });
+      
+      // Add markers
+      const customerLoc = [12.3051, 76.6551]; // Mysore coordinates
+      const teamLoc = [12.2951, 76.6451]; // Slightly offset
+      
+      L.marker(customerLoc).addTo(map)
+        .bindPopup('Your Location')
+        .openPopup();
+      
+      const teamMarker = L.marker(teamLoc).addTo(map)
+        .bindPopup('Installation Team');
+      
+      // Calculate ETA
+      const eta = Math.floor(Math.random() * 30) + 15;
+      document.getElementById('etaInfo').innerHTML = `
+        <strong>ETA:</strong> ${eta} minutes<br>
+        <strong>Order:</strong> ${order.id}<br>
+        <strong>Status:</strong> Team is on the way
+      `;
+           
+      // Animate team marker
+      let angle = 0;
+      setInterval(() => {
+        angle += 0.01;
+        const newLat = 12.2951 + Math.sin(angle) * 0.01;
+        const newLng = 76.6451 + Math.cos(angle) * 0.01;
+        teamMarker.setLatLng([newLat, newLng]);
+      }, 1000);
+      
+      showToast(`Tracking order ${orderId}`);
+    }
+
+    // ===== PLACE NEW ORDER =====
+    document.getElementById('orderForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const product = document.getElementById('productType').value;
+      const quantity = parseInt(document.getElementById('quantity').value);
+      const location = document.getElementById('location').value;
+      const address = document.getElementById('address').value;
+      const date = document.getElementById('orderDate').value;
+      
+      // Calculate price
+      let pricePerSqFt = 399;
+      if (product.includes('Aluminum')) pricePerSqFt = 599;
+      else if (product.includes('Magnetic')) pricePerSqFt = 899;
+      else if (product.includes('Sliding')) pricePerSqFt = 999;
+      
+      const amount = pricePerSqFt * quantity;
+      const gst = amount * 0.18;
+      const total = amount + gst;
+      
+      const orderId = 'ORD' + Date.now().toString().slice(-6);
+      
+      const newOrder = {
+        id: orderId,
+        product: product,
+        quantity: quantity,
+        location: location,
+        address: address,
+        date: date,
+        amount: amount,
+        gst: gst,
+        total: total,
+        status: 'pending',
+        createdAt: new Date().toISOString()
+      };
+      
+      orders.push(newOrder);
+      localStorage.setItem(`orders_${currentUser.id}`, JSON.stringify(orders));
+      
+      // Create payment record
+      const payment = {
+        id: 'PAY' + Date.now().toString().slice(-6),
+        orderId: orderId,
+        amount: total,
+        status: 'pending',
+        dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
+      };
+      
+      payments.push(payment);
+      localStorage.setItem(`payments_${currentUser.id}`, JSON.stringify(payments));
+      
+      showToast('Order placed successfully! Order ID: ' + orderId);
+      updateStats();
+      displayOrders();
+      displayPendingPayments();
+      
+      // Reset form
+      this.reset();
+      showSection('trackOrders');
+    });
+
+    // ===== CANCEL ORDER =====
+    function cancelOrder(orderId) {
+      if (confirm('Are you sure you want to cancel this order?')) {
+        const index = orders.findIndex(o => o.id === orderId);
+        if (index !== -1) {
+          orders[index].status = 'cancelled';
+          localStorage.setItem(`orders_${currentUser.id}`, JSON.stringify(orders));
+          showToast('Order cancelled');
+          displayOrders();
+          updateStats();
+        }
+      }
+    }
+
+    // ===== VIEW ORDER DETAILS =====
+    function viewOrderDetails(orderId) {
+      const order = orders.find(o => o.id === orderId);
+      if (!order) return;
+      
+      const details = `
+        Order ID: ${order.id}
+        Product: ${order.product}
+        Quantity: ${order.quantity} sq ft
+        Amount: ₹${order.amount}
+        GST (18%): ₹${order.gst}
+        Total: ₹${order.total}
+        Location: ${order.location}
+        Date: ${order.date}
+        Status: ${order.status}
+      `;
+      
+      showToast('Order details - Check console');
+      console.log(details);
+    }
+
+    // ===== DISPLAY PENDING PAYMENTS =====
+    function displayPendingPayments() {
+      const pending = payments.filter(p => p.status === 'pending');
+      const container = document.getElementById('pendingPayments');
+      
+      if (pending.length === 0) {
+        container.innerHTML = '<p>No pending payments</p>';
+        return;
+      }
+      
+      container.innerHTML = pending.map(p => `
+        <div class="order-item">
+          <p><strong>Order:</strong> ${p.orderId}</p>
+          <p><strong>Amount:</strong> ₹${p.amount}</p>
+          <p><strong>Due:</strong> ${new Date(p.dueDate).toLocaleDateString()}</p>
+          <button class="btn" onclick="payNow('${p.id}')" style="margin-top: 10px;">
+            Pay Now
+          </button>
+        </div>
+      `).join('');
+      
+      // Payment history
+      const completed = payments.filter(p => p.status === 'completed');
+      const historyEl = document.getElementById('paymentHistory');
+      if (completed.length > 0) {
+        historyEl.innerHTML = '<h4>Payment History</h4>' + completed.map(p => `
+          <p>${p.orderId}: ₹${p.amount} paid on ${new Date(p.paidDate).toLocaleDateString()}</p>
+        `).join('');
+      }
+    }
+
+    // ===== PROCESS PAYMENT =====
+    function processPayment(method) {
+      const pending = payments.find(p => p.status === 'pending');
+      if (!pending) {
+        showToast('No pending payments');
+        return;
+      }
+      
+      // Simulate payment processing
+      showToast(`Processing payment via ${method}...`);
+      
+      setTimeout(() => {
+        pending.status = 'completed';
+        pending.paidDate = new Date().toISOString();
+        pending.method = method;
+        
+        localStorage.setItem(`payments_${currentUser.id}`, JSON.stringify(payments));
+        
+        showToast(`Payment successful via ${method}!`);
+        displayPendingPayments();
+        updateStats();
+      }, 2000);
+    }
+
+    function payNow(paymentId) {
+      showSection('payments');
+      showToast('Select payment method');
+    }
+
+    // ===== INIT CALENDAR =====
+    function initCalendar() {
+      const calendarEl = document.getElementById('calendar');
+      if (!calendarEl) return;
+      
+      calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        events: appointments.map(a => ({
+          title: a.purpose,
+          start: a.date + 'T' + a.time,
+          allDay: false
+        }))
+      });
+      
+      calendar.render();
+    }
+
+    // ===== BOOK APPOINTMENT =====
+    document.getElementById('appointmentForm')?.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const date = document.getElementById('appointmentDate').value;
+      const time = document.getElementById('appointmentTime').value;
+      const purpose = document.getElementById('purpose').value;
+      
+      const appointment = {
+        id: 'APT' + Date.now().toString().slice(-6),
+        date: date,
+        time: time,
+        purpose: purpose,
+        status: 'scheduled',
+        createdAt: new Date().toISOString()
+      };
+      
+      appointments.push(appointment);
+      localStorage.setItem(`appointments_${currentUser.id}`, JSON.stringify(appointments));
+      
+      showToast('Appointment booked successfully!');
+      displayUpcomingAppointments();
+      
+      if (calendar) {
+        calendar.addEvent({
+          title: purpose,
+          start: date + 'T' + time,
+          allDay: false
+        });
+      }
+      
+      this.reset();
+    });
+
+    // ===== DISPLAY UPCOMING APPOINTMENTS =====
+    function displayUpcomingAppointments() {
+      const upcoming = appointments.filter(a => a.status === 'scheduled');
+      const container = document.getElementById('upcomingAppointments');
+      
+      if (upcoming.length === 0) {
+        container.innerHTML = '<p>No upcoming appointments</p>';
+        return;
+      }
+      
+      container.innerHTML = '<h4>Upcoming Appointments</h4>' + upcoming.map(a => `
+        <div class="order-item">
+          <p><strong>${a.purpose}</strong></p>
+          <p>📅 ${new Date(a.date).toLocaleDateString()} at ${a.time}</p>
+          <button onclick="cancelAppointment('${a.id}')" style="background: none; border: none; color: #ff4757; cursor: pointer;">
+            Cancel
+          </button>
+        </div>
+      `).join('');
+    }
+
+    // ===== CANCEL APPOINTMENT =====
+    function cancelAppointment(appointmentId) {
+      if (confirm('Cancel this appointment?')) {
+        const index = appointments.findIndex(a => a.id === appointmentId);
+        if (index !== -1) {
+          appointments[index].status = 'cancelled';
+          localStorage.setItem(`appointments_${currentUser.id}`, JSON.stringify(appointments));
+          showToast('Appointment cancelled');
+          displayUpcomingAppointments();
+        }
+      }
+    }
+
+    // ===== DISPLAY SERVICE HISTORY =====
+    function displayServiceHistory() {
+      const container = document.getElementById('serviceHistory');
+      
+      if (services.length === 0) {
+        services = [
+          {
+            id: 'SRV001',
+            type: 'Installation',
+            date: '2024-01-15',
+            status: 'completed',
+            rating: 5
+          },
+          {
+            id: 'SRV002',
+            type: 'Maintenance',
+            date: '2024-02-01',
+            status: 'completed',
+            rating: 4
+          }
+        ];
+        localStorage.setItem(`services_${currentUser.id}`, JSON.stringify(services));
+      }
+      
+      container.innerHTML = services.map(s => `
+        <div class="service-item">
+          <div class="service-icon">
+            <i class="fas fa-wrench"></i>
+          </div>
+          <div class="service-details">
+            <h4>${s.type}</h4>
+            <p>${new Date(s.date).toLocaleDateString()}</p>
+          </div>
+          <span class="service-status status-${s.status}">${s.status}</span>
+        </div>
+      `).join('');
+    }
+
+    // ===== REQUEST QUICK SERVICE =====
+    function requestQuickService() {
+      const service = {
+        id: 'SRV' + Date.now().toString().slice(-6),
+        type: 'Quick Service',
+        date: new Date().toISOString(),
+        status: 'pending'
+      };
+      
+      services.push(service);
+      localStorage.setItem(`services_${currentUser.id}`, JSON.stringify(services));
+      
+      showToast('Service request submitted! We will contact you soon.');
+      displayServiceHistory();
+    }
+
+    // ===== SUBMIT COMPLAINT =====
+    document.getElementById('complaintForm')?.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const orderId = document.getElementById('complaintOrder').value;
+      const type = document.getElementById('complaintType').value;
+      const desc = document.getElementById('complaintDesc').value;
+      const priority = document.getElementById('priority').value;
+      
+      const complaint = {
+        id: 'CMP' + Date.now().toString().slice(-6),
+        orderId: orderId || 'N/A',
+        type: type,
+        description: desc,
+        priority: priority,
+        status: 'pending',
+        date: new Date().toISOString(),
+        read: false
+      };
+      
+      complaints.push(complaint);
+      localStorage.setItem(`complaints_${currentUser.id}`, JSON.stringify(complaints));
+      
+      showToast('Complaint registered successfully! ID: ' + complaint.id);
+      displayComplaintHistory();
+      updateStats();
+      this.reset();
+    });
+
+    // ===== DISPLAY COMPLAINT HISTORY =====
+    function displayComplaintHistory() {
+      const container = document.getElementById('complaintHistory');
+      
+      if (complaints.length === 0) {
+        container.innerHTML = '<p>No complaints registered</p>';
+        return;
+      }
+      
+      container.innerHTML = '<h4>Recent Complaints</h4>' + complaints.slice(-3).map(c => `
+        <div class="service-item">
+          <div class="service-details">
+            <h4>${c.type} (${c.priority})</h4>
+            <p>${c.description.substring(0, 50)}...</p>
+            <p>Status: ${c.status}</p>
+          </div>
+          <span class="service-status status-${c.status}">${c.status}</span>
+        </div>
+      `).join('');
+    }
+
+    // ===== LOYALTY PROGRAM =====
+    function redeemPoints() {
+      const points = parseInt(document.getElementById('loyaltyPointsDisplay').textContent);
+      if (points < 100) {
+        showToast('Need at least 100 points to redeem');
+        return;
+      }
+      
+      const discount = Math.floor(points / 100) * 10;
+      showToast(`Redeemed for ₹${discount} discount on next order!`);
+      
+      // Reset points after redemption
+      const newPoints = points % 100;
+      document.getElementById('loyaltyPointsDisplay').textContent = newPoints;
+      document.getElementById('loyaltyPoints').textContent = newPoints;
+    }
+
+    // ===== REFERRAL PROGRAM =====
+    function copyReferral() {
+      const code = document.getElementById('referralCode').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        showToast('Referral code copied!');
+        
+        // Simulate referral earning
+        const earnings = parseInt(document.getElementById('referralEarnings').textContent.replace(/[^0-9]/g, ''));
+        document.getElementById('referralEarnings').textContent = `Earned: ₹${earnings + 50}`;
+      });
+    }
+
+    // ===== AVATAR FUNCTIONS =====
     function openAvatarModal() {
       document.getElementById('avatarModal').classList.add('active');
     }
@@ -2556,21 +1731,17 @@
     }
 
     function selectAvatar(animal) {
-      const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${animal}`;
-      document.getElementById('profileImage').src = avatarUrl;
+      const url = `https://api.dicebear.com/7.x/avataaars/svg?seed=${animal}`;
+      document.getElementById('avatarImage').src = url;
       
-      // Save to user profile
-      const user = JSON.parse(localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser'));
-      if (user) {
-        user.avatar = avatarUrl;
-        localStorage.setItem('currentUser', JSON.stringify(user));
-      }
+      currentUser.avatar = url;
+      localStorage.setItem('currentUser', JSON.stringify(currentUser));
       
-      showToast(`Selected ${animal} avatar! 🦁`);
+      showToast(`Avatar updated to ${animal}!`);
       closeModal('avatarModal');
     }
 
-    function uploadCustomPhoto() {
+    function uploadPhoto() {
       const input = document.createElement('input');
       input.type = 'file';
       input.accept = 'image/*';
@@ -2578,91 +1749,124 @@
         const file = e.target.files[0];
         const reader = new FileReader();
         reader.onload = function(event) {
-          document.getElementById('profileImage').src = event.target.result;
-          showToast('Photo uploaded successfully!');
+          document.getElementById('avatarImage').src = event.target.result;
+          
+          currentUser.avatar = event.target.result;
+          localStorage.setItem('currentUser', JSON.stringify(currentUser));
+          
+          showToast('Photo uploaded!');
+          closeModal('avatarModal');
         };
         reader.readAsDataURL(file);
       };
       input.click();
     }
 
-    // ===== ORDER TRACKING =====
-    function refreshTracking() {
-      showToast('Refreshing order status...');
-      setTimeout(() => {
-        showToast('Order status updated!');
-      }, 1000);
-    }
-
-    function viewPhoto(photoId) {
-      showToast(`Viewing photo ${photoId}`);
-    }
-
-    function collectSignature() {
-      showToast('Please sign on the device');
-    }
-
-    // ===== LOYALTY PROGRAM =====
-    function redeemPoints() {
-      showToast('Opening points redemption...');
-    }
-
-    // ===== REFERRAL PROGRAM =====
-    function copyReferral() {
-      const code = document.getElementById('referralCode').textContent;
-      navigator.clipboard.writeText(code).then(() => {
-        showToast('Referral code copied!');
-      });
-    }
-
-    function share(platform) {
-      const code = document.getElementById('referralCode').textContent;
-      const message = `Join Raj Marketing using my referral code ${code} and get 500 points!`;
-      
-      if (platform === 'whatsapp') {
-        window.open(`https://wa.me/?text=${encodeURIComponent(message)}`);
-      } else if (platform === 'facebook') {
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://rajmarketing.com')}&quote=${encodeURIComponent(message)}`);
-      } else if (platform === 'twitter') {
-        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`);
-      }
-      showToast(`Sharing on ${platform}...`);
-    }
-
-    // ===== PAYMENT =====
-    document.getElementById('emiAmount')?.addEventListener('input', calculateEMI);
-    document.getElementById('emiMonths')?.addEventListener('input', calculateEMI);
-
-    function calculateEMI() {
-      const amount = parseFloat(document.getElementById('emiAmount').value) || 0;
-      const months = parseFloat(document.getElementById('emiMonths').value) || 0;
-      
-      if (amount && months) {
-        const interest = amount * 0.12; // 12% interest
-        const total = amount + interest;
-        const emi = total / months;
-        document.getElementById('emiResult').innerHTML = `Monthly EMI: ₹${emi.toFixed(2)}`;
-      }
-    }
-
-    // ===== SECTION NAVIGATION =====
-    function openSection(section) {
-      const sections = {
-        'order': 'Place new order',
-        'track': 'Track your order',
-        'payment': 'Payment options',
-        'appointment': 'Schedule appointment',
-        'service': 'Request quick service',
-        'complaint': 'Register complaint',
-        'referral': 'Refer & earn points',
-        'support': 'Contact support'
+    // ===== CHANGE COVER =====
+    function changeCover() {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.onchange = function(e) {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          document.getElementById('coverImage').src = event.target.result;
+          document.getElementById('coverImage').style.display = 'block';
+          
+          currentUser.cover = event.target.result;
+          localStorage.setItem('currentUser', JSON.stringify(currentUser));
+          
+          showToast('Cover photo updated!');
+        };
+        reader.readAsDataURL(file);
       };
-      showToast(sections[section]);
+      input.click();
     }
 
-    // ===== NOTIFICATIONS =====
+    // ===== SHOW/HIDE SECTIONS =====
+    function showSection(section) {
+      // Hide all sections
+      document.getElementById('newOrderCard').style.display = 'none';
+      document.getElementById('trackOrdersCard').style.display = 'none';
+      document.getElementById('mapCard').style.display = 'none';
+      document.getElementById('paymentsCard').style.display = 'none';
+      document.getElementById('appointmentsCard').style.display = 'none';
+      document.getElementById('servicesCard').style.display = 'none';
+      document.getElementById('complaintsCard').style.display = 'none';
+      document.getElementById('loyaltyCard').style.display = 'none';
+      document.getElementById('referralsCard').style.display = 'none';
+      
+      // Show selected section
+      switch(section) {
+        case 'newOrder':
+          document.getElementById('newOrderCard').style.display = 'block';
+          break;
+        case 'trackOrders':
+          document.getElementById('trackOrdersCard').style.display = 'block';
+          displayOrders();
+          break;
+        case 'payments':
+          document.getElementById('paymentsCard').style.display = 'block';
+          displayPendingPayments();
+          break;
+        case 'appointments':
+          document.getElementById('appointmentsCard').style.display = 'block';
+          if (calendar) calendar.render();
+          break;
+        case 'services':
+          document.getElementById('servicesCard').style.display = 'block';
+          displayServiceHistory();
+          break;
+        case 'complaints':
+          document.getElementById('complaintsCard').style.display = 'block';
+          displayComplaintHistory();
+          break;
+        case 'loyalty':
+          document.getElementById('loyaltyCard').style.display = 'block';
+          break;
+        case 'referrals':
+          document.getElementById('referralsCard').style.display = 'block';
+          break;
+      }
+    }
+
+    // ===== REFRESH ORDERS =====
+    function refreshOrders() {
+      loadAllData();
+      showToast('Orders refreshed');
+    }
+
+    // ===== SHOW NOTIFICATIONS =====
     function showNotifications() {
-      showToast('You have 5 new notifications');
+      const unread = complaints.filter(c => !c.read);
+      
+      if (unread.length === 0) {
+        showToast('No new notifications');
+        return;
+      }
+      
+      // Mark as read
+      complaints.forEach(c => c.read = true);
+      localStorage.setItem(`complaints_${currentUser.id}`, JSON.stringify(complaints));
+      
+      document.getElementById('notificationCount').textContent = '0';
+      
+      let message = 'Notifications:\n';
+      unread.forEach(c => {
+        message += `- ${c.type} complaint: ${c.description.substring(0, 30)}...\n`;
+      });
+      
+      showToast(message);
+    }
+
+    // ===== LOGOUT =====
+    function logout() {
+      if (confirm('Are you sure you want to logout?')) {
+        localStorage.removeItem('currentUser');
+        sessionStorage.removeItem('currentUser');
+        window.location.href = 'customer-login.html';
+      }
     }
 
     // ===== TOAST =====
@@ -2675,19 +1879,25 @@
       }, 3000);
     }
 
-    // Make functions global
+    // ===== MAKE FUNCTIONS GLOBAL =====
+    window.showSection = showSection;
+    window.trackOrder = trackOrder;
+    window.cancelOrder = cancelOrder;
+    window.viewOrderDetails = viewOrderDetails;
+    window.processPayment = processPayment;
+    window.payNow = payNow;
+    window.cancelAppointment = cancelAppointment;
+    window.requestQuickService = requestQuickService;
+    window.redeemPoints = redeemPoints;
+    window.copyReferral = copyReferral;
     window.openAvatarModal = openAvatarModal;
     window.closeModal = closeModal;
     window.selectAvatar = selectAvatar;
-    window.uploadCustomPhoto = uploadCustomPhoto;
-    window.refreshTracking = refreshTracking;
-    window.viewPhoto = viewPhoto;
-    window.collectSignature = collectSignature;
-    window.redeemPoints = redeemPoints;
-    window.copyReferral = copyReferral;
-    window.share = share;
-    window.openSection = openSection;
+    window.uploadPhoto = uploadPhoto;
+    window.changeCover = changeCover;
+    window.refreshOrders = refreshOrders;
     window.showNotifications = showNotifications;
+    window.logout = logout;
   </script>
 </body>
 </html>
