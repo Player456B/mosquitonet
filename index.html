@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Raj Marketing · mosquito nets</title>
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Font Awesome (CDN stays in HTML) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Swiper CSS (CDN stays in HTML) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="business-info">
+                <h1>Raj Marketing</h1>
+                <div class="sub"><i class="fas fa-store-alt"></i> Mysore · nets</div>
+            </div>
+            <div class="header-icons">
+                <i class="fas fa-bell clickable" id="notificationBtn"></i>
+                <i class="fas fa-user-circle clickable" id="profileBtn"></i>
+            </div>
+        </div>
+
+        <!-- Slider Section -->
+        <div class="swiper-container swiper">
+            <div class="swiper-wrapper">
+                <!-- Slide 1 -->
+                <div class="swiper-slide" style="background-image: url('https://placecats.com/400/200?random=1');">
+                    <div class="slide-content">🦟 Velcro nets <small>₹60/sqft · easy fit</small></div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="swiper-slide" style="background-image: url('https://placecats.com/401/201?random=2');">
+                    <div class="slide-content">🪟 Frame system <small>durable ₹180/sqft</small></div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="swiper-slide" style="background-image: url('https://placecats.com/402/202?random=3');">
+                    <div class="slide-content">✨ Pleated nets <small>₹350/sqft · retractable</small></div>
+                </div>
+                <!-- Slide 4 -->
+                <div class="swiper-slide" style="background-image: url('https://placecats.com/403/203?random=4');">
+                    <div class="slide-content">🚪 Mesh door <small>₹380/sqft · magnetic</small></div>
+                </div>
+                <!-- Slide 5 -->
+                <div class="swiper-slide" style="background-image: url('https://placecats.com/404/204?random=5');">
+                    <div class="slide-content">🔧 Free site visit <small>call now</small></div>
+                </div>
+                <!-- Slide 6 -->
+                <div class="swiper-slide" style="background-image: url('https://placecats.com/405/205?random=6');">
+                    <div class="slide-content">🏭 Hootghalli industries <small>#65, Mysore</small></div>
+                </div>
+                <!-- Slide 7 -->
+                <div class="swiper-slide" style="background-image: url('https://placecats.com/406/206?random=7');">
+                    <div class="slide-content">📞 9483037385 <small>Raj Marketing</small></div>
+                </div>
+                <!-- Slide 8 -->
+                <div class="swiper-slide" style="background-image: url('https://placecats.com/407/207?random=8');">
+                    <div class="slide-content">🎯 Monsoon offer <small>10% off</small></div>
+                </div>
+                <!-- Slide 9 -->
+                <div class="swiper-slide" style="background-image: url('https://placecats.com/408/208?random=9');">
+                    <div class="slide-content">🧮 Utility tools <small>EMI / sqft</small></div>
+                </div>
+                <!-- Slide 10 -->
+                <div class="swiper-slide" style="background-image: url('https://placecats.com/409/209?random=10');">
+                    <div class="slide-content">⭐ 4.9 rating <small>200+ reviews</small></div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+
+        <!-- Status Card -->
+        <div class="status-card">
+            <div class="status-item clickable" id="ongoingJobs">
+                <i class="fas fa-tools"></i>
+                <div class="label">ongoing</div>
+                <div class="value">3 jobs</div>
+            </div>
+            <div class="divider"></div>
+            <div class="status-item clickable" id="pendingVisits">
+                <i class="fas fa-calendar-check"></i>
+                <div class="label">visits</div>
+                <div class="value">5 sites</div>
+            </div>
+            <div class="divider"></div>
+            <div class="status-item clickable" id="totalSqft">
+                <i class="fas fa-chart-line"></i>
+                <div class="label">sqft</div>
+                <div class="value">1240</div>
+            </div>
+        </div>
+
+        <!-- My Services -->
+        <div class="section-title">
+            <h3>⚙️ My Services</h3>
+            <a href="#" id="viewAllServices">view all</a>
+        </div>
+        <div class="service-grid">
+            <div class="service-card clickable" id="velcroService">
+                <i class="fas fa-mosquito-net"></i>
+                <span>Velcro</span>
+                <small>₹60/sqft</small>
+            </div>
+            <div class="service-card clickable" id="frameService">
+                <i class="fas fa-window-maximize"></i>
+                <span>Frame</span>
+                <small>₹180/sqft</small>
+            </div>
+            <div class="service-card clickable" id="pleatedService">
+                <i class="fas fa-arrows-spin"></i>
+                <span>Pleated</span>
+                <small>₹350/sqft</small>
+            </div>
+            <div class="service-card clickable" id="meshDoorService">
+                <i class="fas fa-door-open"></i>
+                <span>Mesh door</span>
+                <small>₹380/sqft</small>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <div class="action-item clickable" id="callAction">
+                <i class="fas fa-phone-alt"></i>
+                <span>Call</span>
+            </div>
+            <div class="action-item clickable" id="whatsappAction">
+                <i class="fab fa-whatsapp"></i>
+                <span>WhatsApp</span>
+            </div>
+            <div class="action-item clickable" id="directionAction">
+                <i class="fas fa-location-dot"></i>
+                <span>Direction</span>
+            </div>
+            <div class="action-item clickable" id="shareAction">
+                <i class="fas fa-share-alt"></i>
+                <span>Share</span>
+            </div>
+        </div>
+
+        <!-- Info Banner -->
+        <div class="info-banner clickable" id="infoBanner">
+            <span><i class="fas fa-circle-info"></i> Free site visit & measurement</span>
+            <i class="fas fa-chevron-right"></i>
+        </div>
+
+        <!-- Explore Services -->
+        <div class="explore-services clickable" id="exploreServices">
+            <i class="fas fa-compass fa-xl"></i>
+            <span class="text">Explore services</span>
+            <i class="fas fa-arrow-right"></i>
+        </div>
+
+        <!-- Special Offers -->
+        <div class="offers-row">
+            <div class="offer-card clickable" id="offer1">
+                <i class="fas fa-gift"></i> 3+1 offer
+            </div>
+            <div class="offer-card clickable" id="offer2">
+                <i class="fas fa-percent"></i> frame 5% off
+            </div>
+        </div>
+
+        <!-- Mosquito Net Bazaar -->
+        <div class="bazaar-card clickable" id="bazaarCard">
+            <div class="bazaar-title">🦟 Mosquito Net Bazaar</div>
+            <div class="bazaar-address">
+                <i class="fas fa-map-pin"></i> #65, Near Pragathi logistics, Hootghalli industries area, Hootghalli, Mysore.
+            </div>
+            <div class="bazaar-contact">
+                <span><i class="fas fa-phone"></i> 9483037385</span>
+                <span><i class="fas fa-star"></i> 4.9</span>
+            </div>
+            <div class="price-tag">
+                <span>Velcro ₹60</span> <span>Frame ₹180</span> <span>Pleated ₹350</span> <span>Door ₹380</span>
+            </div>
+        </div>
+
+        <!-- Promotional Offer Banner -->
+        <div class="promo-offer-banner clickable" id="promoBanner">
+            <span><i class="fas fa-tags"></i> Door + window combo</span>
+            <span class="offer-badge">save 10%</span>
+        </div>
+
+        <!-- Safety Awareness & Utility Tools -->
+        <div class="safety-tools">
+            <div class="safety clickable" id="safetyAwareness">
+                <i class="fas fa-shield-heart fa-xl"></i> <span>Safety awareness</span>
+            </div>
+            <div class="utility clickable" id="utilityTools">
+                <i class="fas fa-calculator fa-xl"></i> <span>Utility tools</span>
+            </div>
+        </div>
+
+        <!-- Floating Action Button -->
+        <div class="fab clickable" id="fabButton">
+            <i class="fas fa-pencil-alt"></i>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-item active clickable" id="navHome"><i class="fas fa-home"></i><span>Home</span></div>
+            <div class="nav-item clickable" id="navExplore"><i class="fas fa-search"></i><span>Explore</span></div>
+            <div class="nav-item clickable" id="navSaved"><i class="fas fa-heart"></i><span>Saved</span></div>
+            <div class="nav-item clickable" id="navCall"><i class="fas fa-phone"></i><span>Call</span></div>
+            <div class="nav-item clickable" id="navAccount"><i class="fas fa-user"></i><span>Account</span></div>
+        </div>
+    </div>
+
+    <!-- Toast Message -->
+    <div id="toastMessage"></div>
+
+    <!-- External Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+  </html>
