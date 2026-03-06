@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Services · Raj Marketing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="page-header">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+            <h2>Explore Services</h2>
+            <div></div>
+        </div>
+
+        <div class="explore-content">
+            <!-- Categories -->
+            <div class="categories-section">
+                <h3>Categories</h3>
+                <div class="category-chips">
+                    <span class="chip active">All</span>
+                    <span class="chip">Window</span>
+                    <span class="chip">Door</span>
+                    <span class="chip">Sliding</span>
+                    <span class="chip">Fixed</span>
+                </div>
+            </div>
+
+            <!-- Service Details -->
+            <div class="service-detail-card" id="velcroDetail">
+                <img src="https://placecats.com/400/300?random=50" alt="Velcro Nets" class="detail-image">
+                <div class="detail-content">
+                    <h4>Velcro System</h4>
+                    <p class="price">₹60/sqft</p>
+                    <p class="description">Easy to install and remove. Perfect for windows. Comes with premium fiber mesh and strong velcro tape.</p>
+                    <ul class="features">
+                        <li><i class="fas fa-check-circle yellow-bg-icon"></i> Easy cleaning</li>
+                        <li><i class="fas fa-check-circle yellow-bg-icon"></i> Removable</li>
+                        <li><i class="fas fa-check-circle yellow-bg-icon"></i> 2 year warranty</li>
+                    </ul>
+                    <button class="btn-book-now" onclick="window.location.href='appointment.html?service=velcro'">Book Installation</button>
+                </div>
+            </div>
+
+            <div class="service-detail-card" id="frameDetail">
+                <img src="https://placecats.com/401/301?random=51" alt="Frame System" class="detail-image">
+                <div class="detail-content">
+                    <h4>Frame System</h4>
+                    <p class="price">₹180/sqft</p>
+                    <p class="description">Durable aluminum frame with fine mesh. Permanent solution for windows and doors.</p>
+                    <ul class="features">
+                        <li><i class="fas fa-check-circle yellow-bg-icon"></i> Rust-proof</li>
+                        <li><i class="fas fa-check-circle yellow-bg-icon"></i> Strong frame</li>
+                        <li><i class="fas fa-check-circle yellow-bg-icon"></i> 5 year warranty</li>
+                    </ul>
+                    <button class="btn-book-now" onclick="window.location.href='appointment.html?service=frame'">Book Installation</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-item" onclick="window.location.href='index.html'"><i class="fas fa-home"></i><span>Home</span></div>
+            <div class="nav-item active" onclick="window.location.href='explore.html'"><i class="fas fa-search"></i><span>Explore</span></div>
+            <div class="nav-item" onclick="window.location.href='appointment.html'"><i class="fas fa-calendar-alt"></i><span>Book</span></div>
+            <div class="nav-item" onclick="window.location.href='tel:9483037385'"><i class="fas fa-phone"></i><span>Call</span></div>
+            <div class="nav-item" onclick="window.location.href='#'"><i class="fas fa-user"></i><span>Account</span></div>
+        </div>
+    </div>
+
+    <script src="js/explore.js"></script>
+</body>
+</html>
