@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Free Site Visit · Raj Marketing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/forms.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Simple Header -->
+        <div class="page-header">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+            <h2>Book Free Site Visit</h2>
+            <div></div>
+        </div>
+
+        <!-- Appointment Form -->
+        <div class="form-container">
+            <div class="form-card">
+                <div class="form-icon blue-bg">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <h3>Schedule Your Free Estimate</h3>
+                <p>Get accurate measurement & quote for your mosquito nets</p>
+
+                <form id="appointmentForm">
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Full Name *</label>
+                        <input type="text" id="name" placeholder="Enter your name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-phone"></i> Phone Number *</label>
+                        <input type="tel" id="phone" placeholder="10 digit mobile number" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-map-marker-alt"></i> Address *</label>
+                        <textarea id="address" placeholder="Complete address for site visit" rows="2" required></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label><i class="fas fa-city"></i> City</label>
+                            <input type="text" id="city" value="Mysore" readonly>
+                        </div>
+                        <div class="form-group half">
+                            <label><i class="fas fa-calendar"></i> Preferred Date</label>
+                            <input type="date" id="date" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-clock"></i> Preferred Time</label>
+                        <select id="time">
+                            <option>10:00 AM - 12:00 PM</option>
+                            <option>12:00 PM - 02:00 PM</option>
+                            <option>02:00 PM - 04:00 PM</option>
+                            <option>04:00 PM - 06:00 PM</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-tools"></i> Service Required</label>
+                        <select id="service">
+                            <option value="velcro">Velcro System (₹60/sqft)</option>
+                            <option value="frame">Frame System (₹180/sqft)</option>
+                            <option value="pleated">Pleated Nets (₹350/sqft)</option>
+                            <option value="mesh">Mesh Door (₹380/sqft)</option>
+                            <option value="custom">Custom / Multiple</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-ruler"></i> Approx. Sqft (Optional)</label>
+                        <input type="number" id="sqft" placeholder="e.g., 50 sqft">
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-comment"></i> Additional Notes</label>
+                        <textarea id="notes" placeholder="Any specific requirements..." rows="2"></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <i class="fas fa-paper-plane"></i> Book Free Site Visit
+                    </button>
+                </form>
+
+                <div class="form-footer">
+                    <p><i class="fas fa-shield-alt"></i> Your data is secure · We'll call to confirm</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-item" onclick="window.location.href='index.html'">
+                <i class="fas fa-home"></i><span>Home</span>
+            </div>
+            <div class="nav-item" onclick="window.location.href='explore.html'">
+                <i class="fas fa-search"></i><span>Explore</span>
+            </div>
+            <div class="nav-item active" onclick="window.location.href='appointment.html'">
+                <i class="fas fa-calendar-alt"></i><span>Book</span>
+            </div>
+            <div class="nav-item" onclick="window.location.href='tel:9483037385'">
+                <i class="fas fa-phone"></i><span>Call</span>
+            </div>
+            <div class="nav-item" onclick="window.location.href='#'">
+                <i class="fas fa-user"></i><span>Account</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toastMessage"></div>
+
+    <script src="js/appointment.js"></script>
+</body>
+</html> 
