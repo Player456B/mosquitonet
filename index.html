@@ -3,167 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Raj Marketing · mosquito nets</title>
+    <title>Raj Marketing · Mosquito Nets</title>
     
-    <!-- External CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts - Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="app-container">
-        <!-- Header -->
-        <div class="header">
-            <div class="business-info">
-                <h1>Raj Marketing</h1>
-                <div class="sub"><i class="fas fa-store-alt"></i> Mysore · nets</div>
+        <!-- ===== TOP HEADER BAR - 64px ===== -->
+        <div class="top-header">
+            <div class="header-left">
+                <i class="fas fa-bars hamburger-icon" id="menuBtn"></i>
             </div>
-            <div class="header-icons">
-                <i class="fas fa-bell clickable" id="notificationBtn"></i>
-                <i class="fas fa-user-circle clickable" id="profileBtn"></i>
+            <div class="header-center">
+                <span class="greeting-text">Hello,</span>
+                <span class="customer-name">Raj Marketing Customer</span>
+            </div>
+            <div class="header-right">
+                <i class="fas fa-bell notification-icon" id="notificationBtn"></i>
             </div>
         </div>
 
-        <!-- Main Promotional Slider (10 images) -->
+        <!-- ===== MAIN PROMOTIONAL SLIDER (10 images) ===== -->
         <div class="swiper-container main-slider swiper">
             <div class="swiper-wrapper">
                 <!-- Slide 1 -->
                 <div class="swiper-slide" style="background-image: url('https://placecats.com/400/200?random=1');">
-                    <div class="slide-content">🦟 Velcro nets <small>₹60/sqft · easy fit</small></div>
+                    <div class="slide-content">
+                        <span class="slide-title">🦟 Velcro Nets</span>
+                        <small>₹60/sqft · Easy fit</small>
+                    </div>
                 </div>
                 <!-- Slide 2 -->
                 <div class="swiper-slide" style="background-image: url('https://placecats.com/401/201?random=2');">
-                    <div class="slide-content">🪟 Frame system <small>durable ₹180/sqft</small></div>
+                    <div class="slide-content">
+                        <span class="slide-title">🪟 Frame System</span>
+                        <small>Durable · ₹180/sqft</small>
+                    </div>
                 </div>
                 <!-- Slide 3 -->
                 <div class="swiper-slide" style="background-image: url('https://placecats.com/402/202?random=3');">
-                    <div class="slide-content">✨ Pleated nets <small>₹350/sqft · retractable</small></div>
+                    <div class="slide-content">
+                        <span class="slide-title">✨ Pleated Nets</span>
+                        <small>Retractable · ₹350/sqft</small>
+                    </div>
                 </div>
                 <!-- Slide 4 -->
                 <div class="swiper-slide" style="background-image: url('https://placecats.com/403/203?random=4');">
-                    <div class="slide-content">🚪 Mesh door <small>₹380/sqft · magnetic</small></div>
+                    <div class="slide-content">
+                        <span class="slide-title">🚪 Mesh Door</span>
+                        <small>Magnetic · ₹380/sqft</small>
+                    </div>
                 </div>
                 <!-- Slide 5 -->
                 <div class="swiper-slide" style="background-image: url('https://placecats.com/404/204?random=5');">
-                    <div class="slide-content">🔧 Free site visit <small>call now</small></div>
+                    <div class="slide-content">
+                        <span class="slide-title">🔧 Free Site Visit</span>
+                        <small>Call to schedule</small>
+                    </div>
                 </div>
                 <!-- Slide 6 -->
                 <div class="swiper-slide" style="background-image: url('https://placecats.com/405/205?random=6');">
-                    <div class="slide-content">🏭 Hootghalli industries <small>#65, Mysore</small></div>
+                    <div class="slide-content">
+                        <span class="slide-title">🏭 Hootghalli Industries</span>
+                        <small>#65, Mysore</small>
+                    </div>
                 </div>
                 <!-- Slide 7 -->
                 <div class="swiper-slide" style="background-image: url('https://placecats.com/406/206?random=7');">
-                    <div class="slide-content">📞 9483037385 <small>Raj Marketing</small></div>
+                    <div class="slide-content">
+                        <span class="slide-title">📞 9483037385</span>
+                        <small>Call us anytime</small>
+                    </div>
                 </div>
                 <!-- Slide 8 -->
                 <div class="swiper-slide" style="background-image: url('https://placecats.com/407/207?random=8');">
-                    <div class="slide-content">🎯 Monsoon offer <small>10% off</small></div>
+                    <div class="slide-content">
+                        <span class="slide-title">🎯 Monsoon Offer</span>
+                        <small>10% off on all nets</small>
+                    </div>
                 </div>
                 <!-- Slide 9 -->
                 <div class="swiper-slide" style="background-image: url('https://placecats.com/408/208?random=9');">
-                    <div class="slide-content">🧮 Utility tools <small>EMI / sqft</small></div>
+                    <div class="slide-content">
+                        <span class="slide-title">🧮 EMI Available</span>
+                        <small>Easy monthly payments</small>
+                    </div>
                 </div>
                 <!-- Slide 10 -->
                 <div class="swiper-slide" style="background-image: url('https://placecats.com/409/209?random=10');">
-                    <div class="slide-content">⭐ 4.9 rating <small>200+ reviews</small></div>
+                    <div class="slide-content">
+                        <span class="slide-title">⭐ 4.9 Rating</span>
+                        <small>200+ happy customers</small>
+                    </div>
                 </div>
             </div>
             <div class="swiper-pagination"></div>
         </div>
 
-        <!-- Section Title for Status Cards -->
+        <!-- ===== STATUS CARDS SLIDER (6 cards) ===== -->
         <div class="section-title">
             <h3>📊 Business Overview</h3>
-            <span class="slide-indicator"><i class="fas fa-arrows-left-right"></i> swipe to see more</span>
+            <span class="slide-indicator"><i class="fas fa-arrows-left-right"></i> swipe</span>
         </div>
 
-        <!-- Status Cards Slider (6 cards) -->
         <div class="swiper-container status-slider">
             <div class="swiper-wrapper">
-                <!-- Status Card 1: Ongoing Jobs -->
+                <!-- Status Card 1 -->
                 <div class="swiper-slide">
                     <div class="status-card-slide clickable" id="ongoingJobs">
-                        <div class="status-icon">
+                        <div class="status-icon blue-bg">
                             <i class="fas fa-tools"></i>
                         </div>
                         <div class="status-details">
-                            <span class="status-label">Ongoing Installations</span>
+                            <span class="status-label">Ongoing</span>
                             <span class="status-value">3 Jobs</span>
                             <span class="status-sub">This week</span>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Status Card 2: Pending Visits -->
+                <!-- Status Card 2 -->
                 <div class="swiper-slide">
                     <div class="status-card-slide clickable" id="pendingVisits">
-                        <div class="status-icon">
+                        <div class="status-icon yellow-bg">
                             <i class="fas fa-calendar-check"></i>
                         </div>
                         <div class="status-details">
-                            <span class="status-label">Pending Site Visits</span>
+                            <span class="status-label">Site Visits</span>
                             <span class="status-value">5 Sites</span>
                             <span class="status-sub">Scheduled</span>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Status Card 3: Monthly Sqft -->
+                <!-- Status Card 3 -->
                 <div class="swiper-slide">
                     <div class="status-card-slide clickable" id="totalSqft">
-                        <div class="status-icon">
+                        <div class="status-icon blue-bg">
                             <i class="fas fa-chart-line"></i>
                         </div>
                         <div class="status-details">
-                            <span class="status-label">Total Sqft This Month</span>
-                            <span class="status-value">1,240 sqft</span>
-                            <span class="status-sub">+15% vs last month</span>
+                            <span class="status-label">Monthly Sqft</span>
+                            <span class="status-value">1,240</span>
+                            <span class="status-sub">+15% growth</span>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Status Card 4: Revenue -->
+                <!-- Status Card 4 -->
                 <div class="swiper-slide">
                     <div class="status-card-slide clickable" id="revenueCard">
-                        <div class="status-icon">
+                        <div class="status-icon yellow-bg">
                             <i class="fas fa-rupee-sign"></i>
                         </div>
                         <div class="status-details">
-                            <span class="status-label">Monthly Revenue</span>
-                            <span class="status-value">₹1,85,000</span>
-                            <span class="status-sub">Target: ₹2,00,000</span>
+                            <span class="status-label">Revenue</span>
+                            <span class="status-value">₹1.85L</span>
+                            <span class="status-sub">This month</span>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Status Card 5: Customer Rating -->
+                <!-- Status Card 5 -->
                 <div class="swiper-slide">
                     <div class="status-card-slide clickable" id="ratingCard">
-                        <div class="status-icon">
+                        <div class="status-icon blue-bg">
                             <i class="fas fa-star"></i>
                         </div>
                         <div class="status-details">
-                            <span class="status-label">Customer Rating</span>
-                            <span class="status-value">4.9/5.0</span>
+                            <span class="status-label">Rating</span>
+                            <span class="status-value">4.9/5</span>
                             <span class="status-sub">248 reviews</span>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Status Card 6: Completed Projects -->
+                <!-- Status Card 6 -->
                 <div class="swiper-slide">
                     <div class="status-card-slide clickable" id="completedCard">
-                        <div class="status-icon">
+                        <div class="status-icon yellow-bg">
                             <i class="fas fa-check-circle"></i>
                         </div>
                         <div class="status-details">
-                            <span class="status-label">Completed Projects</span>
+                            <span class="status-label">Completed</span>
                             <span class="status-value">156</span>
-                            <span class="status-sub">Since 2012</span>
+                            <span class="status-sub">Projects</span>
                         </div>
                     </div>
                 </div>
@@ -171,128 +202,446 @@
             <div class="swiper-pagination status-pagination"></div>
         </div>
 
-        <!-- My Services -->
+        <!-- ===== MY SERVICES with Image Slider ===== -->
         <div class="section-title">
-            <h3>⚙️ My Services</h3>
-            <a href="#" id="viewAllServices">view all</a>
-        </div>
-        <div class="service-grid">
-            <div class="service-card clickable" id="velcroService">
-                <i class="fas fa-mosquito-net"></i>
-                <span>Velcro</span>
-                <small>₹60/sqft</small>
-            </div>
-            <div class="service-card clickable" id="frameService">
-                <i class="fas fa-window-maximize"></i>
-                <span>Frame</span>
-                <small>₹180/sqft</small>
-            </div>
-            <div class="service-card clickable" id="pleatedService">
-                <i class="fas fa-arrows-spin"></i>
-                <span>Pleated</span>
-                <small>₹350/sqft</small>
-            </div>
-            <div class="service-card clickable" id="meshDoorService">
-                <i class="fas fa-door-open"></i>
-                <span>Mesh door</span>
-                <small>₹380/sqft</small>
-            </div>
+            <h3>🛠️ My Services</h3>
+            <span class="slide-indicator"><i class="fas fa-arrows-left-right"></i> swipe</span>
         </div>
 
-        <!-- Quick Actions -->
-        <div class="quick-actions">
-            <div class="action-item clickable" id="callAction">
-                <i class="fas fa-phone-alt"></i>
+        <div class="swiper-container services-slider">
+            <div class="swiper-wrapper">
+                <!-- Service 1: Velcro System -->
+                <div class="swiper-slide">
+                    <div class="service-card-slide">
+                        <div class="service-image" style="background-image: url('https://placecats.com/300/200?random=20');">
+                            <div class="service-overlay">
+                                <span class="service-price">₹60/sqft</span>
+                            </div>
+                        </div>
+                        <div class="service-info">
+                            <h4>Velcro System</h4>
+                            <p>Easy installation, removable nets</p>
+                            <div class="service-actions">
+                                <button class="btn-learn-more" onclick="window.location.href='explore.html?service=velcro'">Learn More</button>
+                                <button class="btn-book-now" onclick="window.location.href='appointment.html?service=velcro'">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 2: Frame System -->
+                <div class="swiper-slide">
+                    <div class="service-card-slide">
+                        <div class="service-image" style="background-image: url('https://placecats.com/301/201?random=21');">
+                            <div class="service-overlay">
+                                <span class="service-price">₹180/sqft</span>
+                            </div>
+                        </div>
+                        <div class="service-info">
+                            <h4>Frame System</h4>
+                            <p>Durable aluminum frame, premium finish</p>
+                            <div class="service-actions">
+                                <button class="btn-learn-more" onclick="window.location.href='explore.html?service=frame'">Learn More</button>
+                                <button class="btn-book-now" onclick="window.location.href='appointment.html?service=frame'">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 3: Pleated Nets -->
+                <div class="swiper-slide">
+                    <div class="service-card-slide">
+                        <div class="service-image" style="background-image: url('https://placecats.com/302/202?random=22');">
+                            <div class="service-overlay">
+                                <span class="service-price">₹350/sqft</span>
+                            </div>
+                        </div>
+                        <div class="service-info">
+                            <h4>Pleated Nets</h4>
+                            <p>Retractable, space-saving design</p>
+                            <div class="service-actions">
+                                <button class="btn-learn-more" onclick="window.location.href='explore.html?service=pleated'">Learn More</button>
+                                <button class="btn-book-now" onclick="window.location.href='appointment.html?service=pleated'">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 4: Mesh Door -->
+                <div class="swiper-slide">
+                    <div class="service-card-slide">
+                        <div class="service-image" style="background-image: url('https://placecats.com/303/203?random=23');">
+                            <div class="service-overlay">
+                                <span class="service-price">₹380/sqft</span>
+                            </div>
+                        </div>
+                        <div class="service-info">
+                            <h4>Mesh Door</h4>
+                            <p>Magnetic closure, easy access</p>
+                            <div class="service-actions">
+                                <button class="btn-learn-more" onclick="window.location.href='explore.html?service=meshdoor'">Learn More</button>
+                                <button class="btn-book-now" onclick="window.location.href='appointment.html?service=meshdoor'">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 5: Custom Nets -->
+                <div class="swiper-slide">
+                    <div class="service-card-slide">
+                        <div class="service-image" style="background-image: url('https://placecats.com/304/204?random=24');">
+                            <div class="service-overlay">
+                                <span class="service-price">Custom</span>
+                            </div>
+                        </div>
+                        <div class="service-info">
+                            <h4>Custom Nets</h4>
+                            <p>Any size, any shape, tailored for you</p>
+                            <div class="service-actions">
+                                <button class="btn-learn-more" onclick="window.location.href='explore.html?service=custom'">Learn More</button>
+                                <button class="btn-book-now" onclick="window.location.href='appointment.html?service=custom'">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination services-pagination"></div>
+        </div>
+
+        <!-- ===== MUCH MORE ICONS SECTION (10+ actions) ===== -->
+        <div class="section-title">
+            <h3>🔧 Quick Actions</h3>
+            <span class="slide-indicator">10+ options</span>
+        </div>
+
+        <div class="icons-grid">
+            <!-- Call -->
+            <div class="icon-card clickable" id="callIcon" onclick="window.location.href='tel:9483037385'">
+                <div class="icon-circle blue-bg">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
                 <span>Call</span>
             </div>
-            <div class="action-item clickable" id="whatsappAction">
-                <i class="fab fa-whatsapp"></i>
+            <!-- WhatsApp -->
+            <div class="icon-card clickable" id="whatsappIcon" onclick="window.location.href='https://wa.me/919483037385'">
+                <div class="icon-circle green-bg">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
                 <span>WhatsApp</span>
             </div>
-            <div class="action-item clickable" id="directionAction">
-                <i class="fas fa-location-dot"></i>
-                <span>Direction</span>
-            </div>
-            <div class="action-item clickable" id="shareAction">
-                <i class="fas fa-share-alt"></i>
+            <!-- Share -->
+            <div class="icon-card clickable" id="shareIcon" onclick="shareBusiness()">
+                <div class="icon-circle yellow-bg">
+                    <i class="fas fa-share-alt"></i>
+                </div>
                 <span>Share</span>
             </div>
+            <!-- Direction -->
+            <div class="icon-card clickable" id="directionIcon" onclick="window.open('https://maps.google.com/?q=12.3456,76.6789')">
+                <div class="icon-circle blue-bg">
+                    <i class="fas fa-location-dot"></i>
+                </div>
+                <span>Direction</span>
+            </div>
+            <!-- Get Estimate -->
+            <div class="icon-card clickable" id="estimateIcon" onclick="window.location.href='appointment.html?type=estimate'">
+                <div class="icon-circle yellow-bg">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <span>Estimate</span>
+            </div>
+            <!-- Price Calculator -->
+            <div class="icon-card clickable" id="calculatorIcon" onclick="openCalculator()">
+                <div class="icon-circle blue-bg">
+                    <i class="fas fa-rupee-sign"></i>
+                </div>
+                <span>Calculator</span>
+            </div>
+            <!-- Book Now -->
+            <div class="icon-card clickable" id="bookNowIcon" onclick="window.location.href='appointment.html'">
+                <div class="icon-circle yellow-bg">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <span>Book Now</span>
+            </div>
+            <!-- Discord -->
+            <div class="icon-card clickable" id="discordIcon" onclick="window.open('https://discord.gg/rajmarketing')">
+                <div class="icon-circle blue-bg">
+                    <i class="fab fa-discord"></i>
+                </div>
+                <span>Discord</span>
+            </div>
+            <!-- Email -->
+            <div class="icon-card clickable" id="emailIcon" onclick="window.location.href='mailto:rajmarketing@gmail.com'">
+                <div class="icon-circle yellow-bg">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <span>Email</span>
+            </div>
+            <!-- Review -->
+            <div class="icon-card clickable" id="reviewIcon" onclick="window.location.href='https://g.page/rajmarketing/review'">
+                <div class="icon-circle blue-bg">
+                    <i class="fas fa-star"></i>
+                </div>
+                <span>Review</span>
+            </div>
+            <!-- Support -->
+            <div class="icon-card clickable" id="supportIcon" onclick="window.location.href='appointment.html?type=support'">
+                <div class="icon-circle yellow-bg">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <span>Support</span>
+            </div>
+            <!-- Offers -->
+            <div class="icon-card clickable" id="offersIcon" onclick="window.location.href='offer-details.html'">
+                <div class="icon-circle blue-bg">
+                    <i class="fas fa-tags"></i>
+                    </div>
+                <span>Offers</span>
+            </div>
         </div>
 
-        <!-- Info Banner -->
-        <div class="info-banner clickable" id="infoBanner">
-            <span><i class="fas fa-circle-info"></i> Free site visit & measurement</span>
-            <i class="fas fa-chevron-right"></i>
-        </div>
-
-        <!-- Explore Services -->
-        <div class="explore-services clickable" id="exploreServices">
-            <i class="fas fa-compass fa-xl"></i>
-            <span class="text">Explore services</span>
+        <!-- ===== FREE SITE VISIT BANNER ===== -->
+        <div class="free-visit-banner clickable" id="freeVisitBanner" onclick="window.location.href='appointment.html'">
+            <div class="banner-content">
+                <i class="fas fa-tools"></i>
+                <div>
+                    <h4>Free Site Visit</h4>
+                    <p>Schedule now · Get free estimate</p>
+                </div>
+            </div>
             <i class="fas fa-arrow-right"></i>
         </div>
 
-        <!-- Special Offers -->
-        <div class="offers-row">
-            <div class="offer-card clickable" id="offer1">
-                <i class="fas fa-gift"></i> 3+1 offer
+        <!-- ===== EXPLORE SERVICES BANNER ===== -->
+        <div class="explore-banner clickable" id="exploreBanner" onclick="window.location.href='explore.html'">
+            <div class="banner-content">
+                <i class="fas fa-compass"></i>
+                <div>
+                    <h4>Explore All Services</h4>
+                    <p>View complete catalog & prices</p>
+                </div>
             </div>
-            <div class="offer-card clickable" id="offer2">
-                <i class="fas fa-percent"></i> frame 5% off
+            <i class="fas fa-arrow-right"></i>
+        </div>
+
+        <!-- ===== OFFER REFERENCE CARDS ===== -->
+        <div class="section-title">
+            <h3>🎁 Special Offers</h3>
+            <a href="offer-details.html" class="view-all-link">View All</a>
+        </div>
+
+        <div class="offers-grid">
+            <!-- Offer 1 -->
+            <div class="offer-card-modern clickable" onclick="window.location.href='offer-details.html?id=1'">
+                <div class="offer-icon yellow-bg">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <div class="offer-details">
+                    <h4>3+1 Free</h4>
+                    <p>Buy 3 windows get 1 free</p>
+                    <span class="offer-code">Use: MONSOON3</span>
+                </div>
+            </div>
+            <!-- Offer 2 -->
+            <div class="offer-card-modern clickable" onclick="window.location.href='offer-details.html?id=2'">
+                <div class="offer-icon blue-bg">
+                    <i class="fas fa-percent"></i>
+                </div>
+                <div class="offer-details">
+                    <h4>5% Off</h4>
+                    <p>On Frame System</p>
+                    <span class="offer-code">Use: FRAME5</span>
+                </div>
+            </div>
+            <!-- Offer 3 -->
+            <div class="offer-card-modern clickable" onclick="window.location.href='offer-details.html?id=3'">
+                <div class="offer-icon yellow-bg">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <div class="offer-details">
+                    <h4>Free Installation</h4>
+                    <p>On orders above ₹5000</p>
+                    <span class="offer-code">Auto apply</span>
+                </div>
+            </div>
+            <!-- Offer 4 -->
+            <div class="offer-card-modern clickable" onclick="window.location.href='offer-details.html?id=4'">
+                <div class="offer-icon blue-bg">
+                    <i class="fas fa-rupee-sign"></i>
+                </div>
+                <div class="offer-details">
+                    <h4>₹500 Off</h4>
+                    <p>On Pleated Nets</p>
+                    <span class="offer-code">Use: PLEAT500</span>
+                </div>
             </div>
         </div>
 
-        <!-- Mosquito Net Bazaar -->
-        <div class="bazaar-card clickable" id="bazaarCard">
-            <div class="bazaar-title">🦟 Mosquito Net Bazaar</div>
-            <div class="bazaar-address">
-                <i class="fas fa-map-pin"></i> #65, Near Pragathi logistics, Hootghalli industries area, Hootghalli, Mysore.
-            </div>
-            <div class="bazaar-contact">
-                <span><i class="fas fa-phone"></i> 9483037385</span>
-                <span><i class="fas fa-star"></i> 4.9</span>
-            </div>
-            <div class="price-tag">
-                <span>Velcro ₹60</span> <span>Frame ₹180</span> <span>Pleated ₹350</span> <span>Door ₹380</span>
-            </div>
+        <!-- ===== MOSQUITO NET BAZAAR - 10 Image Slider ===== -->
+        <div class="section-title">
+            <h3>🦟 Mosquito Net Bazaar</h3>
+            <span class="slide-indicator">10 samples</span>
         </div>
 
-        <!-- Promotional Offer Banner -->
-        <div class="promo-offer-banner clickable" id="promoBanner">
-            <span><i class="fas fa-tags"></i> Door + window combo</span>
-            <span class="offer-badge">save 10%</span>
-        </div>
-
-        <!-- Safety Awareness & Utility Tools -->
-        <div class="safety-tools">
-            <div class="safety clickable" id="safetyAwareness">
-                <i class="fas fa-shield-heart fa-xl"></i> <span>Safety awareness</span>
+        <div class="swiper-container bazaar-slider">
+            <div class="swiper-wrapper">
+                <!-- Sample 1 -->
+                <div class="swiper-slide">
+                    <div class="bazaar-sample-card">
+                        <div class="sample-image" style="background-image: url('https://placecats.com/300/300?random=30');">
+                            <span class="sample-tag">White</span>
+                        </div>
+                        <div class="sample-info">
+                            <h4>Fiber Velcro</h4>
+                            <p>₹60/sqft · 2x3 ft</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sample 2 -->
+                <div class="swiper-slide">
+                    <div class="bazaar-sample-card">
+                        <div class="sample-image" style="background-image: url('https://placecats.com/301/301?random=31');">
+                            <span class="sample-tag">Brown</span>
+                        </div>
+                        <div class="sample-info">
+                            <h4>Aluminum Frame</h4>
+                            <p>₹180/sqft · 3x4 ft</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sample 3 -->
+                <div class="swiper-slide">
+                    <div class="bazaar-sample-card">
+                        <div class="sample-image" style="background-image: url('https://placecats.com/302/302?random=32');">
+                            <span class="sample-tag">Black</span>
+                        </div>
+                        <div class="sample-info">
+                            <h4>Pleated Net</h4>
+                            <p>₹350/sqft · Retractable</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sample 4 -->
+                <div class="swiper-slide">
+                    <div class="bazaar-sample-card">
+                        <div class="sample-image" style="background-image: url('https://placecats.com/303/303?random=33');">
+                            <span class="sample-tag">White</span>
+                        </div>
+                        <div class="sample-info">
+                            <h4>Magnetic Door</h4>
+                            <p>₹380/sqft · 3x7 ft</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sample 5 -->
+                <div class="swiper-slide">
+                    <div class="bazaar-sample-card">
+                        <div class="sample-image" style="background-image: url('https://placecats.com/304/304?random=34');">
+                            <span class="sample-tag">Gray</span>
+                        </div>
+                        <div class="sample-info">
+                            <h4>Slider Net</h4>
+                            <p>₹420/sqft · Sliding</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sample 6 -->
+                <div class="swiper-slide">
+                    <div class="bazaar-sample-card">
+                        <div class="sample-image" style="background-image: url('https://placecats.com/305/305?random=35');">
+                            <span class="sample-tag">Black</span>
+                        </div>
+                        <div class="sample-info">
+                            <h4>French Door</h4>
+                            <p>₹450/sqft · Double</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sample 7 -->
+                <div class="swiper-slide">
+                    <div class="bazaar-sample-card">
+                        <div class="sample-image" style="background-image: url('https://placecats.com/306/306?random=36');">
+                            <span class="sample-tag">White</span>
+                        </div>
+                        <div class="sample-info">
+                            <h4>Window Mesh</h4>
+                            <p>₹55/sqft · Basic</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sample 8 -->
+                <div class="swiper-slide">
+                    <div class="bazaar-sample-card">
+                        <div class="sample-image" style="background-image: url('https://placecats.com/307/307?random=37');">
+                            <span class="sample-tag">Brown</span>
+                        </div>
+                        <div class="sample-info">
+                            <h4>Premium Frame</h4>
+                            <p>₹220/sqft · Thick</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sample 9 -->
+                <div class="swiper-slide">
+                    <div class="bazaar-sample-card">
+                        <div class="sample-image" style="background-image: url('https://placecats.com/308/308?random=38');">
+                            <span class="sample-tag">Gray</span>
+                        </div>
+                        <div class="sample-info">
+                            <h4>Roll Up Net</h4>
+                            <p>₹390/sqft · Rolling</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sample 10 -->
+                <div class="swiper-slide">
+                    <div class="bazaar-sample-card">
+                        <div class="sample-image" style="background-image: url('https://placecats.com/309/309?random=39');">
+                            <span class="sample-tag">Custom</span>
+                        </div>
+                        <div class="sample-info">
+                            <h4>Designer Net</h4>
+                            <p>₹500/sqft · Pattern</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="utility clickable" id="utilityTools">
-                <i class="fas fa-calculator fa-xl"></i> <span>Utility tools</span>
-            </div>
+            <div class="swiper-pagination bazaar-pagination"></div>
         </div>
 
-        <!-- Floating Action Button -->
-        <div class="fab clickable" id="fabButton">
-            <i class="fas fa-pencil-alt"></i>
+        <!-- ===== FLOATING ACTION BUTTON ===== -->
+        <div class="fab clickable" id="fabButton" onclick="window.location.href='appointment.html'">
+            <i class="fas fa-calendar-plus"></i>
         </div>
 
-        <!-- Bottom Navigation -->
+        <!-- ===== BOTTOM NAVIGATION ===== -->
         <div class="bottom-nav">
-            <div class="nav-item active clickable" id="navHome"><i class="fas fa-home"></i><span>Home</span></div>
-            <div class="nav-item clickable" id="navExplore"><i class="fas fa-search"></i><span>Explore</span></div>
-            <div class="nav-item clickable" id="navSaved"><i class="fas fa-heart"></i><span>Saved</span></div>
-            <div class="nav-item clickable" id="navCall"><i class="fas fa-phone"></i><span>Call</span></div>
-            <div class="nav-item clickable" id="navAccount"><i class="fas fa-user"></i><span>Account</span></div>
+            <div class="nav-item active" id="navHome" onclick="window.location.href='index.html'">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </div>
+            <div class="nav-item" id="navExplore" onclick="window.location.href='explore.html'">
+                <i class="fas fa-search"></i>
+                <span>Explore</span>
+            </div>
+            <div class="nav-item" id="navBook" onclick="window.location.href='appointment.html'">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Book</span>
+            </div>
+            <div class="nav-item" id="navCall" onclick="window.location.href='tel:9483037385'">
+                <i class="fas fa-phone"></i>
+                <span>Call</span>
+            </div>
+            <div class="nav-item" id="navAccount" onclick="window.location.href='#'">
+                <i class="fas fa-user"></i>
+                <span>Account</span>
+            </div>
         </div>
     </div>
 
     <!-- Toast Message -->
     <div id="toastMessage"></div>
 
-    <!-- External Scripts -->
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
+```
