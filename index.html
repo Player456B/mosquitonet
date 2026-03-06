@@ -610,6 +610,224 @@
         <div class="fab clickable" id="fabButton" onclick="window.location.href='appointment.html'">
             <i class="fas fa-calendar-plus"></i>
         </div>
+        <!-- ===== ADMIN ACCESS BUTTON (Hidden/Secure) ===== -->
+<div class="admin-access" id="adminAccess" onclick="showAdminLogin()">
+    <i class="fas fa-shield-alt"></i>
+    <span>Admin</span>
+</div>
+
+<!-- ===== ADMIN LOGIN MODAL ===== -->
+<div class="modal" id="adminLoginModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><i class="fas fa-lock"></i> Admin Login</h2>
+            <button class="close-modal" onclick="closeAdminLogin()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="adminLoginForm" onsubmit="authenticateAdmin(event)">
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Username</label>
+                    <input type="text" id="username" placeholder="Enter username" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-key"></i> Password</label>
+                    <input type="password" id="password" placeholder="Enter password" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-shield"></i> Security Key</label>
+                    <input type="text" id="securityKey" placeholder="Enter security key (optional)">
+                </div>
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Login to Admin Panel
+                </button>
+            </form>
+            <div class="demo-credentials">
+                <p><i class="fas fa-info-circle"></i> Demo Credentials:</p>
+                <p>Username: <strong>admin</strong> | Password: <strong>raj2024</strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add this CSS to your style.css -->
+<style>
+    .admin-access {
+        position: fixed;
+        bottom: 160px;
+        right: 20px;
+        background: rgba(30, 75, 139, 0.2);
+        backdrop-filter: blur(5px);
+        width: 45px;
+        height: 45px;
+        border-radius: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #1e4b8b;
+        font-size: 0.7rem;
+        flex-direction: column;
+        cursor: pointer;
+        z-index: 8;
+        border: 1px solid rgba(30, 75, 139, 0.3);
+        transition: all 0.3s;
+    }
+    
+    .admin-access:hover {
+        background: #1e4b8b;
+        color: white;
+        width: 70px;
+    }
+    
+    .admin-access i {
+        font-size: 1rem;
+    }
+    
+    .admin-access span {
+        display: none;
+    }
+    
+    .admin-access:hover span {
+        display: block;
+        font-size: 0.6rem;
+    }
+    
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .modal.active {
+        display: flex;
+    }
+    
+    .modal-content {
+        background: white;
+        border-radius: 30px;
+        max-width: 350px;
+        width: 90%;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    
+    .modal-header {
+        background: #1e4b8b;
+        color: white;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .close-modal {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+    
+    .modal-body {
+        padding: 25px;
+    }
+    
+    .modal-body .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .modal-body label {
+        display: block;
+        margin-bottom: 5px;
+        color: #1e4b8b;
+        font-weight: 500;
+        font-size: 0.85rem;
+    }
+    
+    .modal-body label i {
+        color: #e6b422;
+        margin-right: 5px;
+    }
+    
+    .modal-body input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e0e8e5;
+        border-radius: 15px;
+        font-family: 'Poppins', sans-serif;
+    }
+    
+    .login-btn {
+        width: 100%;
+        background: #e6b422;
+        border: none;
+        padding: 14px;
+        border-radius: 30px;
+        font-weight: 600;
+        color: #1e3a3a;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
+    
+    .demo-credentials {
+        background: #f0f5f3;
+        padding: 12px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+    }
+    
+    .demo-credentials p:first-child {
+        color: #1e4b8b;
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+</style>
+
+<script>
+    function showAdminLogin() {
+        document.getElementById('adminLoginModal').classList.add('active');
+    }
+    
+    function closeAdminLogin() {
+        document.getElementById('adminLoginModal').classList.remove('active');
+    }
+    
+    function authenticateAdmin(event) {
+        event.preventDefault();
+        
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        
+        // Simple authentication (in real app, use secure backend)
+        if (username === 'admin' && password === 'raj2024') {
+            showToast('✅ Admin access granted');
+            closeAdminLogin();
+            
+            // Redirect to admin panel or open in new tab
+            window.open('admin-panel.html', '_blank');
+        } else {
+            showToast('❌ Invalid credentials');
+        }
+    }
+</script>
 
         <!-- ===== BOTTOM NAVIGATION ===== -->
         <div class="bottom-nav">
