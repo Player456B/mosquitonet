@@ -8,10 +8,10 @@
     <!-- External CSS -->
     <link rel="stylesheet" href="css/style.css">
     
-    <!-- Font Awesome (CDN stays in HTML) -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <!-- Swiper CSS (CDN stays in HTML) -->
+    <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 <body>
@@ -28,8 +28,8 @@
             </div>
         </div>
 
-        <!-- Slider Section -->
-        <div class="swiper-container swiper">
+        <!-- Main Promotional Slider (10 images) -->
+        <div class="swiper-container main-slider swiper">
             <div class="swiper-wrapper">
                 <!-- Slide 1 -->
                 <div class="swiper-slide" style="background-image: url('https://placecats.com/400/200?random=1');">
@@ -75,25 +75,100 @@
             <div class="swiper-pagination"></div>
         </div>
 
-        <!-- Status Card -->
-        <div class="status-card">
-            <div class="status-item clickable" id="ongoingJobs">
-                <i class="fas fa-tools"></i>
-                <div class="label">ongoing</div>
-                <div class="value">3 jobs</div>
+        <!-- Section Title for Status Cards -->
+        <div class="section-title">
+            <h3>📊 Business Overview</h3>
+            <span class="slide-indicator"><i class="fas fa-arrows-left-right"></i> swipe to see more</span>
+        </div>
+
+        <!-- Status Cards Slider (6 cards) -->
+        <div class="swiper-container status-slider">
+            <div class="swiper-wrapper">
+                <!-- Status Card 1: Ongoing Jobs -->
+                <div class="swiper-slide">
+                    <div class="status-card-slide clickable" id="ongoingJobs">
+                        <div class="status-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <div class="status-details">
+                            <span class="status-label">Ongoing Installations</span>
+                            <span class="status-value">3 Jobs</span>
+                            <span class="status-sub">This week</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Status Card 2: Pending Visits -->
+                <div class="swiper-slide">
+                    <div class="status-card-slide clickable" id="pendingVisits">
+                        <div class="status-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="status-details">
+                            <span class="status-label">Pending Site Visits</span>
+                            <span class="status-value">5 Sites</span>
+                            <span class="status-sub">Scheduled</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Status Card 3: Monthly Sqft -->
+                <div class="swiper-slide">
+                    <div class="status-card-slide clickable" id="totalSqft">
+                        <div class="status-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="status-details">
+                            <span class="status-label">Total Sqft This Month</span>
+                            <span class="status-value">1,240 sqft</span>
+                            <span class="status-sub">+15% vs last month</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Status Card 4: Revenue -->
+                <div class="swiper-slide">
+                    <div class="status-card-slide clickable" id="revenueCard">
+                        <div class="status-icon">
+                            <i class="fas fa-rupee-sign"></i>
+                        </div>
+                        <div class="status-details">
+                            <span class="status-label">Monthly Revenue</span>
+                            <span class="status-value">₹1,85,000</span>
+                            <span class="status-sub">Target: ₹2,00,000</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Status Card 5: Customer Rating -->
+                <div class="swiper-slide">
+                    <div class="status-card-slide clickable" id="ratingCard">
+                        <div class="status-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="status-details">
+                            <span class="status-label">Customer Rating</span>
+                            <span class="status-value">4.9/5.0</span>
+                            <span class="status-sub">248 reviews</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Status Card 6: Completed Projects -->
+                <div class="swiper-slide">
+                    <div class="status-card-slide clickable" id="completedCard">
+                        <div class="status-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="status-details">
+                            <span class="status-label">Completed Projects</span>
+                            <span class="status-value">156</span>
+                            <span class="status-sub">Since 2012</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="divider"></div>
-            <div class="status-item clickable" id="pendingVisits">
-                <i class="fas fa-calendar-check"></i>
-                <div class="label">visits</div>
-                <div class="value">5 sites</div>
-            </div>
-            <div class="divider"></div>
-            <div class="status-item clickable" id="totalSqft">
-                <i class="fas fa-chart-line"></i>
-                <div class="label">sqft</div>
-                <div class="value">1240</div>
-            </div>
+            <div class="swiper-pagination status-pagination"></div>
         </div>
 
         <!-- My Services -->
@@ -220,4 +295,4 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="js/main.js"></script>
 </body>
-  </html>
+</html>
