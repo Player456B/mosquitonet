@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Raj Marketing · Mosquito Nets</title>
+    <title>Raj Marketing · Mosquito Nets · Mysore</title>
     
     <!-- Google Fonts - Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome -->
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     
     <style>
         * {
@@ -25,7 +28,7 @@
         }
 
         body {
-            background-color: #2d3e3f; /* Dark grey background */
+            background-color: #1a2c2d; /* Darker grey background */
             display: flex;
             justify-content: center;
             align-items: flex-start;
@@ -33,42 +36,55 @@
             padding: 0 0 20px 0;
         }
 
-        /* mobile app card */
+        /* mobile app card with glass morphism effect */
         .app-container {
             max-width: 390px;
             width: 100%;
-            background-color: #f0f5f3; /* Light grey background */
-            box-shadow: 0 0 30px rgba(0,0,0,0.15);
-            border-radius: 32px 32px 0 0;
+            background: linear-gradient(145deg, #f5faf8 0%, #e8f0ed 100%);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            border-radius: 36px 36px 0 0;
             margin: 8px 0 0 0;
             overflow: hidden;
             position: relative;
             padding-bottom: 70px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
-        /* ===== TOP HEADER - 64px ===== */
+        /* ===== TOP HEADER - 64px with gradient ===== */
         .top-header {
             height: 64px;
-            background: white;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fcfb 100%);
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 30px -5px rgba(30, 75, 139, 0.1);
             position: sticky;
             top: 0;
             z-index: 100;
+            border-bottom: 1px solid rgba(230, 180, 34, 0.2);
         }
 
         .header-left {
             display: flex;
             align-items: center;
+            gap: 12px;
         }
 
         .hamburger-icon {
             font-size: 24px;
-            color: #1e4b8b; /* Blue */
+            color: #1e4b8b;
             cursor: pointer;
+            transition: all 0.3s;
+            background: rgba(30, 75, 139, 0.1);
+            padding: 8px;
+            border-radius: 12px;
+        }
+
+        .hamburger-icon:hover {
+            background: #1e4b8b;
+            color: white;
         }
 
         .header-center {
@@ -78,16 +94,18 @@
         }
 
         .greeting-text {
-            font-size: 12px;
+            font-size: 11px;
             color: #6b7a7c;
             font-weight: 400;
-            line-height: 1.2;
+            letter-spacing: 0.3px;
         }
 
         .customer-name {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 700;
-            color: #1e4b8b; /* Blue */
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             letter-spacing: -0.2px;
         }
 
@@ -100,45 +118,63 @@
         .notification-icon, .admin-icon {
             font-size: 22px;
             cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
         }
 
         .notification-icon {
-            color: #e6b422; /* Yellow/Gold */
+            color: #e6b422;
+            filter: drop-shadow(0 4px 6px rgba(230, 180, 34, 0.3));
         }
 
         .admin-icon {
-            color: #1e4b8b; /* Blue */
+            color: #1e4b8b;
         }
 
-        /* ===== Color Classes ===== */
-        .blue-bg {
-            background: #1e4b8b !important; /* Blue */
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff4444;
+            color: white;
+            font-size: 10px;
+            padding: 2px 5px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        /* ===== Color Classes with gradients ===== */
+        .blue-gradient {
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3) !important;
             color: white !important;
         }
 
-        .yellow-bg {
-            background: #e6b422 !important; /* Yellow/Gold */
+        .yellow-gradient {
+            background: linear-gradient(135deg, #e6b422, #f5c542) !important;
             color: #1e3a3a !important;
         }
 
-        .green-bg {
-            background: #25a36b !important; /* Green for WhatsApp */
+        .green-gradient {
+            background: linear-gradient(135deg, #25a36b, #2ec47a) !important;
             color: white !important;
         }
 
-        /* ===== Main Slider ===== */
+        /* ===== Main Slider with 3D effect ===== */
         .main-slider {
             width: 100%;
-            height: 180px;
-            margin: 12px 0 8px 0;
+            height: 190px;
+            margin: 12px 0 5px 0;
+            padding: 0 12px;
         }
 
         .main-slider .swiper-slide {
             background-size: cover;
             background-position: center;
-            border-radius: 20px;
+            border-radius: 28px;
             overflow: hidden;
             position: relative;
+            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.3);
         }
 
         .main-slider .swiper-slide::after {
@@ -147,77 +183,159 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 50%;
-            background: linear-gradient(to top, rgba(0,40,60,0.7), transparent);
-            border-radius: 20px;
+            height: 60%;
+            background: linear-gradient(to top, rgba(0,20,30,0.9), transparent);
+            border-radius: 28px;
         }
 
         .slide-content {
             position: absolute;
-            bottom: 16px;
+            bottom: 20px;
             left: 20px;
             color: white;
             z-index: 2;
             font-weight: 600;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.4);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         .slide-title {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             display: block;
-            font-weight: 700;
-            color: #e6b422; /* Yellow */
+            font-weight: 800;
+            background: linear-gradient(135deg, #e6b422, #ffd966);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: none;
         }
 
         .slide-content small {
             display: block;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             opacity: 0.95;
             color: white;
+            font-weight: 500;
         }
 
-        .main-slider .swiper-pagination-bullet {
-            background: white;
-            opacity: 0.8;
+        /* ===== LIVE MOVING TEXT ADS SECTION ===== */
+        .live-notification-bar {
+            background: linear-gradient(90deg, #1e4b8b, #154079);
+            margin: 8px 16px 12px 16px;
+            border-radius: 50px;
+            padding: 10px 0;
+            box-shadow: 0 10px 20px -5px rgba(30, 75, 139, 0.4);
+            border: 1px solid rgba(255,255,255,0.2);
+            overflow: hidden;
+            position: relative;
         }
 
-        .main-slider .swiper-pagination-bullet-active {
-            background: #e6b422; /* Yellow */
+        .live-notification-bar::before {
+            content: '🔴 LIVE';
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ff4444;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 30px;
+            font-size: 10px;
+            font-weight: 700;
+            z-index: 2;
+            animation: pulse 1.5s infinite;
         }
 
-        /* ===== Section Title ===== */
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 0 20px 0 70px;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 25s linear infinite;
+            color: white;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .marquee-content span {
+            margin-right: 40px;
+            display: inline-block;
+        }
+
+        .marquee-content i {
+            color: #e6b422;
+            margin-right: 8px;
+            font-size: 0.8rem;
+        }
+
+        .marquee-content strong {
+            color: #e6b422;
+            font-weight: 700;
+            background: rgba(255,255,255,0.1);
+            padding: 2px 8px;
+            border-radius: 30px;
+            margin: 0 4px;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .marquee-content:hover {
+            animation-play-state: paused;
+        }
+
+        /* ===== Section Title with glow ===== */
         .section-title {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin: 16px 16px 8px 16px;
+            padding: 0 5px;
         }
 
         .section-title h3 {
-            font-weight: 600;
-            font-size: 1.1rem;
-            color: #1e4b8b; /* Blue */
+            font-weight: 700;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             letter-spacing: -0.3px;
+            position: relative;
+        }
+
+        .section-title h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, #e6b422, transparent);
+            border-radius: 3px;
         }
 
         .slide-indicator {
             font-size: 0.7rem;
-            color: #e6b422; /* Yellow */
-            background: rgba(230, 180, 34, 0.1);
-            padding: 4px 10px;
+            color: #e6b422;
+            background: rgba(230, 180, 34, 0.15);
+            padding: 5px 12px;
             border-radius: 30px;
-            font-weight: 500;
+            font-weight: 600;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(230, 180, 34, 0.3);
         }
 
-        .view-all-link {
-            font-size: 0.75rem;
-            color: #1e4b8b;
-            text-decoration: none;
-            font-weight: 500;
-            cursor: pointer;
-        }
-
-        /* ===== Status Cards Slider ===== */
+        /* ===== Status Cards Slider with 3D tilt ===== */
         .status-slider {
             margin: 0 16px 20px 16px;
             padding-bottom: 30px !important;
@@ -225,66 +343,73 @@
 
         .status-slider .swiper-slide {
             width: auto !important;
+            transition: transform 0.3s;
+        }
+
+        .status-slider .swiper-slide:hover {
+            transform: translateY(-5px);
         }
 
         .status-card-slide {
-            background: white;
-            border-radius: 24px;
-            padding: 16px 20px;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 18px 22px;
             display: flex;
             align-items: center;
             gap: 15px;
-            min-width: 220px;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.05);
-            border: 1px solid rgba(30, 75, 139, 0.1);
-            transition: transform 0.2s;
-        }
-
-        .status-card-slide:active {
-            transform: scale(0.98);
+            min-width: 250px;
+            box-shadow: 0 20px 30px -10px rgba(30, 75, 139, 0.2);
+            border: 1px solid rgba(255,255,255,0.5);
+            transition: all 0.3s;
         }
 
         .status-icon {
-            width: 54px;
-            height: 54px;
-            border-radius: 27px;
+            width: 60px;
+            height: 60px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 10px 15px -5px rgba(0,0,0,0.2);
         }
 
         .status-icon i {
-            font-size: 1.8rem;
+            font-size: 2rem;
         }
 
         .status-details {
             flex: 1;
-            display: flex;
-            flex-direction: column;
         }
 
         .status-label {
             font-size: 0.7rem;
             color: #6b7a7c;
             text-transform: uppercase;
-            letter-spacing: 0.3px;
-            font-weight: 500;
+            letter-spacing: 0.5px;
+            font-weight: 600;
         }
 
         .status-value {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #1e4b8b; /* Blue */
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             line-height: 1.2;
         }
 
         .status-sub {
-            font-size: 0.65rem;
-            color: #e6b422; /* Yellow */
-            font-weight: 500;
+            font-size: 0.7rem;
+            color: #e6b422;
+            font-weight: 600;
+            background: rgba(230, 180, 34, 0.1);
+            padding: 2px 10px;
+            border-radius: 30px;
+            display: inline-block;
         }
 
-        /* ===== Services Slider ===== */
+        /* ===== Services Slider with modern cards ===== */
         .services-slider {
             margin: 0 16px 20px 16px;
             padding-bottom: 30px !important;
@@ -296,13 +421,20 @@
 
         .service-card-slide {
             background: white;
-            border-radius: 24px;
+            border-radius: 30px;
             overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+            border: 1px solid rgba(30, 75, 139, 0.1);
+        }
+
+        .service-card-slide:hover {
+            transform: scale(1.02);
+            box-shadow: 0 25px 40px -10px rgba(30, 75, 139, 0.3);
         }
 
         .service-image {
-            height: 140px;
+            height: 150px;
             background-size: cover;
             background-position: center;
             position: relative;
@@ -310,34 +442,35 @@
 
         .service-overlay {
             position: absolute;
-            top: 12px;
-            right: 12px;
+            top: 15px;
+            right: 15px;
         }
 
         .service-price {
-            background: #e6b422; /* Yellow */
+            background: linear-gradient(135deg, #e6b422, #f5c542);
             color: #1e3a3a;
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 0.8rem;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
         }
 
         .service-info {
-            padding: 14px;
+            padding: 18px;
         }
 
         .service-info h4 {
-            font-size: 1rem;
-            font-weight: 700;
-            color: #1e4b8b; /* Blue */
-            margin-bottom: 4px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #1e4b8b;
+            margin-bottom: 5px;
         }
 
         .service-info p {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: #6b7a7c;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
 
         .service-actions {
@@ -348,14 +481,14 @@
         .btn-learn-more {
             flex: 1;
             background: transparent;
-            border: 1.5px solid #1e4b8b;
+            border: 2px solid #1e4b8b;
             color: #1e4b8b;
-            padding: 8px 0;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.7rem;
+            padding: 10px 0;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.75rem;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.3s;
         }
 
         .btn-learn-more:hover {
@@ -365,107 +498,130 @@
 
         .btn-book-now {
             flex: 1;
-            background: #e6b422;
+            background: linear-gradient(135deg, #e6b422, #f5c542);
             border: none;
             color: #1e3a3a;
-            padding: 8px 0;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.7rem;
+            padding: 10px 0;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.75rem;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.3s;
+            box-shadow: 0 5px 10px rgba(230, 180, 34, 0.3);
         }
 
         .btn-book-now:hover {
-            background: #d4a31e;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(230, 180, 34, 0.4);
         }
 
-        /* ===== Icons Grid ===== */
-        .icons-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
+        /* ===== Quick Actions Slider (Small Icons) ===== */
+        .quick-actions-slider {
             margin: 8px 16px 20px 16px;
+            padding-bottom: 10px !important;
         }
 
-        .icon-card {
+        .quick-actions-slider .swiper-slide {
+            width: 70px;
+            text-align: center;
+        }
+
+        .mini-icon-card {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 6px;
+            cursor: pointer;
         }
 
-        .icon-circle {
-            width: 56px;
-            height: 56px;
-            border-radius: 28px;
+        .mini-icon-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
+            box-shadow: 0 10px 15px -5px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+            background: white;
         }
 
-        .icon-circle:hover {
-            transform: scale(1.05);
+        .mini-icon-circle i {
+            font-size: 1.3rem;
         }
 
-        .icon-circle i {
-            font-size: 1.5rem;
+        .mini-icon-circle.blue-gradient i {
+            color: white;
         }
 
-        .icon-card span {
-            font-size: 0.65rem;
-            font-weight: 500;
-            color: #1e4b8b; /* Blue */
-            text-align: center;
+        .mini-icon-circle.yellow-gradient i {
+            color: #1e3a3a;
         }
 
-        /* ===== Banner Styles ===== */
+        .mini-icon-circle.green-gradient i {
+            color: white;
+        }
+
+        .mini-icon-circle:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .mini-icon-card span {
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: #1e4b8b;
+        }
+
+        /* ===== Banner Styles with animations ===== */
         .free-visit-banner, .explore-banner {
             background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
             margin: 16px;
-            padding: 16px 20px;
-            border-radius: 24px;
+            padding: 18px 22px;
+            border-radius: 30px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 8px 20px rgba(30, 75, 139, 0.3);
+            box-shadow: 0 20px 30px -8px rgba(30, 75, 139, 0.4);
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: float 3s ease-in-out infinite;
         }
 
         .explore-banner {
             background: linear-gradient(135deg, #e6b422, #f5c542);
+            animation-delay: 1s;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
         }
 
         .banner-content {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 15px;
         }
 
         .banner-content i {
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: white;
+            filter: drop-shadow(0 5px 8px rgba(0,0,0,0.2));
         }
 
         .banner-content h4 {
-            font-size: 1rem;
-            font-weight: 700;
+            font-size: 1.1rem;
+            font-weight: 800;
             color: white;
             margin-bottom: 2px;
         }
 
         .banner-content p {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: rgba(255,255,255,0.9);
         }
 
-        .free-visit-banner i:last-child, .explore-banner i:last-child {
-            color: white;
-            font-size: 1.2rem;
-        }
-
-        /* ===== Offers Grid ===== */
+        /* ===== Offers Grid with glass morphism ===== */
         .offers-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -474,32 +630,39 @@
         }
 
         .offer-card-modern {
-            background: white;
-            border-radius: 20px;
-            padding: 14px;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 16px 12px;
             display: flex;
             align-items: center;
             gap: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            border: 1px solid rgba(30, 75, 139, 0.1);
+            box-shadow: 0 15px 25px -8px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.5);
+            transition: all 0.3s;
+        }
+
+        .offer-card-modern:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -8px rgba(30, 75, 139, 0.2);
         }
 
         .offer-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 24px;
+            width: 50px;
+            height: 50px;
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .offer-icon i {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
         }
 
         .offer-details h4 {
-            font-size: 0.9rem;
-            font-weight: 700;
+            font-size: 0.95rem;
+            font-weight: 800;
             color: #1e4b8b;
             margin-bottom: 2px;
         }
@@ -507,19 +670,20 @@
         .offer-details p {
             font-size: 0.65rem;
             color: #6b7a7c;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
         }
 
         .offer-code {
             font-size: 0.6rem;
-            font-weight: 600;
+            font-weight: 700;
             color: #e6b422;
-            background: rgba(230, 180, 34, 0.1);
-            padding: 2px 8px;
+            background: rgba(230, 180, 34, 0.15);
+            padding: 3px 10px;
             border-radius: 20px;
+            display: inline-block;
         }
 
-        /* ===== Bazaar Slider ===== */
+        /* ===== Bazaar Slider with 3D cards ===== */
         .bazaar-slider {
             margin: 8px 16px 20px 16px;
             padding-bottom: 30px !important;
@@ -531,13 +695,19 @@
 
         .bazaar-sample-card {
             background: white;
-            border-radius: 20px;
+            border-radius: 25px;
             overflow: hidden;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+            box-shadow: 0 20px 25px -8px rgba(0,0,0,0.15);
+            border: 1px solid rgba(30, 75, 139, 0.1);
+            transition: all 0.3s;
+        }
+
+        .bazaar-sample-card:hover {
+            transform: scale(1.05) rotate(1deg);
         }
 
         .sample-image {
-            height: 140px;
+            height: 150px;
             background-size: cover;
             background-position: center;
             position: relative;
@@ -545,61 +715,70 @@
 
         .sample-tag {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #e6b422;
+            top: 12px;
+            right: 12px;
+            background: linear-gradient(135deg, #e6b422, #f5c542);
             color: #1e3a3a;
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-weight: 600;
+            padding: 5px 12px;
+          border-radius: 30px;
+            font-weight: 700;
             font-size: 0.7rem;
+            box-shadow: 0 5px 8px rgba(0,0,0,0.1);
         }
 
         .sample-info {
-            padding: 12px;
+            padding: 14px;
         }
 
         .sample-info h4 {
-            font-size: 0.9rem;
-            font-weight: 700;
+            font-size: 0.95rem;
+            font-weight: 800;
             color: #1e4b8b;
-            margin-bottom: 2px;
+            margin-bottom: 3px;
         }
 
         .sample-info p {
             font-size: 0.7rem;
             color: #6b7a7c;
+            font-weight: 500;
         }
 
-        /* ===== Floating Action Button ===== */
+        /* ===== Floating Action Button with pulse ===== */
         .fab {
             position: fixed;
             bottom: 90px;
             right: 20px;
-            background: #e6b422; /* Yellow */
-            width: 60px;
-            height: 60px;
+            background: linear-gradient(135deg, #e6b422, #f5c542);
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #1e3a3a;
-            font-size: 1.8rem;
-            box-shadow: 0 8px 20px rgba(230, 180, 34, 0.4);
+            font-size: 2rem;
+            box-shadow: 0 15px 25px rgba(230, 180, 34, 0.4);
             z-index: 10;
             border: 3px solid white;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.3s;
+            animation: pulse-fab 2s infinite;
+        }
+
+        @keyframes pulse-fab {
+            0% { box-shadow: 0 0 0 0 rgba(230, 180, 34, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(230, 180, 34, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(230, 180, 34, 0); }
         }
 
         .fab:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(90deg);
         }
 
         /* ===== Admin Access Button ===== */
         .admin-access {
             position: fixed;
-            bottom: 160px;
+            bottom: 170px;
             right: 20px;
             background: rgba(30, 75, 139, 0.2);
             backdrop-filter: blur(5px);
@@ -625,7 +804,7 @@
         }
 
         .admin-access i {
-            font-size: 1rem;
+            font-size: 1.1rem;
         }
 
         .admin-access span {
@@ -637,7 +816,7 @@
             font-size: 0.6rem;
         }
 
-        /* ===== Login Modal ===== */
+        /* ===== Login Modal with glass morphism ===== */
         .modal {
             display: none;
             position: fixed;
@@ -645,7 +824,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
             z-index: 1000;
             align-items: center;
             justify-content: center;
@@ -656,25 +836,27 @@
         }
 
         .modal-content {
-            background: white;
-            border-radius: 30px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 40px;
             max-width: 350px;
             width: 90%;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 30px 50px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.3);
         }
 
         .modal-header {
-            background: #1e4b8b;
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
             color: white;
-            padding: 20px;
+            padding: 22px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .modal-header h2 {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -684,8 +866,15 @@
             background: none;
             border: none;
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
+            opacity: 0.8;
+            transition: 0.3s;
+        }
+
+        .close-modal:hover {
+            opacity: 1;
+            transform: scale(1.1);
         }
 
         .modal-body {
@@ -698,32 +887,40 @@
 
         .modal-body label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             color: #1e4b8b;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 0.85rem;
         }
 
         .modal-body label i {
             color: #e6b422;
-            margin-right: 5px;
+            margin-right: 8px;
         }
 
         .modal-body input {
             width: 100%;
-            padding: 12px 15px;
+            padding: 14px 18px;
             border: 2px solid #e0e8e5;
-            border-radius: 15px;
+            border-radius: 20px;
             font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .modal-body input:focus {
+            border-color: #1e4b8b;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(30, 75, 139, 0.1);
         }
 
         .login-btn {
             width: 100%;
-            background: #e6b422;
+            background: linear-gradient(135deg, #e6b422, #f5c542);
             border: none;
-            padding: 14px;
-            border-radius: 30px;
-            font-weight: 600;
+            padding: 16px;
+            border-radius: 40px;
+            font-weight: 700;
             color: #1e3a3a;
             cursor: pointer;
             display: flex;
@@ -732,34 +929,36 @@
             gap: 10px;
             font-size: 1rem;
             margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(230, 180, 34, 0.3);
         }
 
         .demo-credentials {
-            background: #f0f5f3;
-            padding: 12px;
-            border-radius: 15px;
+            background: rgba(30, 75, 139, 0.05);
+            padding: 15px;
+            border-radius: 20px;
             font-size: 0.8rem;
+            border: 1px dashed #1e4b8b;
         }
 
-        .demo-credentials p:first-child {
-            color: #1e4b8b;
-            font-weight: 500;
-            margin-bottom: 5px;
-        }
-
-        /* ===== Bottom Navigation ===== */
+        /* ===== Bottom Navigation with glass morphism ===== */
         .bottom-nav {
             position: fixed;
             bottom: 0;
             max-width: 390px;
             width: 100%;
-            background: white;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(20px);
             display: flex;
             justify-content: space-around;
-            padding: 10px 10px 16px 10px;
-            border-top: 1px solid rgba(30, 75, 139, 0.1);
-            border-radius: 26px 26px 0 0;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
+            padding: 12px 10px 18px 10px;
+            border-top: 1px solid rgba(255,255,255,0.5);
+            border-radius: 30px 30px 0 0;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
             z-index: 9;
         }
 
@@ -769,38 +968,33 @@
             align-items: center;
             color: #6b7a7c;
             font-size: 0.7rem;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.3s;
+            padding: 5px 10px;
+            border-radius: 30px;
         }
 
         .nav-item.active {
-            color: #1e4b8b; /* Blue */
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
+            color: white;
+            padding: 8px 15px;
+            margin-top: -5px;
         }
 
         .nav-item.active i {
-            color: #e6b422; /* Yellow for active icon */
+            color: #e6b422;
         }
 
         .nav-item i {
             font-size: 1.4rem;
-            margin-bottom: 2px;
-            transition: 0.2s;
+            margin-bottom: 3px;
+            transition: 0.3s;
         }
 
-        .nav-item:hover {
+        .nav-item:hover:not(.active) {
             color: #1e4b8b;
-        }
-
-        /* ===== Clickable Class ===== */
-        .clickable {
-            cursor: pointer;
-            transition: 0.1s ease;
-        }
-
-        .clickable:active {
-            opacity: 0.7;
-            transform: scale(0.98);
+            transform: translateY(-2px);
         }
 
         /* ===== Toast Message ===== */
@@ -809,17 +1003,58 @@
             bottom: 150px;
             left: 50%;
             transform: translateX(-50%);
-            background: #1e4b8b; /* Blue */
+            background: rgba(30, 75, 139, 0.95);
+            backdrop-filter: blur(10px);
             color: white;
-            padding: 12px 24px;
-            border-radius: 60px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            box-shadow: 0 8px 20px rgba(30, 75, 139, 0.3);
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            box-shadow: 0 15px 25px rgba(30, 75, 139, 0.4);
             z-index: 99;
             opacity: 0;
-            transition: opacity 0.2s;
+            transition: opacity 0.3s;
             pointer-events: none;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* ===== Live Customer Counter ===== */
+        .live-counter {
+            background: rgba(230, 180, 34, 0.15);
+            border-radius: 30px;
+            padding: 8px 16px;
+            margin: 8px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid rgba(230, 180, 34, 0.3);
+        }
+
+        .counter-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .counter-left i {
+            color: #e6b422;
+            font-size: 1.2rem;
+            animation: pulse 1.5s infinite;
+        }
+
+        .counter-text {
+            font-size: 0.8rem;
+            color: #1e4b8b;
+            font-weight: 500;
+        }
+
+        .counter-number {
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
         }
 
         /* ===== Responsive ===== */
@@ -832,112 +1067,128 @@
             .bottom-nav {
                 max-width: 100%;
             }
-            
-            .icons-grid {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 12px;
-            }
         }
     </style>
-</head>
+    </head>
 <body>
     <div class="app-container">
-        <!-- ===== TOP HEADER BAR - 64px ===== -->
+        <!-- ===== TOP HEADER - 64px with enhanced features ===== -->
         <div class="top-header">
             <div class="header-left">
                 <i class="fas fa-bars hamburger-icon" id="menuBtn"></i>
             </div>
             <div class="header-center">
                 <span class="greeting-text">Hello,</span>
-                <span class="customer-name">Raj Marketing Customer</span>
+                <span class="customer-name" id="displayCustomerName">Raj Marketing Customer</span>
             </div>
             <div class="header-right">
+                <div class="notification-icon" id="notificationBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge" id="notificationBadge">3</span>
+                </div>
                 <i class="fas fa-shield-alt admin-icon" id="adminHeaderBtn" onclick="showAdminLogin()"></i>
-                <i class="fas fa-bell notification-icon" id="notificationBtn"></i>
             </div>
+        </div>
+
+        <!-- ===== LIVE CUSTOMER COUNTER ===== -->
+        <div class="live-counter animate__animated animate__pulse">
+            <div class="counter-left">
+                <i class="fas fa-circle"></i>
+                <span class="counter-text">Customers booked today</span>
+            </div>
+            <span class="counter-number" id="todayCustomerCount">24</span>
         </div>
 
         <!-- ===== MAIN PROMOTIONAL SLIDER (10 images) ===== -->
         <div class="swiper-container main-slider swiper">
             <div class="swiper-wrapper">
                 <!-- Slide 1 -->
-                <div class="swiper-slide" style="background-image: url('https://placecats.com/400/200?random=1');">
+                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1584017911766-451b3d0e8434?w=400');">
                     <div class="slide-content">
                         <span class="slide-title">🦟 Velcro Nets</span>
-                        <small>₹60/sqft · Easy fit</small>
+                        <small>Premium Quality · ₹60/sqft</small>
                     </div>
                 </div>
                 <!-- Slide 2 -->
-                <div class="swiper-slide" style="background-image: url('https://placecats.com/401/201?random=2');">
+                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1513694203232-719a280e022f?w=400');">
                     <div class="slide-content">
                         <span class="slide-title">🪟 Frame System</span>
-                        <small>Durable · ₹180/sqft</small>
+                        <small>Aluminum Frame · ₹180/sqft</small>
                     </div>
                 </div>
                 <!-- Slide 3 -->
-                <div class="swiper-slide" style="background-image: url('https://placecats.com/402/202?random=3');">
+                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400');">
                     <div class="slide-content">
                         <span class="slide-title">✨ Pleated Nets</span>
                         <small>Retractable · ₹350/sqft</small>
                     </div>
                 </div>
                 <!-- Slide 4 -->
-                <div class="swiper-slide" style="background-image: url('https://placecats.com/403/203?random=4');">
+                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=400');">
                     <div class="slide-content">
                         <span class="slide-title">🚪 Mesh Door</span>
                         <small>Magnetic · ₹380/sqft</small>
                     </div>
                 </div>
                 <!-- Slide 5 -->
-                <div class="swiper-slide" style="background-image: url('https://placecats.com/404/204?random=5');">
+                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400');">
                     <div class="slide-content">
                         <span class="slide-title">🔧 Free Site Visit</span>
-                        <small>Call to schedule</small>
+                        <small>Expert Consultation</small>
                     </div>
                 </div>
                 <!-- Slide 6 -->
-                <div class="swiper-slide" style="background-image: url('https://placecats.com/405/205?random=6');">
+                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=400');">
                     <div class="slide-content">
-                        <span class="slide-title">🏭 Hootghalli Industries</span>
-                        <small>#65, Mysore</small>
+                        <span class="slide-title">🏭 Hootghalli</span>
+                        <small>#65, Mysore · Since 2012</small>
                     </div>
                 </div>
                 <!-- Slide 7 -->
-                <div class="swiper-slide" style="background-image: url('https://placecats.com/406/206?random=7');">
+                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=400');">
                     <div class="slide-content">
                         <span class="slide-title">📞 9483037385</span>
-                        <small>Call us anytime</small>
+                        <small>24/7 Customer Support</small>
                     </div>
                 </div>
                 <!-- Slide 8 -->
-                <div class="swiper-slide" style="background-image: url('https://placecats.com/407/207?random=8');">
+                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=400');">
                     <div class="slide-content">
                         <span class="slide-title">🎯 Monsoon Offer</span>
-                        <small>10% off on all nets</small>
+                        <small>15% off · Limited Period</small>
                     </div>
                 </div>
                 <!-- Slide 9 -->
-                <div class="swiper-slide" style="background-image: url('https://placecats.com/408/208?random=9');">
+                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400');">
                     <div class="slide-content">
                         <span class="slide-title">🧮 EMI Available</span>
-                        <small>Easy monthly payments</small>
+                        <small>0% Interest · Easy Pay</small>
                     </div>
                 </div>
                 <!-- Slide 10 -->
-                <div class="swiper-slide" style="background-image: url('https://placecats.com/409/209?random=10');">
+                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1556740714-a8395b3bf30f?w=400');">
                     <div class="slide-content">
                         <span class="slide-title">⭐ 4.9 Rating</span>
-                        <small>200+ happy customers</small>
+                        <small>500+ Happy Families</small>
                     </div>
                 </div>
             </div>
             <div class="swiper-pagination"></div>
         </div>
 
-        <!-- ===== STATUS CARDS SLIDER (6 cards) ===== -->
+        <!-- ===== LIVE MOVING TEXT ADS (Dynamic Customer Updates) ===== -->
+        <div class="live-notification-bar">
+            <div class="marquee-container">
+                <div class="marquee-content" id="liveMarquee">
+                    <!-- Dynamic content will be inserted by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== STATUS CARDS SLIDER (6 cards with enhanced data) ===== -->
         <div class="section-title">
-            <h3>📊 Business Overview</h3>
-            <span class="slide-indicator"><i class="fas fa-arrows-left-right"></i> swipe</span>
+            <h3>📊 Live Business Overview</h3>
+            <span class="slide-indicator"><i class="fas fa-sync-alt fa-spin"></i> Live</span>
         </div>
 
         <div class="swiper-container status-slider">
@@ -945,77 +1196,77 @@
                 <!-- Status Card 1 -->
                 <div class="swiper-slide">
                     <div class="status-card-slide clickable" id="ongoingJobs">
-                        <div class="status-icon blue-bg">
+                        <div class="status-icon blue-gradient">
                             <i class="fas fa-tools"></i>
                         </div>
                         <div class="status-details">
                             <span class="status-label">Ongoing</span>
-                            <span class="status-value">3 Jobs</span>
-                            <span class="status-sub">This week</span>
+                            <span class="status-value" id="ongoingCount">8</span>
+                            <span class="status-sub">This Week ↑23%</span>
                         </div>
                     </div>
                 </div>
                 <!-- Status Card 2 -->
                 <div class="swiper-slide">
                     <div class="status-card-slide clickable" id="pendingVisits">
-                        <div class="status-icon yellow-bg">
+                        <div class="status-icon yellow-gradient">
                             <i class="fas fa-calendar-check"></i>
                         </div>
                         <div class="status-details">
                             <span class="status-label">Site Visits</span>
-                            <span class="status-value">5 Sites</span>
-                            <span class="status-sub">Scheduled</span>
+                            <span class="status-value" id="visitCount">12</span>
+                            <span class="status-sub">Today: 4 visits</span>
                         </div>
                     </div>
                 </div>
                 <!-- Status Card 3 -->
                 <div class="swiper-slide">
                     <div class="status-card-slide clickable" id="totalSqft">
-                        <div class="status-icon blue-bg">
+                        <div class="status-icon blue-gradient">
                             <i class="fas fa-chart-line"></i>
                         </div>
                         <div class="status-details">
                             <span class="status-label">Monthly Sqft</span>
-                            <span class="status-value">1,240</span>
-                            <span class="status-sub">+15% growth</span>
+                            <span class="status-value" id="sqftCount">2,450</span>
+                            <span class="status-sub">Target: 3,000</span>
                         </div>
                     </div>
                 </div>
                 <!-- Status Card 4 -->
                 <div class="swiper-slide">
                     <div class="status-card-slide clickable" id="revenueCard">
-                        <div class="status-icon yellow-bg">
+                        <div class="status-icon yellow-gradient">
                             <i class="fas fa-rupee-sign"></i>
                         </div>
                         <div class="status-details">
                             <span class="status-label">Revenue</span>
-                            <span class="status-value">₹1.85L</span>
-                            <span class="status-sub">This month</span>
+                            <span class="status-value" id="revenueCount">₹3.2L</span>
+                            <span class="status-sub">This Month</span>
                         </div>
                     </div>
                 </div>
                 <!-- Status Card 5 -->
                 <div class="swiper-slide">
                     <div class="status-card-slide clickable" id="ratingCard">
-                        <div class="status-icon blue-bg">
+                        <div class="status-icon blue-gradient">
                             <i class="fas fa-star"></i>
                         </div>
                         <div class="status-details">
                             <span class="status-label">Rating</span>
                             <span class="status-value">4.9/5</span>
-                            <span class="status-sub">248 reviews</span>
+                            <span class="status-sub">512 reviews</span>
                         </div>
                     </div>
                 </div>
                 <!-- Status Card 6 -->
                 <div class="swiper-slide">
                     <div class="status-card-slide clickable" id="completedCard">
-                        <div class="status-icon yellow-bg">
+                        <div class="status-icon yellow-gradient">
                             <i class="fas fa-check-circle"></i>
                         </div>
                         <div class="status-details">
                             <span class="status-label">Completed</span>
-                            <span class="status-value">156</span>
+                            <span class="status-value">289</span>
                             <span class="status-sub">Projects</span>
                         </div>
                     </div>
@@ -1023,10 +1274,11 @@
             </div>
             <div class="swiper-pagination status-pagination"></div>
         </div>
-          <!-- ===== MY SERVICES with Image Slider ===== -->
+
+        <!-- ===== MY SERVICES with Image Slider ===== -->
         <div class="section-title">
-            <h3>🛠️ My Services</h3>
-            <span class="slide-indicator"><i class="fas fa-arrows-left-right"></i> swipe</span>
+            <h3>🛠️ Premium Services</h3>
+            <span class="slide-indicator"><i class="fas fa-star"></i> Top Rated</span>
         </div>
 
         <div class="swiper-container services-slider">
@@ -1034,14 +1286,14 @@
                 <!-- Service 1: Velcro System -->
                 <div class="swiper-slide">
                     <div class="service-card-slide">
-                        <div class="service-image" style="background-image: url('https://placecats.com/300/200?random=20');">
+                        <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1584017911766-451b3d0e8434?w=400');">
                             <div class="service-overlay">
                                 <span class="service-price">₹60/sqft</span>
                             </div>
                         </div>
                         <div class="service-info">
                             <h4>Velcro System</h4>
-                            <p>Easy installation, removable nets</p>
+                            <p>Easy installation, removable, washable nets</p>
                             <div class="service-actions">
                                 <button class="btn-learn-more" onclick="window.location.href='explore.html?service=velcro'">Learn More</button>
                                 <button class="btn-book-now" onclick="window.location.href='appointment.html?service=velcro'">Book Now</button>
@@ -1052,14 +1304,14 @@
                 <!-- Service 2: Frame System -->
                 <div class="swiper-slide">
                     <div class="service-card-slide">
-                        <div class="service-image" style="background-image: url('https://placecats.com/301/201?random=21');">
+                        <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1513694203232-719a280e022f?w=400');">
                             <div class="service-overlay">
                                 <span class="service-price">₹180/sqft</span>
                             </div>
                         </div>
                         <div class="service-info">
                             <h4>Frame System</h4>
-                            <p>Durable aluminum frame, premium finish</p>
+                            <p>Aluminum frame, powder coated, 5yr warranty</p>
                             <div class="service-actions">
                                 <button class="btn-learn-more" onclick="window.location.href='explore.html?service=frame'">Learn More</button>
                                 <button class="btn-book-now" onclick="window.location.href='appointment.html?service=frame'">Book Now</button>
@@ -1070,14 +1322,14 @@
                 <!-- Service 3: Pleated Nets -->
                 <div class="swiper-slide">
                     <div class="service-card-slide">
-                        <div class="service-image" style="background-image: url('https://placecats.com/302/202?random=22');">
+                        <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400');">
                             <div class="service-overlay">
                                 <span class="service-price">₹350/sqft</span>
                             </div>
                         </div>
                         <div class="service-info">
                             <h4>Pleated Nets</h4>
-                            <p>Retractable, space-saving design</p>
+                            <p>Retractable, space-saving, premium look</p>
                             <div class="service-actions">
                                 <button class="btn-learn-more" onclick="window.location.href='explore.html?service=pleated'">Learn More</button>
                                 <button class="btn-book-now" onclick="window.location.href='appointment.html?service=pleated'">Book Now</button>
@@ -1088,14 +1340,14 @@
                 <!-- Service 4: Mesh Door -->
                 <div class="swiper-slide">
                     <div class="service-card-slide">
-                        <div class="service-image" style="background-image: url('https://placecats.com/303/203?random=23');">
+                        <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=400');">
                             <div class="service-overlay">
                                 <span class="service-price">₹380/sqft</span>
                             </div>
                         </div>
                         <div class="service-info">
                             <h4>Mesh Door</h4>
-                            <p>Magnetic closure, easy access</p>
+                            <p>Magnetic closure, easy access, pet-friendly</p>
                             <div class="service-actions">
                                 <button class="btn-learn-more" onclick="window.location.href='explore.html?service=meshdoor'">Learn More</button>
                                 <button class="btn-book-now" onclick="window.location.href='appointment.html?service=meshdoor'">Book Now</button>
@@ -1106,14 +1358,14 @@
                 <!-- Service 5: Custom Nets -->
                 <div class="swiper-slide">
                     <div class="service-card-slide">
-                        <div class="service-image" style="background-image: url('https://placecats.com/304/204?random=24');">
+                        <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400');">
                             <div class="service-overlay">
                                 <span class="service-price">Custom</span>
                             </div>
                         </div>
                         <div class="service-info">
                             <h4>Custom Nets</h4>
-                            <p>Any size, any shape, tailored for you</p>
+                            <p>Any size, any shape, tailored solutions</p>
                             <div class="service-actions">
                                 <button class="btn-learn-more" onclick="window.location.href='explore.html?service=custom'">Learn More</button>
                                 <button class="btn-book-now" onclick="window.location.href='appointment.html?service=custom'">Book Now</button>
@@ -1125,120 +1377,168 @@
             <div class="swiper-pagination services-pagination"></div>
         </div>
 
-        <!-- ===== MUCH MORE ICONS SECTION (12+ actions) ===== -->
+        <!-- ===== QUICK ACTIONS SLIDER (Small Icons - 15+ options) ===== -->
         <div class="section-title">
-            <h3>🔧 Quick Actions</h3>
-            <span class="slide-indicator">12+ options</span>
+            <h3>⚡ Quick Actions</h3>
+            <span class="slide-indicator"><i class="fas fa-bolt"></i> 15+ Tools</span>
         </div>
 
-        <div class="icons-grid">
-            <!-- Call -->
-            <div class="icon-card clickable" id="callIcon" onclick="window.location.href='tel:9483037385'">
-                <div class="icon-circle blue-bg">
-                    <i class="fas fa-phone-alt"></i>
+        <div class="swiper-container quick-actions-slider">
+            <div class="swiper-wrapper">
+                <!-- Call -->
+                <div class="swiper-slide">
+                    <div class="mini-icon-card" onclick="window.location.href='tel:9483037385'">
+                        <div class="mini-icon-circle blue-gradient">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <span>Call</span>
+                    </div>
                 </div>
-                <span>Call</span>
-            </div>
-            <!-- WhatsApp -->
-            <div class="icon-card clickable" id="whatsappIcon" onclick="window.open('https://wa.me/919483037385')">
-                <div class="icon-circle green-bg">
-                    <i class="fab fa-whatsapp"></i>
+                <!-- WhatsApp -->
+                <div class="swiper-slide">
+                    <div class="mini-icon-card" onclick="window.open('https://wa.me/919483037385')">
+                        <div class="mini-icon-circle green-gradient">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <span>WhatsApp</span>
+                    </div>
                 </div>
-                <span>WhatsApp</span>
-            </div>
-            <!-- Share -->
-            <div class="icon-card clickable" id="shareIcon" onclick="shareBusiness()">
-                <div class="icon-circle yellow-bg">
-                    <i class="fas fa-share-alt"></i>
+                <!-- Share -->
+                <div class="swiper-slide">
+                    <div class="mini-icon-card" onclick="shareBusiness()">
+                        <div class="mini-icon-circle yellow-gradient">
+                            <i class="fas fa-share-alt"></i>
+                        </div>
+                        <span>Share</span>
+                    </div>
                 </div>
-                <span>Share</span>
-            </div>
-            <!-- Direction -->
-            <div class="icon-card clickable" id="directionIcon" onclick="window.open('https://maps.google.com/?q=12.3456,76.6789')">
-                <div class="icon-circle blue-bg">
-                    <i class="fas fa-location-dot"></i>
+                <!-- Direction -->
+                <div class="swiper-slide">
+                    <div class="mini-icon-card" onclick="window.open('https://maps.google.com/?q=12.3456,76.6789')">
+                        <div class="mini-icon-circle blue-gradient">
+                            <i class="fas fa-location-dot"></i>
+                        </div>
+                        <span>Direction</span>
+                    </div>
                 </div>
-                <span>Direction</span>
-            </div>
-            <!-- Get Estimate -->
-            <div class="icon-card clickable" id="estimateIcon" onclick="window.location.href='appointment.html?type=estimate'">
-                <div class="icon-circle yellow-bg">
-                    <i class="fas fa-calculator"></i>
+                <!-- Estimate -->
+                <div class="swiper-slide">
+                    <div class="mini-icon-card" onclick="window.location.href='appointment.html?type=estimate'">
+                        <div class="mini-icon-circle yellow-gradient">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <span>Estimate</span>
+                    </div>
                 </div>
-                <span>Estimate</span>
-            </div>
-            <!-- Price Calculator -->
-            <div class="icon-card clickable" id="calculatorIcon" onclick="openCalculator()">
-                <div class="icon-circle blue-bg">
-                    <i class="fas fa-rupee-sign"></i>
+                <!-- Calculator -->
+                <div class="swiper-slide">
+                    <div class="mini-icon-card" onclick="openCalculator()">
+                        <div class="mini-icon-circle blue-gradient">
+                            <i class="fas fa-rupee-sign"></i>
+                        </div>
+                        <span>Calculator</span>
+                    </div>
                 </div>
-                <span>Calculator</span>
-            </div>
-            <!-- Book Now -->
-            <div class="icon-card clickable" id="bookNowIcon" onclick="window.location.href='appointment.html'">
-                <div class="icon-circle yellow-bg">
-                    <i class="fas fa-calendar-check"></i>
+                <!-- Book Now -->
+                <div class="swiper-slide">
+                    <div class="mini-icon-card" onclick="window.location.href='appointment.html'">
+                        <div class="mini-icon-circle yellow-gradient">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <span>Book Now</span>
+                    </div>
+                    </div>
+                <!-- Discord -->
+                <div class="swiper-slide">
+                    <div class="mini-icon-card" onclick="window.open('https://discord.gg/rajmarketing')">
+                        <div class="mini-icon-circle blue-gradient">
+                            <i class="fab fa-discord"></i>
+                        </div>
+                        <span>Discord</span>
+                    </div>
                 </div>
-                <span>Book Now</span>
-            </div>
-            <!-- Discord -->
-            <div class="icon-card clickable" id="discordIcon" onclick="window.open('https://discord.gg/rajmarketing')">
-                <div class="icon-circle blue-bg">
-                    <i class="fab fa-discord"></i>
+                <!-- Email -->
+                <div class="swiper-slide">
+                    <div class="mini-icon-card" onclick="window.location.href='mailto:rajmarketing@gmail.com'">
+                        <div class="mini-icon-circle yellow-gradient">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <span>Email</span>
+                    </div>
                 </div>
-                <span>Discord</span>
-            </div>
-            <!-- Email -->
-            <div class="icon-card clickable" id="emailIcon" onclick="window.location.href='mailto:rajmarketing@gmail.com'">
-                <div class="icon-circle yellow-bg">
-                    <i class="fas fa-envelope"></i>
+                <!-- Review -->
+                <div class="swiper-slide">
+                    <div class="mini-icon-card" onclick="window.open('https://g.page/rajmarketing/review')">
+                        <div class="mini-icon-circle blue-gradient">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span>Review</span>
+                    </div>
                 </div>
-                <span>Email</span>
-            </div>
-            <!-- Review -->
-            <div class="icon-card clickable" id="reviewIcon" onclick="window.open('https://g.page/rajmarketing/review')">
-                <div class="icon-circle blue-bg">
-                    <i class="fas fa-star"></i>
+                <!-- Support -->
+                <div class="swiper-slide">
+                    <div class="mini-icon-card" onclick="window.location.href='appointment.html?type=support'">
+                        <div class="mini-icon-circle yellow-gradient">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <span>Support</span>
+                    </div>
                 </div>
-                <span>Review</span>
-            </div>
-            <!-- Support -->
-            <div class="icon-card clickable" id="supportIcon" onclick="window.location.href='appointment.html?type=support'">
-                <div class="icon-circle yellow-bg">
-                    <i class="fas fa-headset"></i>
+                <!-- Offers -->
+                <div class="swiper-slide">
+                    <div class="mini-icon-card" onclick="window.location.href='offer-details.html'">
+                        <div class="mini-icon-circle blue-gradient">
+                            <i class="fas fa-tags"></i>
+                        </div>
+                        <span>Offers</span>
+                    </div>
                 </div>
-                <span>Support</span>
-            </div>
-            <!-- Offers -->
-            <div class="icon-card clickable" id="offersIcon" onclick="window.location.href='offer-details.html'">
-                <div class="icon-circle blue-bg">
-                    <i class="fas fa-tags"></i>
+                <!-- Admin -->
+                <div class="swiper-slide">
+                    <div class="mini-icon-card" onclick="showAdminLogin()">
+                        <div class="mini-icon-circle" style="background: #1e4b8b; color: white;">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <span>Admin</span>
+                    </div>
                 </div>
-                <span>Offers</span>
-            </div>
-            <!-- Admin -->
-            <div class="icon-card clickable" id="adminIcon" onclick="showAdminLogin()">
-                <div class="icon-circle" style="background: #1e4b8b; color: white;">
-                    <i class="fas fa-shield-alt"></i>
+                <!-- Gallery -->
+                <div class="swiper-slide">
+                    <div class="mini-icon-card" onclick="window.location.href='gallery.html'">
+                        <div class="mini-icon-circle yellow-gradient">
+                            <i class="fas fa-images"></i>
+                        </div>
+                        <span>Gallery</span>
+                    </div>
                 </div>
-                <span>Admin</span>
-            </div>
-            <!-- Gallery -->
-            <div class="icon-card clickable" id="galleryIcon" onclick="window.location.href='gallery.html'">
-                <div class="icon-circle yellow-bg">
-                    <i class="fas fa-images"></i>
+                <!-- EMI -->
+                <div class="swiper-slide">
+                    <div class="mini-icon-card" onclick="showToast('EMI Calculator Coming Soon')">
+                        <div class="mini-icon-circle blue-gradient">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <span>EMI</span>
+                    </div>
                 </div>
-                <span>Gallery</span>
+                <!-- Refer -->
+                <div class="swiper-slide">
+                    <div class="mini-icon-card" onclick="showToast('Refer & Earn ₹500')">
+                        <div class="mini-icon-circle yellow-gradient">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <span>Refer</span>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- ===== FREE SITE VISIT BANNER ===== -->
-        <div class="free-visit-banner clickable" id="freeVisitBanner" onclick="window.location.href='appointment.html'">
+        <div class="free-visit-banner clickable animate__animated animate__pulse" id="freeVisitBanner" onclick="window.location.href='appointment.html'">
             <div class="banner-content">
                 <i class="fas fa-tools"></i>
                 <div>
-                    <h4>Free Site Visit</h4>
-                    <p>Schedule now · Get free estimate</p>
+                    <h4>🔧 Free Site Visit</h4>
+                    <p>Expert consultation · Free measurement · Best quote</p>
                 </div>
             </div>
             <i class="fas fa-arrow-right"></i>
@@ -1249,8 +1549,8 @@
             <div class="banner-content">
                 <i class="fas fa-compass"></i>
                 <div>
-                    <h4>Explore All Services</h4>
-                    <p>View complete catalog & prices</p>
+                    <h4>🧭 Explore All Services</h4>
+                    <p>View catalog · Compare prices · Read reviews</p>
                 </div>
             </div>
             <i class="fas fa-arrow-right"></i>
@@ -1258,61 +1558,61 @@
 
         <!-- ===== OFFER REFERENCE CARDS ===== -->
         <div class="section-title">
-            <h3>🎁 Special Offers</h3>
-            <a href="offer-details.html" class="view-all-link">View All</a>
+            <h3>🎁 Limited Time Offers</h3>
+            <a href="offer-details.html" class="view-all-link">View All →</a>
         </div>
 
         <div class="offers-grid">
             <!-- Offer 1 -->
             <div class="offer-card-modern clickable" onclick="window.location.href='offer-details.html?id=1'">
-                <div class="offer-icon yellow-bg">
+                <div class="offer-icon yellow-gradient">
                     <i class="fas fa-gift"></i>
                 </div>
                 <div class="offer-details">
                     <h4>3+1 Free</h4>
                     <p>Buy 3 windows get 1 free</p>
-                    <span class="offer-code">Use: MONSOON3</span>
+                    <span class="offer-code">MONSOON3</span>
                 </div>
             </div>
             <!-- Offer 2 -->
             <div class="offer-card-modern clickable" onclick="window.location.href='offer-details.html?id=2'">
-                <div class="offer-icon blue-bg">
+                <div class="offer-icon blue-gradient">
                     <i class="fas fa-percent"></i>
                 </div>
                 <div class="offer-details">
                     <h4>5% Off</h4>
                     <p>On Frame System</p>
-                    <span class="offer-code">Use: FRAME5</span>
+                    <span class="offer-code">FRAME5</span>
                 </div>
             </div>
             <!-- Offer 3 -->
             <div class="offer-card-modern clickable" onclick="window.location.href='offer-details.html?id=3'">
-                <div class="offer-icon yellow-bg">
+                <div class="offer-icon yellow-gradient">
                     <i class="fas fa-truck"></i>
                 </div>
                 <div class="offer-details">
                     <h4>Free Installation</h4>
                     <p>On orders above ₹5000</p>
-                    <span class="offer-code">Auto apply</span>
+                    <span class="offer-code">FREEINSTALL</span>
                 </div>
             </div>
             <!-- Offer 4 -->
             <div class="offer-card-modern clickable" onclick="window.location.href='offer-details.html?id=4'">
-                <div class="offer-icon blue-bg">
+                <div class="offer-icon blue-gradient">
                     <i class="fas fa-rupee-sign"></i>
                 </div>
                 <div class="offer-details">
                     <h4>₹500 Off</h4>
                     <p>On Pleated Nets</p>
-                    <span class="offer-code">Use: PLEAT500</span>
+                    <span class="offer-code">PLEAT500</span>
                 </div>
             </div>
-    </div>
+        </div>
 
         <!-- ===== MOSQUITO NET BAZAAR - 10 Image Slider ===== -->
         <div class="section-title">
             <h3>🦟 Mosquito Net Bazaar</h3>
-            <span class="slide-indicator">10 samples</span>
+            <span class="slide-indicator">10+ Samples</span>
         </div>
 
         <div class="swiper-container bazaar-slider">
@@ -1320,7 +1620,7 @@
                 <!-- Sample 1 -->
                 <div class="swiper-slide">
                     <div class="bazaar-sample-card">
-                        <div class="sample-image" style="background-image: url('https://placecats.com/300/300?random=30');">
+                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1584017911766-451b3d0e8434?w=300');">
                             <span class="sample-tag">White</span>
                         </div>
                         <div class="sample-info">
@@ -1332,7 +1632,7 @@
                 <!-- Sample 2 -->
                 <div class="swiper-slide">
                     <div class="bazaar-sample-card">
-                        <div class="sample-image" style="background-image: url('https://placecats.com/301/301?random=31');">
+                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1513694203232-719a280e022f?w=300');">
                             <span class="sample-tag">Brown</span>
                         </div>
                         <div class="sample-info">
@@ -1344,7 +1644,7 @@
                 <!-- Sample 3 -->
                 <div class="swiper-slide">
                     <div class="bazaar-sample-card">
-                        <div class="sample-image" style="background-image: url('https://placecats.com/302/302?random=32');">
+                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=300');">
                             <span class="sample-tag">Black</span>
                         </div>
                         <div class="sample-info">
@@ -1356,7 +1656,7 @@
                 <!-- Sample 4 -->
                 <div class="swiper-slide">
                     <div class="bazaar-sample-card">
-                        <div class="sample-image" style="background-image: url('https://placecats.com/303/303?random=33');">
+                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=300');">
                             <span class="sample-tag">White</span>
                         </div>
                         <div class="sample-info">
@@ -1368,7 +1668,7 @@
                 <!-- Sample 5 -->
                 <div class="swiper-slide">
                     <div class="bazaar-sample-card">
-                        <div class="sample-image" style="background-image: url('https://placecats.com/304/304?random=34');">
+                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=300');">
                             <span class="sample-tag">Gray</span>
                         </div>
                         <div class="sample-info">
@@ -1380,7 +1680,7 @@
                 <!-- Sample 6 -->
                 <div class="swiper-slide">
                     <div class="bazaar-sample-card">
-                        <div class="sample-image" style="background-image: url('https://placecats.com/305/305?random=35');">
+                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=300');">
                             <span class="sample-tag">Black</span>
                         </div>
                         <div class="sample-info">
@@ -1392,7 +1692,7 @@
                 <!-- Sample 7 -->
                 <div class="swiper-slide">
                     <div class="bazaar-sample-card">
-                        <div class="sample-image" style="background-image: url('https://placecats.com/306/306?random=36');">
+                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=300');">
                             <span class="sample-tag">White</span>
                         </div>
                         <div class="sample-info">
@@ -1404,7 +1704,7 @@
                 <!-- Sample 8 -->
                 <div class="swiper-slide">
                     <div class="bazaar-sample-card">
-                        <div class="sample-image" style="background-image: url('https://placecats.com/307/307?random=37');">
+                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=300');">
                             <span class="sample-tag">Brown</span>
                         </div>
                         <div class="sample-info">
@@ -1416,7 +1716,7 @@
                 <!-- Sample 9 -->
                 <div class="swiper-slide">
                     <div class="bazaar-sample-card">
-                        <div class="sample-image" style="background-image: url('https://placecats.com/308/308?random=38');">
+                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=300');">
                             <span class="sample-tag">Gray</span>
                         </div>
                         <div class="sample-info">
@@ -1428,7 +1728,7 @@
                 <!-- Sample 10 -->
                 <div class="swiper-slide">
                     <div class="bazaar-sample-card">
-                        <div class="sample-image" style="background-image: url('https://placecats.com/309/309?random=39');">
+                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1556740714-a8395b3bf30f?w=300');">
                             <span class="sample-tag">Custom</span>
                         </div>
                         <div class="sample-info">
@@ -1512,6 +1812,103 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
+        // Sample customer data for live notifications (will be linked to appointment form)
+        const customerAreas = [
+            'Vijayanagar', 'Kuvempunagar', 'Gokulam', 'Jayalakshmipuram', 
+            'Saraswathipuram', 'Hebbal', 'Bogadi', 'Mysore City', 
+            'Rajarajeshwari Nagar', 'Manasagangotri', 'Yadavagiri', 'Bannimantap'
+        ];
+
+        const customerNames = [
+            'Suresh', 'Priya', 'Ramesh', 'Kavitha', 'Manoj', 'Anita',
+            'Vikram', 'Deepa', 'Rajesh', 'Meena', 'Arjun', 'Latha'
+        ];
+
+        const services = [
+            'Velcro System', 'Frame System', 'Pleated Nets', 'Mesh Door'
+        ];
+
+        // Generate live notifications
+        function generateLiveNotifications() {
+            let notifications = [];
+            const today = new Date();
+            
+            // Generate 15 random notifications
+            for (let i = 0; i < 15; i++) {
+                const name = customerNames[Math.floor(Math.random() * customerNames.length)];
+                const area = customerAreas[Math.floor(Math.random() * customerAreas.length)];
+                const service = services[Math.floor(Math.random() * services.length)];
+                const timeAgo = Math.floor(Math.random() * 30) + 1;
+                
+                const templates = [
+                    `🔔 <strong>${name}</strong> from <strong>${area}</strong> just booked <strong>${service}</strong> • ${timeAgo} min ago`,
+                    `⭐ <strong>${name}</strong> in <strong>${area}</strong> scheduled site visit for <strong>${service}</strong> • ${timeAgo} min ago`,
+                    `🔥 <strong>${name}</strong> (${area}) upgraded to <strong>${service}</strong> • ${timeAgo} min ago`,
+                    `📞 <strong>${name}</strong> from <strong>${area}</strong> requested callback for <strong>${service}</strong> • ${timeAgo} min ago`,
+                    `✅ <strong>${name}</strong>'s <strong>${service}</strong> installation completed in <strong>${area}</strong> • ${timeAgo} min ago`,
+                    `💰 <strong>${name}</strong> from <strong>${area}</strong> paid advance for <strong>${service}</strong> • ${timeAgo} min ago`,
+                    `🎉 <strong>${name}</strong> in <strong>${area}</strong> got <strong>15% off</strong> on ${service} • ${timeAgo} min ago`
+                ];
+                
+                notifications.push(templates[Math.floor(Math.random() * templates.length)]);
+            }
+            
+            // Double the notifications for smooth marquee
+            return [...notifications, ...notifications];
+        }
+
+        // Update marquee with live notifications
+        function updateMarquee() {
+            const marquee = document.getElementById('liveMarquee');
+            const notifications = generateLiveNotifications();
+            
+            let html = '';
+            notifications.forEach(notification => {
+                html += `<span><i class="fas fa-circle" style="font-size: 6px; vertical-align: middle;"></i> ${notification}</span>`;
+            });
+            
+            marquee.innerHTML = html;
+        }
+
+        // Update live stats
+        function updateLiveStats() {
+            // Simulate real-time updates
+            setInterval(() => {
+                document.getElementById('ongoingCount').textContent = Math.floor(Math.random() * 5) + 5;
+                document.getElementById('visitCount').textContent = Math.floor(Math.random() * 8) + 8;
+                document.getElementById('sqftCount').textContent = Math.floor(Math.random() * 500) + 2000;
+                document.getElementById('todayCustomerCount').textContent = Math.floor(Math.random() * 10) + 20;
+                
+                // Update revenue
+                const revenue = (Math.random() * 1 + 2.8).toFixed(1);
+                document.getElementById('revenueCount').textContent = `₹${revenue}L`;
+            }, 8000);
+        }
+
+        // Load data from localStorage (appointments)
+        function loadCustomerData() {
+            const appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
+            
+            // Update today's count
+            const today = new Date().toDateString();
+            const todayCount = appointments.filter(app => {
+                const appDate = new Date(app.date);
+                return appDate.toDateString() === today;
+            }).length;
+            
+            if (todayCount > 0) {
+                document.getElementById('todayCustomerCount').textContent = todayCount;
+            }
+            
+            // Add real customer notifications if available
+            if (appointments.length > 0) {
+                const latest = appointments[appointments.length - 1];
+                if (latest.name && latest.area) {
+                    // Add to marquee
+                }
+            }
+        }
+
         // Initialize all sliders
         document.addEventListener('DOMContentLoaded', function() {
             // Main promotional slider
@@ -1525,13 +1922,14 @@
                     el: '.main-slider .swiper-pagination',
                     clickable: true,
                 },
-                speed: 600,
+                speed: 800,
+                effect: 'slide',
             });
 
             // Status cards slider
             const statusSlider = new Swiper('.status-slider', {
                 slidesPerView: 'auto',
-                spaceBetween: 12,
+                spaceBetween: 15,
                 freeMode: true,
                 pagination: {
                     el: '.status-pagination',
@@ -1542,7 +1940,7 @@
             // Services slider
             const servicesSlider = new Swiper('.services-slider', {
                 slidesPerView: 'auto',
-                spaceBetween: 16,
+                spaceBetween: 18,
                 freeMode: true,
                 pagination: {
                     el: '.services-pagination',
@@ -1553,7 +1951,7 @@
             // Bazaar slider
             const bazaarSlider = new Swiper('.bazaar-slider', {
                 slidesPerView: 'auto',
-                spaceBetween: 12,
+                spaceBetween: 15,
                 freeMode: true,
                 pagination: {
                     el: '.bazaar-pagination',
@@ -1561,8 +1959,24 @@
                 },
             });
 
+            // Quick actions slider (new)
+            const quickActionsSlider = new Swiper('.quick-actions-slider', {
+                slidesPerView: 'auto',
+                spaceBetween: 8,
+                freeMode: true,
+                grabCursor: true,
+            });
+
+            // Initialize live features
+            updateMarquee();
+            updateLiveStats();
+            loadCustomerData();
+            
+            // Update marquee every 30 seconds
+            setInterval(updateMarquee, 30000);
+
             // Welcome toast
-            setTimeout(() => showToast('👋 Welcome to Raj Marketing'), 400);
+            setTimeout(() => showToast('👋 Welcome to Raj Marketing · Live Now'), 400);
         });
 
         // Toast function
@@ -1572,7 +1986,7 @@
             toast.innerText = '📱 ' + text;
             setTimeout(() => {
                 toast.style.opacity = '0';
-            }, 1400);
+            }, 2000);
         }
 
         // Share function
@@ -1580,21 +1994,24 @@
             if (navigator.share) {
                 navigator.share({
                     title: 'Raj Marketing - Mosquito Nets',
-                    text: 'Best mosquito nets in Mysore. Velcro: ₹60/sqft, Frame: ₹180/sqft',
+                    text: 'Best mosquito nets in Mysore. Live bookings open!',
                     url: window.location.href
                 });
             } else {
-                showToast('Share link copied to clipboard');
+                showToast('📋 Share link copied to clipboard');
             }
         }
 
         // Open calculator
         function openCalculator() {
-            const sqft = prompt('Enter area in sqft:');
-            if (sqft) {
+            const sqft = prompt('📐 Enter area in sqft:');
+            if (sqft && !isNaN(sqft)) {
                 const velcro = sqft * 60;
                 const frame = sqft * 180;
-                showToast(`Velcro: ₹${velcro}, Frame: ₹${frame}`);
+                const pleated = sqft * 350;
+                const mesh = sqft * 380;
+                
+                showToast(`Velcro: ₹${velcro} | Frame: ₹${frame} | Pleated: ₹${pleated} | Mesh: ₹${mesh}`);
             }
         }
 
@@ -1613,12 +2030,9 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             
-            // Simple authentication
             if (username === 'admin' && password === 'raj2024') {
                 showToast('✅ Admin access granted');
                 closeAdminLogin();
-                
-                // Open admin panel in new tab
                 window.open('admin-panel.html', '_blank');
             } else {
                 showToast('❌ Invalid credentials');
@@ -1627,47 +2041,44 @@
 
         // Status card click handlers
         document.addEventListener('DOMContentLoaded', function() {
-            // Add click handlers for status cards
             const ongoingJobs = document.getElementById('ongoingJobs');
             if (ongoingJobs) {
-                ongoingJobs.addEventListener('click', () => showToast('3 ongoing installations'));
+                ongoingJobs.addEventListener('click', () => showToast('8 ongoing installations this week'));
             }
             
             const pendingVisits = document.getElementById('pendingVisits');
             if (pendingVisits) {
-                pendingVisits.addEventListener('click', () => showToast('5 site visits scheduled'));
+                pendingVisits.addEventListener('click', () => showToast('12 site visits scheduled'));
             }
             
             const totalSqft = document.getElementById('totalSqft');
             if (totalSqft) {
-                totalSqft.addEventListener('click', () => showToast('1,240 sqft this month'));
+                totalSqft.addEventListener('click', () => showToast('2,450 sqft this month'));
             }
             
             const revenueCard = document.getElementById('revenueCard');
             if (revenueCard) {
-                revenueCard.addEventListener('click', () => showToast('Revenue: ₹1,85,000'));
+                revenueCard.addEventListener('click', () => showToast('Revenue: ₹3.2 Lakhs this month'));
             }
             
             const ratingCard = document.getElementById('ratingCard');
             if (ratingCard) {
-                ratingCard.addEventListener('click', () => showToast('Rating: 4.9/5 from 248 reviews'));
+                ratingCard.addEventListener('click', () => showToast('4.9/5 from 512 reviews'));
             }
             
             const completedCard = document.getElementById('completedCard');
             if (completedCard) {
-                completedCard.addEventListener('click', () => showToast('156 completed projects'));
+                completedCard.addEventListener('click', () => showToast('289 completed projects'));
             }
 
-            // Menu button
             const menuBtn = document.getElementById('menuBtn');
             if (menuBtn) {
-                menuBtn.addEventListener('click', () => showToast('Menu opened'));
+                menuBtn.addEventListener('click', () => showToast('📱 Menu'));
             }
 
-            // Notification button
             const notificationBtn = document.getElementById('notificationBtn');
             if (notificationBtn) {
-                notificationBtn.addEventListener('click', () => showToast('No new notifications'));
+                notificationBtn.addEventListener('click', () => showToast('📬 3 new notifications'));
             }
         });
     </script>
