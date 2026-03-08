@@ -16,8 +16,829 @@
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     
-    <!-- External CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #2d3e3f; /* Dark grey background */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 0 0 20px 0;
+        }
+
+        /* mobile app card */
+        .app-container {
+            max-width: 390px;
+            width: 100%;
+            background-color: #f0f5f3; /* Light grey background */
+            box-shadow: 0 0 30px rgba(0,0,0,0.15);
+            border-radius: 32px 32px 0 0;
+            margin: 8px 0 0 0;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 70px;
+        }
+
+        /* ===== TOP HEADER - 64px ===== */
+        .top-header {
+            height: 64px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .hamburger-icon {
+            font-size: 24px;
+            color: #1e4b8b; /* Blue */
+            cursor: pointer;
+        }
+
+        .header-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .greeting-text {
+            font-size: 12px;
+            color: #6b7a7c;
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        .customer-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1e4b8b; /* Blue */
+            letter-spacing: -0.2px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .notification-icon, .admin-icon {
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .notification-icon {
+            color: #e6b422; /* Yellow/Gold */
+        }
+
+        .admin-icon {
+            color: #1e4b8b; /* Blue */
+        }
+
+        /* ===== Color Classes ===== */
+        .blue-bg {
+            background: #1e4b8b !important; /* Blue */
+            color: white !important;
+        }
+
+        .yellow-bg {
+            background: #e6b422 !important; /* Yellow/Gold */
+            color: #1e3a3a !important;
+        }
+
+        .green-bg {
+            background: #25a36b !important; /* Green for WhatsApp */
+            color: white !important;
+        }
+
+        /* ===== Main Slider ===== */
+        .main-slider {
+            width: 100%;
+            height: 180px;
+            margin: 12px 0 8px 0;
+        }
+
+        .main-slider .swiper-slide {
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .main-slider .swiper-slide::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to top, rgba(0,40,60,0.7), transparent);
+            border-radius: 20px;
+        }
+
+        .slide-content {
+            position: absolute;
+            bottom: 16px;
+            left: 20px;
+            color: white;
+            z-index: 2;
+            font-weight: 600;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.4);
+        }
+
+        .slide-title {
+            font-size: 1.1rem;
+            display: block;
+            font-weight: 700;
+            color: #e6b422; /* Yellow */
+        }
+
+        .slide-content small {
+            display: block;
+            font-size: 0.75rem;
+            opacity: 0.95;
+            color: white;
+        }
+
+        .main-slider .swiper-pagination-bullet {
+            background: white;
+            opacity: 0.8;
+        }
+
+        .main-slider .swiper-pagination-bullet-active {
+            background: #e6b422; /* Yellow */
+        }
+
+        /* ===== Section Title ===== */
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 16px 16px 8px 16px;
+        }
+
+        .section-title h3 {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #1e4b8b; /* Blue */
+            letter-spacing: -0.3px;
+        }
+
+        .slide-indicator {
+            font-size: 0.7rem;
+            color: #e6b422; /* Yellow */
+            background: rgba(230, 180, 34, 0.1);
+            padding: 4px 10px;
+            border-radius: 30px;
+            font-weight: 500;
+        }
+
+        .view-all-link {
+            font-size: 0.75rem;
+            color: #1e4b8b;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        /* ===== Status Cards Slider ===== */
+        .status-slider {
+            margin: 0 16px 20px 16px;
+            padding-bottom: 30px !important;
+        }
+
+        .status-slider .swiper-slide {
+            width: auto !important;
+        }
+
+        .status-card-slide {
+            background: white;
+            border-radius: 24px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            min-width: 220px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+            border: 1px solid rgba(30, 75, 139, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .status-card-slide:active {
+            transform: scale(0.98);
+        }
+
+        .status-icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 27px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .status-icon i {
+            font-size: 1.8rem;
+        }
+
+        .status-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .status-label {
+            font-size: 0.7rem;
+            color: #6b7a7c;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            font-weight: 500;
+        }
+
+        .status-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1e4b8b; /* Blue */
+            line-height: 1.2;
+        }
+
+        .status-sub {
+            font-size: 0.65rem;
+            color: #e6b422; /* Yellow */
+            font-weight: 500;
+        }
+
+        /* ===== Services Slider ===== */
+        .services-slider {
+            margin: 0 16px 20px 16px;
+            padding-bottom: 30px !important;
+        }
+
+        .services-slider .swiper-slide {
+            width: 280px;
+        }
+
+        .service-card-slide {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        .service-image {
+            height: 140px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .service-overlay {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+        }
+
+        .service-price {
+            background: #e6b422; /* Yellow */
+            color: #1e3a3a;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+
+        .service-info {
+            padding: 14px;
+        }
+
+        .service-info h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1e4b8b; /* Blue */
+            margin-bottom: 4px;
+        }
+
+        .service-info p {
+            font-size: 0.7rem;
+            color: #6b7a7c;
+            margin-bottom: 12px;
+        }
+
+        .service-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-learn-more {
+            flex: 1;
+            background: transparent;
+            border: 1.5px solid #1e4b8b;
+            color: #1e4b8b;
+            padding: 8px 0;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-learn-more:hover {
+            background: #1e4b8b;
+            color: white;
+        }
+
+        .btn-book-now {
+            flex: 1;
+            background: #e6b422;
+            border: none;
+            color: #1e3a3a;
+            padding: 8px 0;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-book-now:hover {
+            background: #d4a31e;
+        }
+
+        /* ===== Icons Grid ===== */
+        .icons-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 8px 16px 20px 16px;
+        }
+
+        .icon-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .icon-circle {
+            width: 56px;
+            height: 56px;
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .icon-circle:hover {
+            transform: scale(1.05);
+        }
+
+        .icon-circle i {
+            font-size: 1.5rem;
+        }
+
+        .icon-card span {
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: #1e4b8b; /* Blue */
+            text-align: center;
+        }
+
+        /* ===== Banner Styles ===== */
+        .free-visit-banner, .explore-banner {
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
+            margin: 16px;
+            padding: 16px 20px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 8px 20px rgba(30, 75, 139, 0.3);
+        }
+
+        .explore-banner {
+            background: linear-gradient(135deg, #e6b422, #f5c542);
+        }
+
+        .banner-content {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .banner-content i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .banner-content h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 2px;
+        }
+
+        .banner-content p {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .free-visit-banner i:last-child, .explore-banner i:last-child {
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        /* ===== Offers Grid ===== */
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 8px 16px 20px 16px;
+        }
+
+        .offer-card-modern {
+            background: white;
+            border-radius: 20px;
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border: 1px solid rgba(30, 75, 139, 0.1);
+        }
+
+        .offer-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .offer-icon i {
+            font-size: 1.3rem;
+        }
+
+        .offer-details h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #1e4b8b;
+            margin-bottom: 2px;
+        }
+
+        .offer-details p {
+            font-size: 0.65rem;
+            color: #6b7a7c;
+            margin-bottom: 2px;
+        }
+
+        .offer-code {
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: #e6b422;
+            background: rgba(230, 180, 34, 0.1);
+            padding: 2px 8px;
+            border-radius: 20px;
+        }
+
+        /* ===== Bazaar Slider ===== */
+        .bazaar-slider {
+            margin: 8px 16px 20px 16px;
+            padding-bottom: 30px !important;
+        }
+
+        .bazaar-slider .swiper-slide {
+            width: 160px;
+        }
+
+        .bazaar-sample-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+        }
+
+        .sample-image {
+            height: 140px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .sample-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #e6b422;
+            color: #1e3a3a;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.7rem;
+        }
+
+        .sample-info {
+            padding: 12px;
+        }
+
+        .sample-info h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #1e4b8b;
+            margin-bottom: 2px;
+        }
+
+        .sample-info p {
+            font-size: 0.7rem;
+            color: #6b7a7c;
+        }
+
+        /* ===== Floating Action Button ===== */
+        .fab {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background: #e6b422; /* Yellow */
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e3a3a;
+            font-size: 1.8rem;
+            box-shadow: 0 8px 20px rgba(230, 180, 34, 0.4);
+            z-index: 10;
+            border: 3px solid white;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .fab:hover {
+            transform: scale(1.1);
+        }
+
+        /* ===== Admin Access Button ===== */
+        .admin-access {
+            position: fixed;
+            bottom: 160px;
+            right: 20px;
+            background: rgba(30, 75, 139, 0.2);
+            backdrop-filter: blur(5px);
+            width: 45px;
+            height: 45px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e4b8b;
+            font-size: 0.7rem;
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 8;
+            border: 1px solid rgba(30, 75, 139, 0.3);
+            transition: all 0.3s;
+        }
+
+        .admin-access:hover {
+            background: #1e4b8b;
+            color: white;
+            width: 70px;
+        }
+
+        .admin-access i {
+            font-size: 1rem;
+        }
+
+        .admin-access span {
+            display: none;
+        }
+
+        .admin-access:hover span {
+            display: block;
+            font-size: 0.6rem;
+        }
+
+        /* ===== Login Modal ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 30px;
+            max-width: 350px;
+            width: 90%;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            background: #1e4b8b;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            padding: 25px;
+        }
+
+        .modal-body .form-group {
+            margin-bottom: 20px;
+        }
+
+        .modal-body label {
+            display: block;
+            margin-bottom: 5px;
+            color: #1e4b8b;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+
+        .modal-body label i {
+            color: #e6b422;
+            margin-right: 5px;
+        }
+
+        .modal-body input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e8e5;
+            border-radius: 15px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .login-btn {
+            width: 100%;
+            background: #e6b422;
+            border: none;
+            padding: 14px;
+            border-radius: 30px;
+            font-weight: 600;
+            color: #1e3a3a;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .demo-credentials {
+            background: #f0f5f3;
+            padding: 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .demo-credentials p:first-child {
+            color: #1e4b8b;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        /* ===== Bottom Navigation ===== */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            max-width: 390px;
+            width: 100%;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 10px 16px 10px;
+            border-top: 1px solid rgba(30, 75, 139, 0.1);
+            border-radius: 26px 26px 0 0;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
+            z-index: 9;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #6b7a7c;
+            font-size: 0.7rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .nav-item.active {
+            color: #1e4b8b; /* Blue */
+        }
+
+        .nav-item.active i {
+            color: #e6b422; /* Yellow for active icon */
+        }
+
+        .nav-item i {
+            font-size: 1.4rem;
+            margin-bottom: 2px;
+            transition: 0.2s;
+        }
+
+        .nav-item:hover {
+            color: #1e4b8b;
+        }
+
+        /* ===== Clickable Class ===== */
+        .clickable {
+            cursor: pointer;
+            transition: 0.1s ease;
+        }
+
+        .clickable:active {
+            opacity: 0.7;
+            transform: scale(0.98);
+        }
+
+        /* ===== Toast Message ===== */
+        #toastMessage {
+            position: fixed;
+            bottom: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e4b8b; /* Blue */
+            color: white;
+            padding: 12px 24px;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: 0 8px 20px rgba(30, 75, 139, 0.3);
+            z-index: 99;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 390px) {
+            .app-container {
+                max-width: 100%;
+                border-radius: 0;
+            }
+            
+            .bottom-nav {
+                max-width: 100%;
+            }
+            
+            .icons-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 12px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="app-container">
@@ -31,6 +852,7 @@
                 <span class="customer-name">Raj Marketing Customer</span>
             </div>
             <div class="header-right">
+                <i class="fas fa-shield-alt admin-icon" id="adminHeaderBtn" onclick="showAdminLogin()"></i>
                 <i class="fas fa-bell notification-icon" id="notificationBtn"></i>
             </div>
         </div>
@@ -201,8 +1023,7 @@
             </div>
             <div class="swiper-pagination status-pagination"></div>
         </div>
-
-        <!-- ===== MY SERVICES with Image Slider ===== -->
+          <!-- ===== MY SERVICES with Image Slider ===== -->
         <div class="section-title">
             <h3>🛠️ My Services</h3>
             <span class="slide-indicator"><i class="fas fa-arrows-left-right"></i> swipe</span>
@@ -304,10 +1125,10 @@
             <div class="swiper-pagination services-pagination"></div>
         </div>
 
-        <!-- ===== MUCH MORE ICONS SECTION (10+ actions) ===== -->
+        <!-- ===== MUCH MORE ICONS SECTION (12+ actions) ===== -->
         <div class="section-title">
             <h3>🔧 Quick Actions</h3>
-            <span class="slide-indicator">10+ options</span>
+            <span class="slide-indicator">12+ options</span>
         </div>
 
         <div class="icons-grid">
@@ -319,7 +1140,7 @@
                 <span>Call</span>
             </div>
             <!-- WhatsApp -->
-            <div class="icon-card clickable" id="whatsappIcon" onclick="window.location.href='https://wa.me/919483037385'">
+            <div class="icon-card clickable" id="whatsappIcon" onclick="window.open('https://wa.me/919483037385')">
                 <div class="icon-circle green-bg">
                     <i class="fab fa-whatsapp"></i>
                 </div>
@@ -333,7 +1154,7 @@
                 <span>Share</span>
             </div>
             <!-- Direction -->
-            <div class="icon-card clickable" id="directionIcon" onclick="window.open('https://maps.app.goo.gl/D2XypJsWfhLnBNHQ8')">
+            <div class="icon-card clickable" id="directionIcon" onclick="window.open('https://maps.google.com/?q=12.3456,76.6789')">
                 <div class="icon-circle blue-bg">
                     <i class="fas fa-location-dot"></i>
                 </div>
@@ -361,7 +1182,7 @@
                 <span>Book Now</span>
             </div>
             <!-- Discord -->
-            <div class="icon-card clickable" id="discordIcon" onclick="window.open('https://discord.gg/DauF8BFhA')">
+            <div class="icon-card clickable" id="discordIcon" onclick="window.open('https://discord.gg/rajmarketing')">
                 <div class="icon-circle blue-bg">
                     <i class="fab fa-discord"></i>
                 </div>
@@ -375,7 +1196,7 @@
                 <span>Email</span>
             </div>
             <!-- Review -->
-            <div class="icon-card clickable" id="reviewIcon" onclick="window.location.href='https://g.page/rajmarketing/review'">
+            <div class="icon-card clickable" id="reviewIcon" onclick="window.open('https://g.page/rajmarketing/review')">
                 <div class="icon-circle blue-bg">
                     <i class="fas fa-star"></i>
                 </div>
@@ -392,8 +1213,22 @@
             <div class="icon-card clickable" id="offersIcon" onclick="window.location.href='offer-details.html'">
                 <div class="icon-circle blue-bg">
                     <i class="fas fa-tags"></i>
-                    </div>
+                </div>
                 <span>Offers</span>
+            </div>
+            <!-- Admin -->
+            <div class="icon-card clickable" id="adminIcon" onclick="showAdminLogin()">
+                <div class="icon-circle" style="background: #1e4b8b; color: white;">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <span>Admin</span>
+            </div>
+            <!-- Gallery -->
+            <div class="icon-card clickable" id="galleryIcon" onclick="window.location.href='gallery.html'">
+                <div class="icon-circle yellow-bg">
+                    <i class="fas fa-images"></i>
+                </div>
+                <span>Gallery</span>
             </div>
         </div>
 
@@ -472,7 +1307,7 @@
                     <span class="offer-code">Use: PLEAT500</span>
                 </div>
             </div>
-        </div>
+    </div>
 
         <!-- ===== MOSQUITO NET BAZAAR - 10 Image Slider ===== -->
         <div class="section-title">
@@ -610,224 +1445,41 @@
         <div class="fab clickable" id="fabButton" onclick="window.location.href='appointment.html'">
             <i class="fas fa-calendar-plus"></i>
         </div>
-        <!-- ===== ADMIN ACCESS BUTTON (Hidden/Secure) ===== -->
-<div class="admin-access" id="adminAccess" onclick="showAdminLogin()">
-    <i class="fas fa-shield-alt"></i>
-    <span>Admin</span>
-</div>
 
-<!-- ===== ADMIN LOGIN MODAL ===== -->
-<div class="modal" id="adminLoginModal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2><i class="fas fa-lock"></i> Admin Login</h2>
-            <button class="close-modal" onclick="closeAdminLogin()">&times;</button>
+        <!-- ===== ADMIN ACCESS BUTTON (Floating) ===== -->
+        <div class="admin-access clickable" id="adminAccess" onclick="showAdminLogin()">
+            <i class="fas fa-shield-alt"></i>
+            <span>Admin</span>
         </div>
-        <div class="modal-body">
-            <form id="adminLoginForm" onsubmit="authenticateAdmin(event)">
-                <div class="form-group">
-                    <label><i class="fas fa-user"></i> Username</label>
-                    <input type="text" id="username" placeholder="Enter username" required>
+
+        <!-- ===== ADMIN LOGIN MODAL ===== -->
+        <div class="modal" id="adminLoginModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fas fa-lock"></i> Admin Login</h2>
+                    <button class="close-modal" onclick="closeAdminLogin()">&times;</button>
                 </div>
-                <div class="form-group">
-                    <label><i class="fas fa-key"></i> Password</label>
-                    <input type="password" id="password" placeholder="Enter password" required>
+                <div class="modal-body">
+                    <form id="adminLoginForm" onsubmit="authenticateAdmin(event)">
+                        <div class="form-group">
+                            <label><i class="fas fa-user"></i> Username</label>
+                            <input type="text" id="username" placeholder="Enter username" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-key"></i> Password</label>
+                            <input type="password" id="password" placeholder="Enter password" required>
+                        </div>
+                        <button type="submit" class="login-btn">
+                            <i class="fas fa-sign-in-alt"></i> Login to Admin Panel
+                        </button>
+                    </form>
+                    <div class="demo-credentials">
+                        <p><i class="fas fa-info-circle"></i> Demo Credentials:</p>
+                        <p>Username: <strong>admin</strong> | Password: <strong>raj2024</strong></p>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label><i class="fas fa-shield"></i> Security Key</label>
-                    <input type="text" id="securityKey" placeholder="Enter security key (optional)">
-                </div>
-                <button type="submit" class="login-btn">
-                    <i class="fas fa-sign-in-alt"></i> Login to Admin Panel
-                </button>
-            </form>
-            <div class="demo-credentials">
-                <p><i class="fas fa-info-circle"></i> Demo Credentials:</p>
-                <p>Username: <strong>admin</strong> | Password: <strong>raj2024</strong></p>
             </div>
         </div>
-    </div>
-</div>
-
-<!-- Add this CSS to your style.css -->
-<style>
-    .admin-access {
-        position: fixed;
-        bottom: 160px;
-        right: 20px;
-        background: rgba(30, 75, 139, 0.2);
-        backdrop-filter: blur(5px);
-        width: 45px;
-        height: 45px;
-        border-radius: 25px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #1e4b8b;
-        font-size: 0.7rem;
-        flex-direction: column;
-        cursor: pointer;
-        z-index: 8;
-        border: 1px solid rgba(30, 75, 139, 0.3);
-        transition: all 0.3s;
-    }
-    
-    .admin-access:hover {
-        background: #1e4b8b;
-        color: white;
-        width: 70px;
-    }
-    
-    .admin-access i {
-        font-size: 1rem;
-    }
-    
-    .admin-access span {
-        display: none;
-    }
-    
-    .admin-access:hover span {
-        display: block;
-        font-size: 0.6rem;
-    }
-    
-    .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.5);
-        z-index: 1000;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .modal.active {
-        display: flex;
-    }
-    
-    .modal-content {
-        background: white;
-        border-radius: 30px;
-        max-width: 350px;
-        width: 90%;
-        overflow: hidden;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    }
-    
-    .modal-header {
-        background: #1e4b8b;
-        color: white;
-        padding: 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    
-    .modal-header h2 {
-        font-size: 1.2rem;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    
-    .close-modal {
-        background: none;
-        border: none;
-        color: white;
-        font-size: 1.5rem;
-        cursor: pointer;
-    }
-    
-    .modal-body {
-        padding: 25px;
-    }
-    
-    .modal-body .form-group {
-        margin-bottom: 20px;
-    }
-    
-    .modal-body label {
-        display: block;
-        margin-bottom: 5px;
-        color: #1e4b8b;
-        font-weight: 500;
-        font-size: 0.85rem;
-    }
-    
-    .modal-body label i {
-        color: #e6b422;
-        margin-right: 5px;
-    }
-    
-    .modal-body input {
-        width: 100%;
-        padding: 12px 15px;
-        border: 2px solid #e0e8e5;
-        border-radius: 15px;
-        font-family: 'Poppins', sans-serif;
-    }
-    
-    .login-btn {
-        width: 100%;
-        background: #e6b422;
-        border: none;
-        padding: 14px;
-        border-radius: 30px;
-        font-weight: 600;
-        color: #1e3a3a;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        font-size: 1rem;
-        margin-bottom: 15px;
-    }
-    
-    .demo-credentials {
-        background: #f0f5f3;
-        padding: 12px;
-        border-radius: 15px;
-        font-size: 0.8rem;
-    }
-    
-    .demo-credentials p:first-child {
-        color: #1e4b8b;
-        font-weight: 500;
-        margin-bottom: 5px;
-    }
-</style>
-
-<script>
-    function showAdminLogin() {
-        document.getElementById('adminLoginModal').classList.add('active');
-    }
-    
-    function closeAdminLogin() {
-        document.getElementById('adminLoginModal').classList.remove('active');
-    }
-    
-    function authenticateAdmin(event) {
-        event.preventDefault();
-        
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        
-        // Simple authentication (in real app, use secure backend)
-        if (username === 'admin' && password === 'raj2024') {
-            showToast('✅ Admin access granted');
-            closeAdminLogin();
-            
-            // Redirect to admin panel or open in new tab
-            window.open('admin-panel.html', '_blank');
-        } else {
-            showToast('❌ Invalid credentials');
-        }
-    }
-</script>
 
         <!-- ===== BOTTOM NAVIGATION ===== -->
         <div class="bottom-nav">
@@ -847,9 +1499,9 @@
                 <i class="fas fa-phone"></i>
                 <span>Call</span>
             </div>
-            <div class="nav-item" id="navAccount" onclick="window.location.href='#'">
-                <i class="fas fa-user"></i>
-                <span>Account</span>
+            <div class="nav-item" id="navAdmin" onclick="showAdminLogin()">
+                <i class="fas fa-shield-alt"></i>
+                <span>Admin</span>
             </div>
         </div>
     </div>
@@ -859,7 +1511,166 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="js/main.js"></script>
+    <script>
+        // Initialize all sliders
+        document.addEventListener('DOMContentLoaded', function() {
+            // Main promotional slider
+            const mainSlider = new Swiper('.main-slider', {
+                loop: true,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.main-slider .swiper-pagination',
+                    clickable: true,
+                },
+                speed: 600,
+            });
+
+            // Status cards slider
+            const statusSlider = new Swiper('.status-slider', {
+                slidesPerView: 'auto',
+                spaceBetween: 12,
+                freeMode: true,
+                pagination: {
+                    el: '.status-pagination',
+                    clickable: true,
+                },
+            });
+
+            // Services slider
+            const servicesSlider = new Swiper('.services-slider', {
+                slidesPerView: 'auto',
+                spaceBetween: 16,
+                freeMode: true,
+                pagination: {
+                    el: '.services-pagination',
+                    clickable: true,
+                },
+            });
+
+            // Bazaar slider
+            const bazaarSlider = new Swiper('.bazaar-slider', {
+                slidesPerView: 'auto',
+                spaceBetween: 12,
+                freeMode: true,
+                pagination: {
+                    el: '.bazaar-pagination',
+                    clickable: true,
+                },
+            });
+
+            // Welcome toast
+            setTimeout(() => showToast('👋 Welcome to Raj Marketing'), 400);
+        });
+
+        // Toast function
+        function showToast(text) {
+            const toast = document.getElementById('toastMessage');
+            toast.style.opacity = '1';
+            toast.innerText = '📱 ' + text;
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 1400);
+        }
+
+        // Share function
+        function shareBusiness() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Raj Marketing - Mosquito Nets',
+                    text: 'Best mosquito nets in Mysore. Velcro: ₹60/sqft, Frame: ₹180/sqft',
+                    url: window.location.href
+                });
+            } else {
+                showToast('Share link copied to clipboard');
+            }
+        }
+
+        // Open calculator
+        function openCalculator() {
+            const sqft = prompt('Enter area in sqft:');
+            if (sqft) {
+                const velcro = sqft * 60;
+                const frame = sqft * 180;
+                showToast(`Velcro: ₹${velcro}, Frame: ₹${frame}`);
+            }
+        }
+
+        // Admin login functions
+        function showAdminLogin() {
+            document.getElementById('adminLoginModal').classList.add('active');
+        }
+
+        function closeAdminLogin() {
+            document.getElementById('adminLoginModal').classList.remove('active');
+        }
+
+        function authenticateAdmin(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Simple authentication
+            if (username === 'admin' && password === 'raj2024') {
+                showToast('✅ Admin access granted');
+                closeAdminLogin();
+                
+                // Open admin panel in new tab
+                window.open('admin-panel.html', '_blank');
+            } else {
+                showToast('❌ Invalid credentials');
+            }
+        }
+
+        // Status card click handlers
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click handlers for status cards
+            const ongoingJobs = document.getElementById('ongoingJobs');
+            if (ongoingJobs) {
+                ongoingJobs.addEventListener('click', () => showToast('3 ongoing installations'));
+            }
+            
+            const pendingVisits = document.getElementById('pendingVisits');
+            if (pendingVisits) {
+                pendingVisits.addEventListener('click', () => showToast('5 site visits scheduled'));
+            }
+            
+            const totalSqft = document.getElementById('totalSqft');
+            if (totalSqft) {
+                totalSqft.addEventListener('click', () => showToast('1,240 sqft this month'));
+            }
+            
+            const revenueCard = document.getElementById('revenueCard');
+            if (revenueCard) {
+                revenueCard.addEventListener('click', () => showToast('Revenue: ₹1,85,000'));
+            }
+            
+            const ratingCard = document.getElementById('ratingCard');
+            if (ratingCard) {
+                ratingCard.addEventListener('click', () => showToast('Rating: 4.9/5 from 248 reviews'));
+            }
+            
+            const completedCard = document.getElementById('completedCard');
+            if (completedCard) {
+                completedCard.addEventListener('click', () => showToast('156 completed projects'));
+            }
+
+            // Menu button
+            const menuBtn = document.getElementById('menuBtn');
+            if (menuBtn) {
+                menuBtn.addEventListener('click', () => showToast('Menu opened'));
+            }
+
+            // Notification button
+            const notificationBtn = document.getElementById('notificationBtn');
+            if (notificationBtn) {
+                notificationBtn.addEventListener('click', () => showToast('No new notifications'));
+            }
+        });
+    </script>
 </body>
 </html>
 ```
