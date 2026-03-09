@@ -768,5 +768,997 @@
             box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
             z-index: 9;
         }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #6b7a7c;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
-        
+        .nav-item.active {
+            color: #1e4b8b;
+        }
+
+        .nav-item.active i {
+            color: #e6b422;
+        }
+
+        .nav-item i {
+            font-size: 1.4rem;
+            margin-bottom: 3px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: white;
+            margin-top: 30px;
+            padding: 25px 16px 20px;
+            border-radius: 30px 30px 0 0;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .footer-column h4 {
+            color: #1e4b8b;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-column ul li a {
+            color: #6b7a7c;
+            text-decoration: none;
+            font-size: 0.75rem;
+            transition: 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: #e6b422;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            color: #6b7a7c;
+            font-size: 0.7rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .social-links a {
+            color: #1e4b8b;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #e6b422;
+            transform: translateY(-3px);
+        }
+
+        /* ===== TOAST MESSAGE ===== */
+        #toastMessage {
+            position: fixed;
+            bottom: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e4b8b;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            box-shadow: 0 15px 25px rgba(30, 75, 139, 0.4);
+            z-index: 99;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- ===== TOP HEADER ===== -->
+        <div class="top-header">
+            <div class="header-left">
+                <i class="fas fa-bars hamburger-icon" id="menuBtn"></i>
+            </div>
+            <div class="header-center">
+                <span class="business-name">Raj Marketing</span>
+                <span class="business-location">Mysore · Since 2012</span>
+            </div>
+            <div class="header-right">
+                <div class="notification-icon" id="notificationBtn" onclick="window.location.href='customer-login.html'">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge" id="notificationBadge">3</span>
+                </div>
+                <i class="fas fa-shield-alt admin-icon" id="adminHeaderBtn" onclick="window.location.href='admin-panel.html'"></i>
+            </div>
+        </div>
+            <!-- ===== DROPDOWN MENU ===== -->
+        <div class="dropdown-menu" id="dropdownMenu">
+            <div class="menu-header">
+                <h3>Raj Marketing</h3>
+                <p>Mosquito Nets Specialist</p>
+            </div>
+            <ul class="menu-items">
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+                <li><a href="contact.html"><i class="fas fa-phone-alt"></i> Contact Us</a></li>
+                <li><a href="products.html"><i class="fas fa-box"></i> Products</a></li>
+                <li><a href="estimate.html"><i class="fas fa-calculator"></i> Estimate</a></li>
+                <li><a href="service.html"><i class="fas fa-tools"></i> Service</a></li>
+                <li><a href="complaint.html"><i class="fas fa-exclamation-triangle"></i> Complaint</a></li>
+                <li style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px;">
+                    <a href="customer-login.html"><i class="fas fa-user"></i> Customer Login</a>
+                </li>
+                <li><a href="admin-panel.html"><i class="fas fa-shield-alt"></i> Admin Panel</a></li>
+            </ul>
+        </div>
+        <div class="menu-overlay" id="menuOverlay"></div>
+
+        <!-- ===== LIVE CUSTOMER COUNTER ===== -->
+        <div class="live-counter">
+            <div class="counter-left">
+                <i class="fas fa-circle"></i>
+                <span class="counter-text">Booked Today</span>
+            </div>
+            <span class="counter-number" id="todayBookedCount">08</span>
+        </div>
+
+        <!-- ===== MAIN PROMOTIONAL SLIDER (10 images) ===== -->
+        <div class="swiper-container main-slider swiper">
+            <div class="swiper-wrapper">
+                <!-- Slide 1 - Velcro System -->
+                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1584017911766-451b3d0e8434?w=400');">
+                    <div class="slide-content">
+                        <span class="slide-title">🦟 Premium Velcro Nets</span>
+                        <small>Easy Install · ₹60/sqft</small>
+                    </div>
+                </div>
+                <!-- Slide 2 - Frame System -->
+                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1513694203232-719a280e022f?w=400');">
+                    <div class="slide-content">
+                        <span class="slide-title">🪟 Aluminum Frame System</span>
+                        <small>5 Year Warranty · ₹180/sqft</small>
+                    </div>
+                </div>
+                <!-- Slide 3 - Pleated Nets -->
+                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400');">
+                    <div class="slide-content">
+                        <span class="slide-title">✨ Pleated Retractable Nets</span>
+                        <small>Space Saving · ₹350/sqft</small>
+                    </div>
+                </div>
+                <!-- Slide 4 - Mesh Door -->
+                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=400');">
+                    <div class="slide-content">
+                        <span class="slide-title">🚪 Magnetic Mesh Door</span>
+                        <small>Easy Access · ₹380/sqft</small>
+                    </div>
+                </div>
+                <!-- Slide 5 - Free Site Visit -->
+                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400');">
+                    <div class="slide-content">
+                        <span class="slide-title">🔧 Free Site Visit</span>
+                        <small>Expert Consultation</small>
+                    </div>
+                </div>
+                <!-- Slide 6 - Hootghalli -->
+                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=400');">
+                    <div class="slide-content">
+                        <span class="slide-title">🏭 Hootghalli Industries</span>
+                        <small>#65, Mysore · ISO Certified</small>
+                    </div>
+                </div>
+                <!-- Slide 7 - Contact -->
+                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=400');">
+                    <div class="slide-content">
+                        <span class="slide-title">📞 24/7 Customer Support</span>
+                        <small>Call: 9483037385</small>
+                    </div>
+                </div>
+                <!-- Slide 8 - Monsoon Offer -->
+                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=400');">
+                    <div class="slide-content">
+                        <span class="slide-title">🎯 Monsoon Special</span>
+                        <small>15% Off + Free Installation</small>
+                    </div>
+                </div>
+                <!-- Slide 9 - EMI -->
+                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400');">
+                    <div class="slide-content">
+                        <span class="slide-title">🧮 0% EMI Available</span>
+                        <small>No Cost EMI · Easy Pay</small>
+                    </div>
+                </div>
+                <!-- Slide 10 - Rating -->
+                <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1556740714-a8395b3bf30f?w=400');">
+                    <div class="slide-content">
+                        <span class="slide-title">⭐ 4.9 Google Rating</span>
+                        <small>500+ Happy Families</small>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+
+        <!-- ===== LIVE MOVING TEXT ADS ===== -->
+        <div class="live-notification-bar">
+            <div class="marquee-container">
+                <div class="marquee-content" id="liveMarquee">
+                    <!-- Dynamic content will be inserted by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== LIVE BUSINESS OVERVIEW ===== -->
+        <div class="business-overview">
+            <div class="overview-item">
+                <div class="overview-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="overview-label">Visitors</div>
+                <div class="overview-count" id="visitorCount">1,284</div>
+                <div class="overview-period">
+                    <span class="period-item active" onclick="updateOverviewPeriod('visitor', 'day')">Day</span>
+                    <span class="period-item" onclick="updateOverviewPeriod('visitor', 'week')">Week</span>
+                    <span class="period-item" onclick="updateOverviewPeriod('visitor', 'month')">Month</span>
+                </div>
+            </div>
+            <div class="overview-item">
+                <div class="overview-icon">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <div class="overview-label">Calls</div>
+                <div class="overview-count" id="callCount">47</div>
+                <div class="overview-period">
+                    <span class="period-item active" onclick="updateOverviewPeriod('call', 'day')">Day</span>
+                    <span class="period-item" onclick="updateOverviewPeriod('call', 'week')">Week</span>
+                    <span class="period-item" onclick="updateOverviewPeriod('call', 'month')">Month</span>
+                </div>
+            </div>
+            <div class="overview-item">
+                <div class="overview-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="overview-label">Messages</div>
+                <div class="overview-count" id="messageCount">23</div>
+                <div class="overview-period">
+                    <span class="period-item active" onclick="updateOverviewPeriod('message', 'day')">Day</span>
+                    <span class="period-item" onclick="updateOverviewPeriod('message', 'week')">Week</span>
+                    <span class="period-item" onclick="updateOverviewPeriod('message', 'month')">Month</span>
+                </div>
+            </div>
+            <div class="overview-item">
+                <div class="overview-icon">
+                    <i class="fas fa-location-dot"></i>
+                </div>
+                <div class="overview-label">Directions</div>
+                <div class="overview-count" id="directionCount">156</div>
+                <div class="overview-period">
+                    <span class="period-item active" onclick="updateOverviewPeriod('direction', 'day')">Day</span>
+                    <span class="period-item" onclick="updateOverviewPeriod('direction', 'week')">Week</span>
+                    <span class="period-item" onclick="updateOverviewPeriod('direction', 'month')">Month</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== PRIME SERVICES SECTION ===== -->
+        <div class="section-title">
+            <h3>⭐ Prime Services</h3>
+            <a href="products.html" class="view-all-link">View All</a>
+        </div>
+
+        <div class="prime-services-grid">
+            <!-- Prime Service 1 - Premium Velcro -->
+            <div class="prime-service-card">
+                <div class="prime-service-image" style="background-image: url('https://images.unsplash.com/photo-1584017911766-451b3d0e8434?w=400');">
+                    <span class="prime-service-tag">Best Seller</span>
+                </div>
+                <div class="prime-service-info">
+                    <h4>Premium Velcro</h4>
+                    <p>White/Black · 2x3 ft</p>
+                    <div class="prime-service-actions">
+                        <button class="price-check-btn" onclick="checkPrice('velcro')">Price</button>
+                        <button class="estimate-btn" onclick="estimate('velcro')">Estimate</button>
+                        <button class="order-btn" onclick="order('velcro')">Order</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Prime Service 2 - Aluminum Frame -->
+            <div class="prime-service-card">
+                <div class="prime-service-image" style="background-image: url('https://images.unsplash.com/photo-1513694203232-719a280e022f?w=400');">
+                    <span class="prime-service-tag">Premium</span>
+                </div>
+                <div class="prime-service-info">
+                    <h4>Aluminum Frame</h4>
+                    <p>Powder Coated · 3x4 ft</p>
+                    <div class="prime-service-actions">
+                        <button class="price-check-btn" onclick="checkPrice('frame')">Price</button>
+                        <button class="estimate-btn" onclick="estimate('frame')">Estimate</button>
+                        <button class="order-btn" onclick="order('frame')">Order</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Prime Service 3 - Pleated Nets -->
+            <div class="prime-service-card">
+                <div class="prime-service-image" style="background-image: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400');">
+                    <span class="prime-service-tag">New</span>
+                </div>
+                <div class="prime-service-info">
+                    <h4>Pleated Nets</h4>
+                    <p>Retractable · 4x4 ft</p>
+                    <div class="prime-service-actions">
+                        <button class="price-check-btn" onclick="checkPrice('pleated')">Price</button>
+                        <button class="estimate-btn" onclick="estimate('pleated')">Estimate</button>
+                        <button class="order-btn" onclick="order('pleated')">Order</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Prime Service 4 - Mesh Door -->
+            <div class="prime-service-card">
+                <div class="prime-service-image" style="background-image: url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=400');">
+                    <span class="prime-service-tag">Popular</span>
+                </div>
+                <div class="prime-service-info">
+                    <h4>Magnetic Door</h4>
+                    <p>3x7 ft · Pet Friendly</p>
+                    <div class="prime-service-actions">
+                        <button class="price-check-btn" onclick="checkPrice('meshdoor')">Price</button>
+                        <button class="estimate-btn" onclick="estimate('meshdoor')">Estimate</button>
+                        <button class="order-btn" onclick="order('meshdoor')">Order</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Prime Service 5 - Fiber Mesh -->
+            <div class="prime-service-card">
+                <div class="prime-service-image" style="background-image: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400');">
+                    <span class="prime-service-tag">Value</span>
+                </div>
+                <div class="prime-service-info">
+                    <h4>Fiber Mesh</h4>
+                    <p>Economy · 2x2 ft</p>
+                    <div class="prime-service-actions">
+                        <button class="price-check-btn" onclick="checkPrice('fiber')">Price</button>
+                        <button class="estimate-btn" onclick="estimate('fiber')">Estimate</button>
+                        <button class="order-btn" onclick="order('fiber')">Order</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Prime Service 6 - Sliding Net -->
+            <div class="prime-service-card">
+                <div class="prime-service-image" style="background-image: url('https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=400');">
+                    <span class="prime-service-tag">Premium</span>
+                </div>
+                <div class="prime-service-info">
+                    <h4>Sliding Net</h4>
+                    <p>Aluminum Track · 3x5 ft</p>
+                    <div class="prime-service-actions">
+                        <button class="price-check-btn" onclick="checkPrice('sliding')">Price</button>
+                        <button class="estimate-btn" onclick="estimate('sliding')">Estimate</button>
+                        <button class="order-btn" onclick="order('sliding')">Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== QUICK ACTIONS ===== -->
+        <div class="quick-actions-grid">
+            <div class="quick-action-card" onclick="window.location.href='tel:9483037385'">
+                <div class="quick-action-circle">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <span>Call</span>
+            </div>
+            <div class="quick-action-card" onclick="window.open('https://wa.me/919483037385')">
+                <div class="quick-action-circle">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <span>WhatsApp</span>
+            </div>
+            <div class="quick-action-card" onclick="window.location.href='estimate.html'">
+                <div class="quick-action-circle">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <span>Estimate</span>
+            </div>
+            <div class="quick-action-card" onclick="window.location.href='products.html'">
+                <div class="quick-action-circle">
+                    <i class="fas fa-box"></i>
+                </div>
+                <span>Products</span>
+            </div>
+            <div class="quick-action-card" onclick="window.location.href='service.html'">
+                <div class="quick-action-circle">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <span>Service</span>
+            </div>
+            <div class="quick-action-card" onclick="window.location.href='complaint.html'">
+                <div class="quick-action-circle">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <span>Complaint</span>
+            </div>
+            <div class="quick-action-card" onclick="window.location.href='about.html'">
+                <div class="quick-action-circle">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <span>About</span>
+            </div>
+            <div class="quick-action-card" onclick="window.location.href='contact.html'">
+                <div class="quick-action-circle">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <span>Contact</span>
+            </div>
+        </div>
+
+        <!-- ===== BANNER ADS SLIDER (6-8 images) ===== -->
+        <div class="swiper-container banner-ads-slider">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="banner-ad-content" style="background-image: linear-gradient(135deg, #1e4b8b, #2a6bb3);">
+                        <span>🔥 20% Off on First Order</span>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="banner-ad-content" style="background-image: linear-gradient(135deg, #e6b422, #f5c542);">
+                        <span>🎁 Free Installation This Week</span>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="banner-ad-content" style="background-image: linear-gradient(135deg, #28a745, #34ce57);">
+                        <span>💰 EMI Starting ₹999/month</span>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="banner-ad-content" style="background-image: linear-gradient(135deg, #dc3545, #ff6b6b);">
+                        <span>🚚 Free Delivery in Mysore</span>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="banner-ad-content" style="background-image: linear-gradient(135deg, #6f42c1, #9166cc);">
+                        <span>⭐ 5 Year Warranty on Frames</span>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="banner-ad-content" style="background-image: linear-gradient(135deg, #fd7e14, #ff9f4b);">
+                        <span>🔄 Free Replacement Guarantee</span>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="banner-ad-content" style="background-image: linear-gradient(135deg, #20c997, #5ce0b4);">
+                        <span>🧹 Easy Clean Mesh Available</span>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="banner-ad-content" style="background-image: linear-gradient(135deg, #17a2b8, #5dc1d9);">
+                        <span>🔧 24/7 Service Support</span>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+
+        <!-- ===== LIMITED TIME OFFERS ===== -->
+        <div class="section-title">
+            <h3>🎁 Limited Time Offers</h3>
+            <a href="offer-details.html" class="view-all-link">View All</a>
+        </div>
+
+        <div class="offers-grid">
+            <div class="offer-card">
+                <div class="offer-icon"><i class="fas fa-gift"></i></div>
+                <div class="offer-title">3+1 Free</div>
+                <div class="offer-desc">Buy 3 windows get 1 free</div>
+                <div class="offer-code">MONSOON3</div>
+                <div class="offer-validity">Valid till: 31 Mar 2026</div>
+            </div>
+            <div class="offer-card">
+                <div class="offer-icon"><i class="fas fa-percent"></i></div>
+                <div class="offer-title">5% Off</div>
+                <div class="offer-desc">On Frame System</div>
+                <div class="offer-code">FRAME5</div>
+                <div class="offer-validity">Valid till: 31 Mar 2026</div>
+            </div>
+            <div class="offer-card">
+                <div class="offer-icon"><i class="fas fa-truck"></i></div>
+                <div class="offer-title">Free Installation</div>
+                <div class="offer-desc">On orders above ₹5000</div>
+                <div class="offer-code">FREEINSTALL</div>
+                <div class="offer-validity">Valid till: 31 Mar 2026</div>
+            </div>
+            <div class="offer-card">
+                <div class="offer-icon"><i class="fas fa-rupee-sign"></i></div>
+                <div class="offer-title">₹500 Off</div>
+                <div class="offer-desc">On Pleated Nets</div>
+                <div class="offer-code">PLEAT500</div>
+                <div class="offer-validity">Valid till: 31 Mar 2026</div>
+            </div>
+        </div>
+
+        <!-- ===== MOSQUITO NET BAZAAR ===== -->
+        <div class="section-title">
+            <h3>🦟 Mosquito Net Bazaar</h3>
+            <span class="view-all-link">10+ Samples</span>
+        </div>
+
+        <div class="swiper-container bazaar-slider">
+            <div class="swiper-wrapper">
+                <!-- Sample 1 -->
+                <div class="swiper-slide">
+                    <div class="bazaar-sample-card">
+                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1584017911766-451b3d0e8434?w=300');">
+                            <span class="sample-tag">White</span>
+                        </div>
+                        <div class="sample-info">
+                            <h4>Fiber Velcro</h4>
+                            <p>₹60/sqft · 2x3 ft</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sample 2 -->
+                <div class="swiper-slide">
+                    <div class="bazaar-sample-card">
+                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1513694203232-719a280e022f?w=300');">
+                            <span class="sample-tag">Brown</span>
+                        </div>
+                        <div class="sample-info">
+                            <h4>Aluminum Frame</h4>
+                            <p>₹180/sqft · 3x4 ft</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sample 3 -->
+                <div class="swiper-slide">
+                    <div class="bazaar-sample-card">
+                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=300');">
+                            <span class="sample-tag">Black</span>
+                        </div>
+                        <div class="sample-info">
+                            <h4>Pleated Net</h4>
+                            <p>₹350/sqft · Retractable</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sample 4 -->
+                <div class="swiper-slide">
+                    <div class="bazaar-sample-card">
+                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=300');">
+                            <span class="sample-tag">White</span>
+                        </div>
+                        <div class="sample-info">
+                            <h4>Magnetic Door</h4>
+                            <p>₹380/sqft · 3x7 ft</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sample 5 -->
+                <div class="swiper-slide">
+                    <div class="bazaar-sample-card">
+                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=300');">
+                            <span class="sample-tag">Gray</span>
+                        </div>
+                        <div class="sample-info">
+                            <h4>Slider Net</h4>
+                            <p>₹420/sqft · Sliding</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sample 6 -->
+                <div class="swiper-slide">
+                    <div class="bazaar-sample-card">
+                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=300');">
+                            <span class="sample-tag">Black</span>
+                        </div>
+                        <div class="sample-info">
+                            <h4>French Door</h4>
+                            <p>₹450/sqft · Double</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sample 7 -->
+                <div class="swiper-slide">
+                    <div class="bazaar-sample-card">
+                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=300');">
+                            <span class="sample-tag">White</span>
+                        </div>
+                        <div class="sample-info">
+                            <h4>Window Mesh</h4>
+                            <p>₹55/sqft · Basic</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sample 8 -->
+                <div class="swiper-slide">
+                    <div class="bazaar-sample-card">
+                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=300');">
+                            <span class="sample-tag">Brown</span>
+                        </div>
+                        <div class="sample-info">
+                            <h4>Premium Frame</h4>
+                            <p>₹220/sqft · Thick</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sample 9 -->
+                <div class="swiper-slide">
+                    <div class="bazaar-sample-card">
+                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=300');">
+                            <span class="sample-tag">Gray</span>
+                        </div>
+                        <div class="sample-info">
+                            <h4>Roll Up Net</h4>
+                            <p>₹390/sqft · Rolling</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sample 10 -->
+                <div class="swiper-slide">
+                    <div class="bazaar-sample-card">
+                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1556740714-a8395b3bf30f?w=300');">
+                            <span class="sample-tag">Custom</span>
+                        </div>
+                        <div class="sample-info">
+                            <h4>Designer Net</h4>
+                            <p>₹500/sqft · Pattern</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination bazaar-pagination"></div>
+        </div>
+
+        <!-- ===== FOOTER ===== -->
+        <div class="footer">
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="service.html">Services</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="estimate.html">Estimate</a></li>
+                        <li><a href="complaint.html">Complaint</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="disclaimer.html">Disclaimer</a></li>
+                        <li><a href="privacy.html">Privacy</a></li>
+                        <li><a href="terms.html">Terms</a></li>
+                        <li><a href="more.html">More</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2026 Raj Marketing · All Rights Reserved</p>
+                <p style="margin-top: 5px; font-size: 0.6rem;">#65, Hootghalli Industries, Mysore</p>
+            </div>
+        </div>
+
+        <!-- ===== BOTTOM NAVIGATION ===== -->
+        <div class="bottom-nav">
+            <div class="nav-item active" id="navHome" onclick="window.location.href='index.html'">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </div>
+            <div class="nav-item" id="navSearch" onclick="window.location.href='products.html'">
+                <i class="fas fa-search"></i>
+                <span>Search</span>
+            </div>
+            <div class="nav-item" id="navAll" onclick="window.location.href='more.html'">
+                <i class="fas fa-grid-2"></i>
+                <span>All</span>
+            </div>
+            <div class="nav-item" id="navCall" onclick="window.location.href='tel:9483037385'">
+                <i class="fas fa-phone"></i>
+                <span>Call</span>
+            </div>
+            <div class="nav-item" id="navAccount" onclick="window.location.href='customer-login.html'">
+                <i class="fas fa-user"></i>
+                <span>Account</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Message -->
+    <div id="toastMessage"></div>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    
+    <!-- Firebase Configuration -->
+    <script src="js/firebase-config.js"></script>
+    
+    <!-- Main JavaScript -->
+    <script>
+        // Initialize all sliders
+        document.addEventListener('DOMContentLoaded', function() {
+            // Main slider
+            new Swiper('.main-slider', {
+                loop: true,
+                autoplay: { delay: 3000, disableOnInteraction: false },
+                pagination: { el: '.main-slider .swiper-pagination', clickable: true },
+                speed: 800,
+            });
+
+            // Banner ads slider
+            new Swiper('.banner-ads-slider', {
+                loop: true,
+                autoplay: { delay: 2500, disableOnInteraction: false },
+                pagination: { el: '.banner-ads-slider .swiper-pagination', clickable: true },
+                slidesPerView: 1,
+                spaceBetween: 10,
+            });
+
+            // Bazaar slider
+            new Swiper('.bazaar-slider', {
+                slidesPerView: 'auto',
+                spaceBetween: 15,
+                freeMode: true,
+                pagination: { el: '.bazaar-pagination', clickable: true },
+            });
+
+            // Initialize menu
+            initMenu();
+            
+            // Load live data
+            loadLiveData();
+            
+            // Start live updates
+            startLiveUpdates();
+        });
+
+        // Menu functionality
+        function initMenu() {
+            const menuBtn = document.getElementById('menuBtn');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            const menuOverlay = document.getElementById('menuOverlay');
+
+            menuBtn.addEventListener('click', function() {
+                dropdownMenu.classList.toggle('active');
+                menuOverlay.classList.toggle('active');
+            });
+
+            menuOverlay.addEventListener('click', function() {
+                dropdownMenu.classList.remove('active');
+                menuOverlay.classList.remove('active');
+            });
+        }
+
+        // Live data from Firebase
+        function loadLiveData() {
+            // Get today's bookings
+            const today = new Date().toDateString();
+            
+            db.collection('bookings').where('date', '==', today).get()
+                .then((querySnapshot) => {
+                    document.getElementById('todayBookedCount').textContent = 
+                        querySnapshot.size.toString().padStart(2, '0');
+                })
+                .catch(() => {
+                    // Random fallback 01-15
+                    document.getElementById('todayBookedCount').textContent = 
+                        Math.floor(Math.random() * 15 + 1).toString().padStart(2, '0');
+                });
+            
+            // Get overview counts
+            loadOverviewCounts();
+            
+            // Get live notifications
+            loadLiveNotifications();
+        }
+
+        function loadOverviewCounts() {
+            // Visitors
+            db.collection('visitors').get()
+                .then((snapshot) => {
+                    document.getElementById('visitorCount').textContent = snapshot.size;
+                })
+                .catch(() => {
+                    document.getElementById('visitorCount').textContent = '1,284';
+                });
+            
+            // Calls (tracked in Firebase when call button clicked)
+            db.collection('calls').get()
+                .then((snapshot) => {
+                    document.getElementById('callCount').textContent = snapshot.size;
+                })
+                .catch(() => {
+                    document.getElementById('callCount').textContent = '47';
+                });
+            
+            // Messages
+            db.collection('messages').get()
+                .then((snapshot) => {
+                    document.getElementById('messageCount').textContent = snapshot.size;
+                })
+                .catch(() => {
+                    document.getElementById('messageCount').textContent = '23';
+                });
+            
+            // Directions
+            db.collection('directions').get()
+                .then((snapshot) => {
+                    document.getElementById('directionCount').textContent = snapshot.size;
+                })
+                .catch(() => {
+                    document.getElementById('directionCount').textContent = '156';
+                });
+        }
+
+        function loadLiveNotifications() {
+            const marquee = document.getElementById('liveMarquee');
+            
+            // Get recent bookings from Firebase
+            db.collection('bookings').orderBy('timestamp', 'desc').limit(10).get()
+                .then((querySnapshot) => {
+                    let html = '';
+                    querySnapshot.forEach((doc) => {
+                        const data = doc.data();
+                        const minutesAgo = Math.floor((Date.now() - data.timestamp.toDate()) / 60000);
+                        
+                        html += `<span>
+                            <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            <strong class="customer-name">${data.name}</strong> 
+                            from <strong style="color: #e6b422;">${data.area}</strong> 
+                            booked <strong style="color: #28a745;">${data.service}</strong> 
+                            • ${minutesAgo} min ago
+                        </span>`;
+                    });
+                    
+                    if (html === '') {
+                        html = generateRandomNotifications();
+                    } else {
+                        // Duplicate for smooth animation
+                        html += html;
+                    }
+                    
+                    marquee.innerHTML = html;
+                })
+                .catch(() => {
+                    marquee.innerHTML = generateRandomNotifications();
+                });
+        }
+
+        function generateRandomNotifications() {
+            const areas = ['Vijayanagar', 'Kuvempunagar', 'Gokulam', 'Jayalakshmipuram', 'Saraswathipuram', 'Hebbal'];
+            const names = ['Suresh', 'Priya', 'Ramesh', 'Kavitha', 'Manoj', 'Anita'];
+            const services = ['Velcro System', 'Frame System', 'Pleated Nets', 'Mesh Door'];
+            
+            let html = '';
+            for (let i = 0; i < 10; i++) {
+                const name = names[Math.floor(Math.random() * names.length)];
+                const area = areas[Math.floor(Math.random() * areas.length)];
+                const service = services[Math.floor(Math.random() * services.length)];
+                const mins = Math.floor(Math.random() * 30) + 1;
+                
+                html += `<span>
+                    <i class="fas fa-circle" style="font-size: 6px;"></i>
+                    <strong class="customer-name">${name}</strong> 
+                    from <strong style="color: #e6b422;">${area}</strong> 
+                    booked <strong style="color: #28a745;">${service}</strong> 
+                    • ${mins} min ago
+                </span>`;
+            }
+            return html + html; // Duplicate for smooth animation
+        }
+
+        function startLiveUpdates() {
+            // Update every 30 seconds
+            setInterval(() => {
+                loadLiveNotifications();
+                loadOverviewCounts();
+            }, 30000);
+        }
+
+        function updateOverviewPeriod(type, period) {
+            // Update active period
+            document.querySelectorAll(`.period-item`).forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Show toast
+            showToast(`Showing ${type} stats for ${period}`);
+        }
+
+        // Price check function
+        function checkPrice(service) {
+            const prices = {
+                'velcro': '₹60/sqft',
+                'frame': '₹180/sqft',
+                'pleated': '₹350/sqft',
+                'meshdoor': '₹380/sqft',
+                'fiber': '₹55/sqft',
+                'sliding': '₹420/sqft'
+            };
+            showToast(`💰 Price: ${prices[service] || 'Contact for price'}`);
+            
+            // Track in Firebase
+            db.collection('priceChecks').add({
+                service: service,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            });
+        }
+
+        function estimate(service) {
+            window.location.href = `estimate.html?service=${service}`;
+        }
+
+        function order(service) {
+            window.location.href = `appointment.html?service=${service}`;
+        }
+
+        // Toast function
+        function showToast(text) {
+            const toast = document.getElementById('toastMessage');
+            toast.style.opacity = '1';
+            toast.innerText = text;
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 2000);
+        }
+
+        // Track call button clicks
+        document.addEventListener('DOMContentLoaded', function() {
+            const callButtons = document.querySelectorAll('[onclick*="tel:"]');
+            callButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    db.collection('calls').add({
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                        page: 'index'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+```
