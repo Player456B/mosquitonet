@@ -19,11 +19,7 @@
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     
-    <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="css/style.css">
-    
     <style>
-        /* Additional styles specific to index */
         * {
             margin: 0;
             padding: 0;
@@ -232,61 +228,88 @@
             display: block;
         }
 
-        /* ===== LIVE CUSTOMER COUNTER ===== */
-        .live-counter {
-            background: rgba(230, 180, 34, 0.15);
+        /* ===== BOOKING COUNTER ===== */
+        .booking-counter {
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
             border-radius: 30px;
-            padding: 8px 16px;
-            margin: 8px 16px;
+            padding: 12px 20px;
+            margin: 12px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border: 1px solid rgba(230, 180, 34, 0.3);
+            color: white;
+            box-shadow: 0 10px 20px rgba(30, 75, 139, 0.3);
         }
 
         .counter-left {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
         .counter-left i {
+            font-size: 1.4rem;
             color: #e6b422;
-            font-size: 1.2rem;
             animation: pulse 1.5s infinite;
         }
 
         .counter-text {
-            font-size: 0.8rem;
-            color: #1e4b8b;
+            font-size: 0.85rem;
             font-weight: 500;
         }
 
-        .counter-number {
-            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 0.9rem;
+        .counter-numbers {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
-        /* ===== MAIN SLIDER ===== */
+        .today-count, .total-count {
+            text-align: center;
+        }
+
+        .today-count .label, .total-count .label {
+            font-size: 0.65rem;
+            opacity: 0.9;
+        }
+
+        .today-count .value, .total-count .value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #e6b422;
+        }
+
+        .total-count .value {
+            color: white;
+        }
+
+        .separator {
+            width: 1px;
+            height: 30px;
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* ===== MAIN SLIDER WITH MORE SPACE ===== */
         .main-slider {
             width: 100%;
-            height: 190px;
-            margin: 12px 0 5px 0;
+            height: 200px;
+            margin: 8px 0 15px 0;
             padding: 0 12px;
         }
 
         .main-slider .swiper-slide {
             background-size: cover;
             background-position: center;
-            border-radius: 28px;
+            border-radius: 30px;
             overflow: hidden;
             position: relative;
-            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.3);
-            border: 2px solid rgba(255,255,255,0.3);
+            box-shadow: 0 20px 30px -8px rgba(0,0,0,0.4);
+            border: 3px solid white;
+            transition: transform 0.3s;
+        }
+
+        .main-slider .swiper-slide:hover {
+            transform: scale(1.02);
         }
 
         .main-slider .swiper-slide::after {
@@ -295,9 +318,14 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 60%;
+            height: 70%;
             background: linear-gradient(to top, rgba(0,20,30,0.9), transparent);
-            border-radius: 28px;
+            border-radius: 30px;
+        }
+
+        /* Increased space between slides */
+        .main-slider .swiper-slide:not(:last-child) {
+            margin-right: 15px;
         }
 
         .slide-content {
@@ -327,27 +355,27 @@
             font-weight: 500;
         }
 
-        /* ===== LIVE MOVING TEXT ADS - SLOW VERSION ===== */
-        .live-notification-bar {
+        /* ===== LIVE CUSTOMER BOOKING TICKER ===== */
+        .live-booking-ticker {
             background: white;
-            margin: 8px 16px 12px 16px;
+            margin: 5px 16px 15px 16px;
             border-radius: 50px;
             padding: 12px 0;
-            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
             border: 2px solid #1e4b8b;
             overflow: hidden;
             position: relative;
         }
 
-        .live-notification-bar::before {
-            content: '🔴 LIVE';
+        .live-booking-ticker::before {
+            content: '🔴 LIVE BOOKINGS';
             position: absolute;
             left: 10px;
             top: 50%;
             transform: translateY(-50%);
             background: #ff4444;
             color: white;
-            padding: 5px 12px;
+            padding: 5px 15px;
             border-radius: 30px;
             font-size: 11px;
             font-weight: 700;
@@ -355,49 +383,54 @@
             animation: pulse 2s infinite;
         }
 
-        .marquee-container {
+        .ticker-container {
             width: 100%;
             overflow: hidden;
             white-space: nowrap;
-            padding: 0 20px 0 80px;
+            padding: 0 20px 0 130px;
         }
 
-        .marquee-content {
+        .ticker-content {
             display: inline-block;
-            animation: marquee-slow 45s linear infinite;
+            animation: ticker-scroll 50s linear infinite;
             color: #000000;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 0.95rem;
-            letter-spacing: 0.3px;
         }
 
-        .marquee-content span {
+        .ticker-content span {
             margin-right: 45px;
             display: inline-block;
         }
 
-        .marquee-content i {
-            color: #e6b422;
-            margin-right: 10px;
+        .ticker-content i {
+            color: #ff4444;
+            margin-right: 8px;
             font-size: 0.7rem;
         }
 
-        .marquee-content strong {
-            color: #e6b422;
-            font-weight: 800;
-            background: rgba(230, 180, 34, 0.1);
-            padding: 3px 10px;
-            border-radius: 40px;
-            margin: 0 5px;
-            font-size: 0.9rem;
-        }
-
-        .marquee-content .customer-name {
+        .ticker-content .customer-name {
             color: #28a745;
             font-weight: 800;
+            background: rgba(40, 167, 69, 0.1);
+            padding: 2px 8px;
+            border-radius: 30px;
         }
 
-        @keyframes marquee-slow {
+        .ticker-content .customer-area {
+            color: #e6b422;
+            font-weight: 800;
+        }
+
+        .ticker-content .customer-service {
+            color: #1e4b8b;
+            font-weight: 800;
+            background: rgba(30, 75, 139, 0.1);
+            padding: 2px 8px;
+            border-radius: 30px;
+        }
+
+        @keyframes ticker-scroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
@@ -408,67 +441,88 @@
             100% { opacity: 1; }
         }
 
-        /* ===== LIVE BUSINESS OVERVIEW ===== */
-        .business-overview {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            margin: 16px;
-            padding: 16px;
-            background: white;
-            border-radius: 30px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        /* ===== LIVE BUSINESS OVERVIEW SLIDER ===== */
+        .overview-slider {
+            margin: 10px 16px 20px 16px;
+            padding-bottom: 30px !important;
         }
 
-        .overview-item {
+        .overview-slider .swiper-slide {
+            width: 160px;
+        }
+
+        .overview-card {
+            background: white;
+            border-radius: 25px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            border: 1px solid rgba(30, 75, 139, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .overview-card:hover {
+            transform: translateY(-5px);
         }
 
         .overview-icon {
-            width: 45px;
-            height: 45px;
-            background: rgba(30, 75, 139, 0.1);
-            border-radius: 15px;
+            width: 60px;
+            height: 60px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 8px;
+            margin-bottom: 12px;
         }
 
         .overview-icon i {
-            font-size: 1.3rem;
-            color: #1e4b8b;
+            font-size: 2rem;
         }
 
+        .overview-icon.purple { background: linear-gradient(135deg, #6f42c1, #9166cc); color: white; }
+        .overview-icon.blue { background: linear-gradient(135deg, #1e4b8b, #2a6bb3); color: white; }
+        .overview-icon.green { background: linear-gradient(135deg, #28a745, #34ce57); color: white; }
+        .overview-icon.orange { background: linear-gradient(135deg, #fd7e14, #ff9f4b); color: white; }
+        .overview-icon.red { background: linear-gradient(135deg, #dc3545, #ff6b6b); color: white; }
+        .overview-icon.teal { background: linear-gradient(135deg, #20c997, #5ce0b4); color: white; }
+
         .overview-label {
-            font-size: 0.6rem;
+            font-size: 0.8rem;
             color: #6b7a7c;
             font-weight: 500;
+            margin-bottom: 5px;
         }
 
         .overview-count {
-            font-size: 0.9rem;
-            font-weight: 700;
+            font-size: 1.6rem;
+            font-weight: 800;
             color: #1e4b8b;
+            line-height: 1;
+            margin-bottom: 8px;
         }
 
         .overview-period {
-            font-size: 0.55rem;
-            color: #e6b422;
             display: flex;
-            gap: 5px;
+            gap: 8px;
             justify-content: center;
-            margin-top: 3px;
+            width: 100%;
         }
 
-        .period-item {
+        .period-btn {
+            font-size: 0.55rem;
+            padding: 3px 8px;
+            border-radius: 20px;
+            background: #f0f5f3;
+            color: #6b7a7c;
             cursor: pointer;
-            padding: 2px 5px;
-            border-radius: 10px;
             transition: 0.3s;
+            font-weight: 600;
         }
 
-        .period-item.active {
+        .period-btn.active {
             background: #1e4b8b;
             color: white;
         }
@@ -494,74 +548,90 @@
             font-weight: 600;
         }
 
-        /* ===== PRIME SERVICES GRID ===== */
-        .prime-services-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+        /* ===== PRIME SERVICES SLIDER ===== */
+        .prime-services-slider {
             margin: 8px 16px 20px 16px;
+            padding-bottom: 30px !important;
         }
 
-        .prime-service-card {
+        .prime-services-slider .swiper-slide {
+            width: 280px;
+        }
+
+        .prime-card {
             background: white;
-            border-radius: 25px;
+            border-radius: 30px;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border: 1px solid rgba(30, 75, 139, 0.1);
+            transition: transform 0.3s;
         }
 
-        .prime-service-image {
-            height: 120px;
+        .prime-card:hover {
+            transform: scale(1.02);
+        }
+
+        .prime-image {
+            height: 160px;
             background-size: cover;
             background-position: center;
             position: relative;
         }
 
-        .prime-service-tag {
+        .prime-tag {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 15px;
+            right: 15px;
             background: linear-gradient(135deg, #e6b422, #f5c542);
             color: #1e3a3a;
-            padding: 4px 10px;
-            border-radius: 20px;
+            padding: 6px 15px;
+            border-radius: 30px;
             font-weight: 700;
-            font-size: 0.65rem;
+            font-size: 0.75rem;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
         }
 
-        .prime-service-info {
-            padding: 12px;
+        .prime-info {
+            padding: 18px;
         }
 
-        .prime-service-info h4 {
-            font-size: 0.9rem;
-            font-weight: 700;
+        .prime-info h4 {
+            font-size: 1.1rem;
+            font-weight: 800;
             color: #1e4b8b;
-            margin-bottom: 4px;
+            margin-bottom: 5px;
         }
 
-        .prime-service-info p {
-            font-size: 0.7rem;
+        .prime-desc {
+            font-size: 0.75rem;
             color: #6b7a7c;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
 
-        .prime-service-actions {
+        .prime-price {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #e6b422;
+            margin-bottom: 12px;
+        }
+
+        .prime-actions {
             display: flex;
-            gap: 8px;
+            gap: 10px;
         }
 
-        .price-check-btn, .estimate-btn, .order-btn {
+        .price-btn, .estimate-btn, .order-btn {
             flex: 1;
-            padding: 6px 0;
+            padding: 8px 0;
             border: none;
-            border-radius: 20px;
-            font-size: 0.6rem;
+            border-radius: 25px;
+            font-size: 0.7rem;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s;
         }
 
-        .price-check-btn {
+        .price-btn {
             background: rgba(30, 75, 139, 0.1);
             color: #1e4b8b;
         }
@@ -576,58 +646,77 @@
             color: white;
         }
 
+        .price-btn:hover, .estimate-btn:hover, .order-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+
         /* ===== QUICK ACTIONS GRID ===== */
         .quick-actions-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
+            gap: 15px;
             margin: 8px 16px 20px 16px;
         }
 
-        .quick-action-card {
+        .quick-item {
             text-align: center;
-        }
-
-        .quick-action-circle {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 8px;
-            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.4rem;
-            transition: 0.3s;
             cursor: pointer;
         }
 
-        .quick-action-circle:hover {
-            transform: scale(1.1);
-            background: #e6b422;
+        .quick-circle {
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 8px;
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            box-shadow: 0 10px 15px -5px rgba(0,0,0,0.2);
         }
 
-        .quick-action-card span {
-            font-size: 0.65rem;
+        .quick-circle i {
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .quick-circle:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .quick-item span {
+            font-size: 0.7rem;
             font-weight: 600;
             color: #1e4b8b;
         }
 
-        /* ===== BANNER ADS ===== */
+        /* Colorful icons */
+        .quick-circle.call { background: linear-gradient(135deg, #1e4b8b, #2a6bb3); }
+        .quick-circle.whatsapp { background: linear-gradient(135deg, #25a36b, #2ec47a); }
+        .quick-circle.estimate { background: linear-gradient(135deg, #e6b422, #f5c542); }
+        .quick-circle.products { background: linear-gradient(135deg, #dc3545, #ff6b6b); }
+        .quick-circle.service { background: linear-gradient(135deg, #6f42c1, #9166cc); }
+        .quick-circle.complaint { background: linear-gradient(135deg, #fd7e14, #ff9f4b); }
+        .quick-circle.about { background: linear-gradient(135deg, #17a2b8, #5dc1d9); }
+        .quick-circle.contact { background: linear-gradient(135deg, #20c997, #5ce0b4); }
+        .quick-circle.gallery { background: linear-gradient(135deg, #e83e8c, #ff7ab3); }
+        .quick-circle.offer { background: linear-gradient(135deg, #28a745, #34ce57); }
+
+        /* ===== BANNER ADS SLIDER ===== */
         .banner-ads-slider {
             margin: 16px;
             padding-bottom: 30px !important;
         }
 
         .banner-ads-slider .swiper-slide {
-            height: 100px;
-            border-radius: 20px;
+            height: 110px;
+            border-radius: 25px;
             overflow: hidden;
-            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
-        .banner-ad-content {
+        .banner-ad {
             width: 100%;
             height: 100%;
             background-size: cover;
@@ -637,7 +726,24 @@
             justify-content: center;
             color: white;
             font-weight: 700;
+            font-size: 1rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .banner-ad::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .banner-ad span {
+            position: relative;
+            z-index: 2;
         }
 
         /* ===== LIMITED TIME OFFERS ===== */
@@ -655,6 +761,12 @@
             color: white;
             position: relative;
             overflow: hidden;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .offer-card:hover {
+            transform: translateY(-5px);
         }
 
         .offer-card::before {
@@ -662,9 +774,9 @@
             position: absolute;
             top: -20px;
             right: -20px;
-            width: 80px;
-            height: 80px;
-            background: rgba(230, 180, 34, 0.3);
+            width: 100px;
+            height: 100px;
+            background: rgba(230, 180, 34, 0.2);
             border-radius: 50%;
         }
 
@@ -688,69 +800,186 @@
 
         .offer-code {
             background: rgba(230, 180, 34, 0.3);
-            padding: 4px 8px;
+            padding: 4px 10px;
             border-radius: 20px;
             font-size: 0.6rem;
             font-weight: 600;
             display: inline-block;
         }
 
-        .offer-validity {
-            font-size: 0.55rem;
-            margin-top: 8px;
-            opacity: 0.7;
-        }
-
-        /* ===== MOSQUITO NET BAZAAR ===== */
+        /* ===== UPGRADED MOSQUITO NET BAZAAR ===== */
         .bazaar-slider {
             margin: 8px 16px 20px 16px;
             padding-bottom: 30px !important;
         }
 
         .bazaar-slider .swiper-slide {
-            width: 160px;
+            width: 170px;
         }
 
-        .bazaar-sample-card {
+        .bazaar-card {
             background: white;
-            border-radius: 25px;
+            border-radius: 28px;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+            border: 1px solid rgba(30, 75, 139, 0.1);
+            transition: transform 0.3s;
         }
 
-        .sample-image {
-            height: 140px;
+        .bazaar-card:hover {
+            transform: scale(1.05) rotate(1deg);
+        }
+
+        .bazaar-image {
+            height: 150px;
             background-size: cover;
             background-position: center;
             position: relative;
         }
 
-        .sample-tag {
+        .bazaar-badge {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #e6b422;
+            top: 12px;
+            right: 12px;
+            background: linear-gradient(135deg, #e6b422, #f5c542);
             color: #1e3a3a;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.65rem;
-        }
-
-        .sample-info {
-            padding: 12px;
-        }
-
-        .sample-info h4 {
-            font-size: 0.9rem;
+            padding: 5px 12px;
+            border-radius: 30px;
             font-weight: 700;
-            color: #1e4b8b;
-            margin-bottom: 4px;
+            font-size: 0.7rem;
+            box-shadow: 0 5px 8px rgba(0,0,0,0.1);
         }
 
-        .sample-info p {
+        .bazaar-info {
+            padding: 15px;
+        }
+
+        .bazaar-info h4 {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #1e4b8b;
+            margin-bottom: 5px;
+        }
+
+        .bazaar-desc {
             font-size: 0.7rem;
             color: #6b7a7c;
+            margin-bottom: 8px;
+        }
+
+        .bazaar-price {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #e6b422;
+            margin-bottom: 10px;
+        }
+
+        .bazaar-features {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .feature {
+            background: #f0f5f3;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 0.55rem;
+            font-weight: 600;
+            color: #1e4b8b;
+        }
+
+        .bazaar-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .view-btn, .buy-btn {
+            flex: 1;
+            padding: 6px 0;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .view-btn {
+            background: rgba(30, 75, 139, 0.1);
+            color: #1e4b8b;
+        }
+
+        .buy-btn {
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
+            color: white;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: white;
+            margin-top: 30px;
+            padding: 30px 20px 20px;
+            border-radius: 30px 30px 0 0;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .footer-col h4 {
+            color: #1e4b8b;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-col ul li a {
+            color: #6b7a7c;
+            text-decoration: none;
+            font-size: 0.7rem;
+            transition: 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #e6b422;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            color: #6b7a7c;
+            font-size: 0.7rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            color: #1e4b8b;
+            font-size: 1.3rem;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #e6b422;
+            transform: translateY(-3px);
         }
 
         /* ===== BOTTOM NAVIGATION ===== */
@@ -759,15 +988,17 @@
             bottom: 0;
             max-width: 390px;
             width: 100%;
-            background: white;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
             display: flex;
             justify-content: space-around;
-            padding: 12px 10px 18px 10px;
+            padding: 12px 10px 18px;
             border-top: 1px solid rgba(0,0,0,0.05);
             border-radius: 30px 30px 0 0;
             box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
             z-index: 9;
         }
+
         .nav-item {
             display: flex;
             flex-direction: column;
@@ -792,73 +1023,6 @@
             margin-bottom: 3px;
         }
 
-        /* ===== FOOTER ===== */
-        .footer {
-            background: white;
-            margin-top: 30px;
-            padding: 25px 16px 20px;
-            border-radius: 30px 30px 0 0;
-        }
-
-        .footer-links {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .footer-column h4 {
-            color: #1e4b8b;
-            font-size: 0.9rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .footer-column ul {
-            list-style: none;
-        }
-
-        .footer-column ul li {
-            margin-bottom: 8px;
-        }
-
-        .footer-column ul li a {
-            color: #6b7a7c;
-            text-decoration: none;
-            font-size: 0.75rem;
-            transition: 0.3s;
-        }
-
-        .footer-column ul li a:hover {
-            color: #e6b422;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(0,0,0,0.05);
-            color: #6b7a7c;
-            font-size: 0.7rem;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 15px 0;
-        }
-
-        .social-links a {
-            color: #1e4b8b;
-            font-size: 1.2rem;
-            transition: 0.3s;
-        }
-
-        .social-links a:hover {
-            color: #e6b422;
-            transform: translateY(-3px);
-        }
-
         /* ===== TOAST MESSAGE ===== */
         #toastMessage {
             position: fixed;
@@ -876,6 +1040,40 @@
             opacity: 0;
             transition: opacity 0.3s;
             pointer-events: none;
+        }
+
+        /* ===== FUTURE FEATURES PLACEHOLDER ===== */
+        .future-features {
+            margin: 20px 16px;
+            padding: 20px;
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
+            border-radius: 30px;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .future-features:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(30, 75, 139, 0.4);
+        }
+
+        .future-features i {
+            font-size: 2rem;
+            color: #e6b422;
+            margin-bottom: 10px;
+        }
+
+        .future-features h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .future-features p {
+            font-size: 0.8rem;
+            opacity: 0.9;
         }
     </style>
 </head>
@@ -898,7 +1096,8 @@
                 <i class="fas fa-shield-alt admin-icon" id="adminHeaderBtn" onclick="window.location.href='admin-panel.html'"></i>
             </div>
         </div>
-            <!-- ===== DROPDOWN MENU ===== -->
+
+        <!-- ===== DROPDOWN MENU ===== -->
         <div class="dropdown-menu" id="dropdownMenu">
             <div class="menu-header">
                 <h3>Raj Marketing</h3>
@@ -919,82 +1118,92 @@
         </div>
         <div class="menu-overlay" id="menuOverlay"></div>
 
-        <!-- ===== LIVE CUSTOMER COUNTER ===== -->
-        <div class="live-counter">
+        <!-- ===== BOOKING COUNTER (Today / Total) ===== -->
+        <div class="booking-counter">
             <div class="counter-left">
-                <i class="fas fa-circle"></i>
-                <span class="counter-text">Booked Today</span>
+                <i class="fas fa-calendar-check"></i>
+                <span class="counter-text">Bookings</span>
             </div>
-            <span class="counter-number" id="todayBookedCount">08</span>
+            <div class="counter-numbers">
+                <div class="today-count">
+                    <div class="label">Today</div>
+                    <div class="value" id="todayBookings">08</div>
+                </div>
+                <div class="separator"></div>
+                <div class="total-count">
+                    <div class="label">Total</div>
+                    <div class="value" id="totalBookings">1,247</div>
+                </div>
+            </div>
         </div>
 
-        <!-- ===== MAIN PROMOTIONAL SLIDER (10 images) ===== -->
+        <!-- ===== MAIN PROMOTIONAL SLIDER (with more space) ===== -->
         <div class="swiper-container main-slider swiper">
             <div class="swiper-wrapper">
-                <!-- Slide 1 - Velcro System -->
+                <!-- Slide 1 -->
                 <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1584017911766-451b3d0e8434?w=400');">
                     <div class="slide-content">
                         <span class="slide-title">🦟 Premium Velcro Nets</span>
                         <small>Easy Install · ₹60/sqft</small>
                     </div>
                 </div>
-                <!-- Slide 2 - Frame System -->
+                <!-- Slide 2 -->
                 <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1513694203232-719a280e022f?w=400');">
                     <div class="slide-content">
                         <span class="slide-title">🪟 Aluminum Frame System</span>
                         <small>5 Year Warranty · ₹180/sqft</small>
                     </div>
                 </div>
-                <!-- Slide 3 - Pleated Nets -->
+                <!-- Slide 3 -->
                 <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400');">
                     <div class="slide-content">
                         <span class="slide-title">✨ Pleated Retractable Nets</span>
                         <small>Space Saving · ₹350/sqft</small>
                     </div>
                 </div>
-                <!-- Slide 4 - Mesh Door -->
+                <!-- Slide 4 -->
                 <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=400');">
                     <div class="slide-content">
                         <span class="slide-title">🚪 Magnetic Mesh Door</span>
                         <small>Easy Access · ₹380/sqft</small>
                     </div>
                 </div>
-                <!-- Slide 5 - Free Site Visit -->
+                <!-- Slide 5 -->
                 <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400');">
                     <div class="slide-content">
                         <span class="slide-title">🔧 Free Site Visit</span>
                         <small>Expert Consultation</small>
                     </div>
                 </div>
-                <!-- Slide 6 - Hootghalli -->
+                <!-- Slide 6 -->
                 <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=400');">
                     <div class="slide-content">
                         <span class="slide-title">🏭 Hootghalli Industries</span>
                         <small>#65, Mysore · ISO Certified</small>
                     </div>
                 </div>
-                <!-- Slide 7 - Contact -->
+                <!-- Slide 7 -->
                 <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=400');">
                     <div class="slide-content">
                         <span class="slide-title">📞 24/7 Customer Support</span>
                         <small>Call: 9483037385</small>
                     </div>
                 </div>
-                <!-- Slide 8 - Monsoon Offer -->
+                <!-- Slide 8 -->
                 <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=400');">
                     <div class="slide-content">
                         <span class="slide-title">🎯 Monsoon Special</span>
                         <small>15% Off + Free Installation</small>
                     </div>
                 </div>
-                <!-- Slide 9 - EMI -->
+                <!-- Slide 9 -->
                 <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400');">
                     <div class="slide-content">
                         <span class="slide-title">🧮 0% EMI Available</span>
                         <small>No Cost EMI · Easy Pay</small>
                     </div>
                 </div>
-                <!-- Slide 10 - Rating -->
+                <!-- Slide 10 -->
                 <div class="swiper-slide" style="background-image: url('https://images.unsplash.com/photo-1556740714-a8395b3bf30f?w=400');">
                     <div class="slide-content">
                         <span class="slide-title">⭐ 4.9 Google Rating</span>
@@ -1005,258 +1214,348 @@
             <div class="swiper-pagination"></div>
         </div>
 
-        <!-- ===== LIVE MOVING TEXT ADS ===== -->
-        <div class="live-notification-bar">
-            <div class="marquee-container">
-                <div class="marquee-content" id="liveMarquee">
-                    <!-- Dynamic content will be inserted by JavaScript -->
+        <!-- ===== LIVE CUSTOMER BOOKING TICKER (Updates Immediately) ===== -->
+        <div class="live-booking-ticker">
+            <div class="ticker-container">
+                <div class="ticker-content" id="liveTicker">
+                    <!-- Dynamic content from Firebase -->
                 </div>
             </div>
         </div>
 
-        <!-- ===== LIVE BUSINESS OVERVIEW ===== -->
-        <div class="business-overview">
-            <div class="overview-item">
-                <div class="overview-icon">
-                    <i class="fas fa-users"></i>
+        <!-- ===== LIVE BUSINESS OVERVIEW SLIDER ===== -->
+        <div class="swiper-container overview-slider">
+            <div class="swiper-wrapper">
+                <!-- Visitors Card -->
+                <div class="swiper-slide">
+                    <div class="overview-card">
+                        <div class="overview-icon purple">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="overview-label">Visitors</div>
+                        <div class="overview-count" id="visitorCount">1,284</div>
+                        <div class="overview-period">
+                            <span class="period-btn active" onclick="updatePeriod('visitor', 'day')">Day</span>
+                            <span class="period-btn" onclick="updatePeriod('visitor', 'week')">Week</span>
+                            <span class="period-btn" onclick="updatePeriod('visitor', 'month')">Month</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="overview-label">Visitors</div>
-                <div class="overview-count" id="visitorCount">1,284</div>
-                <div class="overview-period">
-                    <span class="period-item active" onclick="updateOverviewPeriod('visitor', 'day')">Day</span>
-                    <span class="period-item" onclick="updateOverviewPeriod('visitor', 'week')">Week</span>
-                    <span class="period-item" onclick="updateOverviewPeriod('visitor', 'month')">Month</span>
+                <!-- Calls Card -->
+                <div class="swiper-slide">
+                    <div class="overview-card">
+                        <div class="overview-icon blue">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="overview-label">Calls</div>
+                        <div class="overview-count" id="callCount">47</div>
+                        <div class="overview-period">
+                            <span class="period-btn active" onclick="updatePeriod('call', 'day')">Day</span>
+                            <span class="period-btn" onclick="updatePeriod('call', 'week')">Week</span>
+                            <span class="period-btn" onclick="updatePeriod('call', 'month')">Month</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Messages Card -->
+                <div class="swiper-slide">
+                    <div class="overview-card">
+                        <div class="overview-icon green">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="overview-label">Messages</div>
+                        <div class="overview-count" id="messageCount">23</div>
+                        <div class="overview-period">
+                            <span class="period-btn active" onclick="updatePeriod('message', 'day')">Day</span>
+                            <span class="period-btn" onclick="updatePeriod('message', 'week')">Week</span>
+                            <span class="period-btn" onclick="updatePeriod('message', 'month')">Month</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Directions Card -->
+                <div class="swiper-slide">
+                    <div class="overview-card">
+                        <div class="overview-icon orange">
+                            <i class="fas fa-location-dot"></i>
+                        </div>
+                        <div class="overview-label">Directions</div>
+                        <div class="overview-count" id="directionCount">156</div>
+                        <div class="overview-period">
+                            <span class="period-btn active" onclick="updatePeriod('direction', 'day')">Day</span>
+                            <span class="period-btn" onclick="updatePeriod('direction', 'week')">Week</span>
+                            <span class="period-btn" onclick="updatePeriod('direction', 'month')">Month</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- WhatsApp Card (New) -->
+                <div class="swiper-slide">
+                    <div class="overview-card">
+                        <div class="overview-icon green">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="overview-label">WhatsApp</div>
+                        <div class="overview-count" id="whatsappCount">89</div>
+                        <div class="overview-period">
+                            <span class="period-btn active">Day</span>
+                            <span class="period-btn">Week</span>
+                            <span class="period-btn">Month</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Bookings Card (New) -->
+                <div class="swiper-slide">
+                    <div class="overview-card">
+                        <div class="overview-icon teal">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="overview-label">Bookings</div>
+                        <div class="overview-count" id="bookingCount">1,247</div>
+                        <div class="overview-period">
+                            <span class="period-btn active">Day</span>
+                            <span class="period-btn">Week</span>
+                            <span class="period-btn">Month</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="overview-item">
-                <div class="overview-icon">
-                    <i class="fas fa-phone-alt"></i>
-                </div>
-                <div class="overview-label">Calls</div>
-                <div class="overview-count" id="callCount">47</div>
-                <div class="overview-period">
-                    <span class="period-item active" onclick="updateOverviewPeriod('call', 'day')">Day</span>
-                    <span class="period-item" onclick="updateOverviewPeriod('call', 'week')">Week</span>
-                    <span class="period-item" onclick="updateOverviewPeriod('call', 'month')">Month</span>
-                </div>
-            </div>
-            <div class="overview-item">
-                <div class="overview-icon">
-                    <i class="fas fa-envelope"></i>
-                </div>
-                <div class="overview-label">Messages</div>
-                <div class="overview-count" id="messageCount">23</div>
-                <div class="overview-period">
-                    <span class="period-item active" onclick="updateOverviewPeriod('message', 'day')">Day</span>
-                    <span class="period-item" onclick="updateOverviewPeriod('message', 'week')">Week</span>
-                    <span class="period-item" onclick="updateOverviewPeriod('message', 'month')">Month</span>
-                </div>
-            </div>
-            <div class="overview-item">
-                <div class="overview-icon">
-                    <i class="fas fa-location-dot"></i>
-                </div>
-                <div class="overview-label">Directions</div>
-                <div class="overview-count" id="directionCount">156</div>
-                <div class="overview-period">
-                    <span class="period-item active" onclick="updateOverviewPeriod('direction', 'day')">Day</span>
-                    <span class="period-item" onclick="updateOverviewPeriod('direction', 'week')">Week</span>
-                    <span class="period-item" onclick="updateOverviewPeriod('direction', 'month')">Month</span>
-                </div>
-            </div>
+            <div class="swiper-pagination overview-pagination"></div>
         </div>
 
-        <!-- ===== PRIME SERVICES SECTION ===== -->
+        <!-- ===== PRIME SERVICES SLIDER ===== -->
         <div class="section-title">
             <h3>⭐ Prime Services</h3>
             <a href="products.html" class="view-all-link">View All</a>
         </div>
 
-        <div class="prime-services-grid">
-            <!-- Prime Service 1 - Premium Velcro -->
-            <div class="prime-service-card">
-                <div class="prime-service-image" style="background-image: url('https://images.unsplash.com/photo-1584017911766-451b3d0e8434?w=400');">
-                    <span class="prime-service-tag">Best Seller</span>
+        <div class="swiper-container prime-services-slider">
+            <div class="swiper-wrapper">
+                <!-- Service 1 -->
+                <div class="swiper-slide">
+                    <div class="prime-card">
+                        <div class="prime-image" style="background-image: url('https://images.unsplash.com/photo-1584017911766-451b3d0e8434?w=400');">
+                            <span class="prime-tag">Best Seller</span>
+                        </div>
+                        <div class="prime-info">
+                            <h4>Premium Velcro System</h4>
+                            <div class="prime-desc">Easy installation, removable, washable nets with premium fiber mesh</div>
+                            <div class="prime-price">₹60/sqft</div>
+                            <div class="prime-actions">
+                                <button class="price-btn" onclick="checkPrice('velcro')">Price</button>
+                                <button class="estimate-btn" onclick="estimate('velcro')">Estimate</button>
+                                <button class="order-btn" onclick="order('velcro')">Order</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="prime-service-info">
-                    <h4>Premium Velcro</h4>
-                    <p>White/Black · 2x3 ft</p>
-                    <div class="prime-service-actions">
-                        <button class="price-check-btn" onclick="checkPrice('velcro')">Price</button>
-                        <button class="estimate-btn" onclick="estimate('velcro')">Estimate</button>
-                        <button class="order-btn" onclick="order('velcro')">Order</button>
+                <!-- Service 2 -->
+                <div class="swiper-slide">
+                    <div class="prime-card">
+                        <div class="prime-image" style="background-image: url('https://images.unsplash.com/photo-1513694203232-719a280e022f?w=400');">
+                            <span class="prime-tag">Premium</span>
+                        </div>
+                        <div class="prime-info">
+                            <h4>Aluminum Frame System</h4>
+                            <div class="prime-desc">Powder coated aluminum frame, 5 year warranty, rust-proof</div>
+                            <div class="prime-price">₹180/sqft</div>
+                            <div class="prime-actions">
+                                <button class="price-btn" onclick="checkPrice('frame')">Price</button>
+                                <button class="estimate-btn" onclick="estimate('frame')">Estimate</button>
+                                <button class="order-btn" onclick="order('frame')">Order</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 3 -->
+                <div class="swiper-slide">
+                    <div class="prime-card">
+                        <div class="prime-image" style="background-image: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400');">
+                            <span class="prime-tag">New</span>
+                        </div>
+                        <div class="prime-info">
+                            <h4>Pleated Retractable Nets</h4>
+                            <div class="prime-desc">Space-saving design, retractable, premium look for modern homes</div>
+                            <div class="prime-price">₹350/sqft</div>
+                            <div class="prime-actions">
+                                <button class="price-btn" onclick="checkPrice('pleated')">Price</button>
+                                <button class="estimate-btn" onclick="estimate('pleated')">Estimate</button>
+                                <button class="order-btn" onclick="order('pleated')">Order</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 4 -->
+                <div class="swiper-slide">
+                    <div class="prime-card">
+                        <div class="prime-image" style="background-image: url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=400');">
+                            <span class="prime-tag">Popular</span>
+                        </div>
+                        <div class="prime-info">
+                            <h4>Magnetic Mesh Door</h4>
+                            <div class="prime-desc">Magnetic closure, easy access, pet-friendly, comes with frame</div>
+                            <div class="prime-price">₹380/sqft</div>
+                            <div class="prime-actions">
+                                <button class="price-btn" onclick="checkPrice('meshdoor')">Price</button>
+                                <button class="estimate-btn" onclick="estimate('meshdoor')">Estimate</button>
+                                <button class="order-btn" onclick="order('meshdoor')">Order</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 5 -->
+                <div class="swiper-slide">
+                    <div class="prime-card">
+                        <div class="prime-image" style="background-image: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400');">
+                            <span class="prime-tag">Value</span>
+                        </div>
+                        <div class="prime-info">
+                            <h4>Fiber Mesh Economy</h4>
+                            <div class="prime-desc">Budget-friendly option, basic protection, easy to install</div>
+                            <div class="prime-price">₹55/sqft</div>
+                            <div class="prime-actions">
+                                <button class="price-btn" onclick="checkPrice('fiber')">Price</button>
+                                <button class="estimate-btn" onclick="estimate('fiber')">Estimate</button>
+                                <button class="order-btn" onclick="order('fiber')">Order</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 6 -->
+                <div class="swiper-slide">
+                    <div class="prime-card">
+                        <div class="prime-image" style="background-image: url('https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=400');">
+                            <span class="prime-tag">Premium</span>
+                        </div>
+                        <div class="prime-info">
+                            <h4>Sliding Net System</h4>
+                            <div class="prime-desc">Smooth sliding mechanism, aluminum track, heavy-duty mesh</div>
+                            <div class="prime-price">₹420/sqft</div>
+                            <div class="prime-actions">
+                                <button class="price-btn" onclick="checkPrice('sliding')">Price</button>
+                                <button class="estimate-btn" onclick="estimate('sliding')">Estimate</button>
+                                <button class="order-btn" onclick="order('sliding')">Order</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- Prime Service 2 - Aluminum Frame -->
-            <div class="prime-service-card">
-                <div class="prime-service-image" style="background-image: url('https://images.unsplash.com/photo-1513694203232-719a280e022f?w=400');">
-                    <span class="prime-service-tag">Premium</span>
-                </div>
-                <div class="prime-service-info">
-                    <h4>Aluminum Frame</h4>
-                    <p>Powder Coated · 3x4 ft</p>
-                    <div class="prime-service-actions">
-                        <button class="price-check-btn" onclick="checkPrice('frame')">Price</button>
-                        <button class="estimate-btn" onclick="estimate('frame')">Estimate</button>
-                        <button class="order-btn" onclick="order('frame')">Order</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Prime Service 3 - Pleated Nets -->
-            <div class="prime-service-card">
-                <div class="prime-service-image" style="background-image: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400');">
-                    <span class="prime-service-tag">New</span>
-                </div>
-                <div class="prime-service-info">
-                    <h4>Pleated Nets</h4>
-                    <p>Retractable · 4x4 ft</p>
-                    <div class="prime-service-actions">
-                        <button class="price-check-btn" onclick="checkPrice('pleated')">Price</button>
-                        <button class="estimate-btn" onclick="estimate('pleated')">Estimate</button>
-                        <button class="order-btn" onclick="order('pleated')">Order</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Prime Service 4 - Mesh Door -->
-            <div class="prime-service-card">
-                <div class="prime-service-image" style="background-image: url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=400');">
-                    <span class="prime-service-tag">Popular</span>
-                </div>
-                <div class="prime-service-info">
-                    <h4>Magnetic Door</h4>
-                    <p>3x7 ft · Pet Friendly</p>
-                    <div class="prime-service-actions">
-                        <button class="price-check-btn" onclick="checkPrice('meshdoor')">Price</button>
-                        <button class="estimate-btn" onclick="estimate('meshdoor')">Estimate</button>
-                        <button class="order-btn" onclick="order('meshdoor')">Order</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Prime Service 5 - Fiber Mesh -->
-            <div class="prime-service-card">
-                <div class="prime-service-image" style="background-image: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400');">
-                    <span class="prime-service-tag">Value</span>
-                </div>
-                <div class="prime-service-info">
-                    <h4>Fiber Mesh</h4>
-                    <p>Economy · 2x2 ft</p>
-                    <div class="prime-service-actions">
-                        <button class="price-check-btn" onclick="checkPrice('fiber')">Price</button>
-                        <button class="estimate-btn" onclick="estimate('fiber')">Estimate</button>
-                        <button class="order-btn" onclick="order('fiber')">Order</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Prime Service 6 - Sliding Net -->
-            <div class="prime-service-card">
-                <div class="prime-service-image" style="background-image: url('https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=400');">
-                    <span class="prime-service-tag">Premium</span>
-                </div>
-                <div class="prime-service-info">
-                    <h4>Sliding Net</h4>
-                    <p>Aluminum Track · 3x5 ft</p>
-                    <div class="prime-service-actions">
-                        <button class="price-check-btn" onclick="checkPrice('sliding')">Price</button>
-                        <button class="estimate-btn" onclick="estimate('sliding')">Estimate</button>
-                        <button class="order-btn" onclick="order('sliding')">Order</button>
-                    </div>
-                </div>
-            </div>
+            <div class="swiper-pagination prime-pagination"></div>
         </div>
 
-        <!-- ===== QUICK ACTIONS ===== -->
+        <!-- ===== QUICK ACTIONS GRID (Colorful Icons) ===== -->
         <div class="quick-actions-grid">
-            <div class="quick-action-card" onclick="window.location.href='tel:9483037385'">
-                <div class="quick-action-circle">
+            <div class="quick-item" onclick="window.location.href='tel:9483037385'">
+                <div class="quick-circle call">
                     <i class="fas fa-phone-alt"></i>
                 </div>
                 <span>Call</span>
             </div>
-            <div class="quick-action-card" onclick="window.open('https://wa.me/919483037385')">
-                <div class="quick-action-circle">
+            <div class="quick-item" onclick="window.open('https://wa.me/919483037385')">
+                <div class="quick-circle whatsapp">
                     <i class="fab fa-whatsapp"></i>
                 </div>
                 <span>WhatsApp</span>
             </div>
-            <div class="quick-action-card" onclick="window.location.href='estimate.html'">
-                <div class="quick-action-circle">
+            <div class="quick-item" onclick="window.location.href='estimate.html'">
+                <div class="quick-circle estimate">
                     <i class="fas fa-calculator"></i>
                 </div>
                 <span>Estimate</span>
             </div>
-            <div class="quick-action-card" onclick="window.location.href='products.html'">
-                <div class="quick-action-circle">
+            <div class="quick-item" onclick="window.location.href='products.html'">
+                <div class="quick-circle products">
                     <i class="fas fa-box"></i>
                 </div>
                 <span>Products</span>
             </div>
-            <div class="quick-action-card" onclick="window.location.href='service.html'">
-                <div class="quick-action-circle">
+            <div class="quick-item" onclick="window.location.href='service.html'">
+                <div class="quick-circle service">
                     <i class="fas fa-tools"></i>
                 </div>
                 <span>Service</span>
             </div>
-            <div class="quick-action-card" onclick="window.location.href='complaint.html'">
-                <div class="quick-action-circle">
+            <div class="quick-item" onclick="window.location.href='complaint.html'">
+                <div class="quick-circle complaint">
                     <i class="fas fa-exclamation-triangle"></i>
                 </div>
                 <span>Complaint</span>
             </div>
-            <div class="quick-action-card" onclick="window.location.href='about.html'">
-                <div class="quick-action-circle">
+            <div class="quick-item" onclick="window.location.href='about.html'">
+                <div class="quick-circle about">
                     <i class="fas fa-info-circle"></i>
                 </div>
                 <span>About</span>
             </div>
-            <div class="quick-action-card" onclick="window.location.href='contact.html'">
-                <div class="quick-action-circle">
+            <div class="quick-item" onclick="window.location.href='contact.html'">
+                <div class="quick-circle contact">
                     <i class="fas fa-phone-alt"></i>
                 </div>
                 <span>Contact</span>
             </div>
+            <div class="quick-item" onclick="window.location.href='gallery.html'">
+                <div class="quick-circle gallery">
+                    <i class="fas fa-images"></i>
+                </div>
+                <span>Gallery</span>
+            </div>
+            <div class="quick-item" onclick="window.location.href='offer-details.html'">
+                <div class="quick-circle offer">
+                    <i class="fas fa-tags"></i>
+                </div>
+                <span>Offers</span>
+            </div>
+            <div class="quick-item" onclick="window.location.href='estimate.html'">
+                <div class="quick-circle" style="background: linear-gradient(135deg, #e83e8c, #ff7ab3);">
+                    <i class="fas fa-rupee-sign"></i>
+                </div>
+                <span>Price</span>
+            </div>
+            <div class="quick-item" onclick="window.location.href='booking.html'">
+                <div class="quick-circle" style="background: linear-gradient(135deg, #6f42c1, #9166cc);">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <span>Book</span>
+            </div>
         </div>
 
-        <!-- ===== BANNER ADS SLIDER (6-8 images) ===== -->
+        <!-- ===== BANNER ADS SLIDER (8 Ads) ===== -->
         <div class="swiper-container banner-ads-slider">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <div class="banner-ad-content" style="background-image: linear-gradient(135deg, #1e4b8b, #2a6bb3);">
+                    <div class="banner-ad" style="background-image: linear-gradient(135deg, #1e4b8b, #2a6bb3);">
                         <span>🔥 20% Off on First Order</span>
                     </div>
                 </div>
                 <div class="swiper-slide">
-                    <div class="banner-ad-content" style="background-image: linear-gradient(135deg, #e6b422, #f5c542);">
+                    <div class="banner-ad" style="background-image: linear-gradient(135deg, #e6b422, #f5c542);">
                         <span>🎁 Free Installation This Week</span>
                     </div>
                 </div>
                 <div class="swiper-slide">
-                    <div class="banner-ad-content" style="background-image: linear-gradient(135deg, #28a745, #34ce57);">
+                    <div class="banner-ad" style="background-image: linear-gradient(135deg, #28a745, #34ce57);">
                         <span>💰 EMI Starting ₹999/month</span>
                     </div>
                 </div>
                 <div class="swiper-slide">
-                    <div class="banner-ad-content" style="background-image: linear-gradient(135deg, #dc3545, #ff6b6b);">
+                    <div class="banner-ad" style="background-image: linear-gradient(135deg, #dc3545, #ff6b6b);">
                         <span>🚚 Free Delivery in Mysore</span>
                     </div>
                 </div>
                 <div class="swiper-slide">
-                    <div class="banner-ad-content" style="background-image: linear-gradient(135deg, #6f42c1, #9166cc);">
+                    <div class="banner-ad" style="background-image: linear-gradient(135deg, #6f42c1, #9166cc);">
                         <span>⭐ 5 Year Warranty on Frames</span>
                     </div>
                 </div>
                 <div class="swiper-slide">
-                    <div class="banner-ad-content" style="background-image: linear-gradient(135deg, #fd7e14, #ff9f4b);">
+                    <div class="banner-ad" style="background-image: linear-gradient(135deg, #fd7e14, #ff9f4b);">
                         <span>🔄 Free Replacement Guarantee</span>
                     </div>
                 </div>
                 <div class="swiper-slide">
-                    <div class="banner-ad-content" style="background-image: linear-gradient(135deg, #20c997, #5ce0b4);">
+                    <div class="banner-ad" style="background-image: linear-gradient(135deg, #20c997, #5ce0b4);">
                         <span>🧹 Easy Clean Mesh Available</span>
                     </div>
                 </div>
                 <div class="swiper-slide">
-                    <div class="banner-ad-content" style="background-image: linear-gradient(135deg, #17a2b8, #5dc1d9);">
+                    <div class="banner-ad" style="background-image: linear-gradient(135deg, #17a2b8, #5dc1d9);">
                         <span>🔧 24/7 Service Support</span>
                     </div>
                 </div>
@@ -1271,161 +1570,247 @@
         </div>
 
         <div class="offers-grid">
-            <div class="offer-card">
+            <div class="offer-card" onclick="window.location.href='offer-details.html?id=1'">
                 <div class="offer-icon"><i class="fas fa-gift"></i></div>
                 <div class="offer-title">3+1 Free</div>
                 <div class="offer-desc">Buy 3 windows get 1 free</div>
                 <div class="offer-code">MONSOON3</div>
-                <div class="offer-validity">Valid till: 31 Mar 2026</div>
             </div>
-            <div class="offer-card">
+            <div class="offer-card" onclick="window.location.href='offer-details.html?id=2'">
                 <div class="offer-icon"><i class="fas fa-percent"></i></div>
                 <div class="offer-title">5% Off</div>
                 <div class="offer-desc">On Frame System</div>
                 <div class="offer-code">FRAME5</div>
-                <div class="offer-validity">Valid till: 31 Mar 2026</div>
             </div>
-            <div class="offer-card">
+            <div class="offer-card" onclick="window.location.href='offer-details.html?id=3'">
                 <div class="offer-icon"><i class="fas fa-truck"></i></div>
                 <div class="offer-title">Free Installation</div>
                 <div class="offer-desc">On orders above ₹5000</div>
                 <div class="offer-code">FREEINSTALL</div>
-                <div class="offer-validity">Valid till: 31 Mar 2026</div>
             </div>
-            <div class="offer-card">
+            <div class="offer-card" onclick="window.location.href='offer-details.html?id=4'">
                 <div class="offer-icon"><i class="fas fa-rupee-sign"></i></div>
                 <div class="offer-title">₹500 Off</div>
                 <div class="offer-desc">On Pleated Nets</div>
                 <div class="offer-code">PLEAT500</div>
-                <div class="offer-validity">Valid till: 31 Mar 2026</div>
             </div>
         </div>
 
-        <!-- ===== MOSQUITO NET BAZAAR ===== -->
+        <!-- ===== UPGRADED MOSQUITO NET BAZAAR ===== -->
         <div class="section-title">
             <h3>🦟 Mosquito Net Bazaar</h3>
-            <span class="view-all-link">10+ Samples</span>
+            <span class="view-all-link">10+ Premium Samples</span>
         </div>
 
         <div class="swiper-container bazaar-slider">
             <div class="swiper-wrapper">
                 <!-- Sample 1 -->
                 <div class="swiper-slide">
-                    <div class="bazaar-sample-card">
-                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1584017911766-451b3d0e8434?w=300');">
-                            <span class="sample-tag">White</span>
+                    <div class="bazaar-card">
+                        <div class="bazaar-image" style="background-image: url('https://images.unsplash.com/photo-1584017911766-451b3d0e8434?w=300');">
+                            <span class="bazaar-badge">New</span>
                         </div>
-                        <div class="sample-info">
+                        <div class="bazaar-info">
                             <h4>Fiber Velcro</h4>
-                            <p>₹60/sqft · 2x3 ft</p>
+                            <div class="bazaar-desc">White/Black · 2x3 ft</div>
+                            <div class="bazaar-price">₹60/sqft</div>
+                            <div class="bazaar-features">
+                                <span class="feature">Washable</span>
+                                <span class="feature">Removable</span>
+                            </div>
+                            <div class="bazaar-actions">
+                                <button class="view-btn" onclick="viewProduct('velcro')">View</button>
+                                <button class="buy-btn" onclick="buyNow('velcro')">Buy</button>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <!-- Sample 2 -->
                 <div class="swiper-slide">
-                    <div class="bazaar-sample-card">
-                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1513694203232-719a280e022f?w=300');">
-                            <span class="sample-tag">Brown</span>
+                    <div class="bazaar-card">
+                        <div class="bazaar-image" style="background-image: url('https://images.unsplash.com/photo-1513694203232-719a280e022f?w=300');">
+                            <span class="bazaar-badge">Premium</span>
                         </div>
-                        <div class="sample-info">
+                        <div class="bazaar-info">
                             <h4>Aluminum Frame</h4>
-                            <p>₹180/sqft · 3x4 ft</p>
+                            <div class="bazaar-desc">Brown/White · 3x4 ft</div>
+                            <div class="bazaar-price">₹180/sqft</div>
+                            <div class="bazaar-features">
+                                <span class="feature">5 Yr Warranty</span>
+                                <span class="feature">Rust-proof</span>
+                            </div>
+                            <div class="bazaar-actions">
+                                <button class="view-btn" onclick="viewProduct('frame')">View</button>
+                                <button class="buy-btn" onclick="buyNow('frame')">Buy</button>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <!-- Sample 3 -->
                 <div class="swiper-slide">
-                    <div class="bazaar-sample-card">
-                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=300');">
-                            <span class="sample-tag">Black</span>
+                    <div class="bazaar-card">
+                        <div class="bazaar-image" style="background-image: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=300');">
+                            <span class="bazaar-badge">Best Seller</span>
                         </div>
-                        <div class="sample-info">
+                        <div class="bazaar-info">
                             <h4>Pleated Net</h4>
-                            <p>₹350/sqft · Retractable</p>
+                            <div class="bazaar-desc">Black/Gray · 4x4 ft</div>
+                            <div class="bazaar-price">₹350/sqft</div>
+                            <div class="bazaar-features">
+                                <span class="feature">Retractable</span>
+                                <span class="feature">Space-saver</span>
+                            </div>
+                            <div class="bazaar-actions">
+                                <button class="view-btn" onclick="viewProduct('pleated')">View</button>
+                                <button class="buy-btn" onclick="buyNow('pleated')">Buy</button>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <!-- Sample 4 -->
                 <div class="swiper-slide">
-                    <div class="bazaar-sample-card">
-                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=300');">
-                            <span class="sample-tag">White</span>
+                    <div class="bazaar-card">
+                        <div class="bazaar-image" style="background-image: url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=300');">
+                            <span class="bazaar-badge">Popular</span>
                         </div>
-                        <div class="sample-info">
+                        <div class="bazaar-info">
                             <h4>Magnetic Door</h4>
-                            <p>₹380/sqft · 3x7 ft</p>
+                            <div class="bazaar-desc">White/Brown · 3x7 ft</div>
+                            <div class="bazaar-price">₹380/sqft</div>
+                            <div class="bazaar-features">
+                                <span class="feature">Magnetic</span>
+                                <span class="feature">Pet-friendly</span>
+                            </div>
+                            <div class="bazaar-actions">
+                                <button class="view-btn" onclick="viewProduct('meshdoor')">View</button>
+                                <button class="buy-btn" onclick="buyNow('meshdoor')">Buy</button>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <!-- Sample 5 -->
                 <div class="swiper-slide">
-                    <div class="bazaar-sample-card">
-                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=300');">
-                            <span class="sample-tag">Gray</span>
+                    <div class="bazaar-card">
+                        <div class="bazaar-image" style="background-image: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=300');">
+                            <span class="bazaar-badge">Value</span>
                         </div>
-                        <div class="sample-info">
+                        <div class="bazaar-info">
                             <h4>Slider Net</h4>
-                            <p>₹420/sqft · Sliding</p>
+                            <div class="bazaar-desc">Gray · 3x5 ft</div>
+                            <div class="bazaar-price">₹420/sqft</div>
+                            <div class="bazaar-features">
+                                <span class="feature">Sliding</span>
+                                <span class="feature">Smooth</span>
+                            </div>
+                            <div class="bazaar-actions">
+                                <button class="view-btn" onclick="viewProduct('sliding')">View</button>
+                                <button class="buy-btn" onclick="buyNow('sliding')">Buy</button>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <!-- Sample 6 -->
                 <div class="swiper-slide">
-                    <div class="bazaar-sample-card">
-                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=300');">
-                            <span class="sample-tag">Black</span>
+                    <div class="bazaar-card">
+                        <div class="bazaar-image" style="background-image: url('https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=300');">
+                            <span class="bazaar-badge">Premium</span>
                         </div>
-                        <div class="sample-info">
+                        <div class="bazaar-info">
                             <h4>French Door</h4>
-                            <p>₹450/sqft · Double</p>
+                            <div class="bazaar-desc">Black · 5x7 ft</div>
+                            <div class="bazaar-price">₹450/sqft</div>
+                            <div class="bazaar-features">
+                                <span class="feature">Double door</span>
+                                <span class="feature">Magnetic</span>
+                            </div>
+                            <div class="bazaar-actions">
+                                <button class="view-btn" onclick="viewProduct('french')">View</button>
+                                <button class="buy-btn" onclick="buyNow('french')">Buy</button>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <!-- Sample 7 -->
                 <div class="swiper-slide">
-                    <div class="bazaar-sample-card">
-                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=300');">
-                            <span class="sample-tag">White</span>
+                    <div class="bazaar-card">
+                        <div class="bazaar-image" style="background-image: url('https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=300');">
+                            <span class="bazaar-badge">Basic</span>
                         </div>
-                        <div class="sample-info">
+                        <div class="bazaar-info">
                             <h4>Window Mesh</h4>
-                            <p>₹55/sqft · Basic</p>
+                            <div class="bazaar-desc">White · 2x2 ft</div>
+                            <div class="bazaar-price">₹55/sqft</div>
+                            <div class="bazaar-features">
+                                <span class="feature">Economy</span>
+                                <span class="feature">Basic</span>
+                            </div>
+                            <div class="bazaar-actions">
+                                <button class="view-btn" onclick="viewProduct('basic')">View</button>
+                                <button class="buy-btn" onclick="buyNow('basic')">Buy</button>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <!-- Sample 8 -->
                 <div class="swiper-slide">
-                    <div class="bazaar-sample-card">
-                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=300');">
-                            <span class="sample-tag">Brown</span>
+                    <div class="bazaar-card">
+                        <div class="bazaar-image" style="background-image: url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=300');">
+                            <span class="bazaar-badge">Heavy</span>
                         </div>
-                        <div class="sample-info">
+                        <div class="bazaar-info">
                             <h4>Premium Frame</h4>
-                            <p>₹220/sqft · Thick</p>
+                            <div class="bazaar-desc">Brown · 4x5 ft</div>
+                            <div class="bazaar-price">₹220/sqft</div>
+                            <div class="bazaar-features">
+                                <span class="feature">Thick</span>
+                                <span class="feature">Heavy-duty</span>
+                            </div>
+                            <div class="bazaar-actions">
+                                <button class="view-btn" onclick="viewProduct('premium')">View</button>
+                                <button class="buy-btn" onclick="buyNow('premium')">Buy</button>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <!-- Sample 9 -->
                 <div class="swiper-slide">
-                    <div class="bazaar-sample-card">
-                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=300');">
-                            <span class="sample-tag">Gray</span>
+                    <div class="bazaar-card">
+                        <div class="bazaar-image" style="background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=300');">
+                            <span class="bazaar-badge">Roll-up</span>
                         </div>
-                        <div class="sample-info">
+                        <div class="bazaar-info">
                             <h4>Roll Up Net</h4>
-                            <p>₹390/sqft · Rolling</p>
+                            <div class="bazaar-desc">Gray · 3x6 ft</div>
+                            <div class="bazaar-price">₹390/sqft</div>
+                            <div class="bazaar-features">
+                                <span class="feature">Rolling</span>
+                                <span class="feature">Space-saver</span>
+                            </div>
+                            <div class="bazaar-actions">
+                                <button class="view-btn" onclick="viewProduct('rollup')">View</button>
+                                <button class="buy-btn" onclick="buyNow('rollup')">Buy</button>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <!-- Sample 10 -->
                 <div class="swiper-slide">
-                    <div class="bazaar-sample-card">
-                        <div class="sample-image" style="background-image: url('https://images.unsplash.com/photo-1556740714-a8395b3bf30f?w=300');">
-                            <span class="sample-tag">Custom</span>
+                    <div class="bazaar-card">
+                        <div class="bazaar-image" style="background-image: url('https://images.unsplash.com/photo-1556740714-a8395b3bf30f?w=300');">
+                            <span class="bazaar-badge">Designer</span>
                         </div>
-                        <div class="sample-info">
+                        <div class="bazaar-info">
                             <h4>Designer Net</h4>
-                            <p>₹500/sqft · Pattern</p>
+                            <div class="bazaar-desc">Patterned · Custom</div>
+                            <div class="bazaar-price">₹500/sqft</div>
+                            <div class="bazaar-features">
+                                <span class="feature">Designer</span>
+                                <span class="feature">Premium</span>
+                            </div>
+                            <div class="bazaar-actions">
+                                <button class="view-btn" onclick="viewProduct('designer')">View</button>
+                                <button class="buy-btn" onclick="buyNow('designer')">Buy</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1433,10 +1818,17 @@
             <div class="swiper-pagination bazaar-pagination"></div>
         </div>
 
+        <!-- ===== FUTURE FEATURES SECTION ===== -->
+        <div class="future-features" onclick="showFutureFeatures()">
+            <i class="fas fa-rocket"></i>
+            <h4>More Features Coming Soon</h4>
+            <p>Tap to see what's next · AI Estimator · Live Chat · Video Consultation</p>
+        </div>
+
         <!-- ===== FOOTER ===== -->
         <div class="footer">
             <div class="footer-links">
-                <div class="footer-column">
+                <div class="footer-col">
                     <h4>Company</h4>
                     <ul>
                         <li><a href="about.html">About Us</a></li>
@@ -1445,7 +1837,7 @@
                         <li><a href="service.html">Services</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
+                <div class="footer-col">
                     <h4>Support</h4>
                     <ul>
                         <li><a href="estimate.html">Estimate</a></li>
@@ -1454,7 +1846,7 @@
                         <li><a href="terms.html">Terms & Conditions</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
+                <div class="footer-col">
                     <h4>Legal</h4>
                     <ul>
                         <li><a href="disclaimer.html">Disclaimer</a></li>
@@ -1470,11 +1862,12 @@
                 <a href="#"><i class="fab fa-instagram"></i></a>
                 <a href="#"><i class="fab fa-youtube"></i></a>
                 <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
             </div>
             
             <div class="footer-bottom">
                 <p>© 2026 Raj Marketing · All Rights Reserved</p>
-                <p style="margin-top: 5px; font-size: 0.6rem;">#65, Hootghalli Industries, Mysore</p>
+                <p style="margin-top: 5px; font-size: 0.6rem;">#65, Hootghalli Industries Area, Mysore · 9483037385</p>
             </div>
         </div>
 
@@ -1505,7 +1898,7 @@
 
     <!-- Toast Message -->
     <div id="toastMessage"></div>
-    
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     
@@ -1513,19 +1906,46 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
     
-    <!-- Firebase Configuration -->
-    <script src="js/firebase-config.js"></script>
-    
-    <!-- Main JavaScript -->
     <script>
+        // Firebase Configuration (Replace with your own)
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
         // Initialize all sliders
         document.addEventListener('DOMContentLoaded', function() {
-            // Main slider
+            // Main slider with more space
             new Swiper('.main-slider', {
                 loop: true,
                 autoplay: { delay: 3000, disableOnInteraction: false },
                 pagination: { el: '.main-slider .swiper-pagination', clickable: true },
+                spaceBetween: 15, // More space between slides
                 speed: 800,
+            });
+
+            // Overview slider
+            new Swiper('.overview-slider', {
+                slidesPerView: 'auto',
+                spaceBetween: 12,
+                freeMode: true,
+                pagination: { el: '.overview-pagination', clickable: true },
+            });
+
+            // Prime services slider
+            new Swiper('.prime-services-slider', {
+                slidesPerView: 'auto',
+                spaceBetween: 16,
+                freeMode: true,
+                pagination: { el: '.prime-pagination', clickable: true },
             });
 
             // Banner ads slider
@@ -1551,7 +1971,7 @@
             // Load live data
             loadLiveData();
             
-            // Start live updates
+            // Start live updates (every 10 seconds for immediate updates)
             startLiveUpdates();
         });
 
@@ -1572,31 +1992,33 @@
             });
         }
 
-        // Live data from Firebase
+        // Load live data from Firebase
         function loadLiveData() {
-            // Get today's bookings
             const today = new Date().toDateString();
             
+            // Get today's bookings count
             db.collection('bookings').where('date', '==', today).get()
-                .then((querySnapshot) => {
-                    document.getElementById('todayBookedCount').textContent = 
-                        querySnapshot.size.toString().padStart(2, '0');
+                .then((snapshot) => {
+                    document.getElementById('todayBookings').textContent = 
+                        snapshot.size.toString().padStart(2, '0');
                 })
                 .catch(() => {
-                    // Random fallback 01-15
-                    document.getElementById('todayBookedCount').textContent = 
+                    document.getElementById('todayBookings').textContent = 
                         Math.floor(Math.random() * 15 + 1).toString().padStart(2, '0');
                 });
-            
-            // Get overview counts
-            loadOverviewCounts();
-            
-            // Get live notifications
-            loadLiveNotifications();
-        }
 
-        function loadOverviewCounts() {
-            // Visitors
+            // Get total bookings
+            db.collection('bookings').get()
+                .then((snapshot) => {
+                    document.getElementById('totalBookings').textContent = snapshot.size;
+                    document.getElementById('bookingCount').textContent = snapshot.size;
+                })
+                .catch(() => {
+                    document.getElementById('totalBookings').textContent = '1,247';
+                    document.getElementById('bookingCount').textContent = '1,247';
+                });
+
+            // Get visitors count
             db.collection('visitors').get()
                 .then((snapshot) => {
                     document.getElementById('visitorCount').textContent = snapshot.size;
@@ -1604,8 +2026,8 @@
                 .catch(() => {
                     document.getElementById('visitorCount').textContent = '1,284';
                 });
-            
-            // Calls (tracked in Firebase when call button clicked)
+
+            // Get calls count
             db.collection('calls').get()
                 .then((snapshot) => {
                     document.getElementById('callCount').textContent = snapshot.size;
@@ -1613,8 +2035,8 @@
                 .catch(() => {
                     document.getElementById('callCount').textContent = '47';
                 });
-            
-            // Messages
+
+            // Get messages count
             db.collection('messages').get()
                 .then((snapshot) => {
                     document.getElementById('messageCount').textContent = snapshot.size;
@@ -1622,8 +2044,8 @@
                 .catch(() => {
                     document.getElementById('messageCount').textContent = '23';
                 });
-            
-            // Directions
+
+            // Get directions count
             db.collection('directions').get()
                 .then((snapshot) => {
                     document.getElementById('directionCount').textContent = snapshot.size;
@@ -1631,46 +2053,50 @@
                 .catch(() => {
                     document.getElementById('directionCount').textContent = '156';
                 });
+
+            // Load live bookings ticker
+            loadLiveBookings();
         }
 
-        function loadLiveNotifications() {
-            const marquee = document.getElementById('liveMarquee');
+        // Load live bookings for ticker
+        function loadLiveBookings() {
+            const ticker = document.getElementById('liveTicker');
             
-            // Get recent bookings from Firebase
-            db.collection('bookings').orderBy('timestamp', 'desc').limit(10).get()
-                .then((querySnapshot) => {
+            db.collection('bookings').orderBy('timestamp', 'desc').limit(20).get()
+                .then((snapshot) => {
                     let html = '';
-                    querySnapshot.forEach((doc) => {
+                    snapshot.forEach((doc) => {
                         const data = doc.data();
                         const minutesAgo = Math.floor((Date.now() - data.timestamp.toDate()) / 60000);
                         
                         html += `<span>
-                            <i class="fas fa-circle" style="font-size: 6px;"></i>
-                            <strong class="customer-name">${data.name}</strong> 
-                            from <strong style="color: #e6b422;">${data.area}</strong> 
-                            booked <strong style="color: #28a745;">${data.service}</strong> 
+                            <i class="fas fa-circle"></i>
+                            <span class="customer-name">${data.name || 'Customer'}</span> 
+                            from <span class="customer-area">${data.area || 'Mysore'}</span> 
+                            booked <span class="customer-service">${data.service || 'Velcro'}</span> 
                             • ${minutesAgo} min ago
                         </span>`;
                     });
                     
                     if (html === '') {
-                        html = generateRandomNotifications();
+                        html = generateRandomBookings();
                     } else {
                         // Duplicate for smooth animation
                         html += html;
                     }
                     
-                    marquee.innerHTML = html;
+                    ticker.innerHTML = html;
                 })
                 .catch(() => {
-                    marquee.innerHTML = generateRandomNotifications();
+                    ticker.innerHTML = generateRandomBookings();
                 });
         }
 
-        function generateRandomNotifications() {
-            const areas = ['Vijayanagar', 'Kuvempunagar', 'Gokulam', 'Jayalakshmipuram', 'Saraswathipuram', 'Hebbal'];
-            const names = ['Suresh', 'Priya', 'Ramesh', 'Kavitha', 'Manoj', 'Anita'];
-            const services = ['Velcro System', 'Frame System', 'Pleated Nets', 'Mesh Door'];
+        // Generate random bookings for demo
+        function generateRandomBookings() {
+            const areas = ['Vijayanagar', 'Kuvempunagar', 'Gokulam', 'Jayalakshmipuram', 'Saraswathipuram', 'Hebbal', 'Bogadi'];
+            const names = ['Suresh', 'Priya', 'Ramesh', 'Kavitha', 'Manoj', 'Anita', 'Vikram', 'Deepa'];
+            const services = ['Velcro System', 'Frame System', 'Pleated Nets', 'Mesh Door', 'Premium Velcro'];
             
             let html = '';
             for (let i = 0; i < 10; i++) {
@@ -1680,33 +2106,42 @@
                 const mins = Math.floor(Math.random() * 30) + 1;
                 
                 html += `<span>
-                    <i class="fas fa-circle" style="font-size: 6px;"></i>
-                    <strong class="customer-name">${name}</strong> 
-                    from <strong style="color: #e6b422;">${area}</strong> 
-                    booked <strong style="color: #28a745;">${service}</strong> 
+                    <i class="fas fa-circle"></i>
+                    <span class="customer-name">${name}</span> 
+                    from <span class="customer-area">${area}</span> 
+                    booked <span class="customer-service">${service}</span> 
                     • ${mins} min ago
                 </span>`;
             }
-            return html + html; // Duplicate for smooth animation
+            return html + html;
         }
 
+        // Start live updates
         function startLiveUpdates() {
-            // Update every 30 seconds
+            // Update every 10 seconds for immediate feedback
             setInterval(() => {
-                loadLiveNotifications();
-                loadOverviewCounts();
-            }, 30000);
+                loadLiveBookings();
+                loadLiveData();
+            }, 10000);
         }
 
-        function updateOverviewPeriod(type, period) {
-            // Update active period
-            document.querySelectorAll(`.period-item`).forEach(item => {
-                item.classList.remove('active');
-            });
+        // Update period function
+        function updatePeriod(type, period) {
+            // Update active button
+            const buttons = document.querySelectorAll(`.period-btn`);
+            buttons.forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
             
-            // Show toast
-            showToast(`Showing ${type} stats for ${period}`);
+            // Update count based on period (simulated)
+            const counts = {
+                'visitor': { 'day': '1,284', 'week': '8,942', 'month': '38,456' },
+                'call': { 'day': '47', 'week': '312', 'month': '1,284' },
+                'message': { 'day': '23', 'week': '156', 'month': '647' },
+                'direction': { 'day': '156', 'week': '1,023', 'month': '4,892' }
+            };
+            
+            document.getElementById(type + 'Count').textContent = counts[type][period];
+            showToast(`Showing ${period}ly ${type} count`);
         }
 
         // Price check function
@@ -1736,6 +2171,18 @@
             window.location.href = `appointment.html?service=${service}`;
         }
 
+        function viewProduct(product) {
+            window.location.href = `product-details.html?product=${product}`;
+        }
+
+        function buyNow(product) {
+            window.location.href = `order.html?product=${product}`;
+        }
+
+        function showFutureFeatures() {
+            showToast('🚀 Coming Soon: AI Estimator · Live Chat · Video Consultation');
+        }
+
         // Toast function
         function showToast(text) {
             const toast = document.getElementById('toastMessage');
@@ -1745,6 +2192,13 @@
                 toast.style.opacity = '0';
             }, 2000);
         }
+
+        // Track page visit
+        db.collection('visitors').add({
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            page: 'index',
+            userAgent: navigator.userAgent
+        });
 
         // Track call button clicks
         document.addEventListener('DOMContentLoaded', function() {
@@ -1761,4 +2215,3 @@
     </script>
 </body>
 </html>
-```
